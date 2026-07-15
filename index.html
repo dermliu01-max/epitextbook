@@ -17,6 +17,8 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
   --formula:#fff6ec; --formula-b:#d98a2b;
   --exam:#fdeeee; --exam-b:#c0392b;
   --bridge:#f3eefb; --bridge-b:#7d4fc0;
+  --deep:#e9f6f4; --deep-b:#12897e;
+  --qual:#fff8e8; --qual-b:#b8860b;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -52,6 +54,8 @@ main{flex:1;min-width:0;padding:30px 42px 120px;max-width:1000px;margin:0 auto}
 .c-formula{background:var(--formula);border-color:var(--formula-b)}
 .c-exam{background:var(--exam);border-color:var(--exam-b)}
 .c-bridge{background:var(--bridge);border-color:var(--bridge-b)}
+.c-deep{background:var(--deep);border-color:var(--deep-b)}
+.c-qual{background:var(--qual);border-color:var(--qual-b)}
 .chapter{background:var(--panel);border:1px solid var(--line);border-radius:16px;
   padding:26px 30px;margin-bottom:34px;scroll-margin-top:14px;box-shadow:0 2px 10px rgba(20,40,60,.04)}
 .ch-head{border-bottom:2px solid var(--brand);padding-bottom:12px;margin-bottom:18px}
@@ -76,6 +80,21 @@ main{flex:1;min-width:0;padding:30px 42px 120px;max-width:1000px;margin:0 auto}
 .box-formula{background:var(--formula)} .box-formula .box-title{background:#fbecd7;color:#a9631a;border-bottom:2px solid var(--formula-b)}
 .box-exam{background:var(--exam)} .box-exam .box-title{background:#f9dede;color:#a5281b;border-bottom:2px solid var(--exam-b)}
 .box-bridge{background:var(--bridge)} .box-bridge .box-title{background:#ece1f8;color:#5d3a95;border-bottom:2px solid var(--bridge-b)}
+.box-deep{background:var(--deep)} .box-deep .box-title{background:#d5efeb;color:#0c6259;border-bottom:2px solid var(--deep-b)}
+.box-deep .box-body{padding:10px 20px 18px}
+.box-deep h4{color:#0c6259;font-size:15.5px;margin:16px 0 6px;border-left:4px solid var(--deep-b);padding-left:9px}
+.box-deep .derive{background:#fff;border:1px solid #bfe3dd;border-radius:8px;padding:8px 14px;margin:10px 0}
+.box-deep .qa{background:#fbfffe;border:1px dashed #7bc0b7;border-radius:8px;padding:8px 14px;margin:9px 0}
+.box-deep .qa .q{font-weight:700;color:#0c6259}
+.box-deep .qa .a{margin-top:3px}
+.box-qual{background:var(--qual)} .box-qual .box-title{background:#fbeecb;color:#8a6400;border-bottom:2px solid var(--qual-b)}
+.box-qual .box-body{padding:10px 20px 18px}
+.box-qual .exq{background:#fff;border:1px solid #ecd9a6;border-radius:8px;padding:9px 14px;margin:12px 0}
+.box-qual .exq .yr{display:inline-block;font-size:11.5px;font-weight:800;color:#fff;background:#b8860b;padding:1px 9px;border-radius:20px;margin-right:6px}
+.box-qual .exq .qtitle{font-weight:700;color:#7a5600}
+.box-qual .exq .sol{margin-top:5px}
+.box-qual .pitfall{color:#a5281b;font-weight:700}
+.box-qual h4{color:#8a6400;font-size:15px;margin:14px 0 4px}
 .box-exam ol{margin:6px 0 6px 2px;padding-left:20px} .box-exam li{margin:6px 0}
 table{border-collapse:collapse;width:100%;margin:10px 0;font-size:13.6px;background:#fff}
 th,td{border:1px solid #d5dde5;padding:7px 10px;text-align:left;vertical-align:top}
@@ -154,9 +173,9 @@ tbody tr:nth-child(even){background:#fafcfe}
 </nav>
 <main>
 <div class="masthead">
-  <h1>現代流行病學 · 精讀複習手冊</h1>
+  <h1>現代流行病學 · 精讀複習手冊（資格考詳細版）</h1>
   <p><b>Modern Epidemiology</b>（第 5 版）· 全 43 章 · 正體中文</p>
-  <p>每章開頭附「核心邏輯與方法地圖」；章末附「方法比較總表／重要公式總整理／考試重點／如何把本章接回其他單元」。</p>
+  <p>每章：核心邏輯與方法地圖 → 重點解說 → <b>深入解析與推導（資格考深化：進階觀念、關鍵推導、口試常見追問）</b> → 方法比較總表／重要公式總整理／考試重點／接回其他單元。</p>
   <div class="note">說明：本手冊為原著概念之中文重點整理與解說（精讀複習版），屬讀書筆記性質，非原文逐句翻譯；名詞與公式以教學方式重新表述，供學習與複習使用。</div>
 </div>
 <div class="how">
@@ -167,6 +186,8 @@ tbody tr:nth-child(even){background:#fafcfe}
     <span class="chip">本文重點解說</span>
     <span class="chip c-compare">📊 方法比較總表</span>
     <span class="chip c-formula">🧮 重要公式總整理</span>
+    <span class="chip c-deep">🔬 深入解析與推導</span>
+    <span class="chip c-qual">🎓 資格考真題與詳解</span>
     <span class="chip c-exam">🎯 考試重點</span>
     <span class="chip c-bridge">🔗 接回其他單元</span>
   </div>
@@ -183,23 +204,36 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>閱讀策略：把本章當成「名詞地基」與「思路起點」，後面每一章都是在把「比較」這件事做得更嚴謹。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 流行病學是什麼</h3>
-<p><span class="term">流行病學（epidemiology）</span>研究「人群」層次的疾病發生與健康狀態，強調的是<b>族群（population）</b>而非單一病人。與臨床醫學最大的差別在單位：臨床看個體，流行病學看群體與其分布。</p>
-<p>學科定位可從方法或研究對象兩種角度定義。多數作者傾向以<b>研究對象</b>定義：探討健康相關狀態或事件在特定人群中的分布與決定因子，並將結果應用於疾病防治。</p>
+<h3>1. 流行病學到底在研究什麼</h3>
+<p><span class="term">流行病學（epidemiology）</span>研究的是「<b>人群</b>」層次的疾病與健康狀態：某疾病在一個族群中<b>發生得多不多、發生在誰身上、什麼時候、什麼地方，以及為什麼</b>。這裡最關鍵、也最容易被初學者忽略的一點是「<b>分析單位</b>」——臨床醫學關心的是坐在診間裡的<b>那一個病人</b>該怎麼治，流行病學關心的是<b>一整群人</b>裡疾病的分布與成因。同樣一位糖尿病患者，臨床問「他的血糖怎麼控制」，流行病學問「這個社區的糖尿病發生率為什麼比隔壁高、哪些人風險最大」。</p>
+<p>為什麼要在族群層次思考？因為<b>單一個體無法提供「風險」的資訊</b>。「某人抽菸後得肺癌」不能告訴我們抽菸是不是原因——他可能不抽也會得。只有觀察「一大群抽菸者」與「一大群不抽菸者」的發病比例差異，「風險」與「效應」這些概念才有意義。這就是流行病學一切方法的起點。</p>
 
-<h3>2. 描述性 vs. 分析性流行病學</h3>
-<p><span class="term">描述性流行病學（descriptive epidemiology）</span>又稱醫學人口學，處理疾病頻率如何隨<b>人（person）、時（time）、地（place）</b>三要素變化。它的產物是「型態（pattern）」與「假說」。</p>
-<p><span class="term">分析性流行病學（analytic epidemiology）</span>則進一步問「為什麼」，用有對照組的研究設計去檢驗暴露與疾病的因果關係。兩者是連續光譜而非對立。</p>
+<h3>2. 描述性與分析性：同一光譜的兩端</h3>
+<p><span class="term">描述性流行病學（descriptive epidemiology）</span>回答「<b>誰、何時、何地</b>」。它把疾病頻率依<b>人（person）</b>（年齡、性別、族群、職業…）、<b>時（time）</b>（季節、長期趨勢、流行曲線）、<b>地（place）</b>（國家、城鄉、地理群聚）三個維度攤開來看，產出的是「疾病的型態（pattern）」。例如發現某癌症在特定職業族群特別高——這本身還不是因果結論，而是一個<b>值得追查的線索</b>，也就是「假說」。</p>
+<p><span class="term">分析性流行病學（analytic epidemiology）</span>接手回答「<b>為什麼</b>」。它用有<b>對照組</b>的研究設計（世代、病例對照、實驗）去檢驗「暴露 → 疾病」的因果假說。兩者不是對立，而是同一條探究之路的先後段：描述先產生假說，分析再檢驗假說。理解這點，你在考場看到任何題目都能先問自己「這在做描述還是分析？需不需要對照組？」</p>
 
-<h3>3. 為什麼「比較」是核心</h3>
-<p>只知道某族群發病人數無法回答因果；必須有一個「若沒有暴露會如何」的<b>參照經驗</b>。這個「參照」的概念，正式化之後就是後面章節的<span class="term">反事實（counterfactual）</span>與<span class="term">對照組（comparison group）</span>。所有測量、設計與偏差的討論，本質都在確保比較的兩群「除了暴露之外其他都可比」。</p>
+<h3>3. 「比較」為什麼是流行病學的靈魂</h3>
+<p>所有因果陳述的骨架都是一句話：「<b>暴露組的疾病經驗</b>」相對於「<b>如果他們沒暴露、本來會有的疾病經驗</b>」。後面那半句是關鍵——它是一個<b>看不到的參照（反事實）</b>。我們永遠無法同時觀察「同一群人暴露」與「同一群人沒暴露」，只能<b>找另一群沒暴露的人來代表</b>那個看不到的參照。</p>
+<p>於是整門學科的核心難題就浮現了：<b>這個「代表」到底代不代表？</b>如果暴露組與未暴露組除了暴露以外還有別的系統差異（例如年齡、生活習慣不同），比較出來的差異就混進了非暴露的效應——這正是後面「干擾」「偏差」各章要對付的敵人。第 1 章先把這個直覺種下：<b>比較必須「其他都可比，只差在暴露」</b>，因果才成立。</p>
 
-<h3>4. 應用面向</h3>
-<p>流行病學同時是「基礎方法學」與「公共衛生工具」：監測疾病趨勢、找出危險因子、評估介入與政策、支援臨床決策。它是實證公共衛生（evidence-based public health）的方法核心。</p>
+<h3>4. 流行病學的用途：從方法學到公共衛生</h3>
+<p>流行病學同時是「基礎方法學」與「行動工具」。作為方法學，它提供量化健康、辨識病因、評估因果的一整套技術；作為公共衛生工具，它用來<b>監測疾病趨勢、找出危險因子、評估介入與政策、支援臨床與資源決策</b>。可以說，實證公共衛生（evidence-based public health）的方法核心就是流行病學。這也是為什麼本書後半會一路延伸到傳染病、環境、職業、藥物等各應用領域——它們都是同一套方法在不同疾病脈絡下的展開。</p>
 
-<h3>5. 全書結構的心智地圖</h3>
-<p>可把全書想成四層：概念（因果推論）→ 測量（頻率、效應）→ 設計（世代、病例對照…）→ 效度與分析（干擾、偏差、統計）。最後再接上各應用領域。第 1 章就是這張地圖的封面。</p>
+<h3>5. 用一張心智地圖讀完整本書</h3>
+<p>面對這本厚重的教科書，建議把全書想成<b>四層樓</b>：第一層「概念」（因果是什麼、怎麼推論）；第二層「測量」（怎麼把疾病與效應變成數字）；第三層「設計」（怎麼蒐集能回答因果問題的資料）；第四層「效度與分析」（怎麼排除干擾與偏差、怎麼用統計估計並表達不確定性）。最後再加上各「應用領域」的頂樓。第 1 章就是這張地圖的封面——先建立全局，後面每一章都是在把「有效的比較」這件事做得更嚴謹、更精細。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>進階觀念</h4>
+<p>把流行病學的「比較」形式化，最小單位是<b>兩個可比較的頻率</b>。任何流行病學陳述都可寫成「在族群 P 中，暴露 E 相對於對照 C，結果 O 的頻率差異」。資格考常要你把一句臨床/公衛敘述<b>重寫成 PECO</b>，並指出這個比較的參照是否可交換。</p>
+<p>描述性 vs. 分析性不是研究「種類」而是研究「目的」：同一份世代資料，算各年齡別發生率是描述、比較暴露組率是分析。這點常被口試官用來反問。</p>
+<h4>關鍵推導：為何「盛行率不宜做病因研究」</h4>
+<div class="derive"><p>穩態下，流入（新病例）＝流出（痊癒＋死亡）。令發生率 \(I\)、平均病程 \(\bar D\)、盛行勝算 \(P/(1-P)\)。單位時間內：無病者變病例 \(\approx I(1-P)\)，病例離開 \(\approx P/\bar D\)。穩態令兩者相等：</p>
+<p>\[ I(1-P)=\frac{P}{\bar D}\;\Rightarrow\; \frac{P}{1-P}=I\,\bar D \]</p>
+<p>因此高盛行可能來自高 \(I\)（病因）<b>或</b>長 \(\bar D\)（存活久/慢性）。用盛行率當結果時，暴露與病程的關聯會混進「效應」，故病因研究首選發生率。</p></div>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：流行病學和臨床醫學的根本差異？</div><div class="a">A：分析單位是「族群」與其分布；核心工具是「有參照的比較」。個體風險只能由族群經驗估計。</div></div>
+<div class="qa"><div class="q">Q：為什麼說「沒有比較就沒有流行病學」？</div><div class="a">A：單一頻率無法回答因果；需要一個「若未暴露會如何」的反事實參照（第 3 章形式化）。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>面向</th><th>描述性流行病學</th><th>分析性流行病學</th></tr></thead>
 <tbody>
@@ -241,27 +275,48 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：因果推論是<b>不確定、需靠設計與推理共同支撐</b>的過程；統計顯著性不等於因果。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 科學推理的兩種模式</h3>
-<p><span class="term">歸納（induction）</span>由觀察推普遍律，但無法被邏輯保證為真；<span class="term">演繹（deduction）</span>由前提推結論，可靠但不產生新經驗知識。Popper 的<span class="term">否證論（falsificationism）</span>主張科學假說不能被證實、只能被<b>否證</b>：好的理論是能做出大膽、可被推翻之預測者。流行病學研究因此被視為對假說的一次次嚴格檢驗。</p>
+<h3>1. 科學知識為什麼是「暫時的」</h3>
+<p>因果推論的第一個心理準備是：<b>科學結論永遠可以被推翻</b>。<span class="term">歸納（induction）</span>——從有限觀察推出普遍規律——在邏輯上無法被保證為真（看過一萬隻白天鵝也不能證明「所有天鵝都是白的」）。<span class="term">演繹（deduction）</span>雖然可靠，卻不產生新的經驗知識。Popper 的<span class="term">否證論（falsificationism）</span>提出一條出路：科學假說<b>不能被證實、只能被否證</b>。一個好的理論，是能做出<b>大膽、具體、可被觀察推翻</b>的預測者。流行病學研究因此被視為對假說的一次次嚴格檢驗，而不是「證明」什麼。這解釋了為什麼我們永遠在講「證據支持」而非「證明」。</p>
 
-<h3>2. 充分原因與組成原因模型</h3>
-<p>Rothman 的<span class="term">因果派模型（causal pies）</span>：一個「充分原因」是一整塊派，由若干「組成原因（component causes）」拼成；<b>湊齊一整塊派</b>疾病才發生。重要推論：</p>
-<ul>
-<li><b>多因性</b>：同一疾病可由多種不同的派（不同機制組合）造成。</li>
-<li><b>交互作用（生物學交互）</b>：同一塊派中的兩個組成原因，彼此為對方「發揮作用」的必要條件——這就是<span class="term">因果共同作用（causal co-action）</span>。</li>
-<li><b>歸因分數可加總超過 100%</b>：因為一個病例可被多個組成原因共同「歸因」。</li>
-<li><span class="term">誘導期（induction period）</span>與<span class="term">潛伏期（latent period）</span>的概念由此自然出現：從最後一塊拼上到疾病出現、到被偵測的時間。</li>
-</ul>
+<h3>2. 充分原因—組成原因模型（因果派）</h3>
+<p>Rothman 的<span class="term">因果派模型（causal pies）</span>是理解「多因」的最好工具。想像一塊圓餅＝一個<span class="term">充分原因（sufficient cause）</span>：只要這塊餅拼<b>完整</b>，疾病<b>必然</b>發生。餅裡的每一片扇形＝一個<span class="term">組成原因（component cause）</span>，缺一片這塊餅就不完整、疾病就不會經由這條路徑發生。</p>
+<p>這個簡單模型一次解釋了四件事。第一，<b>多因性</b>：同一疾病可以由好幾種不同的餅（不同機制組合）造成。第二，<b>交互作用的生物意義</b>：同一塊餅裡的兩個組成原因，彼此是對方「發揮作用」的必要條件——這就是<span class="term">因果共同作用</span>，A 只有在 B 也在場時才致病。第三，<b>歸因分數可加總超過 100%</b>：因為一個病例可以同時歸因於它那塊餅裡的每一個組成原因（移除任一片都能阻止發病）。第四，<b>時間概念</b>：從最後一片拼上（因果作用完成）到疾病出現，是<span class="term">誘導期（induction period）</span>；到被偵測出來，還要再加<span class="term">潛伏期（latent period）</span>。</p>
 
-<h3>3. 強因子與弱因子、必要與充分</h3>
-<p>「原因的強度」取決於其組成原因在人群中的<b>盛行分布</b>，而非機制本身。<span class="term">必要原因（necessary cause）</span>出現在每一塊派中（如結核桿菌之於結核病）；充分原因則單獨即可致病，實務上罕見。</p>
+<h3>3. 因子的「強度」其實是族群性質</h3>
+<p>最反直覺、也最常考的一點：一個組成原因造成的<b>效應大小，取決於它的「互補組成原因」在該族群中有多普遍</b>，而不是機制本身。舉例：某基因只有在特定環境暴露存在時才致病；在那個環境暴露很普遍的族群，這個基因看起來是「強因子」；在幾乎沒有該暴露的族群，同一個基因幾乎沒有效應。所以「強因子/弱因子」是<b>族群相依</b>的描述，不是因子的固定標籤。</p>
+<p>順帶區辨兩個常混的詞：<span class="term">必要原因（necessary cause）</span>出現在<b>每一塊</b>充分原因餅中（如結核桿菌之於結核病，沒有它一定不發病）；<span class="term">充分原因</span>單獨即可致病，但實務上「單一因子就充分」幾乎不存在，真正「充分」的是一整塊拼齊的餅。</p>
 
-<h3>4. Hill 的因果考量</h3>
-<p>常被誤當「因果檢核表」的九點（強度、一致性、特異性、時序、劑量反應、生物合理性、連貫性、實驗證據、類比）其實是<b>輔助判斷的視角</b>。唯一近乎必要的是<b>時序（暴露先於結果）</b>；其餘皆有例外，不能機械式計分。</p>
+<h3>4. Hill 的九個考量：是視角，不是計分表</h3>
+<p><span class="term">Hill 的九點</span>（強度、一致性、特異性、時序、劑量反應、生物合理性、連貫性、實驗證據、類比）常被誤用成「因果檢核表」，逐條打勾算分。這是嚴重誤解。它們是<b>幫助判斷的不同視角</b>，每一點都有例外：強關聯可能來自干擾、弱關聯也可能是真因果；沒有劑量反應不代表沒有因果（可能有閾值）。唯一近乎<b>必要</b>的是<b>時序</b>——因必須先於果。其餘都是輔助，機械式計分反而會誤導。</p>
 
 <h3>5. 因果推論的實務態度</h3>
-<p>因果結論永遠是暫時的、機率性的。研究者的責任是：明確界定所欲估計的因果量、用設計盡量排除替代解釋（干擾、偏差、機遇），並誠實呈現不確定性。這條線直接連到第 3 章的形式化模型。</p>
+<p>把以上收攏成一種工作態度：因果結論永遠是<b>暫時的、機率性的</b>。研究者的責任有三：（1）明確界定「我要估的因果量是什麼」；（2）用設計盡量排除替代解釋（干擾、偏差、機遇）；（3）誠實呈現不確定性。這條線會直接接到第 3 章——把「因」與「反事實」用數學語言精確定義，才能談「怎麼估、需要什麼假設」。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>進階觀念</h4>
+<p>因果派模型的威力在於它同時解釋<b>多因、交互、歸因&gt;100%、誘導期</b>四件事，卻不需任何機率假設——它是<b>決定論</b>的個體機制模型。與第 3 章的反事實（機率/族群層）互補：因果派講「機制如何拼成」，反事實講「若改變暴露結果會不會變」。</p>
+<p>「原因的強度取決於其互補組成原因的盛行率」是最反直覺、最常考的一點：同一機制在不同人群可以是強因子或弱因子。</p>
+<h4>關鍵推導：歸因分數為何可加總超過 100%</h4>
+<div class="derive"><p>一個病例的充分原因派若含組成原因 A、B、C，則此病例<b>同時</b>可歸因於 A、也可歸因於 B、也可歸因於 C——移除任一個都能阻止這塊派完成。因此「由 A 造成的病例數」與「由 B 造成的病例數」在同一批病例上重疊計算，各組成原因的歸因分數相加自然可 &gt; 100%。這說明「單一疾病只有一個原因」是錯的。</p></div>
+<h4>關鍵觀念：誘導期 vs. 潛伏期</h4>
+<div class="derive"><p>誘導期＝從「因果作用完成（最後一塊組成原因拼上）」到「疾病發生」的時間；潛伏期＝從「疾病發生」到「被偵測」的時間。兩者相加影響觀察到的暴露—發病時間差，並決定<b>暴露時窗</b>與滯後（第 41 章職業研究直接用到）。</p></div>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：Hill 準則能否用來「證明」因果？</div><div class="a">A：不能。它是輔助判斷的視角、非充分條件；唯一近乎必要的是時序。機械式計分是誤用。</div></div>
+<div class="qa"><div class="q">Q：必要原因與充分原因，哪個實務上更常見？</div><div class="a">A：必要原因（如病原體）較可辨識；單一充分原因幾乎不存在，真實的「充分」是一整塊派。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<p>本章（因果概念、充分–組成原因）是<b>方老師 SCC 系列</b>的核心考點，102-2／104／105 三年共用同一組題型，114-2 名詞題也再考一次。</p>
+<div class="exq"><span class="yr">102-2/104/105</span><span class="qtitle">題1：解釋 Sufficient Component Cause model</span>
+<div class="sol">答題骨架：一個「圓（pie）」＝一個充分原因，切片＝組成原因，切片<b>湊齊</b>才發病；一病可有多個充分原因（多條病因途徑）；出現在<b>所有</b>充分原因中的組成原因＝必要原因（如結核菌）。四點意涵：解釋族群間效果差異（其他組成原因盛行率不同）、界定交互作用的<b>生物機制</b>、預防理論基礎（阻斷任一切片即阻斷該圓）、支持多重病因論。侷限：充分原因幾乎無法完整觀測，屬理論框架。</div></div>
+<div class="exq"><span class="yr">102-2/104/105</span><span class="qtitle">題2：用 R11/R10/R01/R00 說明生物交互作用（interaction contrast 推導）</span>
+<div class="sol">2×2 風險表（菸×石綿）：R11 皆有、R10 僅菸、R01 僅石綿、R00 皆無。<b>相加交互（interaction contrast）</b>：\( IC=R_{11}-(R_{10}+R_{01}-R_{00}) \)。\(IC>0\)＝<b>超相加/協同（synergism）</b>：\((R_{11}-R_{00})>(R_{10}-R_{00})+(R_{01}-R_{00})\)。這是「兩組成原因落在同一塊餅」的頻率學對應（詳見第 26 章 RERI）。</div></div>
+<div class="exq"><span class="yr">102-2/104/105</span><span class="qtitle">題3：HBeAg 是保護因子？反向因果與理想設計</span>
+<div class="sol"><span class="pitfall">陷阱＝反向因果</span>：橫斷面看似保護，實為疾病狀態影響標記；理想設計為前瞻世代、暴露先於結果。連第 34 章反向因果、第 6 章時序。</div></div>
+<div class="exq"><span class="yr">114-2</span><span class="qtitle">名詞1：SCC model（統計原理、流病意義與應用）</span>
+<div class="sol">拿分句：①交互作用＝兩組成原因落在<b>同一塊餅</b>（生物協同，非統計顯著）；②阻斷任一組成即阻斷整個充分原因。</div></div>
+<h4>作答提醒</h4>
+<p>看到因果題先辨明問的是<b>causal pie（SCC）</b>還是<b>causal diagram（DAG）</b>——兩套語言不同（第 2 章 vs 第 3 章）。SCC 講「機制如何拼成」，DAG 講「該調整誰」。</p>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>概念</th><th>意義</th><th>易混淆處／重點</th></tr></thead>
 <tbody>
@@ -303,32 +358,50 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>可交換性（exchangeability）</b>是識別因果效應的關鍵假設；DAG 幫你判斷該控制誰、避免control碰撞點（collider）與中介。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 潛在結果框架</h3>
-<p>對個體 \(i\)，定義兩個<span class="term">潛在結果</span>：暴露下的 \(Y_i(1)\) 與未暴露下的 \(Y_i(0)\)。個體因果效應為 \(Y_i(1)-Y_i(0)\)，但我們只能看到實際發生那一個，另一個是<span class="term">反事實（counterfactual）</span>——此即<b>因果推論的根本問題</b>。因此因果推論的目標退而求其次：估計<b>平均因果效應</b> \(E[Y(1)]-E[Y(0)]\)。</p>
+<h3>1. 潛在結果：把「因果」寫成數學</h3>
+<p>要嚴謹談因果，先給每個人兩個<span class="term">潛在結果（potential outcomes）</span>：如果他<b>暴露</b>，結果會是 \(Y_i(1)\)；如果他<b>沒暴露</b>，結果會是 \(Y_i(0)\)。個體的因果效應就是兩者之差 \(Y_i(1)-Y_i(0)\)。問題在於：同一個人，我們<b>只能看到其中一個</b>——他實際暴露了，就只看得到 \(Y_i(1)\)，另一個 \(Y_i(0)\) 成了永遠看不到的<span class="term">反事實（counterfactual）</span>。這就是<b>因果推論的根本問題</b>：個體因果效應無法直接觀察。</p>
+<p>退而求其次，我們改估<b>平均因果效應</b> \(E[Y(1)]-E[Y(0)]\)——整群人若都暴露 vs. 都不暴露的平均差異。這個量在適當假設下是可以用資料估計的，這也是為什麼流行病學談的是「族群層次的平均效應」。</p>
 
-<h3>2. 可交換性與可識別條件</h3>
-<p>要用觀察到的組間差異代表因果效應，需三個假設：</p>
-<ul>
-<li><span class="term">可交換性（exchangeability）</span>：暴露與潛在結果獨立（給定共變項後為條件可交換）。直覺：暴露組與未暴露組「本可互換」。</li>
-<li><span class="term">正性（positivity）</span>：每一層共變項下，暴露與未暴露都有可能發生（機率&gt;0）。</li>
-<li><span class="term">一致性（consistency）</span>：觀察到的結果等於對應該實際暴露的潛在結果；需要「良好定義的暴露」。</li>
-</ul>
-<p>三者滿足時，因果效應才「可識別（identifiable）」，能用資料估計。</p>
+<h3>2. 三個讓因果「可估」的假設</h3>
+<p>要用「觀察到的組間差異」代表「因果效應」，需要三個假設同時成立，缺一不可：</p>
+<p><b>（1）可交換性（exchangeability）：</b>暴露組與未暴露組「本來可以互換」——若把兩組對調，結果分布不變。直覺上就是「兩組除了暴露以外沒有系統差異」。違反它，就是<b>干擾</b>。條件式版本 \(Y(a)\perp A\mid Z\) 是說「在校正 \(Z\) 之後」才可交換。</p>
+<p><b>（2）正性（positivity）：</b>在每一層共變項下，暴露與未暴露<b>都有可能發生</b>（機率大於 0）。若某類人「不可能不暴露」，我們就沒有他們的反事實資訊，只能靠模型外推。</p>
+<p><b>（3）一致性（consistency）：</b>觀察到的結果等於「對應其實際暴露的那個潛在結果」。這要求<b>暴露被良好定義</b>——「若這人減重 5 公斤」是清楚的介入，「若這人是另一種體型」則模糊，反事實無法對應清楚的行動。</p>
 
-<h3>3. 因果圖（DAG）</h3>
-<p>DAG 以節點為變項、箭頭為直接因果，且<b>無環</b>。三種基本結構：</p>
-<ul>
-<li><b>鏈（chain）</b> \(A\to M\to Y\)：\(M\) 是<span class="term">中介（mediator）</span>；調整它會擋住間接效應。</li>
-<li><b>叉（fork）</b> \(A\leftarrow C\to Y\)：\(C\) 是<span class="term">共同原因／干擾因子（confounder）</span>；<b>不調整</b>會產生後門偏差。</li>
-<li><b>對撞（collider）</b> \(A\to K\leftarrow Y\)：\(K\) 是<span class="term">碰撞點</span>；<b>調整它（或依它選樣）反而製造偏差</b>。</li>
-</ul>
+<h3>3. 因果圖（DAG）：用箭頭思考該控制誰</h3>
+<p><span class="term">有向無環圖（DAG）</span>用節點代表變項、箭頭代表直接因果、且不允許形成迴圈。它的價值在於把「該不該控制某變項」從模糊直覺變成<b>可檢驗的圖形規則</b>。三種基本結構務必背熟：</p>
+<p><b>鏈（chain）</b> \(A\to M\to Y\)：\(M\) 是<span class="term">中介（mediator）</span>，站在因果路徑上。若要估總效應，<b>不能</b>控制它（控制了會把經由 \(M\) 的效應擋掉）。<b>叉（fork）</b> \(A\leftarrow C\to Y\)：\(C\) 是<span class="term">共同原因、干擾因子</span>，<b>必須</b>控制，否則 \(A\) 與 \(Y\) 會出現非因果的關聯（後門路徑沒關）。<b>對撞（collider）</b> \(A\to K\leftarrow Y\)：\(K\) 是<span class="term">碰撞點</span>，\(A\) 與 \(Y\) 本來獨立，但一旦<b>控制它或依它選樣，反而製造出假關聯</b>。</p>
 
 <h3>4. 後門準則與 d-分離</h3>
-<p><span class="term">後門準則（back-door criterion）</span>：找到一組變項 \(Z\)，阻斷所有從暴露到結果的「後門路徑」，且不含暴露的後代，即可用調整 \(Z\) 識別因果效應。<span class="term">d-分離</span>是判斷路徑是否被阻斷的圖形規則：鏈與叉在中間點被調整即阻斷；對撞點<b>反過來</b>——不調整才阻斷。</p>
+<p><span class="term">後門準則（back-door criterion）</span>給出一個明確操作：找到一組變項 \(Z\)，能<b>阻斷所有從暴露通往結果的「後門路徑」</b>（那些以指向暴露的箭頭起頭的非因果路徑），且 \(Z\) 不包含暴露的後代，則調整 \(Z\) 就能識別因果效應。判斷路徑通不通用<span class="term">d-分離</span>規則：鏈與叉在中間點被控制就<b>阻斷</b>；對撞點<b>剛好相反</b>——不控制才阻斷，一控制反而打通。這個「對撞點反向」的規則，是選擇偏差（第 14 章）的數學引擎，務必牢記。</p>
 
-<h3>5. 為何形式化重要</h3>
-<p>DAG 把「該不該控制某變項」從直覺變成可檢驗的規則，明確揭露<b>過度調整（over-adjustment）</b>與<b>碰撞點偏差</b>等常被忽略的陷阱。潛在結果與 DAG 兩套語言可互譯，共同構成現代因果推論（第 25–28 章）的基礎。</p>
+<h3>5. 兩套語言，一個目的</h3>
+<p>潛在結果與 DAG 是同一枚硬幣的兩面：DAG 用「箭頭的有無」編碼條件獨立假設，潛在結果用「可交換性」編碼同樣的假設，兩者可互相翻譯。把它們學好，你就有了現代因果推論（中介、時變暴露、工具變數等第 25–28 章）的共同語言，也能一眼看穿「過度調整」「碰撞點偏差」這些常被忽略的陷阱。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>進階觀念</h4>
+<p>潛在結果與 DAG 是同一枚硬幣兩面：DAG 用「箭頭缺失」編碼<b>條件獨立假設</b>，潛在結果用「可交換性」編碼同一假設。資格考最愛考「給 DAG → 找最小充分調整集」與「解釋某調整為何製造偏差」。</p>
+<h4>關鍵推導：後門調整公式（identification）</h4>
+<div class="derive"><p>若 \(Z\) 滿足後門準則（阻斷所有 \(A\leftarrow\cdots\to Y\) 路徑、且不含 \(A\) 的後代），則條件可交換 \(Y(a)\perp A\mid Z\) 成立。於是</p>
+<p>\[ E[Y(a)]=\sum_z E[Y(a)\mid Z=z]P(z)=\sum_z E[Y(a)\mid A=a,Z=z]P(z) \]</p>
+<p>第一步用全期望，第二步用條件可交換把 \(Y(a)\) 換成觀察量，第三步用一致性 \(Y(a)=Y\)（當 \(A=a\)）：</p>
+<p>\[ E[Y(a)]=\sum_z E[Y\mid A=a,Z=z]P(z) \]</p>
+<p>這就是「標準化/g-formula」的一步版（第 18、25 章）。三個可識別假設在此各出一次力：可交換、一致性、正性（保證每個 \(z\) 下 \(P(A=a\mid z)>0\)）。</p></div>
+<h4>關鍵觀念：碰撞點為何「調整才壞」</h4>
+<div class="derive"><p>\(A\to K\leftarrow Y\)：\(A\)、\(Y\) 邊際獨立。但已知 \(K=1\) 時，若非 \(A\) 造成則更可能是 \(Y\) 造成 → 在 \(K\) 的層內 \(A\) 與 \(Y\) 出現負相關（explaining away）。這就是選擇偏差的引擎（第 14 章）。</p></div>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：可交換性、正性、一致性各在推導哪一步？</div><div class="a">A：可交換換掉反事實、一致性把反事實接回觀測、正性保證每層都有可估的條件期望。</div></div>
+<div class="qa"><div class="q">Q：調整了中介會怎樣？</div><div class="a">A：擋掉間接效應→低估總效應；若中介同時是碰撞或有共同原因，還會引入新偏差。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<p>DAG／反事實是林先和老師因果單元的主軸，113-2、111-1 都以 DAG 判讀 confounder／mediator／collider 為核心大題。</p>
+<div class="exq"><span class="yr">113-2 Q2</span><span class="qtitle">latent TB → DM：畫出 confounder、mediator、collider 的 DAG</span>
+<div class="sol">要能在同一張圖上指認三種角色並說明對應處置：共同原因（叉）→須調整；中介（鏈）→估總效應時不調；共同後果（碰撞）→不可調整/不可據以選樣。</div></div>
+<div class="exq"><span class="yr">111-1 應用二</span><span class="qtitle">舉例說明 collider 並說明如何控制</span>
+<div class="sol">定義 \(A\to C\leftarrow B\)：不條件化 C 時 A、B 獨立；一旦<b>條件化 C</b>（限制樣本或當共變數控制），會在 A、B 間打開虛假關聯（collider／selection bias）。實例：只收住院病人研究抽菸與糖尿病，因兩者都增加住院機率→住院是碰撞點→產生假關聯。<span class="pitfall">控制之道＝「不要控制它」</span>，並避免依它選樣。</div></div>
+<div class="exq"><span class="yr">113-2 / 111-1</span><span class="qtitle">名詞：counterfactual（反事實）</span>
+<div class="sol">因果＝兩個平行宇宙結果的比較 \(Y(1)\) vs \(Y(0)\)；個體只能觀察其一（因果推論的根本問題），故估平均因果效應，並需可交換、正性、一致性三假設（本章推導）。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>結構</th><th>圖形</th><th>中間變項角色</th><th>要不要調整</th></tr></thead>
 <tbody>
@@ -375,22 +448,44 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線公式：<b>盛行率勝算 ≈ 發生率 × 平均病程</b>（穩態下）；風險與率之間靠存活關係轉換。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 兩個基本量：風險與率</h3>
-<p><span class="term">風險（risk）</span>＝<span class="term">累積發生率（cumulative incidence, CI）</span>：一段固定期間內，原本無病者變成病例的<b>比例</b>，是機率，無單位、介於 0 與 1，<b>必須註明時間長度</b>。</p>
-<p><span class="term">發生率（incidence rate, IR）</span>又稱<span class="term">發生密度（incidence density）</span>：新病例數 ÷ 追蹤的<span class="term">人時（person-time）</span>。單位是時間<sup>-1</sup>（如每人年），數值可超過 1，衡量「疾病發生的瞬時速度」。</p>
+<h3>1. 先分清楚：風險與率是兩種不同的量</h3>
+<p>量化疾病，第一步是把「發生了多少」數清楚，而這裡藏著全章最重要、也最常考的分辨：<b>風險 vs. 率</b>。</p>
+<p><span class="term">風險（risk）＝累積發生率（cumulative incidence, CI）</span>：一段固定期間內，<b>原本沒病</b>的人當中<b>變成病例的比例</b>。它是一個<b>機率</b>，沒有單位，必落在 0 到 1 之間，而且<b>一定要講明時間長度</b>（「五年風險 10%」有意義，「風險 10%」沒意義）。分母是「期初有風險的人數」。</p>
+<p><span class="term">發生率（incidence rate, IR）＝發生密度</span>：新病例數除以追蹤累積的<span class="term">人時（person-time）</span>。它的單位是「時間的倒數」（如每人年 0.02 例），數值<b>可以超過 1</b>，衡量的是「疾病發生的瞬時速度」。分母是人時，不是人數。</p>
+<p>一句話記住差別：<b>風險的分母是「人」、率的分母是「人時」</b>；風險是機率、率是速度。</p>
 
-<h3>2. 人時的概念</h3>
-<p>每位受試者貢獻其「處於風險」的時間，直到發病、失去追蹤或研究結束。人時把不同追蹤長度的個體整合成共同分母，是處理<b>動態族群</b>與<b>不等追蹤</b>的關鍵。發病或死亡者於事件當下停止累積人時。</p>
+<h3>2. 人時：把不同追蹤長度整合起來</h3>
+<p>真實世界裡每個人被追蹤的時間不一樣——有人中途搬走、有人後期才加入、有人先發病。<span class="term">人時</span>的巧妙在於：每個人只<b>貢獻他「處於風險」的那段時間</b>，一旦發病、失去追蹤或研究結束就停止累積。把所有人的人時加起來當共同分母，就能公平地處理「不等長追蹤」與「成員進出的動態族群」。這也是為什麼開放族群（成員可進出）必須用率、而不能用簡單的人數比例。</p>
 
-<h3>3. 風險與率的轉換</h3>
-<p>當率在區間內近似定值 \(\lambda\)，且無競爭風險時，累積發生率 \( CI = 1-e^{-\lambda t} \)。當 \(\lambda t\) 很小時 \(CI \approx \lambda t\)（罕見病近似）。<span class="term">發生勝算（incidence odds）</span>＝\(CI/(1-CI)\)，在病例對照研究中很重要。</p>
+<h3>3. 風險與率怎麼換算</h3>
+<p>當率在一段期間內近似固定為 \(\lambda\)、且沒有競爭風險時，累積發生率 \( CI = 1-e^{-\lambda t} \)。當 \(\lambda t\) 很小（罕見或短期），可近似為 \( CI \approx \lambda t \)，也就是「率 × 時間 ≈ 風險」。這條近似是後面「罕見病假設」的根源。另外，<span class="term">發生勝算（incidence odds）</span> \(=CI/(1-CI)\)，在病例對照研究與 logistic 迴歸裡扮演要角。</p>
 
-<h3>4. 盛行率</h3>
-<p><span class="term">盛行率（prevalence, P）</span>＝某時點現存病例 ÷ 總人口，是「<b>存量</b>」而非「流量」。它同時受<b>發生率</b>與<b>病程（duration）</b>影響。穩態（steady state）下：<span class="term">盛行率勝算 ≈ 發生率 × 平均病程</span>，即 \( P/(1-P) \approx IR \times \bar{D} \)。因此盛行率不適合做病因研究——高盛行可能因病程長（存活久）而非發生率高。</p>
+<h3>4. 盛行率：存量，不是流量</h3>
+<p><span class="term">盛行率（prevalence, P）</span>是某時點「<b>現存</b>病例佔總人口的比例」，它是一個「<b>存量</b>」——像水缸裡的水量，同時受「進水速度（發生率）」與「停留時間（病程）」影響。穩態下有一條關鍵關係：<span class="term">盛行率勝算 ≈ 發生率 × 平均病程</span>，即 \( P/(1-P) \approx IR \times \bar{D} \)。</p>
+<p>這條關係有個重要的實務推論：<b>高盛行率不代表高發生率</b>。一個病如果治不好但也不會死（病程很長），盛行率會很高，但這是「活得久」而非「發生得多」。所以做<b>病因研究時首選發生率，不用盛行率</b>——否則暴露與「存活/病程」的關係會混進你以為的「效應」裡。</p>
 
-<h3>5. 特殊率與競爭風險</h3>
-<p><b>死亡率、致死率（case-fatality）、發病率</b>都是率的特例。當研究某結果時，其他會「移除受試者」的事件（如他因死亡）即<span class="term">競爭風險（competing risk）</span>，會使簡單的 \(1-e^{-\lambda t}\) 高估風險，需用存活分析（第 22 章）處理。</p>
+<h3>5. 特殊的率與競爭風險</h3>
+<p>死亡率、致死率（case-fatality）、發病率都是率的特例，差別只在分子分母的定義。最後一個要注意的觀念是<span class="term">競爭風險（competing risk）</span>：當我們研究某結果時，其他「會把人移出風險集」的事件（例如研究心臟病死亡，但有人先因車禍過世）會影響估計。忽略競爭風險、直接用 \(1-e^{-\lambda t}\) 會<b>高估</b>真實可觀察到的累積發生——這要留到第 22 章用存活分析正確處理。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵推導：由定率危害得累積發生率</h4>
+<div class="derive"><p>令瞬時危害（率）為常數 \(\lambda\)。存活函數滿足 \(S'(t)=-\lambda S(t)\)，\(S(0)=1\Rightarrow S(t)=e^{-\lambda t}\)。累積發生率</p>
+<p>\[ CI(t)=1-S(t)=1-e^{-\lambda t}\approx \lambda t\quad(\lambda t\ll1) \]</p>
+<p>泰勒展開 \(e^{-\lambda t}=1-\lambda t+\tfrac{(\lambda t)^2}{2}-\cdots\)，故罕見（短期）時 \(CI\approx\lambda t\)，這正是「率×時間≈風險」與罕見病近似的來源。</p></div>
+<h4>進階觀念：人時的可加性與不朽時間</h4>
+<p>人時把不同追蹤長度整合為共同分母，其正確性依賴「每一單位人時的瞬時風險可比」。若把「一段不可能發病的時間」錯算進暴露組人時，就會人為壓低暴露組率——這就是不朽時間偏差（第 11、43 章）的頻率學本質。</p>
+<h4>關鍵觀念：競爭風險使 1−KM 高估</h4>
+<div class="derive"><p>有競爭事件時，原因別危害 \(\lambda_1\) 積出的「淨」風險 \(1-e^{-\int\lambda_1}\) 假設競爭事件不存在（別人不會先死），高於真實可觀察的累積發生函數 CIF。CIF 需同時扣除仍存活的比例：\( \mathrm{CIF}_1(t)=\int_0^t \lambda_1(u)S(u)\,du \)，\(S\) 含所有原因（第 22 章）。</p></div>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：發生率可以大於 1 嗎？風險呢？</div><div class="a">A：率可以（單位時間⁻¹，如 2/人年）；風險是機率，必落在 0–1。</div></div>
+<div class="qa"><div class="q">Q：何時率≈風險/時間可用？</div><div class="a">A：追蹤期內率近似定值、且累積發生小（罕見）、無顯著競爭風險時。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<div class="exq"><span class="yr">109-1 第二部分-2</span><span class="qtitle">測量指標：IR／IP／hazard／prevalence／odds／PAF 的定義與關係</span>
+<div class="sol">要能一次說清分母差異：IR（人時）、IP＝累積發生率（人數，機率）、hazard（瞬時率）、prevalence（存量＝IR×病程）、odds＝\(R/(1-R)\)、PAF（族群可預防比例）。並會由率轉風險 \(1-e^{-\lambda t}\)。</div></div>
+<div class="exq"><span class="yr">109-2 / 110-1</span><span class="qtitle">名詞：Cumulative incidence（累積發生率）</span>
+<div class="sol">一段固定期間內原本無病者發病的比例（機率，需註明時間長度）；與 IR 的橋樑為 \(CI=1-e^{-IR\cdot t}\approx IR\cdot t\)（罕見）。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>量</th><th>分母</th><th>範圍/單位</th><th>需指定時間？</th><th>主要用途</th></tr></thead>
 <tbody>
@@ -432,24 +527,46 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>三大家族：<b>差（difference→RD、可加）</b>、<b>比（ratio→RR、IRR、OR、HR、可乘）</b>、以及<b>歸因分數（attributable fractions）</b>。主線：可乘尺度適合病因強度、可加尺度適合公共衛生衝擊。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 效應 vs. 關聯</h3>
-<p><span class="term">效應測量</span>是<b>因果</b>概念：把同一族群在兩種暴露狀態下的頻率相比（反事實對比）。<span class="term">關聯測量</span>是<b>觀察</b>概念：把暴露組與未暴露組的實際頻率相比。兩者數值形式相同，但只有在<b>可交換（無干擾、無偏差）</b>時，關聯才等於效應。這是全書效度討論的出發點。</p>
+<h3>1. 效應與關聯：看起來一樣，意義天差地別</h3>
+<p>本章教的是把第 4 章的頻率「兩兩相比」，但一開始就要立一個觀念樁：<span class="term">效應（effect）</span>與<span class="term">關聯（association）</span>是<b>兩個層次</b>的東西。</p>
+<p><b>效應</b>是<b>因果</b>概念：把「<b>同一群人</b>暴露 vs. 不暴露」的頻率相比——這是反事實對比，需要可交換性才成立。<b>關聯</b>是<b>觀察</b>概念：把「<b>暴露組</b>與<b>未暴露組</b>」這兩群<b>不同的人</b>的實際頻率相比。兩者的數學形式一模一樣（都是相減或相除），但只有在<b>沒有干擾、沒有偏差</b>時，觀察到的關聯才等於因果效應。一個有用的心像是：<b>觀察關聯 = 真效應 × 干擾偏差 × 選擇偏差 × 錯分偏差</b>，整本書的效度章節就是在把右邊那些「污染乘數」逼近 1。考試被問「你報的是效應還是關聯？」時，答案幾乎永遠是「關聯，除非我能論證各種偏差都可忽略」。</p>
 
-<h3>2. 差的家族（可加尺度）</h3>
-<p><span class="term">風險差（risk difference, RD）</span>＝\(R_1-R_0\)；<span class="term">率差（rate difference）</span>同理。RD 反映「暴露多造成幾個病例」，直接連到公共衛生衝擊與<span class="term">可歸因風險（attributable risk）</span>。其倒數即<span class="term">需治療人數（NNT）</span>類指標。</p>
+<h3>2. 差的家族：可加尺度，講公共衛生衝擊</h3>
+<p><span class="term">風險差（risk difference, RD）</span> \(=R_1-R_0\)，率差同理。RD 回答的是「暴露<b>多造成了幾個</b>病例」，是<b>絕對</b>的量，直接連到公共衛生衝擊與<span class="term">可歸因風險（attributable risk）</span>。它的倒數就是「每多防一個病例需處理多少人」這類指標（如 NNT）。決策者最需要的往往是這個絕對量——因為它才告訴你「投入資源能實際避免幾例」。</p>
 
-<h3>3. 比的家族（可乘尺度）</h3>
-<p><span class="term">風險比（risk ratio, RR）</span>＝\(R_1/R_0\)；<span class="term">率比（incidence rate ratio, IRR）</span>；<span class="term">勝算比（odds ratio, OR）</span>＝\(\frac{O_1}{O_0}\)；<span class="term">危害比（hazard ratio, HR）</span>。比值衡量<b>相對</b>效應，常用於病因強度。<b>罕見病時 OR≈RR≈IRR</b>，此為病例對照研究可估 RR 的理論基礎。</p>
+<h3>3. 比的家族：可乘尺度，講病因強度</h3>
+<p><span class="term">風險比（RR）</span> \(=R_1/R_0\)、<span class="term">率比（IRR）</span>、<span class="term">勝算比（OR）</span>、<span class="term">危害比（HR）</span>都是「相對」的量，衡量暴露把風險<b>放大幾倍</b>，常用於<b>病因強度</b>的論證。這裡有一條貫穿全書的近似：<b>當疾病罕見時，OR ≈ RR ≈ IRR</b>。這不是巧合，而是病例對照研究能用 OR 估計 RR 的理論基礎（第 8 章會嚴格推導）。</p>
 
-<h3>4. 勝算比的特殊地位</h3>
-<p>OR 可由病例對照設計無偏估計、且是 logistic 迴歸的自然參數，但<b>會誇大</b>（當病不罕見時，OR 比 RR 更偏離 1）。解讀時務必區分「勝算比」與「風險比」。</p>
+<h3>4. 勝算比的特殊地位與陷阱</h3>
+<p><span class="term">勝算比（OR）</span>有兩個獨特身份：它能被病例對照設計<b>無偏估計</b>，也是 logistic 迴歸的自然參數。但它有個代價——當疾病<b>不罕見</b>時，OR 會<b>誇大</b>效應（比 RR 更偏離 1）。所以解讀時務必說清楚「這是勝算比，不是風險比」，尤其在常見結果（如高盛行疾病）時，把 OR 當 RR 講會嚴重高估。</p>
 
-<h3>5. 歸因分數</h3>
-<p><span class="term">暴露者歸因分數（AFe，又稱歸因風險百分比）</span>＝\((RR-1)/RR\)：暴露病例中可歸因於暴露的比例。<span class="term">族群歸因分數（PAF）</span>＝\(\frac{P_e(RR-1)}{1+P_e(RR-1)}\)：整個族群疾病負擔中可由消除暴露而預防的比例，<b>同時取決於 RR 與暴露盛行率 \(P_e\)</b>。這是政策優先順序的關鍵量。</p>
+<h3>5. 歸因分數：從個人到族群</h3>
+<p><span class="term">暴露者歸因分數（AFe）</span> \(=(RR-1)/RR\)：在暴露的病例中，有多少比例是「因為暴露」才發生的。<span class="term">族群歸因分數（PAF）</span> \(=\dfrac{P_e(RR-1)}{1+P_e(RR-1)}\)：整個族群的疾病負擔中，有多少比例能靠「消除這個暴露」而預防。PAF 的關鍵在於它<b>同時取決於效應強度 RR 與暴露盛行率 \(P_e\)</b>——這解釋了一個重要的政策洞見：<b>一個弱但很普遍的因子，PAF 可能大於一個強但罕見的因子</b>。要排介入優先順序，看的是 PAF，不只是 RR。</p>
 
-<h3>6. 尺度選擇與同質性</h3>
-<p>「效應是否一致」取決於尺度：在可加尺度同質，往往在可乘尺度異質，反之亦然。因此「有無交互作用」是<b>尺度相依</b>的（見第 26 章）。選尺度要看目的：病因機制多用可乘，公共衛生決策多用可加。</p>
+<h3>6. 尺度的選擇不是小事</h3>
+<p>最後一個深刻觀念：「效應是否一致（有沒有交互作用）」<b>取決於你用哪個尺度</b>。在可加尺度上一致的效應，往往在可乘尺度上不一致，反之亦然。所以「有沒有交互作用」這個問題<b>不指定尺度就沒有答案</b>（第 26 章詳談）。選尺度要看目的：探討病因機制多用可乘（RR/OR），做公共衛生決策多用可加（RD/PAF）。把「先問尺度、再問效應」變成反射，你在交互作用與 PAF 的題目上就不會出錯。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵推導：罕見病時 OR ≈ RR ≈ IRR</h4>
+<div class="derive"><p>\(OR=\dfrac{R_1/(1-R_1)}{R_0/(1-R_0)}=RR\cdot\dfrac{1-R_0}{1-R_1}\)。當 \(R_1,R_0\to0\)，修正因子 \(\dfrac{1-R_0}{1-R_1}\to1\)，故 \(OR\to RR\)。病不罕見時 \(R_1>R_0\Rightarrow\) 修正因子 &gt;1 \(\Rightarrow OR\) 比 \(RR\) 更偏離 1（誇大）。密度抽樣的病例對照則 \(OR=IRR\) 不需此近似（第 8 章）。</p></div>
+<h4>關鍵推導：PAF 的兩種等價式</h4>
+<div class="derive"><p>由 \(RR\) 與暴露盛行 \(P_e\)：族群平均風險 \(=P_e R_1+(1-P_e)R_0\)。</p>
+<p>\[ PAF=\frac{\text{族群風險}-R_0}{\text{族群風險}}=\frac{P_e(RR-1)}{1+P_e(RR-1)} \]</p>
+<p>另一等價式用病例中暴露比例 \(p_c\)：\(PAF=p_c\cdot\dfrac{RR-1}{RR}\)（便於病例對照估計，因 \(p_c\) 可從病例組得到）。可見 PAF 同時受 <b>效應強度</b> 與 <b>暴露盛行</b> 決定——弱因子若很普遍，PAF 可能大於強而罕見的因子。</p></div>
+<h4>進階觀念：效應 vs. 關聯的鴻溝</h4>
+<p>\(RR^{obs}=RR^{causal}\times(\text{干擾偏差因子})\times(\text{選擇偏差因子})\times(\text{錯分因子})\)。整本書的效度章節就是在估計並消除右邊那些乘數。口試很愛問「你報的是效應還是關聯？差在哪？」</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：為何公共衛生決策看 RD/PAF 而非 RR？</div><div class="a">A：RR 不含基線風險；RD、PAF 反映「絕對能防幾例」，才是資源配置依據。</div></div>
+<div class="qa"><div class="q">Q：OR 一定高估 RR 嗎？</div><div class="a">A：偏離虛無的方向被放大：RR&gt;1 時 OR&gt;RR，RR&lt;1 時 OR&lt;RR。罕見病時可忽略。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<div class="exq"><span class="yr">114-1 Q7</span><span class="qtitle">RR、Absolute risk、Attributable risk 的區辨與計算</span>
+<div class="sol">RR＝相對；AR（可歸因風險）＝\(R_1-R_0\)（絕對、公衛衝擊）；歸因分數＝\((RR-1)/RR\)。務必分清「相對」與「絕對」語言。</div></div>
+<div class="exq"><span class="yr">108 Part II</span><span class="qtitle">疫苗保護力計算（VE）</span>
+<div class="sol">\( VE=1-RR=\dfrac{I_{unvacc}-I_{vacc}}{I_{unvacc}} \)。例：\(I_{vacc}=0.40,I_{unvacc}=0.36\Rightarrow RR=1.11,VE=-11\%\)（負值＝未降風險）。<span class="pitfall">注意</span>：算出負 VE 要能解讀，別誤把分子分母顛倒。</div></div>
+<div class="exq"><span class="yr">114-2 第二部份</span><span class="qtitle">疫苗效果與交互作用（3 題）</span>
+<div class="sol">結合 VE 與交互作用尺度（相加 vs 相乘），連第 26、32 章。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>測量</th><th>公式</th><th>尺度</th><th>無效應值</th><th>主要用途/備註</th></tr></thead>
 <tbody>
@@ -495,28 +612,38 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：先求無偏（效度），再求精確（效率）；<b>設計階段能防的偏差，分析階段補不回來</b>。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 設計的兩把尺</h3>
-<p><span class="term">效度（validity）</span>指估計是否無系統誤差（偏差）；<span class="term">效率（efficiency）</span>指在固定成本下的統計精確度（隨機誤差小）。兩者常有取捨，但<b>效度優先</b>：有偏的精確估計比無偏但不精確更危險。</p>
+<h3>1. 評價任何研究的兩把尺</h3>
+<p>研究設計千百種，但評價它們永遠用<b>兩把尺</b>：<span class="term">效度（validity）</span>——估計有沒有系統性偏差；<span class="term">效率（efficiency）</span>——在固定成本下能得到多精確（隨機誤差多小）。這兩者常有取捨，但<b>效度優先</b>是鐵律。原因用一條式子就能講清楚：均方誤差 \(=\) 偏差\(^2 +\) 變異。加大樣本只縮小「變異」那一項；<b>偏差是樣本再大也消不掉的系統項</b>。所以一個「有偏但很精確」的估計，比「無偏但不精確」更危險——它會讓你<b>很有信心地相信一個錯的答案</b>。</p>
 
-<h3>2. 實驗性研究</h3>
-<p><span class="term">隨機對照試驗（RCT）</span>由研究者<b>隨機分派</b>暴露/介入，使組間在期望上可交換，是控制已知與未知干擾的最強手段。限制：倫理、成本、外推性、依從性。田野試驗、社區介入試驗為其變形。</p>
+<h3>2. 實驗性研究：隨機化的獨特威力</h3>
+<p><span class="term">隨機對照試驗（RCT）</span>由研究者<b>隨機分派</b>暴露/介入。隨機化的獨特之處在於：它讓暴露與<b>所有</b>潛在結果獨立——不只是已知干擾，連<b>未知、沒測到的干擾</b>也在期望上被平衡。這是任何觀察研究都做不到的，也是 RCT 被稱為因果證據金標準的根本原因。但它有代價：倫理限制（不能隨機分派有害暴露）、成本、外推性（嚴格納入條件使樣本不像真實世界）、以及依從性問題。田野試驗、社區介入試驗是它的變形。</p>
 
-<h3>3. 觀察性研究三大型</h3>
-<ul>
-<li><span class="term">世代研究（cohort）</span>：依<b>暴露</b>分組，前瞻或回溯追蹤<b>結果</b>；可直接算發生率、RR、RD。</li>
-<li><span class="term">病例對照研究（case-control）</span>：依<b>結果</b>選病例與對照，回溯<b>暴露</b>；效率高，適合罕見病，直接算 OR。</li>
-<li><span class="term">橫斷面研究（cross-sectional）</span>：同時測暴露與結果，得盛行率；時序不清是弱點。</li>
-</ul>
+<h3>3. 觀察性研究的三種基本型</h3>
+<p><b>世代研究</b>：先確認一群沒病的人，依<span class="term">暴露</span>分組，往後追蹤誰發病。它時序清楚、能算絕對風險與率，還能同時看多個結果——但對罕見病沒效率（要追很多人很久）。<b>病例對照研究</b>：反過來，先找<span class="term">病例與對照</span>，再回頭問暴露。它對罕見病與長潛伏病極有效率、省時省錢，但容易有回憶與選擇偏差，且通常一次只能研究一個結果。<b>橫斷面研究</b>：同時測暴露與結果，得到盛行率，快又便宜，但<b>時序不清</b>是硬傷——你分不清是暴露造成疾病，還是疾病改變了暴露。</p>
 
-<h3>4. 目標試驗思維</h3>
-<p>現代設計強調：先明確定義一個<span class="term">目標試驗（target trial）</span>——理想中若能隨機化，要比較誰、暴露如何定義、何時開始追蹤、結果是什麼——再用觀察資料去「模擬」它。這能避免<b>不朽時間偏差（immortal time bias）</b>、<b>盛行使用者偏差</b>等時間對齊錯誤。</p>
+<h3>4. 目標試驗：把觀察研究對齊到一個假想 RCT</h3>
+<p>現代設計最重要的思維是<span class="term">目標試驗（target trial）</span>：在用觀察資料回答因果問題前，先明確寫下「如果我能做一個理想的隨機試驗，它會長什麼樣」——包括合格條件、暴露如何定義、<b>從哪一刻開始算追蹤（time zero）</b>、結果是什麼、要比較什麼。然後用觀察資料去<b>模擬</b>這個試驗。這個框架的價值在於：許多惡名昭彰的偏差（<span class="term">不朽時間偏差</span>、<span class="term">盛行使用者偏差</span>）本質都是「某個要素沒對齊」，用目標試驗一比就現形。</p>
 
-<h3>5. 效率的來源</h3>
-<p>效率可透過抽樣設計提升，例如巢式病例對照、病例世代（case-cohort）、配對、以及在暴露/結果分布上做最有訊息量的取樣。設計時要問：每一分資源買到多少「有效比較」。</p>
-
-<h3>6. 設計選擇的決策邏輯</h3>
-<p>依<b>疾病罕見度、暴露罕見度、潛伏期長短、結果與暴露測量成本、時序需求</b>選型：罕見病→病例對照；罕見暴露→世代；要多重結果→世代；要快、便宜、探索→橫斷面。</p>
+<h3>5. 效率從哪裡來、設計怎麼選</h3>
+<p>效率可以靠聰明的抽樣提升：巢式病例對照、病例世代（case-cohort）、配對，都是「用同樣的錢買到更多有效比較」。設計選擇則是一連串權衡：<b>疾病罕見</b>→病例對照；<b>暴露罕見</b>→世代；<b>要看多個結果</b>→世代；<b>要快、便宜、探索性</b>→橫斷面；<b>潛伏期長</b>→病例對照或歷史世代。把這些決策邏輯記成反射，遇到情境題就能快速選對設計並說出理由。核心心法始終是那句：<b>設計階段能防的偏差，分析階段補不回來</b>。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>進階觀念：目標試驗七要素</h4>
+<p>把觀察研究對齊到一個假想 RCT，需明確：<b>合格條件、暴露策略、分派、time zero、追蹤終點、結果、對比與估計量</b>。多數真實世界偏差（不朽時間、盛行使用者、adjustment for post-baseline）都來自這七項某一項沒對齊。資格考常給一個「壞研究」要你指出違反哪一項。</p>
+<h4>關鍵觀念：隨機化到底處理了什麼</h4>
+<div class="derive"><p>隨機分派使 \(A\perp\{Y(1),Y(0)\}\)（<b>邊際</b>可交換），因此不需測量任何干擾即可識別效應——這是觀察研究做不到的。但隨機化<b>不</b>保證：無選擇偏差（失訪後）、無測量偏差、外部效度。故 RCT 仍需 ITT 與追蹤完整性。</p></div>
+<h4>關鍵觀念：效度 vs. 效率的數學分離</h4>
+<div class="derive"><p>均方誤差 \( \mathrm{MSE}=\underbrace{\text{Bias}^2}_{\text{效度}}+\underbrace{\text{Variance}}_{\text{效率}} \)。加大樣本只降低第二項；偏差是 \(n\to\infty\) 仍不消失的系統項。故「效度優先」有嚴格意義：無法用資料量買回無偏。</p></div>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：橫斷面研究能否談因果？</div><div class="a">A：時序不明是硬傷；除非暴露為不可變（如基因、血型）或有明確時間結構，否則僅供假說。</div></div>
+<div class="qa"><div class="q">Q：給一個罕見病＋長潛伏，選什麼設計？</div><div class="a">A：病例對照（或世代內巢式病例對照）；世代對罕見病無效率。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<div class="exq"><span class="yr">109-1 第二部分-1</span><span class="qtitle">cohort／case-control／case-crossover 三設計比較</span>
+<div class="sol">依分組依據（暴露 vs 結果 vs 自我對照）、可估量、適用（罕見病/短暫暴露）、主要偏差列表比較。case-crossover＝病人自身不同時間作對照，適合短暫暴露對急性事件。</div></div>
+<div class="exq"><span class="yr">108 I-3</span><span class="qtitle">醫院型 vs 社區型病例對照：對照如何選、優缺點</span>
+<div class="sol">醫院型：資訊易收集、適罕見病，但對照難代表母體、就診行為與暴露相關（<b>Berkson bias</b>）；社區型：暴露分布近母體、可推論整體，但成本高。關鍵：對照暴露分布要代表<b>源族群</b>。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>設計</th><th>分組依據</th><th>可估量</th><th>優勢</th><th>限制</th></tr></thead>
 <tbody>
@@ -557,24 +684,39 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：世代研究的效度關鍵是<b>暴露組與未暴露組可比</b>＋<b>完整、無差別的追蹤</b>。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 基本結構與型態</h3>
-<p>先確認一群「有風險、尚未發病」的人，依<span class="term">暴露狀態</span>分組，往後追蹤發病。<span class="term">前瞻世代</span>暴露先測、結果後發生，時序最清楚；<span class="term">回溯（歷史）世代</span>用過去紀錄重建暴露與結果，快而省，但受既有資料品質限制。</p>
+<h3>1. 世代研究的基本骨架</h3>
+<p>世代研究的邏輯只有一句話：<b>先依暴露把人分組，再往前追蹤，比較各組結果發生的多寡</b>。它的起點是一群「有風險、尚未發病」的人（若已發病就不能再「發生」了）。依<span class="term">暴露狀態</span>分組後，追蹤誰後來發病，就能直接計算各組的發生率並相比。因為暴露是先確認、結果是後發生，<b>時序天然清楚</b>，這是世代研究相對病例對照與橫斷面的最大優勢。</p>
 
-<h3>2. 封閉 vs. 開放族群</h3>
-<p><span class="term">封閉世代（closed/fixed cohort）</span>成員固定、只減不增，適合算<b>累積發生率與風險</b>。<span class="term">開放/動態族群（open/dynamic population）</span>成員可進出，適合算<b>發生率（人時分母）</b>。選哪種取決於研究問題與資料結構。</p>
+<h3>2. 前瞻與回溯：差在暴露資料怎麼來</h3>
+<p><span class="term">前瞻世代（prospective）</span>從現在開始，先量暴露、再等結果發生。好處是暴露資料由研究者親自、標準化地蒐集，品質高、能精確定義；壞處是慢又貴、失訪風險高。<span class="term">回溯（歷史）世代</span>則用<b>既有紀錄</b>重建過去的暴露與後來的結果——例如用職業紀錄查幾十年前的暴露，再連結癌症登記查結果。它快又省，但受限於既有資料的品質與完整度。<b>關鍵澄清</b>：兩者的時序保證是<b>一樣</b>的（都是依暴露分組追結果），差別只在暴露資料是「當下量」還是「翻紀錄」，影響的是<b>測量品質</b>而非時序。</p>
 
-<h3>3. 對照組的選擇</h3>
-<p>未暴露組必須代表「暴露組若未暴露的經驗」。常見策略：內部對照（同世代未暴露者，最佳）、外部/一般人口對照（需標準化，見<span class="term">SMR</span>）、多重對照。職業世代常用一般人口比較，須留意<span class="term">健康工人效應（healthy worker effect）</span>。</p>
+<h3>3. 封閉族群還是開放族群</h3>
+<p><span class="term">封閉世代（closed cohort）</span>成員一開始就固定、之後只減不增，適合算<b>累積發生率與風險</b>（分母是期初人數）。<span class="term">開放/動態族群（open population）</span>成員可以進進出出（像一個城市的居民），必須算<b>發生率</b>（分母是人時），因為每個人貢獻的時間不一樣。選哪一種取決於你的研究問題與資料結構——這也呼應第 4 章「風險用人數、率用人時」的分辨。</p>
 
-<h3>4. 追蹤與失訪</h3>
-<p>完整追蹤是效度命脈。<span class="term">失去追蹤（loss to follow-up）</span>若與暴露及結果<b>相關</b>，會造成選擇偏差（第 14 章）。策略：多重聯絡管道、與登記/死亡檔連結、敏感度分析評估失訪影響。</p>
+<h3>4. 對照組：未暴露組要代表「暴露組若沒暴露的樣子」</h3>
+<p>世代研究的效度命脈之一，是<b>未暴露組必須能代表「暴露組如果沒暴露、本來會有的結果經驗」</b>（回到第 3 章的可交換性）。常見策略：<b>內部對照</b>（同一世代裡的未暴露者，通常最理想，因為背景最相似）；<b>外部/一般人口對照</b>（需要標準化，會用到<span class="term">SMR</span>）；<b>多重對照</b>。職業世代常拿一般人口比較，但要小心<span class="term">健康工人效應</span>——能就業、還在職的人本來就比一般人健康，會使危害被低估。</p>
 
-<h3>5. 分析要點</h3>
-<p>依人時算發生率並求 IRR/RD；有時間變化或競爭風險時用存活分析（Kaplan–Meier、Cox，第 22 章）。需調整干擾（分層/標準化/迴歸，第 18、20 章）。<b>暴露可能隨時間改變</b>時，注意時變暴露的正確處理（第 25 章）。</p>
+<h3>5. 追蹤完整性與失訪</h3>
+<p>另一條命脈是<b>完整追蹤</b>。<span class="term">失去追蹤（loss to follow-up）</span>之所以危險，不在於「失訪本身」，而在於<b>失訪是否與暴露且與結果同時相關</b>——若是，就等於依一個碰撞點選樣，造成選擇偏差（第 14 章）。因應之道：多重聯絡管道、與死亡檔/疾病登記連結、並用敏感度分析評估「如果失訪者結果不同會怎樣」。</p>
 
-<h3>6. 特殊變形</h3>
-<p><b>雙向世代、出生世代、電子病歷世代</b>等。巢式病例對照與病例世代（見第 8、11 章）是在世代內做的高效率抽樣，保留世代的時序優勢又省測量成本。</p>
+<h3>6. 分析與變形</h3>
+<p>分析上，依人時算發生率並求率比/率差；有時間變化或競爭風險時改用存活分析（Kaplan–Meier、Cox，第 22 章）；需要校正干擾時用分層、標準化或迴歸（第 18、20 章）。若<b>暴露會隨時間改變</b>，還要小心時變暴露的正確處理（第 25 章）。常見變形包括出生世代、電子病歷世代，以及在世代內做的巢式病例對照與病例世代——後兩者保留世代的時序優勢，又能省下昂貴的暴露測量成本。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵觀念：SMR 的本質是間接標準化</h4>
+<div class="derive"><p>\( \mathrm{SMR}=\dfrac{\sum_i O_i}{\sum_i E_i} \)，\(E_i=\lambda_i^{std}\times PT_i\)（把標準人口的層別率套到研究世代的人時結構）。因權重是<b>研究世代自身</b>的人時分布，兩個 SMR 用了不同權重，故<b>不可互比</b>——這是職業世代（第 41 章）最常見的錯誤。</p></div>
+<h4>進階觀念：健康工人效應的兩層結構</h4>
+<p>(1) 僱用選擇（雇用即較健康，基線偏移）；(2) 健康工人存活效應（不健康者先離職，留任者累積更多暴露又更健康）——後者是<b>時變干擾又受先前暴露影響</b>，正是第 25 章 g-方法的教科書案例。用內部對照＋時間相依模型化解。</p>
+<h4>關鍵觀念：失訪何時造成偏差</h4>
+<div class="derive"><p>失訪是對「留存 \(S=1\)」設條件。只有當 \(P(S=1)\) 同時依賴暴露與結果（碰撞結構）時才偏。若只與暴露相關或只與結果相關，不產生選擇偏差（但可能損失效率或影響外推）。</p></div>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：前瞻與回溯世代，時序保證一樣嗎？</div><div class="a">A：一樣（都是依暴露分組追結果）；差別在暴露資料是「當下量」或「既有紀錄」，影響測量品質而非時序。</div></div>
+<div class="qa"><div class="q">Q：封閉世代能算率嗎？</div><div class="a">A：可以，只要記錄人時；但其自然產物是累積發生率/風險，開放族群才必須用率。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<div class="exq"><span class="yr">109-2 I-2</span><span class="qtitle">Matched cohort：配對後還要調整嗎？</span>
+<div class="sol">世代研究依干擾配對暴露/未暴露組。<span class="pitfall">重點</span>：配對世代與配對病例對照處理不同——世代配對後組間干擾已平衡，分析<b>不一定</b>要條件式；但病例對照配對會人為使粗 OR 偏向虛無，<b>必須</b>用配對/條件式分析還原（見第 8、18 章）。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>面向</th><th>前瞻世代</th><th>回溯（歷史）世代</th></tr></thead>
 <tbody>
@@ -620,25 +762,51 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>把病例對照想成「在一個世代裡，對所有病例＋一個對照樣本量暴露」</b>，一切就通了。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 為什麼要用病例對照</h3>
-<p>當疾病罕見或潛伏期長，世代研究要追蹤大量人、很久才得到少數病例，極不效率。病例對照<b>先鎖定病例</b>，再從同一來源族群抽一組對照來代表暴露分布，用少得多的樣本得到相近資訊。</p>
+<h3>1. 一句心法：病例對照是世代的抽樣版</h3>
+<p>病例對照研究最容易被誤解，但只要抓住一句心法就全通了：<b>想像底下有一個世代，我們對「所有病例」加上「一個對照樣本」去量暴露</b>。對照的唯一任務，是<b>估計這個底層族群（來源族群）的暴露分布</b>。把這句話刻在腦裡，後面所有的抽樣與 OR 意義都能自己推出來。</p>
 
-<h3>2. 來源族群與對照的角色</h3>
-<p>關鍵心法：病例來自某個<span class="term">來源族群</span>，對照必須是<b>同一來源族群中「若發病也會成為本研究病例」的人之代表</b>（研究基礎原則，study base principle）。對照的任務是<b>估計來源族群的暴露比例</b>，因此「對照不必健康」——他們代表的是族群，不是無病狀態。</p>
+<h3>2. 為什麼需要病例對照</h3>
+<p>當疾病<b>罕見</b>或<b>潛伏期長</b>，世代研究要追蹤大量人、等很久才累積到少數病例，極度沒效率。病例對照反其道而行：<b>先鎖定病例</b>（把稀有的結果一次抓齊），再從同一來源族群抽一組對照代表暴露分布。用少得多的樣本，得到與世代相近的資訊——這就是它的效率來源。</p>
 
-<h3>3. 三種對照抽樣與 OR 的意義</h3>
-<ul>
-<li><span class="term">累積（cumulative / 存活者）抽樣</span>：追蹤期末在未發病者中抽對照 → OR 估 <b>風險勝算比</b>，須<b>罕見病假設</b>才 ≈RR。</li>
-<li><span class="term">風險集（密度／同步）抽樣</span>：在每個病例發病<b>當下</b>從仍在風險者中抽對照 → OR <b>直接等於率比 IRR</b>，<b>不需</b>罕見病假設。</li>
-<li><span class="term">病例世代（case-cohort）</span>：對照從基線全體隨機抽（子世代）→ OR <b>直接等於 RR</b>，可共用同一組對照給多種結果。</li>
-</ul>
+<h3>3. 來源族群與「對照代表誰」</h3>
+<p>核心觀念是<span class="term">研究基礎原則（study base）</span>：病例來自某個<b>來源族群</b>，而對照必須是「這個來源族群中，<b>假如也發病、就會成為本研究病例</b>的人」的代表。由此導出一個常被考、也常被答錯的重點：<b>對照不必是「健康的人」</b>。對照代表的是<b>族群的暴露分布</b>，不是「無病狀態」；在密度抽樣下，對照甚至可能是將來會發病的人。</p>
 
-<h3>4. 對照來源與偏差</h3>
-<p>常見對照來源：族群為本（population-based，最佳但貴）、醫院對照（方便但可能與暴露相關→偏差）、鄰里、親友。<span class="term">選擇偏差</span>來自對照抽樣機率與暴露相關；<span class="term">回憶偏差（recall bias）</span>來自病例比對照更用力回想暴露。<b>配對（matching）</b>可提升效率並控制強干擾，但配對變項須在分析中處理（配對分析／條件式 logistic），且不可對中介或僅與暴露相關者配對。</p>
+<h3>4. 三種抽樣，三種 OR 的意義</h3>
+<p>這是本章最核心、幾乎必考的部分。<b>密度（風險集）抽樣</b>：在每個病例發病的<b>當下</b>，從仍在風險的人中抽對照。此時 OR <b>直接等於率比 IRR</b>，<b>不需要罕見病假設</b>。<b>累積（存活者）抽樣</b>：追蹤結束後，從未發病者中抽對照。此時 OR 估的是風險勝算比，<b>要罕見病</b>才近似 RR。<b>病例世代（case-cohort）</b>：對照從基線全體隨機抽（一個子世代）。此時 OR <b>直接等於 RR</b>，且同一組對照可重複用於多個結果。記法：<b>密度→率比、病例世代→風險比，這兩者免罕見假設；只有累積抽樣才需要罕見病</b>。</p>
 
-<h3>5. 特殊設計</h3>
-<p><span class="term">巢式病例對照（nested case-control）</span>在既定世代內做，暴露測量（如儲存檢體）只對病例＋抽樣對照做，省成本又保時序。<span class="term">病例交叉（case-crossover）</span>用病例自己在不同時間作對照，適合短暫暴露對急性事件（自我配對，去除穩定干擾）。<span class="term">病例時間對照（case-time-control）</span>再校正暴露趨勢。</p>
+<h3>5. 對照來源與兩大偏差</h3>
+<p>對照可來自族群（population-based，最理想但貴）、醫院、鄰里、親友。<span class="term">選擇偏差</span>發生在「對照的被抽中機率與暴露相關」時——例如醫院對照可能因為抽菸相關疾病而住院，使對照的抽菸比例偏高，低估關聯（Berkson 型）。<span class="term">回憶偏差（recall bias）</span>則來自「病例比對照更用力回想暴露」，是差別錯分的典型。防範：族群對照、選與暴露無關的疾病當醫院對照、盲化、用客觀暴露來源。</p>
+
+<h3>6. 配對與特殊設計</h3>
+<p><span class="term">配對（matching）</span>能控制強干擾、提升效率，但有代價：配對後<b>粗 OR 會偏向虛無</b>，必須用配對分析（1:1 時 OR\(=b/c\)，只用不一致對）或條件式 logistic 還原。而且<b>不能對中介或只與暴露相關的變項配對</b>，否則製造偏差或白白損失效率。特殊設計包括：<span class="term">巢式病例對照</span>（世代內只對病例＋抽樣對照測昂貴暴露，省錢又保時序）、<span class="term">病例交叉</span>（病人自己在不同時間當對照，自我配對消去所有穩定干擾，適合短暫暴露對急性事件）。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>核心心法：病例對照＝世代的抽樣</h4>
+<p>想像一個底層世代。<b>對所有病例＋一個對照樣本量暴露</b>。對照的唯一任務是估計「來源族群的暴露分布/暴露人時」。抓住這句，三種抽樣的 OR 意義自然推出。</p>
+<h4>關鍵推導：三種抽樣下 OR 估什麼</h4>
+<div class="derive"><p>設暴露/未暴露的病例數 \(a,c\)、對照數 \(b,d\)。</p>
+<p><b>密度（風險集）抽樣：</b>對照按人時比例被抽，\(b/d\to PT_1/PT_0\)。故 \(OR=\dfrac{a/c}{b/d}\to\dfrac{a/c}{PT_1/PT_0}=\dfrac{a/PT_1}{c/PT_0}=IRR\)。<b>免罕見假設。</b></p>
+<p><b>累積（存活者）抽樣：</b>對照取自期末未發病者，\(b/d\to (1-R_1)N_1/((1-R_0)N_0)\)，得風險勝算比，須罕見才 \(\approx RR\)。</p>
+<p><b>病例世代：</b>對照取自基線全體，\(b/d\to N_1/N_0\)，故 \(OR=\dfrac{a/N_1}{c/N_0}=RR\)，<b>免罕見假設</b>且對照可共用於多結果。</p></div>
+<h4>關鍵觀念：配對的代價</h4>
+<div class="derive"><p>對干擾配對後，病例與對照在配對變項上人為相同，<b>粗 OR 反而偏向虛無</b>；必須用配對分析（1:1 時 \(OR=b/c\)，僅用不一致對）或條件式 logistic 還原。配對錯了（配到中介或只與暴露相關者）會製造偏差或損效率。</p></div>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：對照要「健康」嗎？</div><div class="a">A：不必。對照代表來源族群的暴露分布，可含將來會發病者（密度抽樣尤然）。</div></div>
+<div class="qa"><div class="q">Q：醫院對照的風險？</div><div class="a">A：住院原因可能與研究暴露相關→選擇偏差（Berkson 型）；宜多疾病別對照或族群對照。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<p>病例對照的抽樣與配對是高頻大題，橫跨 114-1、111-1、108、102-2、113-1。</p>
+<div class="exq"><span class="yr">114-1 Q1</span><span class="qtitle">1:1 配對病例對照的 OR 與漸近／精確 CI</span>
+<div class="sol">條件概似只用<b>不一致對（discordant pairs）</b>：\( \widehat{OR}=b/c \)。Wald 95% CI：\( \frac{b}{c}\exp[\pm1.96\sqrt{1/b+1/c}] \)（變異不含 a,d）。精確 CI：固定 \(n=b+c\)，\(b\sim\)Binomial，先對 \(\pi\) 求 Clopper–Pearson 再轉 \(OR=\pi/(1-\pi)\)。<span class="pitfall">核心考點</span>：為何 concordant pairs 不進入（固定每對總暴露數後只有 discordant 提供 OR 訊息）。</div></div>
+<div class="exq"><span class="yr">113-1 Q2</span><span class="qtitle">Matched case-control 條件邏輯斯：1:1 vs 1:m</span>
+<div class="sol">一個 case 可配多個 control。單一 matched set 的條件概似 \( L_i(\beta)=\dfrac{\exp(\beta'x_{i0})}{\sum_{j=0}^{m}\exp(\beta'x_{ij})} \)；整體連乘。基準風險 \(h_0\) 在比值中<b>消去</b>，故不需估。</div></div>
+<div class="exq"><span class="yr">114-1 Q8</span><span class="qtitle">Nested case-control（HPV load）</span>
+<div class="sol">世代內對病例＋抽樣對照測暴露（省儲存檢體成本、保時序）；密度抽樣使 OR＝IRR。</div></div>
+<div class="exq"><span class="yr">114-1 Q9</span><span class="qtitle">Test-negative design 估疫苗效力</span>
+<div class="sol">就醫且檢驗者中比較陽性/陰性者的疫苗暴露，<b>自動部分校正就醫傾向</b>；近年疫苗效力主力設計。</div></div>
+<div class="exq"><span class="yr">102-2/104/105 題4</span><span class="qtitle">Density vs Cumulative 病例對照</span>
+<div class="sol">密度（風險集）抽樣→OR＝IRR（免罕見假設）；累積（存活者）抽樣→須罕見病才 OR≈RR（見本章推導）。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>對照抽樣</th><th>從何抽對照</th><th>OR 估計的量</th><th>需罕見病假設？</th></tr></thead>
 <tbody>
@@ -683,26 +851,31 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：監測不是研究而是<b>行動導向的資訊系統</b>；「夠好用來行動」比「完美」重要。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 定義與用途</h3>
-<p><span class="term">公共衛生監測</span>強調「持續、系統」與「用於行動」。它支援：疫情偵測與預警、疾病負擔與趨勢描述、危險族群辨識、介入規劃與評價、資源配置、以及假說生成。</p>
+<h3>1. 監測是什麼、為什麼重要</h3>
+<p><span class="term">公共衛生監測</span>的定義有兩個關鍵詞：「<b>持續、系統</b>」與「<b>用於行動</b>」。它是<b>持續不斷地蒐集—分析—解讀—傳播</b>健康資料，目的不是發表論文，而是<b>指導公衛決策</b>。它是描述性流行病學的實務引擎，支撐疫情預警、疾病負擔評估、危險族群辨識、介入規劃與評價，以及假說生成。</p>
 
-<h3>2. 監測系統的型態</h3>
-<ul>
-<li><span class="term">被動監測（passive）</span>：等醫療端通報，便宜、涵蓋廣，但<b>低估</b>與延遲明顯。</li>
-<li><span class="term">主動監測（active）</span>：衛生單位主動蒐集，完整及時但昂貴，多用於疫情或消除計畫。</li>
-<li><span class="term">哨兵監測（sentinel）</span>：選代表性據點深入蒐集，效率高但代表性有限。</li>
-<li><span class="term">症候群監測（syndromic）</span>：用症候群/就醫前資料（急診主訴、藥局銷售）求<b>早期</b>訊號，特異性較低。</li>
-</ul>
+<h3>2. 四種監測型態與其取捨</h3>
+<p><b>被動監測</b>：等醫療端主動通報。便宜、涵蓋廣，但<b>低估</b>且延遲明顯（醫師不一定報）。<b>主動監測</b>：衛生單位主動去蒐集。完整又及時，但昂貴，多用於疫情調查或消除計畫。<b>哨兵監測</b>：選少數有代表性的據點深入蒐集，效率高但代表性有限（如流感哨兵醫師）。<b>症候群監測</b>：用「還沒確診」的資料（急診主訴、藥局銷售）求<b>最早期</b>的訊號，換來及時性，代價是特異性低、容易假警報。設計時就是在這些屬性間權衡。</p>
 
-<h3>3. 系統屬性與評價</h3>
-<p>CDC 式評價面向：<b>簡易性、彈性、資料品質、可接受度、敏感度、陽性預測值、代表性、及時性、穩定性</b>。設計時在這些屬性間權衡，例如症候群監測換取及時性而犧牲特異性。</p>
+<h3>3. 系統的屬性與評價</h3>
+<p>評價一個監測系統，看它的<b>簡易性、彈性、資料品質、可接受度、敏感度、陽性預測值、代表性、及時性、穩定性</b>。這些屬性彼此拉扯：症候群監測刻意犧牲特異性換及時性。特別要理解<b>敏感度與陽性預測值（PPV）的取捨</b>——敏感度低會漏掉真疫情，PPV 低則充滿假警報、耗費調查資源。而且因為 \( PPV=\dfrac{Se\,\pi}{Se\,\pi+(1-Sp)(1-\pi)} \)，當事件罕見（\(\pi\) 很小）時，即使特異度很高，PPV 仍可能很低——這就是為什麼早期預警系統常常「狼來了」。</p>
 
-<h3>4. 資料來源與分析</h3>
-<p>來源：法定傳染病通報、生命統計、登記（癌症/出生缺陷）、實驗室、醫院/保險資料、電子病歷。分析重點是<b>趨勢與異常偵測</b>：時間序列、閾值/CUSUM、時空群聚偵測。解讀須注意通報行為改變、定義變更造成的<b>人為波動</b>。</p>
+<h3>4. 資料來源與異常偵測</h3>
+<p>來源包括法定傳染病通報、生命統計、疾病登記（癌症、出生缺陷）、實驗室、醫院/保險資料、電子病歷。分析的重點是<b>趨勢與異常偵測</b>：時間序列、閾值法、CUSUM（累積和，對緩慢上升敏感）、時空群聚偵測。解讀時最大的陷阱是<b>人為波動</b>——通報數上升可能只是通報意識提高、病例定義改變或檢驗量能增加，未必是真疫情。看到異常要先查分母與通報流程。</p>
 
-<h3>5. 從監測到行動</h3>
-<p>監測的價值在「<b>資訊用於行動</b>」的閉環：訊號 → 調查（田野，第 10 章）→ 介入 → 再監測評估。傳播（回饋給通報者與決策者）是常被忽略卻關鍵的一步。</p>
+<h3>5. 從監測到行動的閉環</h3>
+<p>監測的價值在於「<b>資訊真的被用於行動</b>」的閉環：偵測到訊號 → 實地調查（田野方法，第 10 章）→ 介入 → 再監測評估效果。其中<b>傳播（把資訊回饋給通報者與決策者）</b>是最常被忽略、卻最關鍵的一步——沒有回饋，通報者失去動力，系統就會枯萎。記住：監測不是研究，它容忍系統性低估，只要趨勢穩定、能及時指導行動就是好系統。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>進階觀念：監測不是研究</h4>
+<p>監測目標是<b>行動時效</b>而非無偏估計，故容忍系統性低估只要趨勢穩定可解讀。評價要在「敏感度 vs. 陽性預測值 vs. 及時性」間權衡；症候群監測刻意犧牲特異性換及時。</p>
+<h4>關鍵觀念：敏感度與 PPV 的資源意涵</h4>
+<div class="derive"><p>低 PPV 表示大量假訊號，耗費調查資源；低敏感度表示漏掉真疫情。閾值設定即在兩者間移動。\( \mathrm{PPV}=\dfrac{Se\cdot\pi}{Se\cdot\pi+(1-Sp)(1-\pi)} \)，罕見事件（\(\pi\) 小）時即使 \(Sp\) 高，PPV 仍可能很低——這解釋為何早期預警常「狼來了」。</p></div>
+<h4>關鍵觀念：異常偵測</h4>
+<p>觀察數對比期望數（歷史基線）：閾值法、CUSUM（累積和，對緩升敏感）、時空掃描（Kulldorff）。解讀務必排除通報行為/定義改變造成的人為斷點。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：被動監測的通報數上升，一定是疫情嗎？</div><div class="a">A：未必。可能是通報意識、定義或檢驗量能改變。需查分母與通報流程。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>型態</th><th>成本</th><th>完整性/及時性</th><th>代表性</th><th>典型用途</th></tr></thead>
 <tbody>
@@ -743,24 +916,34 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：好的資料在<b>蒐集當下</b>就決定了；分析救不回爛資料。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 招募與參與</h3>
-<p>抽樣框、招募策略與<span class="term">應答率（response rate）</span>直接決定代表性。低應答不必然造成偏差——關鍵在於<b>參與與否是否和暴露/結果相關</b>。策略：多元聯絡、誘因、追蹤不應答者特徵以評估偏差。</p>
+<h3>1. 田野方法：把研究真正做出來</h3>
+<p>前面幾章談「該怎麼設計」，本章談「怎麼把它落地執行」——從招募受試者、測量暴露與結果、蒐集資料，到品質管控與倫理。核心觀念貫穿全章：<b>好的資料在蒐集當下就決定了，分析救不回爛資料</b>。田野階段的每一個選擇，都會在下游轉化成某種偏差。</p>
 
-<h3>2. 資料蒐集工具</h3>
-<p>問卷/訪談（面訪、電訪、自填、線上）各有成本與偏差特性；面訪品質高但貴且可能有訪員效應。<b>測量工具</b>需重視效度與信度、標準化操作程序（SOP）、訪員訓練與校準。生物檢體採集、儲存與鏈鎖（chain of custody）攸關分子/生物標記研究（第 36 章）。</p>
+<h3>2. 招募與參與：低應答不等於偏差</h3>
+<p>抽樣框、招募策略與<span class="term">應答率</span>決定樣本的代表性。但這裡有個重要且常考的細節：<b>低應答率本身不必然造成偏差</b>。偏差的條件是「<b>參與與否同時與暴露、與結果相關</b>」。90% 應答但不參與者集中在「高暴露高風險」的人，可能比 60% 隨機不應答還糟。所以策略不只是衝高應答率，更要<b>蒐集不應答者的特徵</b>，以評估偏差的可能方向與大小。</p>
 
-<h3>3. 暴露與結果的操作化</h3>
-<p>把抽象概念變成可測變項時要預防<span class="term">資訊偏差</span>：盡量<b>盲化</b>（測暴露者不知結果、反之亦然）、用客觀來源、事先訂定明確病例定義。回溯性暴露特別容易<b>回憶偏差</b>。</p>
+<h3>3. 資料蒐集工具與其偏差特性</h3>
+<p>問卷/訪談有多種形式——面訪（品質高但貴、有訪員效應）、電訪（居中）、自填/線上（便宜但自選偏差、遺漏多）。生物檢體與客觀量測較不受回憶影響，但採集、儲存、鏈鎖（chain of custody）都會影響品質（這對第 36 章分子流行病學尤其關鍵）。每種工具都有它的成本—品質—偏差三角，選擇時要對應研究問題。工具本身還需重視<b>效度與信度</b>、標準化操作程序（SOP）、訪員訓練與校準。</p>
 
-<h3>4. 品質保證與控制</h3>
-<p><span class="term">品質保證（QA）</span>是事前預防（SOP、訓練、前測、試點）；<span class="term">品質控制（QC）</span>是進行中監測（重複測量、重抽稽核、範圍/邏輯檢查、盲化重測評信度）。建立稽核軌跡與資料清理流程。</p>
+<h3>4. 把抽象概念變成可測變項</h3>
+<p>暴露與結果的「操作化」是資訊偏差的源頭。防範之道的核心是<b>盲化</b>：讓測暴露的人不知道結果、測結果的人不知道暴露。盲化的因果作用在於<b>切斷「知情 → 差別測量」的路徑</b>，把原本可能的差別錯分（危險，方向不定）降為非差別錯分（通常只造成衰減，較安全，第 13 章）。回溯性暴露特別容易有回憶偏差，事先訂好明確、客觀的病例定義能減少主觀判斷。</p>
 
-<h3>5. 倫理與治理</h3>
-<p>知情同意、IRB 審查、隱私與資料保護、弱勢族群保護、社群參與。田野研究還要顧及文化適切性與研究者安全。</p>
+<h3>5. 品質保證（QA）與品質控制（QC）</h3>
+<p>兩者常被混用，但時機不同。<span class="term">品質保證（QA）</span>是<b>事前預防</b>：寫 SOP、訓練訪員、前測、試點。<span class="term">品質控制（QC）</span>是<b>進行中監測</b>：重複測量評信度、重抽稽核、範圍與邏輯檢查、盲化重測。兩者搭配，建立可追溯的稽核軌跡與資料清理流程。</p>
 
-<h3>6. 田野選擇如何變成偏差</h3>
-<p>把本章當「偏差的上游」：抽樣/應答 → 選擇偏差（14）；測量工具/訪員/回憶 → 測量誤差（13）；時間對齊 → 設計偏差（6）。田野的每個 SOP 都是在為效度買保險。</p>
+<h3>6. 倫理，以及田野作為偏差的上游</h3>
+<p>倫理面向包括知情同意、IRB 審查、隱私與資料保護、弱勢族群保護、文化適切性與研究者安全。最後把本章定位清楚：它是<b>偏差的上游</b>——抽樣與應答 → 選擇偏差（第 14 章）；工具、訪員、回憶 → 測量誤差（第 13 章）；時間對齊 → 設計偏差（第 6 章）。田野裡的每一份 SOP，都是在為研究的效度買保險。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>進階觀念：田野即偏差的上游</h4>
+<p>把抽樣→選擇偏差、工具/訪員/回憶→資訊偏差、時間對齊→設計偏差三條線牢記。每個 SOP 都對應下游某個偏差的預防。</p>
+<h4>關鍵觀念：應答率與偏差的解耦</h4>
+<div class="derive"><p>低應答率<b>本身</b>不等於偏差。偏差條件是「參與 \(S=1\) 同時依賴暴露與結果」。90% 應答但不參與者集中在高暴露高風險者，可能比 60% 隨機不應答更糟。故應蒐集不應答者特徵評估。</p></div>
+<h4>關鍵觀念：盲化的因果作用</h4>
+<p>測暴露者不知結果、測結果者不知暴露，可切斷「知情→差別測量」的路徑，把潛在的差別錯分降為非差別（通常僅衰減，較安全，第 13 章）。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：QA 與 QC 差在哪？</div><div class="a">A：QA 事前預防（SOP、訓練、前測）；QC 進行中監測（重測、稽核、邏輯檢查）。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>資料蒐集方式</th><th>成本</th><th>資料品質</th><th>主要偏差風險</th></tr></thead>
 <tbody>
@@ -806,27 +989,38 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：次級資料的效度取決於<b>你多懂資料是怎麼產生的</b>（資料生成機制）。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 次級資料的種類</h3>
-<p>常見來源：<b>保險/申報資料（claims）</b>、<b>電子病歷（EHR）</b>、<b>疾病登記</b>、<b>生命統計/死亡檔</b>、<b>普查與調查</b>、可連結的行政資料。各有不同的變項涵蓋、粒度與缺漏型態。</p>
+<h3>1. 什麼是次級資料、為什麼吸引人</h3>
+<p><span class="term">次級資料研究</span>用的是「<b>別人為別的目的蒐集</b>」的資料：健保申報、電子病歷（EHR）、疾病登記、生命統計、行政資料。它的吸引力很實在——<b>樣本龐大、成本低、蒐集快</b>，能研究罕見結果與長期追蹤，還避開了招募與回憶偏差。這也是真實世界證據（RWE）與藥物流行病學（第 43 章）的主要資料來源。</p>
 
-<h3>2. 優勢</h3>
-<p>樣本龐大、成本低、蒐集快、能研究<b>罕見結果</b>與<b>長期</b>結局、可連結多個資料庫、避免招募與回憶偏差。特別適合藥物流行病學（第 43 章）與真實世界證據。</p>
+<h3>2. 天生的弱點：資料不是為研究而生</h3>
+<p>但便利有代價，而且代價全來自同一句話：<b>這些資料不是為你的研究而生</b>。診斷碼不等於真實臨床狀態（錯分）；申報資料裡沒有生活型態、疾病嚴重度（未測干擾）；資料的時間結構容易被誤用（時間對齊偏差）。因此次級資料研究的效度，<b>取決於你多懂「資料是怎麼產生的」</b>（資料生成機制）。</p>
 
-<h3>3. 核心弱點與偏差</h3>
-<ul>
-<li><span class="term">錯分（misclassification）</span>：診斷碼/處方≠真實臨床狀態；需<b>驗證研究</b>與演算法定義（algorithm）並評估其敏感度/特異度/PPV。</li>
-<li><span class="term">未測干擾（unmeasured confounding）</span>：申報資料缺生活型態、嚴重度等；靠<b>代理變項、proxy、敏感度分析</b>或工具變數（第 28 章）補救。</li>
-<li><span class="term">不朽時間偏差（immortal time bias）</span>：暴露定義期間內受試者「不可能發生結果」，錯誤歸類會虛增暴露的保護效果。</li>
-<li><span class="term">盛行使用者偏差（prevalent user bias）</span>：納入已在用藥者會漏掉早期事件與存活者選擇；改用<b>新使用者設計（new-user design）</b>。</li>
-<li><span class="term">適應症干擾（confounding by indication）</span>：開藥與否和疾病嚴重度相關。</li>
-</ul>
+<h3>3. 三類核心偏差</h3>
+<p><b>錯分</b>：需要<b>驗證研究</b>來估計你的「碼定義/演算法」的敏感度、特異度與 PPV，並據以校正。<b>未測干擾</b>：申報資料缺嚴重度與行為變項，靠代理變項、敏感度分析或工具變數（第 28 章）補救。<b>時間對齊偏差</b>，包含兩個經典：<span class="term">不朽時間偏差</span>——某段「依定義不可能發生結果」的時間被錯算進暴露組人時，虛增暴露的保護效果；<span class="term">盛行使用者偏差</span>——納入「已經在用藥」的人，會漏掉早期事件、且只留下存活者。</p>
 
-<h3>4. 設計對策</h3>
-<p><b>新使用者、主動比較者（active comparator）</b>設計最能對齊時間與嚴重度；<b>目標試驗模擬</b>強迫你定義 eligibility、time zero、暴露與結果，系統性排除時間偏差。<b>傾向分數</b>（第 20 章）與<b>高維傾向分數</b>用於多干擾調整。</p>
+<h3>4. 設計對策：新使用者與主動比較者</h3>
+<p>對付這些偏差，最有力的組合是<b>新使用者設計（new-user design）</b>＋<b>主動比較者（active comparator）</b>。新使用者只納入「首次」使用者，排除盛行使用者的存活選擇並正確設定 time zero；主動比較者拿「同一適應症的另一種藥」當對照，使兩組疾病嚴重度相近，壓低<span class="term">適應症干擾</span>。再套上<b>目標試驗模擬</b>，強迫你把合格條件、time zero、暴露、結果都定義清楚，系統性地排除時間偏差。多干擾的調整則靠傾向分數與高維傾向分數（第 20 章）。</p>
 
 <h3>5. 資料連結與治理</h3>
-<p>跨庫連結（確定性/機率式配對）擴充變項，但引入連結誤差與隱私議題。研究前應理解編碼系統（ICD、ATC）、資料涵蓋期間與政策變動造成的斷點。</p>
+<p>跨資料庫連結（確定性或機率式配對）能擴充變項、補足單一資料源的不足，但會引入連結誤差與隱私議題。研究前務必理解編碼系統（ICD、ATC）、資料涵蓋的期間，以及政策變動造成的資料斷點——這些「資料的歷史」往往比統計方法更能決定結論的可信度。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵觀念：不朽時間偏差的機制與量化</h4>
+<div class="derive"><p>若「暴露」定義需存活一段期間才能達成（如領到第二張處方），則暴露組在該期間<b>依定義不會有結果</b>（否則無法被分類為暴露）。把這段「不朽時間」錯算進暴露組人時，分母虛增、分子為零，暴露組率被系統性壓低 → 虛假保護。修正：以<b>正確 time zero</b> 分派、或用時間相依暴露。</p></div>
+<h4>關鍵觀念：新使用者＋主動比較者為何有效</h4>
+<p>新使用者排除盛行使用者的存活選擇與早期事件遺漏；主動比較者（同適應症的另一藥）使兩組疾病嚴重度相近，壓低適應症干擾，並自然對齊 time zero。這是次級資料因果分析的黃金組合（第 43 章）。</p>
+<h4>關鍵觀念：碼定義的錯分校正</h4>
+<div class="derive"><p>驗證研究給演算法的 \(Se,Sp\)。若結果錯分為非差別，觀察 RR 衰減；可用矩陣法回推真實細格：真陽 \(=\dfrac{\text{觀察陽}-(1-Sp)N}{Se+Sp-1}\)（第 13、29 章）。</p></div>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：claims 資料最大的三個威脅？</div><div class="a">A：碼錯分、未測干擾（嚴重度/生活型態）、時間對齊偏差（不朽時間/盛行使用者）。</div></div>
+<div class="qa"><div class="q">Q：適應症干擾為何難調整？</div><div class="a">A：開藥決策所依據的嚴重度常未被完整記錄→殘餘/未測干擾，需主動比較者、IV 或偏差分析。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<div class="exq"><span class="yr">113-2 Q5</span><span class="qtitle">健保資料庫：prevalent user vs incident user</span>
+<div class="sol"><b>盛行使用者偏差</b>：納入已在用藥者會漏早期事件並引入存活選擇；改用<b>新使用者（incident user）設計</b>，正確設 time zero。連第 43 章。</div></div>
+<div class="exq"><span class="yr">113-2 Q4</span><span class="qtitle">大數據時代的流病研究注意事項</span>
+<div class="sol">資料非為研究而生→碼錯分、未測干擾、時間對齊（不朽時間/盛行使用者）；以<b>目標試驗仿真</b>對齊。連第 25 章 TTE。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>資料源</th><th>強項</th><th>主要弱點</th></tr></thead>
 <tbody>
@@ -873,33 +1067,45 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>控制手段：設計端（隨機化、限制、配對）＋分析端（分層、標準化、迴歸、傾向分數）。<b>絕不可調整中介或碰撞點</b>。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 三種定義，一個現象</h3>
-<p><span class="term">干擾（confounding）</span>指暴露—結果關聯被第三變項扭曲。三種等價/互補刻畫：</p>
-<ul>
-<li><b>共同原因（DAG）</b>：\(C\) 同時是暴露與結果的原因，且不在因果路徑上 → 需阻斷後門。</li>
-<li><b>反事實不可交換</b>：未暴露組不能代表暴露組「若未暴露」的風險。</li>
-<li><b>操作性判準</b>：候選干擾因子須（1）與結果相關（在未暴露者中）、（2）與暴露相關、（3）<b>非中介、非暴露後果</b>。</li>
-</ul>
+<h3>1. 干擾是什麼：三種看法，同一個現象</h3>
+<p><span class="term">干擾（confounding）</span>指的是「暴露與結果的關聯被第三個變項扭曲」。它有三種互補的刻畫方式，能從三個角度幫你抓住它。<b>共同原因觀（DAG）</b>：干擾因子是同時影響暴露與結果、又不在因果路徑上的變項（叉結構 \(A\leftarrow C\to Y\)），它會打開一條「後門」讓非因果的關聯漏進來。<b>可交換性觀（反事實）</b>：干擾就是「暴露組與未暴露組的基線風險不同」——未暴露組不能代表暴露組若沒暴露的樣子。<b>操作性判準（傳統四要件）</b>：候選干擾因子要（1）是結果的獨立危險因子、（2）與暴露相關、（3）不受暴露與結果影響、（4）不在因果路徑上（否則它是中介）。</p>
 
-<h3>2. 干擾因子的辨識</h3>
-<p>不能只看「調整後估計是否改變」（改變也可能因調了中介或碰撞點）。應以<b>因果知識/ DAG</b> 先判斷角色，再決定調整集（最小充分調整集）。<span class="warn">警告：對撞點（collider）與中介不可調整</span>——否則製造偏差或抹掉真效應。</p>
+<h3>2. 怎麼辨識干擾因子（以及不能怎麼辨識）</h3>
+<p>一個常見但<b>錯誤</b>的做法是「看調整後估計有沒有改變」——改變就當它是干擾。這是陷阱，因為估計改變也可能是因為你調了<b>中介</b>（改變是擋掉間接效應）、調了<b>碰撞點</b>（改變是新造的偏差），甚至只是<b>OR 的不可壓縮性</b>（即使無干擾，條件 OR 也不等於邊際 OR）。正確做法是：<b>先用因果知識/DAG 判斷每個變項的角色</b>，再決定最小充分調整集。務必記住：<span class="warn">碰撞點與中介絕不可調整</span>。</p>
 
 <h3>3. 設計階段的控制</h3>
-<ul>
-<li><span class="term">隨機化</span>：期望上平衡所有（含未知）干擾。</li>
-<li><span class="term">限制（restriction）</span>：只納入干擾因子某一層，簡單有效但犧牲外推與樣本。</li>
-<li><span class="term">配對（matching）</span>：使組間干擾分布相同；病例對照中配對需配對分析。</li>
-</ul>
+<p>控制干擾有兩個戰場。設計階段：<b>隨機化</b>（期望上平衡所有已知與未知干擾，最強）、<b>限制</b>（只納入干擾因子的某一層，簡單徹底但犧牲外推與樣本）、<b>配對</b>（使組間干擾分布相同，但病例對照配對後必須用配對分析）。</p>
 
 <h3>4. 分析階段的控制</h3>
-<p><span class="term">分層（stratification）</span>＋<span class="term">Mantel–Haenszel</span> 合併；<span class="term">標準化（standardization）</span>；<span class="term">多變項迴歸</span>；<span class="term">傾向分數（propensity score）</span>與<span class="term">逆機率加權（IPTW）</span>。迴歸能處理多個連續干擾，但依賴模型設定正確。</p>
+<p>分析階段：<b>分層＋Mantel–Haenszel 合併</b>（透明、還能順便看有沒有交互作用）、<b>標準化</b>（可指定要對哪個目標人群估效應）、<b>多變項迴歸</b>（能處理多個連續干擾，但依賴模型設定正確）、<b>傾向分數與逆機率加權</b>（在干擾多、結果少時特別有用）。各方法的共同前提是：<b>它們只能處理「已測到」的干擾</b>。</p>
 
 <h3>5. 殘餘與未測干擾</h3>
-<p>即使調整，仍可能有<span class="term">殘餘干擾（residual confounding）</span>（測量粗糙、錯分、類別過寬）與<span class="term">未測干擾</span>。評估工具：<b>敏感度分析、E-value、負對照、工具變數</b>（第 28、29 章）。</p>
-
-<h3>6. 兩個易錯點</h3>
-<p>（1）<b>OR 的不可壓縮性</b>：即使無干擾，粗 OR 也可能≠分層 OR（因 OR 非可塌縮），別把它誤判為干擾。（2）<b>過度調整</b>：調整中介會低估總效應、調整碰撞點會引入選擇型偏差。</p>
+<p>即使認真調整，仍可能有<span class="term">殘餘干擾</span>（測量太粗、類別太寬、有錯分）與<span class="term">未測干擾</span>（根本沒測到的變項）。評估工具包括敏感度分析、<b>E-value</b>（要多強的未測干擾才能把觀察關聯解釋為虛無）、負對照、工具變數（第 28、29 章）。最後提醒兩個易錯點：<b>OR 的不可壓縮性</b>（別把它誤判成干擾）與<b>過度調整</b>（調中介會低估總效應、調碰撞點會引入偏差）。分辨「該調誰」永遠回到因果結構，不是回到數字。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵推導：干擾造成的偏差方向</h4>
+<div class="derive"><p>單一二元干擾 \(C\)，粗 RR 與分層 RR 的關係可寫成暴露組與未暴露組 \(C\) 盛行差異的函數。若 \(C\) 使風險上升（\(RR_{CY}>1\)）且在暴露組較盛行（\(P(C\mid A{=}1)>P(C\mid A{=}0)\)），則粗估<b>高估</b>正效應；若方向相反則低估。<b>偏差方向＝(干擾對結果方向) × (干擾在兩暴露組的分布差方向)</b>。這條口訣可快速判斷「調整後會往哪移」。</p></div>
+<h4>關鍵觀念：為何不能只看「估計改變10%」</h4>
+<div class="derive"><p>加入變項 \(Z\) 後估計改變，可能因 \(Z\) 是真干擾（該調），也可能因 \(Z\) 是中介（不該調，改變是擋掉間接效應）或碰撞（不該調，改變是新造偏差），甚至因 <b>OR 不可壓縮</b>（即使無干擾，條件 OR≠邊際 OR）。故變項選擇必須由 DAG 的角色決定，非由數值變化決定。</p></div>
+<h4>關鍵推導：E-value</h4>
+<div class="derive"><p>問：要多強的未測干擾（與暴露、與結果的 RR 皆至少為 \(E\)）才能把觀察 \(RR_{obs}\) 完全解釋掉？解 \(\dfrac{E\times E}{E+E-1}=RR_{obs}\) 得</p>
+<p>\[ E=RR_{obs}+\sqrt{RR_{obs}(RR_{obs}-1)} \]</p>
+<p>E-value 越大，結論對未測干擾越穩健。對 CI 下界同樣可算，報告時兩者並陳。</p></div>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：隨機化後還需要調整基線變項嗎？</div><div class="a">A：期望上不需（已平衡），但調整<b>強預後因子</b>可提升精確度（尤其小型 RCT）；不可用結果導向選擇。</div></div>
+<div class="qa"><div class="q">Q：傾向分數解決未測干擾嗎？</div><div class="a">A：不能。PS 只重整已測干擾的平衡；未測干擾仍需 IV 或偏差分析。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<p>Confounder 的定義／處理／判準是最常考的 L1–L4 全層次題。</p>
+<div class="exq"><span class="yr">108 I-1</span><span class="qtitle">何謂 confounder？如何處理？舉 3 例</span>
+<div class="sol">四要件：①是結果的獨立危險因子②與暴露相關③不受暴露與結果影響④不在因果路徑上（否則是 mediator）；未控制會經<b>後門路徑</b>產生假關聯。處理：設計端（RCT 隨機化、配對/PS matching）、分析端（分層、迴歸校正）。三例：年齡、吸菸（酒精→肺癌）、社經地位（飲食→CVD）。</div></div>
+<div class="exq"><span class="yr">106 第一部分 Q3</span><span class="qtitle">Confounder vs Effect modifier 的區辨</span>
+<div class="sol">干擾＝扭曲關聯、要消除；效應修飾＝效應本身隨修飾因子而異、要呈現（分層報告）。前者是偏差、後者是發現。</div></div>
+<div class="exq"><span class="yr">109-1</span><span class="qtitle">名詞：Confounding by indication（適應症混淆）</span>
+<div class="sol">醫師依病情選治療，若適應症又是預後因子，療效被它混淆。解方：主動比較者、IV/MR、pragmatic RCT（連第 28、43 章）。</div></div>
+<div class="exq"><span class="yr">114-1 Q3</span><span class="qtitle">未測量混淆 bias analysis（Lee 閾值 × E-value）</span>
+<div class="sol">E-value \(=RR+\sqrt{RR(RR-1)}\)（VanderWeele & Ding 2017）＋Lee 2011 閾值法、Ding & VanderWeele 2016 bounding factor。<span class="pitfall">此題原作答有訂正</span>：要正確說明「需多強的未測干擾才能解釋掉關聯」。詳見第 29 章。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>控制方法</th><th>階段</th><th>優點</th><th>缺點</th></tr></thead>
 <tbody>
@@ -945,25 +1151,47 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：測量誤差是<b>資訊偏差</b>的根；診斷/篩檢的 Se、Sp、PPV 是同一套語言。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 效度與信度</h3>
-<p><span class="term">效度（validity）</span>＝測到的是不是真的那個量（系統面）；<span class="term">信度（reliability）</span>＝重複測是否一致（隨機面）。以<span class="term">敏感度（Se）</span>、<span class="term">特異度（Sp）</span>對二分類；以 kappa、ICC 量信度。</p>
+<h3>1. 效度與信度：兩種不同的「準」</h3>
+<p>測量誤差的討論，先分清兩個詞。<span class="term">效度（validity）</span>問「你量到的是不是真的那個東西」——這是<b>系統面</b>，對二分變項用敏感度、特異度衡量。<span class="term">信度（reliability）</span>問「重複量會不會一致」——這是<b>隨機面</b>，用 kappa、組內相關（ICC）衡量。一把秤可以很穩定地都多秤 2 公斤（信度高但效度差）。兩者是不同問題，別混。</p>
 
-<h3>2. 錯分的類型與方向</h3>
-<ul>
-<li><span class="term">非差別錯分</span>：暴露測量誤差<b>與結果無關</b>（或反之）。二分暴露、誤差獨立時，<b>期望上把效應拉向虛無</b>（衰減），但這只是「平均而言」，個別研究可能過衝。</li>
-<li><span class="term">差別錯分</span>：誤差在病例/對照（或暴露/未暴露）間<b>不同</b>。例：<span class="term">回憶偏差</span>（病例更用力回想暴露）、<span class="term">偵測/偵察偏差</span>（暴露者被更密集檢查）。方向不定，可放大或反轉。</li>
-</ul>
-<p><span class="warn">關鍵警示</span>：非差別「偏向虛無」只適用<b>二分類、誤差獨立</b>；<b>三分類以上或誤差相關時，未必偏向虛無</b>，可能偏離。</p>
+<h3>2. 錯分的兩個軸向</h3>
+<p>錯分（把人分錯類）依兩個問題分類。第一：誤差是否<b>與另一個變項相關</b>？<span class="term">非差別錯分</span>——暴露的測量誤差與結果無關（或反之）。<span class="term">差別錯分</span>——誤差在病例/對照（或暴露/未暴露）之間不同，例如<b>回憶偏差</b>（病例更用力回想暴露）、<b>偵測偏差</b>（暴露者被更密集檢查）。第二：誤差變項之間是否相關。這兩個軸向決定了偏差的方向。</p>
 
-<h3>3. 連續變項的測量誤差</h3>
-<p><span class="term">古典誤差（classical error）</span>：測量值＝真值＋獨立雜訊 → 迴歸係數<b>向 0 衰減（迴歸稀釋）</b>，衰減因子＝可靠度。<span class="term">Berkson 誤差</span>：真值＝指派值＋雜訊（如以工區平均代表個人暴露），對點估計偏誤小但增變異。</p>
+<h3>3. 「非差別偏向虛無」是有條件的</h3>
+<p>教科書常說「非差別錯分把效應拉向虛無（衰減）」，這<b>只在特定條件成立</b>：<b>二分類暴露、且誤差彼此獨立</b>。此時病例與對照的觀察暴露盛行率會互相靠近，OR 向 1 收縮。但一旦是<b>三分類以上</b>或<b>誤差彼此相關</b>，就不保證偏向虛無，甚至可能越過虛無或遠離。這是常考的陷阱——別把「非差別＝安全」當成鐵律。至於<b>差別錯分</b>，方向完全不定，可放大也可反轉，最危險。</p>
 
-<h3>4. 診斷與篩檢</h3>
-<p>Se/Sp 為工具屬性；<span class="term">陽性預測值（PPV）</span>、陰性預測值<b>隨盛行率而變</b>。篩檢還涉及<span class="term">領先時間偏差、長度偏差、過度診斷</span>（第 35 章）。ROC 曲線權衡 Se/Sp。</p>
+<h3>4. 連續變項的兩種誤差</h3>
+<p>連續暴露有兩種誤差模型，後果不同。<span class="term">古典誤差</span>：測量值＝真值＋獨立雜訊（\(W=X+U\)）。它使迴歸係數<b>向 0 衰減（迴歸稀釋）</b>，衰減因子等於可靠度。用重複測量估出可靠度，就能反推真正的斜率。<span class="term">Berkson 誤差</span>：真值＝指派值＋雜訊（\(X=W+U\)，例如用某工區的平均暴露代表每個人）。它對點估計的偏誤很小，但會增加變異。分清這兩種，才知道你的測量誤差會不會偏誤結論。</p>
 
-<h3>5. 校正測量誤差</h3>
-<p>方法：<b>驗證/再現子研究</b>估誤差參數 → <span class="term">迴歸校準（regression calibration）</span>、<span class="term">SIMEX</span>、<span class="term">錯分矩陣校正</span>、貝氏或機率式偏差分析（第 29 章）。設計端：改善工具、盲化、重複測量。</p>
+<h3>5. 診斷與篩檢的語言</h3>
+<p>敏感度（Se）、特異度（Sp）是<b>工具屬性</b>，但<span class="term">陽性預測值（PPV）</span>、陰性預測值<b>會隨盛行率而變</b>：\( PPV=\dfrac{Se\,\pi}{Se\,\pi+(1-Sp)(1-\pi)} \)。這解釋了「罕見病即使用很準的工具普篩，陽性也大多是假陽」。篩檢還牽涉領先時間、長度、過度診斷等偏差（第 35 章），ROC 曲線則呈現 Se 與 Sp 的權衡。</p>
+
+<h3>6. 校正測量誤差</h3>
+<p>與其祈禱錯分偏向虛無，不如<b>量化並校正</b>它。方法：用<b>驗證/再現子研究</b>估出誤差參數，再用<b>迴歸校準、SIMEX、錯分矩陣校正</b>或機率式偏差分析（第 29 章）回推。設計端則靠改善工具、盲化、重複測量。核心心態是：測量誤差不是「只能承認的限制」，而是「可以估計影響大小的參數」。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵推導：非差別錯分為何（且何時）偏向虛無</h4>
+<div class="derive"><p>二元暴露、非差別錯分（\(Se,Sp\) 在病例/對照相同）。觀察暴露盛行 \(p^*=Se\cdot p+(1-Sp)(1-p)\) 是真盛行 \(p\) 的線性壓縮映射，使病例與對照的暴露盛行<b>互相靠近</b>→觀察 OR 向 1 收縮。但此結論僅在<b>二分類且錯分獨立於其他誤差</b>成立。三分類以上或誤差相關時，收縮不保證，甚至可能越過虛無或遠離。</p></div>
+<h4>關鍵推導：迴歸稀釋因子</h4>
+<div class="derive"><p>古典誤差 \(W=X+U\)，\(U\perp X\)。以 \(W\) 迴歸 \(Y\) 的斜率</p>
+<p>\[ \beta_{obs}=\beta\cdot\frac{\mathrm{Var}(X)}{\mathrm{Var}(X)+\mathrm{Var}(U)}=\beta\cdot\rho \]</p>
+<p>\(\rho\)＝可靠度（&lt;1），故係數向 0 衰減；用重測估 \(\rho\) 可做迴歸校準 \(\hat\beta=\beta_{obs}/\rho\)。Berkson 誤差 \(X=W+U\) 則不造成此衰減（\(W\) 與 \(U\) 獨立），偏誤小但變異增。</p></div>
+<h4>關鍵推導：PPV 隨盛行率</h4>
+<div class="derive"><p>\( PPV=\dfrac{Se\,\pi}{Se\,\pi+(1-Sp)(1-\pi)} \)。\(\pi\to0\) 時 PPV→0，即使 \(Se=Sp=0.99\)：罕見病篩檢多為假陽。這解釋為何普篩罕見病要謹慎。</p></div>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：差別錯分方向可預測嗎？</div><div class="a">A：不可一概而論；回憶偏差常放大關聯，但視結構而定，需個案分析或偏差分析量化。</div></div>
+<div class="qa"><div class="q">Q：非差別一定安全（只衰減）？</div><div class="a">A：否。多分類或相關誤差時可能偏離虛無；「偏向虛無」是有條件的特例。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<div class="exq"><span class="yr">111-1 應用五</span><span class="qtitle">Nondifferential vs Differential misclassification</span>
+<div class="sol">非差別（誤差與另一變項無關）：二分類時通常<b>偏向虛無</b>（有條件！≥3類或誤差相關則未必）；差別（如回憶/偵測偏差）：方向不定，可放大或反轉。</div></div>
+<div class="exq"><span class="yr">111-2 第二部分</span><span class="qtitle">信度效度五概念 × 快篩 PPV/NPV × 共線性</span>
+<div class="sol">效度（Se/Sp）vs 信度（重測一致，kappa/ICC）；PPV/NPV <b>隨盛行率變</b>：\( PPV=\dfrac{Se\,\pi}{Se\,\pi+(1-Sp)(1-\pi)} \)。共線性膨脹變異（VIF），用 PCA 或刪冗餘（但勿刪必要干擾）。</div></div>
+<div class="exq"><span class="yr">108 Part II(2)</span><span class="qtitle">特異度=0.8 的偏誤分析</span>
+<div class="sol">結果偽陽性↑屬非差別錯分；用 Se/Sp 做矩陣校正回推真實細格（第 29 章）。</div></div>
+<div class="exq"><span class="yr">102-2 題5</span><span class="qtitle">Matching 與 Nondifferential misclassification</span>
+<div class="sol">配對的效率/偏差取捨＋非差別錯分方向。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>錯分類型</th><th>誤差是否與另一變項相關</th><th>對效應的方向</th><th>典型例</th></tr></thead>
 <tbody>
@@ -1009,28 +1237,38 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：內部效度（無偏）與外部效度（可外推）是兩件事，別混為一談。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 選擇偏差的本質</h3>
-<p>當<b>被選入或留在研究的機率</b>同時與<span class="term">暴露</span>及<span class="term">結果（或其原因）</span>相關時，就產生<span class="term">選擇偏差</span>。DAG 語言：對一個<b>碰撞點</b>（\(A\to S\leftarrow Y\) 的 \(S\)＝被選入）做條件（選樣），會在 \(A\) 與 \(Y\) 間打開假關聯。</p>
+<h3>1. 選擇偏差的本質：依碰撞點選樣</h3>
+<p><span class="term">選擇偏差</span>用一句 DAG 語言就講清楚：<b>當「被選入或留在研究」的機率，同時與暴露、與結果（或其原因）相關時，就會產生它</b>。這對應的結構是：讓「被選入」\(S\) 成為暴露 \(A\) 與結果 \(Y\) 的<b>共同後果</b>（\(A\to S\leftarrow Y\)），而研究只看 \(S=1\) 的人——這等於<b>對一個碰撞點設條件</b>，在 \(A\) 與 \(Y\) 之間打開一條假關聯。</p>
 
-<h3>2. 常見型態</h3>
-<ul>
-<li><span class="term">失去追蹤/無應答</span>：離開與暴露且與結果相關（第 7、10 章）。</li>
-<li><span class="term">Berkson 偏差</span>：住院樣本中，兩種住院原因間出現假關聯。</li>
-<li><span class="term">自我選擇/志願者偏差</span>：健康、關心健康者較會參加。</li>
-<li><span class="term">健康工人效應</span>：在職者比一般人健康（第 41 章）。</li>
-<li><span class="term">存活者偏差</span>：只研究活到入組者（盛行病例）。</li>
-<li><span class="term">不當對照</span>：病例對照中對照抽樣機率與暴露相關（第 8 章）。</li>
-</ul>
+<h3>2. 常見的選擇偏差型態</h3>
+<p>把常見型態對號入座：<b>失去追蹤/無應答</b>（離開與暴露且與結果相關）；<b>Berkson 偏差</b>（住院樣本中，兩種住院原因間出現假關聯）；<b>自我選擇/志願者偏差</b>（關心健康的人較會參加）；<b>健康工人效應</b>（在職者比一般人健康，第 41 章）；<b>存活者偏差</b>（只研究活到入組的盛行病例）；<b>對照選擇不當</b>（病例對照中對照的抽中機率與暴露相關，第 8 章）。它們表面各異，機制都是「依共同後果選樣」。</p>
 
-<h3>3. 選擇偏差 vs. 干擾</h3>
-<p>兩者都造成關聯≠效應，但機制不同：干擾＝<b>共同原因</b>（可用調整共同原因處理）；選擇偏差＝<b>依共同後果選樣</b>（調整選入變項通常無法修，甚至更糟，因為它是碰撞點）。分辨清楚才會用對工具。</p>
+<h3>3. 選擇偏差與干擾：機制相反，對策也相反</h3>
+<p>這是全章最重要的對比。兩者都造成「關聯≠效應」，但：<b>干擾是共同原因</b>（叉），對策是「<b>調整</b>那個共同原因」；<b>選擇偏差是依共同後果選樣</b>（碰撞），對策<b>不是調整</b>那個選入變項——因為它是碰撞點，調整它通常無效甚至更糟。這個「調整方向相反」是分辨兩者、選對工具的關鍵。</p>
 
 <h3>4. 因應策略</h3>
-<p>設計端：完善追蹤、適當對照與抽樣框、族群為本設計、避免以碰撞點納入條件。分析端：<span class="term">逆機率選擇加權（IPW for selection）</span>、選擇模型、敏感度/偏差分析（第 29 章）。前提是能建模選入機制。</p>
+<p>設計端：完善追蹤、選對對照與抽樣框、採族群為本設計、避免「用一個碰撞點當納入條件」。分析端：<span class="term">逆機率選擇加權（IPW）</span>——若能對「選入機率」建模，就用它的倒數加權，把來源族群還原回來（與第 25 章 IPTW 同源，只是加權的是「選入」而非「處理」）。前提是能正確建模選入機制，並滿足正性。</p>
 
-<h3>5. 可推廣性與可運送性</h3>
-<p><span class="term">可推廣性（generalizability）</span>：估計是否適用抽樣來源人群；<span class="term">可運送性（transportability）</span>：能否搬到<b>不同</b>人群。當效應修飾因子在研究與目標人群分布不同時，即使內部無偏，外推仍會失準。可用<b>加權/標準化到目標人群</b>校正（與第 18 章相通）。</p>
+<h3>5. 內部效度 vs. 外部效度：兩件事別混</h3>
+<p>最後釐清一組常被混淆的概念。<span class="term">可推廣性（generalizability）</span>問「估計適不適用於抽樣來源的人群」；<span class="term">可運送性（transportability）</span>問「能不能搬到一個<b>不同</b>的人群」。關鍵洞見：即使研究<b>內部完全無偏</b>，只要<b>效應修飾因子</b>在研究人群與目標人群的分布不同，外推就會失準。校正之道是把效應<b>標準化/加權到目標人群</b>（與第 18 章相通）。內部無偏與可外推是兩個獨立的問題，不能混為一談。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵推導：選擇偏差的碰撞機制</h4>
+<div class="derive"><p>令選入 \(S\) 受暴露 \(A\) 與結果 \(Y\) 共同影響（\(A\to S\leftarrow Y\)）。研究只含 \(S=1\)，即對碰撞點設條件，在 \(A\)、\(Y\) 間打開後門，產生 \(A\)–\(Y\) 假關聯。<b>選擇偏差＝對共同後果設條件；干擾＝對共同原因不設條件。</b>兩者 DAG 結構相反，故對策相反：干擾要「調整共同原因」，選擇偏差不能靠調整 \(S\) 解決（它已是被選的條件）。</p></div>
+<h4>關鍵觀念：IPW 還原來源族群</h4>
+<div class="derive"><p>若能對選入機率建模 \(P(S{=}1\mid A,Y,L)\)，以權重 \(1/P(S{=}1\mid\cdots)\) 加權可還原來源族群關聯（前提：模型正確、正性）。這與第 25 章 IPTW 同源——差別在加權的是「選入」而非「處理」。</p></div>
+<h4>關鍵觀念：內部效度 ≠ 外部效度</h4>
+<p>內部無偏（研究樣本內估對）與可運送（搬到目標人群仍對）是兩件事。當<b>效應修飾因子</b>在研究與目標人群分布不同，即使內部無偏，外推仍偏。校正：以修飾因子分布做標準化/加權到目標人群（連第 18、26 章）。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：調整選入變項能修正選擇偏差嗎？</div><div class="a">A：多半不能，甚至更糟（它是碰撞）。除非該變項也阻斷了其他後門，須靠 IPW 或良好抽樣。</div></div>
+<div class="qa"><div class="q">Q：健康工人效應是選擇還是干擾？</div><div class="a">A：兩者皆有：僱用選擇像基線選擇偏差；存活效應是時變干擾（第 25、41 章）。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<div class="exq"><span class="yr">113-2 Q1</span><span class="qtitle">肺癌 RCT × ITT：三種 outcome 的 confounding / selection bias（含 DAG）</span>
+<div class="sol">ITT 保留隨機化：對<b>overall mortality</b>（起點隨機）基本無 confounding；但 <b>recurrence rate</b>、<b>mortality after recurrence</b> 條件化在隨機化<b>之後</b>發生的中間事件（存活、復發）＝condition on collider／其後代→引入<b>selection bias</b>。差別性刪失（informative censoring）亦造成偏差。務必畫 DAG 標出碰撞點。</div></div>
+<div class="exq"><span class="yr">113-1 Q7</span><span class="qtitle">PA–DM–BMI 的選擇偏差</span>
+<div class="sol">BMI 若是碰撞或中介，分層/選樣會偏；用 DAG 判角色（連第 9、12 章）。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th></th><th>干擾</th><th>選擇偏差</th></tr></thead>
 <tbody>
@@ -1077,20 +1315,39 @@ tbody tr:nth-child(even){background:#fafcfe}
 </div></div>
 <div class="ch-body">
 <h3>1. 隨機誤差與精確度</h3>
-<p><span class="term">精確度（precision）</span>是隨機誤差的反面，量化為估計的變異（標準誤）。提升精確度：加大樣本、增加<b>事件數</b>（率型研究中事件數才是關鍵）、平衡暴露分布、減少測量雜訊。</p>
+<p>前面各章對付的是「系統誤差」（偏差），本章對付另一半：<b>隨機誤差</b>。<span class="term">精確度（precision）</span>就是隨機誤差的反面，量化為估計的變異（標準誤）。提升精確度的方法：加大樣本、增加<b>事件數</b>（在率型研究裡，真正決定精確度的是事件數而非總人數）、讓暴露分布更平衡、減少測量雜訊。關鍵區別：<b>精確度靠樣本可以買，效度（偏差）不行</b>。</p>
 
-<h3>2. 信賴區間的意義</h3>
-<p><span class="term">95% 信賴區間（CI）</span>：在重複抽樣下，約 95% 的此類區間會涵蓋真值。它同時傳達<b>方向、大小、精確度</b>。CI 也可視為與資料「相容」的參數範圍。比值型測量（RR/OR）在<b>對數尺度</b>上算 CI 再取指數。</p>
+<h3>2. 信賴區間到底在說什麼</h3>
+<p><span class="term">95% 信賴區間（CI）</span>的正確詮釋是：在重複抽樣下，約 95% 的「此類區間」會涵蓋真值。它一次傳達三件事——<b>方向、大小、精確度</b>（區間越窄越精確）。也可以把它看成「與資料相容的參數範圍」。實務上比值型測量（RR、OR）的抽樣分布是偏態的，所以要<b>先在對數尺度算 CI，再取指數還原</b>，這樣常態近似才站得住。</p>
 
 <h3>3. p 值的正確與錯誤解讀</h3>
-<p>p 值＝在虛無假設為真下，觀察到「與此同樣或更極端」資料的機率。<span class="warn">它不是</span>：虛無為真的機率、效應不存在的機率、也不等於效應大小。反對<b>「顯著/不顯著」二分</b>：不顯著≠沒有效應（可能只是不精確）。</p>
+<p>這是資格考幾乎必考、也最多人答錯的地方。p 值的定義是：<b>在虛無假設為真的前提下，觀察到「與此同樣或更極端」資料的機率</b>。它<b>不是</b>：虛無為真的機率、不是效應不存在的機率、也不是效應大小。最重要的推論：<b>「不顯著」不等於「沒有效應」</b>——它可能只是因為樣本太小、區間太寬（不精確）。反對把結果二分成「顯著/不顯著」，這會丟掉效應大小與不確定性的資訊。報告應以「效應估計＋信賴區間」為主，而非只講一個 p。</p>
 
 <h3>4. 樣本數與檢定力</h3>
-<p><span class="term">檢定力（power）</span>＝\(1-\beta\)，在特定效應下正確拒絕虛無的機率。規劃需指定：欲偵測效應、\(\alpha\)、變異/基線風險、暴露比例、配對比。<b>事後檢定力（post-hoc power）沒有意義</b>，應報告 CI。研究規模也要考慮效度（增大樣本不能修偏差）。</p>
+<p><span class="term">檢定力（power）</span> \(=1-\beta\)，是「在某個真效應下，正確拒絕虛無」的機率。規劃樣本數需要指定：想偵測的效應大小、\(\alpha\)、變異/基線風險、暴露比例、配對比。兩比例的樣本數公式顯示 \(n\) 隨「效應差的平方」反比暴增——想偵測越小的差異，所需樣本以平方倍成長。一個常考重點：<b>事後檢定力（post-hoc power）沒有意義</b>（它與 p 值一對一），該報告的是 CI。還要記得：加大樣本不能修正偏差，樣本規劃也要顧及效度。</p>
 
-<h3>5. 多重比較與精確度取捨</h3>
-<p>多重檢定會膨脹偽陽性，但機械式校正（如 Bonferroni）在估計取向下未必恰當——重點回到效應與區間、以及事前假說。稀疏資料會使估計不穩（第 21、23 章的懲罰/貝氏可救）。</p>
+<h3>5. 多重比較與稀疏資料</h3>
+<p>做很多次檢定會膨脹偽陽性，但在「估計取向」下，機械式校正（如 Bonferroni）未必恰當——重點應回到效應與區間、以及是否有事前假說。另一個實務問題是<b>稀疏資料</b>（細格太小、有零細格）會使估計不穩、變異爆炸，這時要靠懲罰概似或貝氏方法（第 21、23 章）穩定。總結本章的態度：<b>用信賴區間傳達精確度，不要迷信顯著性；樣本規劃是「用資源買精確度」，但買不到無偏</b>。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵推導：ln(OR) 的變異（Woolf）</h4>
+<div class="derive"><p>由 delta 法，\(\ln(a)\) 的近似變異為 \(1/a\)（Poisson 近似）。\(\ln OR=\ln a-\ln b-\ln c+\ln d\)，各項獨立近似：</p>
+<p>\[ \mathrm{Var}(\ln OR)\approx\frac1a+\frac1b+\frac1c+\frac1d \]</p>
+<p>零細格使變異爆炸，故加 0.5 校正或改用精確/貝氏法。95% CI：\(\exp(\ln OR\pm1.96\sqrt{\cdot})\)。<b>比值型一律在對數尺度</b>因其抽樣分布偏態，對數後才近似常態。</p></div>
+<h4>關鍵觀念：p 值不是什麼</h4>
+<p>\(p=P(\text{資料同樣或更極端}\mid H_0)\)。它<b>不是</b> \(P(H_0\mid\text{資料})\)、不是效應大小、不是可重複性。「不顯著」常只是 CI 寬（不精確），非「證明無效應」。資格考極愛此區辨。</p>
+<h4>關鍵推導：兩比例樣本數</h4>
+<div class="derive"><p>檢定 \(H_0:p_1=p_0\)，欲以檢定力 \(1-\beta\)、水準 \(\alpha\) 偵測差 \(p_1-p_0\)：</p>
+<p>\[ n=\frac{\big(z_{1-\alpha/2}+z_{1-\beta}\big)^2\,[p_1(1-p_1)+p_0(1-p_0)]}{(p_1-p_0)^2} \]</p>
+<p>每組 \(n\)。啟示：效應差越小、變異越大，所需 \(n\) 以平方倍增；率型研究真正決定精確度的是<b>事件數</b>。</p></div>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：事後檢定力有用嗎？</div><div class="a">A：無意義（與 p 值一對一）。應報效應大小＋CI 傳達精確度。</div></div>
+<div class="qa"><div class="q">Q：多重比較一定要校正嗎？</div><div class="a">A：估計取向下未必；重點回到事前假說與效應/區間，機械式 Bonferroni 可能過度保守。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<div class="exq"><span class="yr">114-1 Q6</span><span class="qtitle">三大偏差對 validity 與 precision 的影響</span>
+<div class="sol">系統誤差（干擾/選擇/資訊）影響<b>效度</b>，加大樣本不能修；隨機誤差影響<b>精確度</b>，靠樣本數/事件數改善。MSE＝Bias²＋Variance。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>概念</th><th>正確理解</th><th>常見誤解</th></tr></thead>
 <tbody>
@@ -1132,24 +1389,40 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>先想清楚要估什麼因果量、需要哪個調整集，再選統計工具。</b></p>
 </div></div>
 <div class="ch-body">
-<h3>1. 從問題到估計目標</h3>
-<p>分析的第一步不是跑迴歸，而是明確定義<span class="term">估計目標（estimand）</span>：要估哪個對比（RR/RD/…）、在哪個人群、對照是什麼、調整集為何（由 DAG 決定）。這決定後續一切。</p>
+<h3>1. 分析前的心法：由問題與因果結構驅動</h3>
+<p>本章談「動手分析前」的思維。最重要的一句：<b>分析要由「研究問題與因果結構」驅動，不是由「軟體預設」驅動</b>。很多人一拿到資料就跑迴歸，這是本末倒置。正確順序是：先界定估計目標 → 檢查清理資料 → 描述 → 粗估 → 調整 → 呈現與敏感度分析。</p>
 
-<h3>2. 資料檢查與清理</h3>
-<p>檢視分布、缺漏、離群、邏輯矛盾、編碼一致性。<span class="term">缺失資料</span>機制（MCAR/MAR/MNAR）決定處理方式：完整案例分析、<b>多重插補（multiple imputation）</b>、或加權。缺失若與暴露且與結果相關，等同選擇偏差。</p>
+<h3>2. 從問題到估計目標（estimand）</h3>
+<p>第一步不是選模型，而是明確定義<span class="term">估計目標（estimand）</span>：我要估哪個對比（RR/RD/…）、在哪個人群、對照是什麼、調整集為何（由 DAG 決定）。把這件事講清楚，後續的模型與方法都只是「達成 estimand 的工具」。跳過這一步，常常會估到一個「沒有清楚因果詮釋的係數」。</p>
 
-<h3>3. 描述與粗分析</h3>
-<p>先做描述統計與 2×2/2×k 粗估，建立直覺；再進入分層看<b>是否有干擾與交互</b>。粗估與調整估的差異提示干擾（但注意 OR 不可壓縮性，第 12 章）。</p>
+<h3>3. 資料檢查與缺失處理</h3>
+<p>檢視分布、缺漏、離群、邏輯矛盾、編碼一致性。<b>缺失資料</b>的處理取決於機制：<span class="term">MCAR</span>（完全隨機缺失）→完整案例分析大致無偏；<span class="term">MAR</span>（缺失可由觀測變項解釋）→多重插補或加權；<span class="term">MNAR</span>（缺失與未觀測值本身相關）→沒有通用解，只能靠敏感度分析。一個常考的細節：<b>完整案例分析何時仍無偏？</b>當缺失只依賴「納入模型的自變項」（即使依賴暴露）時，對條件效應仍無偏——這比 MCAR 寬鬆。</p>
 
-<h3>4. 調整策略的選擇</h3>
-<p>少量類別干擾 → <b>分層＋M–H</b>（透明、可看交互）；多個/連續干擾 → <b>迴歸</b>或<b>傾向分數</b>；目標人群明確 → <b>標準化/加權</b>。方法應服務估計目標，而非反過來。</p>
+<h3>4. 描述、粗估與調整策略</h3>
+<p>先做描述統計與粗估建立直覺，再進入分層看有沒有干擾與交互。調整策略要服務估計目標：<b>少量類別干擾</b>→分層＋M–H（透明、可看交互）；<b>多個或連續干擾</b>→迴歸或傾向分數；<b>目標人群明確</b>→標準化/加權。方法應該服從問題，而不是反過來讓問題遷就你會的方法。</p>
 
-<h3>5. 呈現與敏感度分析</h3>
-<p>報告效應大小＋CI、關鍵假設、調整集理由；用<b>敏感度分析/偏差分析（第 29 章）</b>檢視未測干擾、錯分、選擇偏差的可能影響。避免只報 p 值、避免資料挖礦式亞組。</p>
-
-<h3>6. 可重現性</h3>
-<p>預先分析計畫、版本控管、可重現腳本、透明報告（如 STROBE）。分析決策應可被他人追溯。</p>
+<h3>5. 呈現、敏感度分析與可重現</h3>
+<p>報告要給效應大小＋CI、關鍵假設、調整集的理由；並用<b>敏感度分析/偏差分析</b>（第 29 章）檢視未測干擾、錯分、選擇偏差的可能影響。避免只報 p 值、避免資料挖礦式的亞組分析。最後強調可重現性：預先分析計畫、版本控管、可重現腳本、透明報告（如 STROBE）。核心原則貫穿全章：<b>分析救不回設計缺陷與嚴重偏差——先設計，後分析</b>。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>進階觀念：先 estimand，後模型</h4>
+<p>現代分析流程強調先定<b>估計量（estimand）</b>：目標人群、對比、尺度、調整集（由 DAG）。模型只是估 estimand 的工具。跳過這步直接跑迴歸，常估到「沒有清楚因果詮釋的係數」。</p>
+<h4>關鍵觀念：缺失機制決定方法</h4>
+<div class="derive"><p>MCAR：缺失⟂一切→完整案例無偏但損效率。MAR：缺失可由觀測解釋→多重插補/IPW 無偏。MNAR：缺失依賴未觀測值→無通用解，需敏感度分析。<b>完整案例何時仍無偏？</b>當缺失只依賴<b>納入模型的自變項</b>（即使依賴暴露），對條件效應仍無偏——這比 MCAR 寬鬆，是常考細節。</p></div>
+<h4>關鍵觀念：分析不能救設計</h4>
+<p>三大偏差中，干擾在分析階段可部分補救（若已測），選擇與資訊偏差多半補不回，只能<b>量化</b>（第 29 章）。故「先設計、後分析」。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：多重插補為何優於單一插補？</div><div class="a">A：單一插補低估變異（把插補值當真值）；多重插補用 Rubin 規則納入插補不確定性。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<p>Exact CI 幾乎年年考（113-1、111-1、109-2、106、114-1）。</p>
+<div class="exq"><span class="yr">113-1 Q1</span><span class="qtitle">什麼是 Exact Confidence Interval？如何計算？</span>
+<div class="sol">直接用統計量的<b>精確分布</b>建構，不靠常態近似。對每個候選參數值做精確檢定，<b>排除被拒絕的點</b>，剩下即精確 CI。計算：雙尾 p＝0.05 解方程求上下界（二項 Clopper–Pearson、Poisson exact）。</div></div>
+<div class="exq"><span class="yr">109-2 II-1</span><span class="qtitle">肝移植 2/10 排斥的 95% CI（小樣本 exact）</span>
+<div class="sol">小樣本→用 exact（Clopper–Pearson）而非常態近似；可提 mid-p 較不保守。</div></div>
+<div class="exq"><span class="yr">106 第二部分</span><span class="qtitle">名詞：Exact／Wald–Score／Mantel–Haenszel／Trend–Omnibus</span>
+<div class="sol">三種檢定（Wald/Score/LRT）的關係與適用；M–H 合併；趨勢檢定 vs 綜合檢定（omnibus）。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>缺失機制</th><th>意義</th><th>建議處理</th></tr></thead>
 <tbody>
@@ -1195,21 +1468,40 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>先算變異，才能給 CI 與檢定</b>；比值型一律先做對數。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 2×2 表的估計</h3>
-<p>由 \(a,b,c,d\) 算 RD、RR、OR。比值型測量抽樣分布偏態，故在<b>對數尺度</b>估計與求 CI 再指數化。變異用 delta 法（如 Woolf 對 lnOR）。</p>
+<h3>1. 類別統計是後續一切的計算引擎</h3>
+<p>本章給 2×2 表與分層表的統計「零件」：點估計、變異、信賴區間、檢定。它看起來基礎，卻是後面分層、標準化、迴歸的計算基礎——把這章的變異公式學好，後面合併估計與其 CI 就只是組裝零件。</p>
 
-<h3>2. 檢定方法</h3>
-<p><span class="term">Pearson 卡方</span>與<span class="term">概似比檢定</span>用於大樣本；<span class="term">Fisher 精確檢定</span>與精確 CI 用於小樣本/稀疏；有序暴露用<span class="term">Cochran–Armitage 趨勢檢定</span>。檢定回答「與虛無的相容度」，仍應搭配效應估計。</p>
+<h3>2. 2×2 表的估計：比值型一律用對數</h3>
+<p>由細格 \(a,b,c,d\) 算出 RD、RR、OR。核心原則：<b>比值型測量（RR、OR）的抽樣分布偏態，要在對數尺度估計與求 CI，再取指數還原</b>。變異用 delta 法推導，例如 \(\ln OR\) 的變異是 \(1/a+1/b+1/c+1/d\)（Woolf 公式）。這解釋了為什麼零細格會讓變異爆炸——某個分母趨近 0。</p>
 
-<h3>3. 稀疏資料問題</h3>
-<p>零細格使 lnOR 變異爆炸或無定義。對策：精確方法、加 0.5 校正（近似）、懲罰概似或貝氏（第 21、23 章）。連續性校正在小樣本使檢定較保守。</p>
+<h3>3. 檢定方法怎麼選</h3>
+<p><span class="term">Pearson 卡方</span>與<span class="term">概似比檢定</span>用於大樣本，兩者漸近相等。<span class="term">Fisher 精確檢定</span>與精確 CI 用於小樣本或稀疏資料。有序暴露則用<span class="term">Cochran–Armitage 趨勢檢定</span>——它把「單調劑量反應」的訊息集中在 1 個自由度，比一般卡方更有檢定力。要記住：檢定回答的是「與虛無的相容度」，仍應搭配效應估計一起看，不能只報 p。</p>
 
-<h3>4. 精確 vs. 近似</h3>
-<p>大樣本用常態近似（快、夠準）；小樣本、稀疏或極端比例用精確法（保守但可靠）。要能判斷何時近似失效。</p>
+<h3>4. 稀疏資料的處理</h3>
+<p>零細格使 \(\ln OR\) 的變異無定義或爆炸。對策：用精確方法、加 0.5 連續性校正（近似）、或懲罰概似/貝氏（第 21、23 章）。連續性校正在小樣本使檢定較保守。要能判斷「何時常態近似會失效」——期望細格小於 5、有零細格、極端邊際或極小樣本，都是改用精確法的訊號。</p>
 
-<h3>5. 從單表到分層</h3>
-<p>單一 2×2 只給粗估；有干擾時要跨層合併（第 18 章 M–H）。本章的變異公式是合併估計與其 CI 的零件。</p>
+<h3>5. 從單表走向分層</h3>
+<p>單一 2×2 只給你粗估，一旦有干擾就要跨層合併（第 18 章的 Mantel–Haenszel）。本章推導的變異公式，正是合併估計與其信賴區間的組件。把「單表 → 分層 → 迴歸」看成同一套邏輯的逐步推廣，會讓後面幾章都變得容易。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵推導：卡方與概似比檢定的關係</h4>
+<div class="derive"><p>Pearson \( \chi^2=\sum\dfrac{(O-E)^2}{E} \) 與概似比 \( G^2=2\sum O\ln(O/E) \) 在 \(H_0\) 下皆漸近 \(\chi^2_{df}\)，大樣本近似相等（\(G^2\) 為 MLE 架構下的自然統計量，迴歸中用它做巢狀比較）。小樣本或稀疏時兩者分歧，改精確法。</p></div>
+<h4>關鍵推導：ln(RR) 變異</h4>
+<div class="derive"><p>\(\ln RR=\ln\frac{a}{n_1}-\ln\frac{c}{n_0}\)，delta 法得 \( \mathrm{Var}(\ln RR)\approx\frac1a-\frac1{n_1}+\frac1c-\frac1{n_0} \)。與 lnOR 對照可見：RR 的變異含 \(-1/n\) 修正項，罕見時兩式趨近。</p></div>
+<h4>關鍵觀念：何時精確法必要</h4>
+<p>期望細格 &lt;5、有零細格、極端邊際或極小樣本時，常態近似失效→Fisher 精確、精確 CI、或中位不偏估計。連續性校正使檢定較保守。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：趨勢檢定比一般卡方好在哪？</div><div class="a">A：對有序暴露，趨勢檢定把「單調劑量反應」的訊息集中在 1 個自由度，檢定力較高。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<p>Poisson 迴歸（人年 offset）是率資料的招牌題，106、113-1、110-1、109-2 反覆出現。</p>
+<div class="exq"><span class="yr">113-1 Q3</span><span class="qtitle">128 城市肺癌 × 空污/抽菸、各城人年不同：寫模型、檢定量分布、拒絕區</span>
+<div class="sol">\( \log\mu_i=\log T_i+\beta_0+\beta_1\text{Pollution}_i+\beta_2\text{Smoking}_i \)，\(T_i\)＝人年 offset，\(\exp(\beta)=IRR\)。檢定：\(H_0:\beta_1=\beta_2=0\)；Wald \(=\hat\beta/SE\sim N(0,1)\)（或 Score/LRT）；\(|Z|>1.96\) 落拒絕區。</div></div>
+<div class="exq"><span class="yr">106 名詞</span><span class="qtitle">Wald 檢定與 Poisson 假設（等分散）</span>
+<div class="sol">Poisson 假設 \(E(Y)=\mathrm{Var}(Y)\)；過度分散→負二項/GAM。</div></div>
+<div class="exq"><span class="yr">109-2 II-6</span><span class="qtitle">肝癌的 Poisson 迴歸與假說檢定</span>
+<div class="sol">同上框架，人年 offset＋率比解讀。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>檢定</th><th>適用</th><th>備註</th></tr></thead>
 <tbody>
@@ -1251,20 +1543,39 @@ tbody tr:nth-child(even){background:#fafcfe}
 </div></div>
 <div class="ch-body">
 <h3>1. 分層的邏輯</h3>
-<p>把資料依干擾因子分層，在<b>每層內</b>暴露與結果不再被該因子干擾；再跨層合併。合併前先看各層估計是否相近（<span class="term">同質性/交互作用檢定</span>，如 Breslow–Day）。異質時合併會掩蓋重要差異。</p>
+<p>分層分析的想法很直接：<b>把資料依干擾因子分層，在每一層「內部」，暴露與結果就不再被該因子干擾</b>（因為層內大家的干擾值都一樣），再把各層的結果合併起來。但合併前有個關鍵步驟：先看<b>各層的效應估計是否相近</b>（同質性/交互作用檢定，如 Breslow–Day）。如果各層效應差很多（異質），硬合併會掩蓋掉重要的差異，這時應該<b>分層報告</b>而非給一個合併值。</p>
 
-<h3>2. Mantel–Haenszel 估計</h3>
-<p><span class="term">M–H</span> 對 OR、RR、IRR 都有對應合併式，權重使稀疏分層仍穩定，是分層分析的主力。附<span class="term">M–H 卡方</span>做整體關聯檢定。</p>
+<h3>2. Mantel–Haenszel 合併</h3>
+<p><span class="term">Mantel–Haenszel（M–H）</span>對 OR、RR、IRR 都有對應的合併公式，例如 \(OR_{MH}=\dfrac{\sum a_i d_i/n_i}{\sum b_i c_i/n_i}\)。它的權重形式對<b>稀疏分層特別穩定</b>——每一層可以很小（甚至只有幾個人），只要整體資訊足夠，估計仍可靠。這是它勝過「把各層 \(\ln OR\) 加權平均」的關鍵優勢，也是它成為分層分析主力的原因。附帶的 M–H 卡方可做整體關聯檢定。</p>
 
 <h3>3. 直接標準化</h3>
-<p><span class="term">直接標準化</span>：用外部<b>標準人口</b>的層權重，對各組層別率加權平均，得可比的<b>標準化率</b>。適合比較兩個以上人群（如國際/跨年比較），需各層率穩定。</p>
+<p><span class="term">直接標準化</span>用一個外部<b>標準人口</b>的層權重，去對各組的層別率加權平均，得到「如果各組都有標準人口的結構、率會是多少」的可比標準化率。它適合比較兩個以上的人群（如跨國、跨年比較），前提是各層率夠穩定。經典例子：比較兩地心臟病死亡率，某地較高可能只是因為老年人多，用同一標準人口標準化後再比才公平。</p>
 
 <h3>4. 間接標準化與 SMR</h3>
-<p><span class="term">間接標準化</span>：用標準人口的<b>層別率</b>套到研究人群層結構，算<b>期望事件數</b>，得 <span class="term">SMR＝觀察/期望</span>。適合層別率不穩（小群、職業世代）的情況。<b>不同 SMR 間不宜直接比較</b>（各自用不同人群結構加權）。</p>
+<p>當研究人群各層的事件太少、層別率不穩（如小型職業世代）時，改用<span class="term">間接標準化</span>：拿標準人口的<b>層別率</b>套到研究人群的年齡結構，算出「期望事件數」，得到 <span class="term">SMR＝觀察/期望</span>。要特別記住一個常考陷阱：<b>不同的 SMR 不能直接互相比較</b>——因為每個 SMR 都用「它自己研究人群的結構」當權重，比較它們等於比較「不同加權下的比值」，沒有意義。</p>
 
-<h3>5. 選擇標準人口與加權</h3>
-<p>標準化本質是「選一組權重」。直接法權重＝標準人口分布；M–H 權重＝資料驅動（追求精確）；IPTW＝以傾向分數還原目標人群。選權重就是選「要對哪個人群估效應」，與可運送性（第 14 章）相通。</p>
+<h3>5. 一個統一觀點：標準化就是選權重</h3>
+<p>把本章拉高一層看：<b>標準化的本質是「選一組權重」，而選權重就是選「要對哪個人群估效應」</b>。直接法的權重是標準人口分布；M–H 的權重由資料決定（追求最小變異）；逆機率加權（IPTW）的權重還原目標人群。這個統一觀點把標準化、M–H 與加權串起來，也直接連到第 14 章的可運送性——你想把效應搬到哪個人群，就用那個人群的分布當權重。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵推導：Mantel–Haenszel 合併 OR</h4>
+<div class="derive"><p>各層 2×2 為 \((a_i,b_i,c_i,d_i)\)，\(n_i\)＝層總數。</p>
+<p>\[ OR_{MH}=\frac{\sum_i a_i d_i/n_i}{\sum_i b_i c_i/n_i} \]</p>
+<p>此權重形式對<b>稀疏分層</b>穩定（每層可以很小，只要總合資訊足夠），這是它勝過「各層 lnOR 加權平均」的關鍵。前提：各層效應同質（先做 Breslow–Day 檢定），異質則不應合併而應分層報告或建交互模型。</p></div>
+<h4>關鍵觀念：標準化＝選權重＝選目標人群</h4>
+<div class="derive"><p>直接標準化率 \( =\dfrac{\sum_i w_i r_i}{\sum_i w_i} \)。權重 \(w_i\) 選標準人口→估「若目標人群有此結構」的率；M–H 權重由資料選（求最小變異）；IPTW 權重＝\(1/PS\)→估對整個研究人群的效應。<b>不同權重回答不同人群的問題</b>，這統一了標準化、M–H 與加權，也連到第 14 章可運送性。</p></div>
+<h4>關鍵觀念：SMR 不可互比</h4>
+<p>間接標準化以<b>各研究世代自己的人時結構</b>為權重，兩個 SMR 用了不同權重，比較它們等於比較「不同加權下的比值」，無意義。要比較須改用共同標準（直接法）。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：何時用間接標準化（SMR）而非直接？</div><div class="a">A：當研究世代各層事件太少、層別率不穩（如小型職業世代），借用標準人口的穩定層別率。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<p>年齡標準化是方老師測量單元的常考大題（110-1、113-2、106）。</p>
+<div class="exq"><span class="yr">110-1 I-1</span><span class="qtitle">年齡標準化：作用、直接/間接、時間/空間、Poisson 標準化</span>
+<div class="sol">直接：用<b>標準人口結構 \(W_i\)</b> 套研究族群年齡別率 \(I_i\)：\( I_{direct}=\dfrac{\sum W_i I_i}{\sum W_i} \)。間接：用標準族群年齡別率套研究族群人口得期望數 \(E\)：\( SMR=O/E \)。時間標準化例：台灣 2000 vs 2020 心臟病死亡率（排除人口老化）；空間例：花蓮 vs 台北。Poisson 標準化：\(\log\mu=\log t+\beta_1 X_{地區}+\beta_2 X_{age}\)，年齡當共變數控制干擾。</div></div>
+<div class="exq"><span class="yr">113-2 Q3</span><span class="qtitle">直接 vs 間接標準化</span>
+<div class="sol">選權重＝選目標人群；<span class="pitfall">SMR 因各用自身人時結構加權，不同 SMR 不可直接互比</span>。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th></th><th>Mantel–Haenszel</th><th>直接標準化</th><th>間接標準化(SMR)</th></tr></thead>
 <tbody>
@@ -1306,24 +1617,35 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：多分類分析是<b>迴歸模型（第 20 章）的表格化前身</b>，觀念一致。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 多分類暴露</h3>
-<p>設一個<span class="term">參照類（reference）</span>，其餘各類對它估 RR/OR，檢視<b>劑量反應型態</b>。有序暴露可用<span class="term">趨勢檢定</span>或給各類指定分數做線性趨勢。分類切點與參照選擇會影響解讀，應事前設定。</p>
+<h3>1. 從 2×2 推廣到多類</h3>
+<p>真實研究裡，暴露常有多個等級（不吸/輕度/重度）、結果也可能有多類（多種疾病亞型）。本章把 2×2 的分析推廣到這些情形。理解它的最好方式是：<b>多分類分析其實就是迴歸模型的「表格版前身」</b>，觀念完全一致，學好它有助於正確設定與解讀第 20 章的迴歸係數。</p>
 
-<h3>2. 多分類結果</h3>
-<ul>
-<li><span class="term">名目結果</span>：<b>多項式邏輯迴歸（multinomial logistic）</b>，每個結果類對基準類各一組 OR。</li>
-<li><span class="term">有序結果</span>：<b>比例勝算模型（ordinal/proportional-odds）</b>，假設各切點的 OR 相同（比例勝算假設，需檢查）。</li>
-</ul>
+<h3>2. 多分類暴露與劑量反應</h3>
+<p>對多類暴露，先設一個<span class="term">參照類</span>，其餘各類都對它估 RR/OR，藉此檢視<b>劑量反應型態</b>。有序暴露可以用<span class="term">趨勢檢定</span>或給各類指定分數做線性趨勢。劑量反應是 Hill 因果論證的重要角度，但要注意：<b>單調趨勢支持因果，非單調卻不能排除因果</b>——閾值效應、飽和效應、U 型關係都與因果相容。參照類的選擇與切點會影響解讀，應該事前設定，不要看了結果再調。</p>
 
-<h3>3. 趨勢與劑量反應</h3>
-<p>劑量反應是因果論證（Hill）的重要角度。可用有序分數、樣條（spline）呈現非線性。單調趨勢支持因果，但<b>非單調不排除因果</b>（閾值、飽和）。</p>
+<h3>3. 多分類結果</h3>
+<p>結果多類時分兩種。<b>名目結果</b>（無序，如不同疾病亞型）用<span class="term">多項式邏輯迴歸</span>，每個結果類都對一個基準類估一組 OR。<b>有序結果</b>（如疾病嚴重度等級）用<span class="term">比例勝算模型</span>，它假設「各個切點的 OR 都相同」（比例勝算假設，即各條線平行）。這個假設一定要檢查——若違反，改用部分比例勝算或多項式模型。</p>
 
-<h3>4. 類別合併的取捨</h3>
-<p>合併類別增精確度但可能遮蔽趨勢或造成<b>非差別錯分</b>（第 13 章）。切點應基於生物學/預設，避免依結果調整切點（資料挖礦）。</p>
+<h3>4. 類別合併的兩面性</h3>
+<p>把類別合併能增加每格人數、提升精確度，但有代價：可能<b>遮蔽非單調的趨勢</b>、可能造成<b>非差別錯分</b>（把不同真值歸成一類，第 13 章）、更可能因為「看了結果才決定切點」而變成資料挖礦。原則是：<b>切點應該基於生物學或事前假設，不要依結果調整</b>。</p>
 
 <h3>5. 通往迴歸</h3>
-<p>多分類的表格分析與迴歸中設<span class="term">虛擬變項（dummy）</span>或有序項完全對應。理解本章有助於正確設定與解讀第 20 章的模型係數。</p>
+<p>多分類的表格分析，與迴歸中設<span class="term">虛擬變項（dummy）</span>或有序項是完全對應的：一個類別變項的係數，就是「該類 vs. 參照類」的對數效應。把這個對應關係看透，第 20 章的迴歸係數解讀就會變得直覺——迴歸只是把這些表格關係，用一個能同時容納多個連續共變項的模型平滑地包起來。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵觀念：多分類即迴歸的表格版</h4>
+<div class="derive"><p>多類暴露設 \(k-1\) 個虛擬變項，等同對每個非參照類估一個 OR/RR；有序暴露指定分數 \(s_k\) 做 1 自由度趨勢檢定。理解表格分析可正確解讀第 20 章係數：一個類別變項的係數＝「該類 vs. 參照」的對數效應。</p></div>
+<h4>關鍵觀念：比例勝算假設</h4>
+<div class="derive"><p>有序結果的比例勝算模型 \( \operatorname{logit}P(Y\le j)=\alpha_j-\beta X \) 假設<b>各切點共用同一 \(\beta\)</b>（線條平行）。可用 score 檢定或分別配適各切點的 logistic 檢查。違反時改用<b>部分比例勝算</b>或多項式模型。</p></div>
+<h4>關鍵觀念：合併類別的兩面性</h4>
+<p>合併增精確度但可能：(1) 遮蔽非單調趨勢；(2) 造成非差別錯分（把不同真值歸一類）；(3) 依結果調切點＝資料挖礦。切點應事前依生物學定。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：非單調劑量反應能否支持因果？</div><div class="a">A：可以。閾值、飽和、U 型都相容於因果；單調只是「加分」非必要。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<div class="exq"><span class="yr">114-2 名詞</span><span class="qtitle">Mantel（extension）趨勢檢定</span>
+<div class="sol">有序暴露的線性趨勢檢定（1 自由度），把劑量反應訊息集中，較綜合卡方有力；連第 17、19 章。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>情形</th><th>方法</th><th>關鍵假設/重點</th></tr></thead>
 <tbody>
@@ -1364,21 +1686,43 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>模型形式由「要估什麼效應」與「因果結構」決定，不是由 p 值挑變項。</b></p>
 </div></div>
 <div class="ch-body">
-<h3>1. 選連結函數＝選效應尺度</h3>
-<p>結果與尺度決定模型：二元結果要 RR 用 <span class="term">log-binomial</span>（或 Poisson＋穩健變異）；要 OR 用 <span class="term">logistic</span>；計數/率用 <span class="term">Poisson/負二項</span>（以 \(\ln(\text{人時})\) 為 <span class="term">offset</span>）；連續或風險差用<span class="term">線性/恆等連結</span>。<b>係數的意義由連結函數決定</b>。</p>
+<h3>1. 迴歸的定位：同時控制多個干擾</h3>
+<p>迴歸是「同時控制多個干擾、估計效應」的主力工具。本章聚焦<b>模型設定（specification）</b>——選對連結函數、決定放哪些項。最核心的一句話：<b>模型的形式由「你要估什麼效應」與「因果結構」決定，不是由 p 值挑變項</b>。</p>
 
-<h3>2. 暴露的函數形式</h3>
-<p>連續暴露不必假設線性：可用<b>類別、多項式、限制性立方樣條（restricted cubic spline）</b>捕捉非線性劑量反應。過度細分增變異、過度平滑掩蓋型態，需權衡。</p>
+<h3>2. 選連結函數＝選效應尺度</h3>
+<p>這是迴歸最關鍵的觀念。結果型態與你想要的效應尺度，決定用哪個模型：二元結果想要 RR 用 <span class="term">log-binomial</span>（或 Poisson＋穩健變異）；想要 OR 用 <span class="term">logistic</span>；計數/率資料用 <span class="term">Poisson/負二項</span>（以 \(\ln(\text{人時})\) 當 <span class="term">offset</span>）；連續結果或風險差用<span class="term">線性/恆等連結</span>。<b>係數的意義完全由連結函數決定</b>：logistic 的 \(e^\beta\) 是 OR，Poisson 的 \(e^\beta\) 是率比。把 OR 當 RR 解讀，在不罕見時會嚴重高估。</p>
 
-<h3>3. 干擾的納入原則</h3>
-<p>調整集<b>由 DAG／後門準則決定</b>（第 3、12 章），納入共同原因、<b>排除中介與碰撞點</b>。<span class="warn">反對純資料驅動的逐步迴歸（stepwise）</span>：它依結果選變項，會引入偏差、破壞 CI 的意義。「改變估計 10%」法則也有缺陷（第 12 章）。</p>
+<h3>3. 暴露的函數形式</h3>
+<p>連續暴露不必假設是直線關係。可以用<b>類別、多項式、限制性立方樣條</b>捕捉非線性的劑量反應。過度細分會增加變異，過度平滑會掩蓋型態，需要權衡。硬把明明有閾值的關係塞進一個線性項，是常見的設定錯誤。</p>
 
-<h3>4. 交互項與效應修飾</h3>
-<p>要估<span class="term">效應修飾</span>就放<b>交互項</b>，並記得交互的<b>尺度相依</b>（乘法模型的交互≠相加交互，第 26 章）。無預設時不必遍歷所有交互，避免偽陽性。</p>
+<h3>4. 干擾的納入原則：反對逐步迴歸</h3>
+<p>調整集<b>由 DAG／後門準則決定</b>（第 3、12 章）：納入共同原因，<b>排除中介與碰撞點</b>。本章特別強調<b>反對純資料驅動的逐步迴歸（stepwise）</b>：它依「與結果的關聯」選變項，會（1）可能選入中介或碰撞點而引入偏差、（2）遺漏弱但真的干擾、（3）使 p 值與 CI 失去名目意義（選擇後推論）。「改變估計 10%」這種法則也有同樣的缺陷。變項的去留看<b>因果角色</b>，不看顯著性。</p>
 
-<h3>5. 常見設定陷阱</h3>
-<p>log-binomial 不收斂（改 Poisson＋穩健 SE）；把 OR 當 RR 解讀；忽略 offset；用單一連續項硬套非線性；把時變暴露當固定（第 25 章）；稀疏資料使估計爆炸（懲罰/貝氏，第 21、23 章）。</p>
+<h3>5. 交互項與常見陷阱</h3>
+<p>要估<b>效應修飾</b>就放<b>交互項</b>，並記得交互作用是<b>尺度相依</b>的（乘法模型的交互不等於相加交互，第 26 章）。最後整理幾個實作陷阱：log-binomial 常不收斂（改用 Poisson＋穩健 SE 估 RR）；把 OR 當 RR 解讀；忘記放 offset；用單一線性項硬套非線性；把時變暴露當固定處理（第 25 章）；稀疏資料使估計爆炸（用懲罰或貝氏，第 21、23 章）。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵推導：連結函數決定效應尺度</h4>
+<div class="derive"><p>二元結果 \(Y\)。logit 連結 \(\operatorname{logit}P=\beta_0+\beta_1X\Rightarrow e^{\beta_1}=OR\)；log 連結 \(\ln P=\cdots\Rightarrow e^{\beta_1}=RR\)；恆等連結 \(P=\cdots\Rightarrow\beta_1=RD\)。Poisson 對率：\(\ln E[Y]=\ln PT+\beta_0+\beta_1X\)，\(\ln PT\) 為 <b>offset</b>（係數固定為 1），使 \(e^{\beta_1}=IRR\)。<b>係數的因果詮釋由連結函數與尺度決定，不是資料屬性。</b></p></div>
+<h4>關鍵觀念：為何反對逐步迴歸</h4>
+<div class="derive"><p>逐步法依「與結果的關聯」選變項，會：(1) 可能選入中介/碰撞→偏差；(2) 遺漏弱但真的干擾；(3) 使 p 值、CI 失去名目意義（選擇後推論）。正解：調整集由 DAG／後門準則決定，變項留去看<b>因果角色</b>而非顯著性。</p></div>
+<h4>關鍵觀念：log-binomial 不收斂的替代</h4>
+<p>log-binomial 要求 \(\ln P\le0\)，在資料邊界常不收斂。替代：<b>Poisson＋穩健（夾心）變異</b>估 RR（Zou 法），或 log-binomial 用起始值/COPY 法。這是實作高頻考點。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：想要 RR 卻只會 logistic 給 OR，怎辦？</div><div class="a">A：改 log-binomial 或 Poisson＋穩健 SE 直接估 RR；勿在不罕見時把 OR 當 RR。</div></div>
+<div class="qa"><div class="q">Q：連續暴露一定要線性嗎？</div><div class="a">A：不必。用限制性立方樣條或類別檢查形狀；硬套線性可能掩蓋閾值/非線性。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<p>迴歸的假設檢查與係數推導是李文宗老師單元的常考題。</p>
+<div class="exq"><span class="yr">106 第一部分 Q1</span><span class="qtitle">列舉迴歸所有假設、如何檢定、違反如何處理</span>
+<div class="sol">線性迴歸四大假設：常態（\(Y|X\sim N\)）、線性（\(E(Y|X)=\alpha+X\beta\)）、同質變異、獨立。檢定×處理：常態→Q–Q 圖／轉換、GLM；線性→殘差 vs 擬合、spline/多項式；同質變異→殘差漏斗狀、WLS/穩健 SE；獨立→Durbin–Watson、混合模型/GEE。<b>擴充</b>：Logistic（自變數與 log-odds 線性，Box–Tidwell）、Poisson（等分散，過度分散→負二項）、Cox（比例風險，Schoenfeld）。</div></div>
+<div class="exq"><span class="yr">109-1 第二部分-3</span><span class="qtitle">以細格 a–h 表示 logistic 係數</span>
+<div class="sol">要能把 2×2×2 分層表的細格對應到 logistic 各項係數（主效應與交互），並解讀 \(e^\beta\) 為 OR。</div></div>
+<div class="exq"><span class="yr">114-1 Q2</span><span class="qtitle">傾向分數四方法比較（Matching／Stratification／IPTW／Covariate adjustment）</span>
+<div class="sol">Rosenbaum–Rubin；Austin 2011。PSM：直觀、balance 佳但丟樣本；分層：簡單但殘餘干擾；IPTW：用全樣本但極端權重不穩；共變數調整：省樣本但依模型正確。<span class="pitfall">共同限制</span>：只平衡<b>已測</b>干擾，未測干擾仍需 IV/偏差分析。</div></div>
+<div class="exq"><span class="yr">109-1 名詞</span><span class="qtitle">Cross-validation／PCA／Multiple testing</span>
+<div class="sol">十摺交叉驗證評估<b>預測</b>能力、減過擬合；PCA 正交降維去共線但難詮釋；多重檢定放大偽陽性，Bonferroni/Holm 控 FWER、BH 控 FDR。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>模型</th><th>結果型態</th><th>係數→效應</th><th>備註</th></tr></thead>
 <tbody>
@@ -1421,21 +1765,39 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>配適診斷是為了讓「效應估計＋不確定性」可信</b>，不是追求最高 R²。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 估計原理</h3>
-<p>廣義線性模型多以<span class="term">最大概似（MLE）</span>估計，具大樣本一致與常態性。變異可用模型基（model-based）或<span class="term">穩健「夾心」變異（robust sandwich）</span>；後者對輕度模型誤設與群集相關較穩健（第 24 章）。</p>
+<h3>1. 從設定到配適：讓估計可信</h3>
+<p>第 20 章決定「模型長什麼樣」，本章處理「設好之後怎麼估參數、怎麼評估配適、怎麼處理問題資料」。核心目的不是追求最高的 R²，而是<b>讓「效應估計＋不確定性」值得信任</b>。</p>
 
-<h3>2. 適合度與殘差</h3>
-<p>用<span class="term">偏差（deviance）、Pearson 統計量、Hosmer–Lemeshow</span>檢視整體配適；用<b>殘差圖、槓桿、Cook 距離、DFBETA</b>找<span class="term">離群與影響點</span>。發現異常應追查資料錯誤或模型形式（非線性、遺漏交互）。</p>
+<h3>2. 估計原理與穩健變異</h3>
+<p>廣義線性模型多用<span class="term">最大概似（MLE）</span>估計，大樣本下具一致性與常態性。變異可用兩種：模型基變異（假設模型完全正確）與<span class="term">穩健「夾心」變異</span>。後者對「輕度模型誤設」與「群集相關」仍給正確的標準誤，代價是效率略降。群集資料（第 24 章）與「用 Poisson 估 RR」（第 20 章）都靠它。</p>
 
-<h3>3. 模型比較與選擇</h3>
-<p>巢狀模型用<span class="term">概似比檢定（LRT）</span>；非巢狀用<span class="term">AIC/BIC</span>。<b>選擇應以因果目標與預設為主</b>，避免只憑配適指標挑變項（呼應第 20 章反逐步迴歸）。預測模型與因果模型的評估準則不同（前者重校準/區辨，後者重無偏）。</p>
+<h3>3. 適合度與影響點診斷</h3>
+<p>用<b>偏差（deviance）、Pearson 統計量、Hosmer–Lemeshow</b>檢視整體配適；用<b>殘差圖、槓桿、Cook 距離、DFBETA</b>找出離群與有過大影響力的觀察值。發現異常時要追查：是資料錯誤，還是模型形式不對（遺漏了非線性或交互項）？診斷的目的是保護你的結論不被少數怪異點或錯誤設定綁架。</p>
 
-<h3>4. 共線性與稀疏</h3>
-<p><span class="term">共線性</span>膨脹變異（VIF），使個別係數不穩但不必然偏誤；不要為此刪掉必要干擾。<span class="term">完全/準分離（separation）</span>與稀疏使 MLE 發散：改用 <span class="term">Firth 懲罰概似</span>、精確邏輯迴歸或<b>弱資訊先驗的貝氏</b>（第 23 章）。</p>
+<h3>4. 模型比較與選擇</h3>
+<p>巢狀模型用<span class="term">概似比檢定（LRT）</span>，非巢狀用<span class="term">AIC/BIC</span>。但要記住一個重點：<b>選擇應以因果目標為主，不能只憑配適指標挑變項</b>（呼應第 20 章反對逐步迴歸）。預測模型與因果模型的評估準則不同——前者重校準與區辨（能不能預測得準），後者重無偏（有沒有估對因果效應）。AIC 最小的模型，不保證是對的因果模型。</p>
 
-<h3>5. 過度配適與驗證</h3>
-<p>參數相對事件數過多會<b>過度配適</b>（經驗法則：每變項需足夠事件數，EPV）。用<b>交叉驗證、收縮（shrinkage）、懲罰迴歸（LASSO/ridge）</b>改善預測穩定度；因果估計則優先確保調整集正確而非最小化預測誤差。</p>
+<h3>5. 共線性、稀疏與過度配適</h3>
+<p><span class="term">共線性</span>會膨脹變異（用 VIF 診斷），使個別係數不穩，但不必然造成偏誤——<b>不要為了共線性就刪掉必要的干擾</b>。<span class="term">完全/準分離</span>與稀疏會使 MLE 發散，用 <span class="term">Firth 懲罰概似</span>、精確邏輯迴歸或弱資訊先驗的貝氏（第 23 章）解決。<span class="term">過度配適</span>發生在「參數相對事件數太多」時，經驗法則是每個預測項需約 10 個事件（EPV≈10）；改善靠交叉驗證、收縮（ridge/LASSO）。而因果估計的首要之務，仍是確保調整集正確，而非最小化預測誤差。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵觀念：MLE 與穩健變異</h4>
+<div class="derive"><p>模型基變異假設模型完全正確 \(V=A^{-1}\)（Fisher 資訊逆）。<b>夾心變異</b> \(V=A^{-1}BA^{-1}\)（\(A\)＝Hessian、\(B\)＝分數外積）對輕度模型誤設與群集相關仍一致，代價是效率略降。群集資料（第 24 章）與 Poisson 估 RR（第 20 章）都靠它。</p></div>
+<h4>關鍵觀念：分離與稀疏的解</h4>
+<div class="derive"><p>完全分離時 MLE 發散（係數→±∞）。<b>Firth 懲罰</b>在對數概似加 Jeffreys 先驗項 \(\tfrac12\ln|I(\beta)|\)，使估計有限且降小樣本偏誤；等價於一種弱資訊貝氏（第 23 章）。這是稀疏 logistic 的標準解。</p></div>
+<h4>關鍵觀念：EPV 與過度配適</h4>
+<p>每預測項需約 10 個事件（EPV≈10）為經驗下限；不足則係數不穩、CI 過窄。因果模型優先保正確調整集；預測模型則用收縮（ridge/LASSO）、交叉驗證改善外推。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：AIC 最小的模型就是「對的」因果模型嗎？</div><div class="a">A：不是。AIC 為預測/配適準則，不保證無偏因果；調整集由因果結構定，非配適指標。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<div class="exq"><span class="yr">114-1 Q5</span><span class="qtitle">CVD 的 Poisson 交互作用模型</span>
+<div class="sol">在 Poisson 迴歸加交互項估 IRR 的效應修飾；注意乘法交互 ≠ 相加交互（公衛看相加，第 26 章 RERI）。</div></div>
+<div class="exq"><span class="yr">114-1 Q10</span><span class="qtitle">不平衡資料的分類模型評估</span>
+<div class="sol">類別極不平衡時 accuracy 失真；改看<b>敏感度/召回、精確率、F1、PR-AUC、校準</b>；抽樣（over/under-sampling）、加權、調閾值。連 AI×流病專題。</div></div>
+<div class="exq"><span class="yr">113-1 Q4–Q6</span><span class="qtitle">乳房密度變化軌跡：GBTM vs time-dependent Cox</span>
+<div class="sol">群組軌跡模型（GBTM）辨識密度變化型態 vs 時間相依 Cox 直接把時變密度放入 \(h(t)\)。前者描述異質軌跡、後者估時變暴露危害；比較兩法取捨。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>工具</th><th>用途</th></tr></thead>
 <tbody>
@@ -1481,21 +1843,44 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>設限與時間尺度的正確處理</b>是一切的前提。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 設限與截斷</h3>
-<p><span class="term">右設限（right censoring）</span>：追蹤結束仍未發生事件。存活分析的價值在於<b>善用設限者提供的部分資訊</b>。需假設<span class="term">無資訊性設限（non-informative censoring）</span>：設限與事件風險獨立（否則＝選擇偏差）。<span class="term">左截斷（left truncation）</span>用於延遲進入（如年齡為時間尺度）。</p>
+<h3>1. 什麼時候需要存活分析</h3>
+<p>當「<b>多久才發生事件</b>」很重要，而且資料裡有<span class="term">設限（censoring）</span>時，就需要存活分析。設限指的是「追蹤結束時還沒發生事件」——存活分析的價值，正在於它能<b>善用這些設限者提供的「至少活到某時點」的部分資訊</b>，而不是簡單地把他們當「沒發病」丟掉。</p>
 
-<h3>2. 存活與危害函數</h3>
-<p><span class="term">存活函數</span> \(S(t)=P(T>t)\)；<span class="term">危害函數</span> \(h(t)\)＝在 \(t\) 仍存活下瞬間發生率。兩者互通：\(S(t)=\exp(-\int_0^t h(u)\,du)\)。危害是「率」的連續版（連回第 4 章）。</p>
+<h3>2. 設限的關鍵假設</h3>
+<p>存活分析依賴一個重要假設：<span class="term">非資訊性設限（non-informative censoring）</span>——設限與事件風險獨立。如果「快要發病的人特別容易失訪」，設限就與風險相關，這其實就是選擇偏差，會使估計偏誤。<span class="term">左截斷</span>則處理「延遲進入」（例如用年齡當時間尺度時，受試者是在某個年齡才進入觀察）。</p>
 
-<h3>3. 非參數方法</h3>
-<p><span class="term">Kaplan–Meier</span> 估 \(S(t)\) 階梯曲線；組間比較用 <span class="term">log-rank 檢定</span>（對 PH 偏離較敏感）。中位存活、特定時點存活可由曲線讀出。</p>
+<h3>3. 存活函數與危害函數</h3>
+<p>兩個核心量：<span class="term">存活函數</span> \(S(t)=P(T>t)\)（活過 \(t\) 的機率）與<span class="term">危害函數</span> \(h(t)\)（在 \(t\) 仍存活的條件下，瞬間發生事件的率）。兩者互通：\(S(t)=\exp(-\int_0^t h(u)du)\)。危害其實就是第 4 章「率」的連續版——把存活分析看成「率的精緻化」，觀念就順了。</p>
 
-<h3>4. Cox 比例危害模型</h3>
-<p><span class="term">Cox 模型</span>：\(h(t\mid X)=h_0(t)\exp(\beta X)\)，不需設定基線危害形狀，\(e^\beta＝\)<span class="term">危害比 HR</span>。核心假設<span class="term">比例危害</span>：HR 不隨時間變。檢查：Schoenfeld 殘差、log(-log) 圖、加時間交互項。違反時：分層 Cox、時間相依係數、或改用其他時間尺度。</p>
+<h3>4. 非參數與半參數方法</h3>
+<p><span class="term">Kaplan–Meier</span>用階梯曲線估 \(S(t)\)，組間比較用<span class="term">log-rank 檢定</span>。<span class="term">Cox 比例危害模型</span> \(h(t\mid X)=h_0(t)e^{\beta X}\) 是主力——它不需要設定基線危害的形狀，\(e^\beta\) 就是<span class="term">危害比 HR</span>。它的核心假設是<b>比例危害</b>：兩人的危害比不隨時間改變。檢查方法：Schoenfeld 殘差對時間有無趨勢、log(−log S) 曲線是否平行、或加「時間×變數」交互項。違反時：改用分層 Cox、時間相依係數，或換一個時間尺度。</p>
 
 <h3>5. 時變共變量與競爭風險</h3>
-<p><span class="term">時變共變量</span>可納入 Cox（但小心把中介或未來資訊帶入 → 偏差，見第 25 章）。<span class="term">競爭風險</span>下，\(1-\)KM 會<b>高估</b>累積發生；改用<span class="term">累積發生函數（CIF）</span>與<span class="term">Fine–Gray 次分佈危害</span>或原因別危害（cause-specific）。選哪個取決於是想估「病因」還是「絕對風險」。</p>
+<p><span class="term">時變共變量</span>可以放進 Cox，但要小心別把中介或「未來的資訊」帶進來（否則造成偏差，第 25 章）。<span class="term">競爭風險</span>是另一個必考重點：當有其他事件會「移除」受試者（如研究癌症死亡，但有人先因心臟病過世），<b>直接用 \(1-\)KM 會高估</b>累積發生。正確做法是用<span class="term">累積發生函數（CIF）</span>與 Fine–Gray 次分佈危害，或原因別危害。選哪個取決於你想回答「病因」（原因別危害）還是「絕對風險/預測」（次分佈危害）。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵推導：存活與危害的關係</h4>
+<div class="derive"><p>危害 \(h(t)=\lim_{\Delta\to0}\dfrac{P(t\le T<t+\Delta\mid T\ge t)}{\Delta}=-\dfrac{d}{dt}\ln S(t)\)。積分得 \( S(t)=\exp\!\big(-\int_0^t h(u)du\big)=e^{-H(t)} \)，\(H\)＝累積危害。定危害即回到第 4 章 \(1-e^{-\lambda t}\)。</p></div>
+<h4>關鍵推導：Kaplan–Meier 為何是乘積</h4>
+<div class="derive"><p>存活到 \(t\)＝逐個事件時點「條件存活」相乘：\( \hat S(t)=\prod_{t_i\le t}\big(1-\tfrac{d_i}{n_i}\big) \)。設限者在其離開後不再計入 \(n_i\)，故其部分資訊（活到離開）被善用——這是存活分析勝過「只看是否發病」的核心。</p></div>
+<h4>關鍵觀念：Cox 的比例危害與偏概似</h4>
+<div class="derive"><p>\(h(t\mid X)=h_0(t)e^{\beta X}\)：兩人危害比 \(e^{\beta(X_1-X_2)}\) <b>不隨時間變</b>（PH 假設）。偏概似在每個事件時點只比較風險集內「誰發生」的相對危害，\(h_0(t)\) 因而消去，故不需設定基線形狀。檢查 PH：Schoenfeld 殘差對時間無趨勢、log(−log S) 平行；違反則分層、加時間交互或改時間尺度。</p></div>
+<h4>關鍵觀念：競爭風險</h4>
+<p>\(1-\)KM 假設競爭事件者「若無競爭仍會發病」，高估絕對風險。CIF \( =\int_0^t h_k(u)S(u)du \) 含全因存活 \(S\)。原因別危害回答「病因」，Fine–Gray 次分佈危害回答「絕對風險/預測」。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：非資訊性設限被違反會怎樣？</div><div class="a">A：等同選擇偏差（設限與風險相關）；KM/Cox 估計偏誤，需 IPW 設限或敏感度分析。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<p>存活分析（PH 假設、競爭風險、時變共變數）是李老師存活單元核心，106、110-1、114-2、109 都考。</p>
+<div class="exq"><span class="yr">110-1 名詞</span><span class="qtitle">Cox 比例風險假設與檢定</span>
+<div class="sol">\(h(t|X)=h_0(t)e^{\beta X}\)，HR 不隨時間變。檢定：Schoenfeld 殘差、log(−log S) 平行；違反→分層 Cox、時間×變數交互、time-dependent covariate。</div></div>
+<div class="exq"><span class="yr">106 Q2</span><span class="qtitle">競爭風險、time-dependent covariate</span>
+<div class="sol">競爭風險下勿用 1−KM（高估），改 CIF／Fine–Gray；時變共變數用 \(h(t)=h_0(t)\exp[\beta X(t)]\)，注意勿納中介/未來資訊。</div></div>
+<div class="exq"><span class="yr">109-2 名詞</span><span class="qtitle">相對存活（relative survival）</span>
+<div class="sol">觀察存活 ÷ 期望存活（一般人口），估「淨」疾病致死，不需死因資訊，癌症登記常用。</div></div>
+<div class="exq"><span class="yr">競爭風險專題</span><span class="qtitle">Cause-specific vs Subdistribution hazard、KM vs CIF</span>
+<div class="sol">原因別危害回答「病因」，次分佈危害（Fine–Gray）回答「絕對風險/預測」；1−KM 高估、CIF 正確。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>方法</th><th>類型</th><th>產出</th><th>關鍵假設</th></tr></thead>
 <tbody>
@@ -1538,21 +1923,33 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>先驗讓不確定性有結構</b>；與頻率派的 CI/p 值形成互補視角。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 貝氏的邏輯</h3>
-<p>參數被視為有<span class="term">分布</span>的未知量。<span class="term">貝氏定理</span>：\(P(\theta\mid \text{data})\propto P(\text{data}\mid\theta)\,P(\theta)\)。<span class="term">先驗（prior）</span>編碼既有知識，<span class="term">概似（likelihood）</span>來自資料，<span class="term">後驗（posterior）</span>是更新後的信念。</p>
+<h3>1. 貝氏的核心邏輯</h3>
+<p>貝氏統計把參數看成有<b>分布</b>的未知量，而非固定的常數。核心是一句口訣：<b>後驗 ∝ 概似 × 先驗</b>。<span class="term">先驗（prior）</span>編碼你在看到資料前的知識，<span class="term">概似（likelihood）</span>來自這次的資料，兩者結合成<span class="term">後驗（posterior）</span>——更新後的信念。這個框架特別適合兩種情境：稀疏資料，以及需要正式納入外部知識時。</p>
 
-<h3>2. 先驗的種類</h3>
-<p><span class="term">無資訊/弱資訊先驗</span>讓資料主導；<span class="term">資訊先驗</span>納入外部證據（前研究、機轉）。稀疏資料時，<b>弱資訊先驗</b>可避免 MLE 發散（等同懲罰，第 21 章）。先驗選擇應透明並做敏感度分析。</p>
+<h3>2. 先驗的種類與作用</h3>
+<p><span class="term">無資訊/弱資訊先驗</span>讓資料主導結論；<span class="term">資訊先驗</span>把前人研究或機轉知識正式納入。一個重要的實用角色：稀疏資料下，<b>弱資訊先驗能避免 MLE 發散</b>——這在數學上等同於懲罰（第 21 章的 Firth 就是以 Jeffreys 先驗的貝氏）。先驗的選擇要透明，並做敏感度分析看結論穩不穩。</p>
 
 <h3>3. 可信區間 vs. 信賴區間</h3>
-<p><span class="term">95% 可信區間</span>可直接解讀為「參數有 95% 後驗機率落於此」——這正是許多人<b>誤以為</b>頻率派 CI 的意思。兩者在弱先驗、大樣本下數值常相近，但詮釋不同。</p>
+<p>這是高頻考點。<span class="term">95% 可信區間（credible interval）</span>可以<b>直接</b>說成「參數有 95% 的（後驗）機率落在此區間內」——這正是許多人<b>誤以為</b>頻率派信賴區間的意思。頻率派的信賴區間其實是對「程序」的陳述（重複抽樣下 95% 的區間涵蓋真值），不能對單一區間講機率。兩者在弱先驗、大樣本下數值常相近，但詮釋根本不同。</p>
 
-<h3>4. 階層（多層）模型與收縮</h3>
-<p><span class="term">階層模型（hierarchical / multilevel）</span>讓各組估計向整體均值<span class="term">收縮（shrinkage）</span>，穩定小組估計、處理多重比較，優於逐一分析。用於多中心、多亞組、小區域估計（連第 24、30 章）。</p>
+<h3>4. 階層模型與收縮</h3>
+<p><span class="term">階層（多層）模型</span>讓各組的估計向整體均值<span class="term">收縮（shrinkage）</span>：小樣本的組被拉得多、大樣本的組拉得少（部分匯集）。這自動穩定了小組估計、也自然處理了多重比較問題，通常優於「每組各自分析」或「全部合併」。用於多中心研究、多個亞組、小區域估計（連第 24、30 章）。</p>
 
-<h3>5. 計算與實務</h3>
-<p>後驗多以 <span class="term">MCMC</span> 近似。實務重點：先驗合理性、收斂診斷、後驗預測檢查、對先驗做敏感度分析。貝氏也是<b>機率式偏差分析</b>的天然框架（把 Se/Sp、干擾強度當有先驗的未知量，第 29 章）。</p>
+<h3>5. 計算與偏差分析的天然框架</h3>
+<p>後驗多用 <span class="term">MCMC</span> 近似求得。實務重點：先驗的合理性、收斂診斷、後驗預測檢查、對先驗做敏感度分析。最後一個重要連結：貝氏是<b>機率式偏差分析的天然框架</b>——把敏感度/特異度、干擾強度這些「偏差參數」當成有先驗分布的未知量，就能把系統誤差與隨機誤差整合進同一個後驗（第 29 章）。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵推導：後驗即加權平均（正態共軛例）</h4>
+<div class="derive"><p>先驗 \(\theta\sim N(\mu_0,\tau^2)\)、概似 \(\bar y\mid\theta\sim N(\theta,\sigma^2/n)\)。後驗均值</p>
+<p>\[ E[\theta\mid y]=\frac{\tau^{-2}\mu_0+(n/\sigma^2)\bar y}{\tau^{-2}+n/\sigma^2} \]</p>
+<p>即先驗與資料<b>依各自精確度加權</b>。資料多（\(n\) 大）→後驗趨近 MLE；資料少→先驗主導（穩定稀疏估計）。這就是「收縮」的來源。</p></div>
+<h4>關鍵觀念：可信區間 vs. 信賴區間</h4>
+<p>95% 可信區間：\(P(\theta\in\text{區間}\mid\text{資料})=0.95\)（對參數的機率陳述，直觀）。95% 信賴區間：重複抽樣下 95% 的區間涵蓋真值（對程序的陳述）。前者才是多數人「以為」的意思。弱先驗、大樣本下數值常相近。</p>
+<h4>關鍵觀念：階層模型的收縮</h4>
+<div class="derive"><p>多組估計向整體均值收縮，收縮量∝各組不確定性。小樣本組被拉得多、大樣本組拉得少。自動處理多重比較（部分匯集 partial pooling），優於逐一分析或完全合併。</p></div>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：貝氏和 Firth 懲罰關係？</div><div class="a">A：Firth＝以 Jeffreys 先驗的貝氏 MAP；弱資訊先驗普遍能穩定稀疏/分離估計。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th></th><th>頻率派</th><th>貝氏</th></tr></thead>
 <tbody>
@@ -1594,21 +1991,39 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>相關資料的重點是「變異/SE 要對」，並想清楚要邊際還是條件效應。</b></p>
 </div></div>
 <div class="ch-body">
-<h3>1. 為什麼要處理相關</h3>
-<p>重複測量與群集（家庭、學校、醫院、社區）內的觀察值正相關，<b>有效樣本數小於名目樣本數</b>。忽略會低估 SE、CI 過窄、p 值過小。</p>
+<h3>1. 為什麼要處理相關資料</h3>
+<p>當觀察值<b>不獨立</b>時——同一個人被重複測量、或同一群集（家庭、學校、醫院、社區）裡的個體彼此相似——標準統計的「獨立假設」就破了。後果很具體：<b>有效樣本數小於名目樣本數</b>，忽略相關會低估標準誤、使信賴區間過窄、p 值過小，讓你對結論過度自信。</p>
 
-<h3>2. GEE（邊際模型）</h3>
-<p><span class="term">GEE</span> 直接估<b>族群平均效應</b>，指定「工作相關結構」（可交換、AR、非結構），並用<b>穩健夾心變異</b>使 SE 對相關穩健（相關結構設錯仍一致）。適合公衛層次「整體」效應與缺失為 MCAR 時。</p>
+<h3>2. 兩條路線：GEE 與混合模型</h3>
+<p>處理相關資料有兩大路線，回答的問題不同。<span class="term">GEE（廣義估計方程）</span>估的是<b>族群平均（marginal）效應</b>：它指定一個「工作相關結構」，並用穩健夾心變異，使標準誤對相關穩健（即使相關結構設錯，估計仍一致）。<span class="term">混合/隨機效應模型</span>估的是<b>條件（cluster-specific）效應</b>：它把群集的異質性建成隨機效應，能分解組內/組間變異（ICC）、處理 MAR 缺失、預測群集特定值。</p>
 
-<h3>3. 混合效應/隨機效應模型</h3>
-<p><span class="term">隨機截距/斜率</span>把群集異質建成隨機效應，估<b>條件（給定群集）效應</b>，並可分解<span class="term">組內/組間變異（ICC）</span>。能處理 MAR 缺失、預測群集特定值、多層結構（學生嵌套於學校）。</p>
+<h3>3. 邊際 vs. 條件：非線性下不相等</h3>
+<p>這是本章最重要、也最常被忽略的觀念。<b>線性模型中，邊際效應與條件效應相等；但在非線性模型（如 logistic）中，兩者不相等</b>——條件 OR 通常大於邊際 OR（這是 OR 的非可塌縮性）。所以報告時一定要說清楚你估的是哪一種：政策關心族群平均，通常要邊際（GEE）；問「同一群集內」的效應，用條件（混合模型）。</p>
 
-<h3>4. 邊際 vs. 條件效應</h3>
-<p><span class="warn">關鍵觀念</span>：線性模型中兩者相等；<b>非線性（如 logistic）中不相等</b>——條件 OR 通常大於邊際 OR（非可塌縮性）。報告時須言明估的是哪一種，對政策（族群平均）常要邊際。</p>
+<h3>4. 設計效應與有效樣本</h3>
+<p>群集資料的一個實用工具是<b>設計效應</b> \(\mathrm{DEFF}=1+(m-1)\rho\)（\(m\) 是群集大小，\(\rho\) 是組內相關 ICC），有效樣本數 \(=\) 名目樣本數 \(/\mathrm{DEFF}\)。啟示：即使 ICC 很小，只要群集夠大（\(m\) 大），也會大幅損失有效資訊——這是群集隨機試驗規劃樣本數時必用的式子。</p>
 
-<h3>5. 縱貫資料的特殊議題</h3>
-<p>時間趨勢、時變共變量、缺失/退出（informative dropout）、以及<b>時變暴露的因果</b>需 g-方法（第 25 章）。簡單重複測量若只想修 SE，群集穩健 SE 是最省事選項。</p>
+<h3>5. 最省事的選項與縱貫議題</h3>
+<p>如果你<b>只想修正標準誤、不想建模相關結構</b>，最省事的選項是<b>群集穩健（夾心）標準誤</b>：點估計不變，標準誤對群集相關穩健。縱貫資料還有額外議題：時間趨勢、時變共變量、資訊性退出（informative dropout），以及<b>時變暴露的因果</b>需要 g-方法（第 25 章）。把「要邊際還是條件、要不要建模相關」想清楚，就能選對工具。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵推導：設計效應與有效樣本</h4>
+<div class="derive"><p>等大小群集 \(m\)、組內相關 ICC \(=\rho\)。群集均值的變異放大 \( \mathrm{DEFF}=1+(m-1)\rho \)。有效樣本 \(n_{eff}=n/\mathrm{DEFF}\)。啟示：即使 \(\rho\) 小，大群集（\(m\) 大）也大幅損失有效資訊——群集隨機試驗樣本規劃必用此式。</p></div>
+<h4>關鍵觀念：邊際 vs. 條件（非可塌縮）</h4>
+<div class="derive"><p>logistic 中隨機效應 \(u\) 使條件 OR \(\ne\) 邊際 OR：對非線性連結，對 \(u\) 積分（平均）後斜率變小，故<b>邊際 OR 較接近 1</b>。線性/log 連結則兩者相等（可塌縮）。政策要族群平均→邊際（GEE）；問「同一群集內」→條件（混合模型）。</p></div>
+<h4>關鍵觀念：GEE 的穩健性</h4>
+<p>GEE 用「工作相關結構」提升效率，但即使該結構設錯，搭配<b>夾心變異</b>仍給一致的邊際估計與正確 SE——這是它受歡迎的原因。代價：對 MAR 缺失不如混合模型穩健（GEE 需接近 MCAR 或加權）。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：只想修正 SE，不想建模相關，用什麼？</div><div class="a">A：群集穩健（夾心）SE 最省事；點估計不變，SE 對群集相關穩健。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<div class="exq"><span class="yr">114-2 名詞</span><span class="qtitle">混合效應模型（mixed model）</span>
+<div class="sol">隨機效應建模群集異質，估<b>條件</b>效應、可分解 ICC；對比 GEE 估<b>邊際</b>效應。非線性下兩者係數不等（非可塌縮）。</div></div>
+<div class="exq"><span class="yr">109-1 名詞</span><span class="qtitle">Random effect（隨機效應）</span>
+<div class="sol">把群集/個體差異視為來自分布的隨機量，處理相關資料、收縮小組估計（連第 23 章階層模型）。</div></div>
+<div class="exq"><span class="yr">113-1 Q2</span><span class="qtitle">配對條件邏輯斯（也屬本章相關資料）</span>
+<div class="sol">matched set 內條件概似消去基準風險（見第 8 章）。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th></th><th>GEE（邊際）</th><th>混合效應（條件）</th></tr></thead>
 <tbody>
@@ -1649,21 +2064,40 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>時變情境要用 g-方法「加權或標準化」而非把中介型干擾當一般共變量放進迴歸。</b></p>
 </div></div>
 <div class="ch-body">
-<h3>1. 問題的結構</h3>
-<p>考慮 \(A_0\to L_1\to A_1\to Y\)，且 \(L_1\) 同時是 \(A_1\) 的干擾與 \(A_0\) 的<b>後果/中介</b>。傳統做法把 \(L_1\) 放進迴歸：它作為 \(A_1\) 的干擾必須調整，但作為 \(A_0\) 的中介又<b>不該</b>調整（也可能是碰撞點）。這個矛盾使標準迴歸無法給出正確的聯合暴露效應。</p>
+<h3>1. 問題長什麼樣：時變暴露＋回饋</h3>
+<p>當暴露<b>會隨時間改變</b>（例如持續用藥、逐年的空汙暴露），而且存在一個特殊的變項——它<b>同時是後續暴露的干擾、又是先前暴露的後果（中介）</b>——這時<b>傳統迴歸會失效</b>。這種「治療—干擾回饋（treatment-confounder feedback）」是本章唯一但致命的難題。</p>
 
-<h3>2. 邊際結構模型（MSM）＋IPTW</h3>
-<p><span class="term">逆機率處理加權（IPTW）</span>：以每個時點的處理機率倒數建權重，創造一個<b>去除時變干擾</b>的「偽族群」，再在其上配適<span class="term">邊際結構模型</span>估聯合效應。需<b>正性</b>與<b>無未測干擾</b>；權重極端時用穩定化/截斷。</p>
+<h3>2. 為什麼傳統迴歸調也不是、不調也不是</h3>
+<p>用一個典型結構說明：\(A_0\to L_1\to A_1\to Y\)，其中 \(L_1\)（例如某個檢驗值）既是 \(A_1\) 的干擾、又是 \(A_0\) 的中介，還可能是碰撞點。要估 \(A_1\) 的效應，你<b>必須調 \(L_1\)</b>（它是 \(A_1\)–\(Y\) 的干擾）；但 \(L_1\) 是 \(A_0\) 的中介，<b>調它就擋掉了 \(A_0\) 的部分效應</b>；而且 \(L_1\) 若是碰撞點，調它還會<b>打開新的後門</b>。同一個變項，調也錯、不調也錯——標準迴歸無法同時處理，這就是需要 g-方法的根本原因。</p>
 
-<h3>3. g-formula（g-computation）</h3>
-<p>用各時點結果/共變量模型，透過對時變干擾分布積分，模擬<b>不同暴露策略</b>下的反事實結果，得到策略對比。彈性強、可比較動態策略，但依賴多個模型正確（g-null 悖論須注意）。</p>
+<h3>3. 邊際結構模型＋逆機率加權</h3>
+<p>第一個解法：<span class="term">逆機率處理加權（IPTW）</span>。用「每個時點接受該處理的機率」的倒數當權重，創造一個<b>去除了時變干擾</b>的「偽族群」，在這個偽族群上配適<span class="term">邊際結構模型（MSM）</span>，就能估到聯合暴露的因果效應。實務上用<b>穩定化權重</b>縮小變異、用截斷處理極端權重。它需要正性（每層處理機率都大於 0）與無未測干擾——權重極端往往是正性快要違反的警訊。</p>
 
-<h3>4. g-estimation 與結構巢式模型</h3>
-<p><span class="term">g-estimation of structural nested models</span>估暴露對結果的直接效應參數，對某些未測干擾較穩健，並能處理效應修飾，但實作較複雜。</p>
+<h3>4. g-formula 與 g-estimation</h3>
+<p>第二個解法：<span class="term">g-formula（g-computation）</span>用各時點的結果與共變量模型，透過對時變干擾的分布積分，模擬「不同暴露策略」下的反事實結果，得到策略之間的對比。它彈性強、能比較動態策略，但依賴多個模型都正確（且有 g-null 悖論要注意）。第三個解法：<span class="term">g-estimation of structural nested models</span>，對某些未測干擾較穩健、能處理效應修飾，但實作較複雜。三種方法在假設滿足下會一致。</p>
 
-<h3>5. 實務要點</h3>
-<p>三法在無未測干擾與正確設定下一致。選擇：MSM+IPTW 直觀常用；g-formula 適合動態策略比較；g-estimation 處理特定結構。皆需嚴謹的<b>時間對齊（目標試驗，第 6、11 章）</b>與正性檢查。</p>
+<h3>5. 怎麼選、要注意什麼</h3>
+<p>選擇上：MSM＋IPTW 最直觀、最常用；g-formula 適合比較動態策略；g-estimation 處理特定結構。三者都需要嚴謹的<b>時間對齊（目標試驗思維，第 6、11 章）</b>與正性檢查。看到「某變項隨時間變、受先前暴露影響、又是後續暴露的干擾」這個訊號，就要立刻想到「不能把它當普通共變量丟進迴歸」，改用 g-方法。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵推導：為何傳統迴歸在時變情境失效</h4>
+<div class="derive"><p>結構 \(A_0\to L_1\to A_1\to Y\)，且 \(A_0\to L_1\)、\(L_1\to Y\)、\(U\to L_1\)、\(U\to Y\)（\(U\) 未測）。要估 \(A_1\) 效應須調 \(L_1\)（它是 \(A_1\)–\(Y\) 干擾）；但 \(L_1\) 是 \(A_0\) 的<b>中介</b>，調它會擋掉 \(A_0\) 的部分效應；且 \(L_1\) 是 \(U\to L_1\leftarrow A_0\) 的<b>碰撞</b>，調它會打開 \(A_0\)–\(U\)–\(Y\) 後門。<b>調也不是、不調也不是</b>——標準迴歸無法同時處理，需 g-方法。</p></div>
+<h4>關鍵推導：穩定化 IPTW</h4>
+<div class="derive"><p>每時點權重</p>
+<p>\[ sw_i=\prod_t\frac{P(A_t\mid \bar A_{t-1})}{P(A_t\mid \bar A_{t-1},\bar L_t)} \]</p>
+<p>分母移除時變干擾對處理的影響（造出處理與 \(L\) 獨立的偽族群），分子（穩定化）縮小權重變異。在偽族群上配適邊際結構模型 \( g\{E[Y_{\bar a}]\}=\beta_0+\beta_1\,\mathrm{cum}(\bar a) \) 即得聯合暴露的因果效應。需正性（每層處理機率&gt;0）與無未測干擾。</p></div>
+<h4>關鍵觀念：三種 g-方法分工</h4>
+<p>IPTW＋MSM（加權，直觀、權重可能極端）；g-formula（對 \(L\) 分布積分模擬各策略，適合動態策略但依賴多模型、有 g-null 悖論）；g-estimation（結構巢式，對部分未測干擾較穩健、可含效應修飾）。三者在假設滿足下一致。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：什麼訊號提示「不能把 L 當普通共變量」？</div><div class="a">A：L 隨時間變、受先前暴露影響、又是後續暴露的干擾（treatment-confounder feedback）。</div></div>
+<div class="qa"><div class="q">Q：權重極端怎麼辦？</div><div class="a">A：穩定化、截斷（trimming）、檢查正性；極端權重常暗示正性接近違反。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<div class="exq"><span class="yr">113-2 Q5 / 114-2</span><span class="qtitle">目標試驗仿真（TTE）與 prevalent/incident user</span>
+<div class="sol">觀察資料模擬理想 RCT，對齊合格條件/暴露/time zero/結果，擋掉不朽時間與盛行使用者偏差。<b>時變干擾又是中介</b>時需 g-方法（IPTW+MSM／g-formula）。TTE 專題另有正反方詳解。</div></div>
+<div class="exq"><span class="yr">109-1 名詞</span><span class="qtitle">Time-varying / time-dependent covariate</span>
+<div class="sol">追蹤中會變的共變數；若受先前暴露影響又是後續干擾（treatment-confounder feedback）→傳統迴歸失效，用 g-方法。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>方法</th><th>機制</th><th>優點</th><th>限制</th></tr></thead>
 <tbody>
@@ -1704,21 +2138,41 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>先問「哪個尺度」與「要回答什麼問題」，交互才有意義。</b></p>
 </div></div>
 <div class="ch-body">
-<h3>1. 效應修飾 vs. 交互作用</h3>
-<p><span class="term">效應修飾（effect modification）</span>：暴露效應在修飾因子各層不同（不對稱、以一個因子為主角）。<span class="term">交互作用（interaction）</span>：兩暴露的聯合效應（對稱看兩者）。實作上常重疊，但概念與 DAG 角色不同。</p>
+<h3>1. 三個容易混淆的概念先分清</h3>
+<p>本章處理「效應隨第三變項而變」，但一開始要把三個常被混用的詞分開。<span class="term">效應修飾（effect modification）</span>：暴露的效應在修飾因子的各層不同，是<b>不對稱</b>的看法（以一個因子為主角，看它的效應被誰改變）。<span class="term">交互作用（interaction）</span>：兩個暴露的<b>聯合</b>效應，是<b>對稱</b>地看兩者。<span class="term">統計交互</span>則是模型裡的交互項，會隨尺度而變。它們在實作上常重疊，但概念與 DAG 角色不同。</p>
 
-<h3>2. 尺度相依性</h3>
-<p>是否「有交互」取決於尺度：若兩因子在<b>可乘尺度</b>無交互（\(RR_{11}=RR_{10}\times RR_{01}\)），則在<b>可加尺度</b>通常<b>有</b>交互，反之亦然。因此不能問「有沒有交互」而不指定尺度。</p>
+<h3>2. 交互作用是尺度相依的</h3>
+<p>這是全章最重要、最常考的一點：<b>「有沒有交互作用」取決於你用哪個尺度</b>。如果兩個因子在<b>可乘尺度</b>上沒有交互（\(RR_{11}=RR_{10}\times RR_{01}\)），那麼它們在<b>可加尺度</b>上通常<b>就有</b>交互，反之亦然。所以「有沒有交互作用」這個問題，<b>不指定尺度就沒有答案</b>。看到交互題，第一件事是問「在哪個尺度？」</p>
 
 <h3>3. 相加交互與公共衛生</h3>
-<p>公共衛生決策（誰該優先介入、聯合介入能多防幾例）看<b>可加尺度</b>。度量：<span class="term">RERI（相對超額風險交互）</span>、<span class="term">歸因比例 AP</span>、<span class="term">交互作用指數 S</span>。可由乘法模型係數換算 RERI。</p>
+<p>公共衛生決策（誰該優先介入、同時介入兩個因子能多防幾例）看的是<b>可加尺度</b>。度量工具有：<span class="term">RERI（相對超額風險交互）</span> \(=RR_{11}-RR_{10}-RR_{01}+1\)、<span class="term">歸因比例 AP</span>、<span class="term">交互作用指數 S</span>。RERI 大於 0 表示「聯合暴露者中，可歸因於交互的超額病例」為正，意味同時介入兩個因子有<b>超額</b>的防治效益——這正是政策排序需要的資訊，所以公衛偏好可加尺度。</p>
 
 <h3>4. 因果（生物）交互作用</h3>
-<p>以反事實/充分原因框架定義：某些個體「需兩因子同時存在才發病」。可檢定<b>反事實類型</b>的存在（如「充分原因交互」需比單純相加交互更強的證據）。與機轉推論相關但需謹慎，統計交互不直接等於生物機轉。</p>
+<p>更深一層是<span class="term">因果/生物交互作用</span>：用反事實或充分原因框架（第 2 章的因果派）定義——某些個體「需要兩個因子同時存在才會發病」。它可以用反事實類型來檢定，但門檻比單純的統計交互更高。要特別警惕：<b>統計交互（尤其乘法）不等於生物機轉</b>——乘法交互很大程度是尺度的產物，不能直接讀成「兩者在生物上協同」。</p>
 
 <h3>5. 實作與陷阱</h3>
-<p>估交互需<b>更大樣本</b>（精確度低）；勿遍歷所有交互（偽陽性）；報告時給各層效應與交互度量、指明尺度。效應修飾也關乎<b>外推/可運送性</b>（第 14 章）。</p>
+<p>估計交互作用需要<b>更大的樣本</b>（精確度天生較低），所以不要遍歷所有可能的交互（會製造大量偽陽性），應由事前假說引導。報告時要給各層的效應、交互度量，並指明尺度。最後一個連結：效應修飾也關乎<b>外推/可運送性</b>（第 14 章）——若修飾因子在目標人群分布不同，即使內部無偏，外推也會失準。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵推導：交互的尺度相依</h4>
+<div class="derive"><p>設 \(RR_{10}=2,\;RR_{01}=3\)。若<b>可乘無交互</b>則 \(RR_{11}=2\times3=6\)。檢查可加：RERI \(=RR_{11}-RR_{10}-RR_{01}+1=6-2-3+1=2>0\)→<b>可加有正交互</b>。反之若可加無交互（\(RR_{11}=RR_{10}+RR_{01}-1=4\)），則可乘 \(4\ne6\) 有負交互。<b>故「有無交互」必須指定尺度。</b></p></div>
+<h4>關鍵推導：由 logistic 係數得 RERI</h4>
+<div class="derive"><p>模型 \(\operatorname{logit}P=\beta_0+\beta_1 A+\beta_2 W+\beta_3 AW\)。以 OR 近似 RR（罕見）：\(RR_{10}=e^{\beta_1},RR_{01}=e^{\beta_2},RR_{11}=e^{\beta_1+\beta_2+\beta_3}\)。</p>
+<p>\[ \mathrm{RERI}=e^{\beta_1+\beta_2+\beta_3}-e^{\beta_1}-e^{\beta_2}+1 \]</p>
+<p>\(\beta_3=0\)（乘法無交互）時 RERI 通常仍 \(\ne0\)——再次說明尺度差異。</p></div>
+<h4>關鍵觀念：公共衛生為何看可加</h4>
+<p>相加交互 &gt;0 表「聯合暴露者中，可歸因於交互的超額病例」為正→同時介入兩因子有<b>超額</b>防治效益，可據以排序介入。這是政策相關量，故公衛偏好可加尺度。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：統計交互等於生物交互嗎？</div><div class="a">A：不等。統計交互（尤其乘法）是尺度產物；生物/因果交互需反事實或充分原因框架，證據門檻更高。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<div class="exq"><span class="yr">102-2/104/105 題2</span><span class="qtitle">以 R11/R10/R01/R00 說明生物交互（interaction contrast）</span>
+<div class="sol">相加交互 \(IC=R_{11}-(R_{10}+R_{01}-R_{00})\)；\(IC>0\)＝協同（synergism），對應 SCC「同一塊餅」。乘法無交互＝\(RR_{11}=RR_{10}\times RR_{01}\)。</div></div>
+<div class="exq"><span class="yr">109-1 名詞</span><span class="qtitle">Mediation vs Effect modification</span>
+<div class="sol">中介在因果路徑上（S→M→Y，拆效應）；效應修飾是效應隨第三變項而異（不在路徑上）。兩者概念與處置完全不同。</div></div>
+<div class="exq"><span class="yr">114-1 Q5 / 114-2</span><span class="qtitle">Poisson 交互、疫苗交互作用</span>
+<div class="sol">指明尺度；公衛決策看相加交互（RERI/AP/S）。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>概念</th><th>尺度/框架</th><th>回答的問題</th></tr></thead>
 <tbody>
@@ -1760,26 +2214,37 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>中介＝在因果鏈上「刻意」拆效應</b>，但假設嚴苛，需敏感度分析。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 為什麼要做中介</h3>
-<p>找出<b>作用機轉</b>與<b>可介入的中間點</b>。例如社經地位→健康，多少經由「吸菸」中介？這決定介入策略。</p>
+<h3>1. 為什麼要做中介分析</h3>
+<p>中介分析回答「暴露<b>如何</b>影響結果」：有多少效應是<b>經由</b>某個中介變項 \(M\)、有多少是<b>不經過</b> \(M\) 的。它的實用價值有二：找出<b>作用機轉</b>，以及找出<b>可介入的中間點</b>。例如社經地位影響健康，有多少是經由「吸菸」中介？答案決定了你該介入源頭還是介入中間環節。</p>
 
-<h3>2. 傳統 vs. 反事實框架</h3>
-<p>傳統<span class="term">Baron–Kenny/乘積法</span>只在無交互、線性下成立。現代<span class="term">反事實中介</span>用潛在結果定義，允許<b>暴露×中介交互</b>與非線性，並給出可識別的直接/間接效應。</p>
+<h3>2. 傳統方法與反事實框架</h3>
+<p>傳統的<span class="term">Baron–Kenny/乘積法</span>只在「無交互、線性」的條件下才正確。現代的<span class="term">反事實中介框架</span>用潛在結果來定義效應，允許<b>暴露×中介交互</b>與非線性，並給出可識別的直接/間接效應。這是為什麼考試特別強調要用反事實定義，而非傳統的係數相乘。</p>
 
 <h3>3. 效應分解</h3>
-<ul>
-<li><span class="term">受控直接效應（CDE）</span>：把 M 固定在某值時的暴露效應。</li>
-<li><span class="term">自然直接效應（NDE）</span>：M 取「未暴露時的自然值」時的暴露效應。</li>
-<li><span class="term">自然間接效應（NIE）</span>：暴露固定、僅讓 M 由未暴露值變到暴露值所致的效應。</li>
-<li>總效應＝NDE＋NIE（可乘尺度為相乘）。<span class="term">被中介比例</span>＝NIE/總效應。</li>
-</ul>
+<p>幾個要能寫出定義的量：<span class="term">受控直接效應（CDE）</span>——把 \(M\) 固定在某個值時的暴露效應；<span class="term">自然直接效應（NDE）</span>——\(M\) 取「未暴露時的自然值」時的暴露效應；<span class="term">自然間接效應（NIE）</span>——暴露固定、只讓 \(M\) 從未暴露值變到暴露值所造成的效應。總效應 = NDE + NIE（可乘尺度上是相乘）。<span class="term">被中介比例</span> = NIE/總效應，量化中介的重要性。</p>
 
-<h3>4. 識別假設</h3>
-<p>需四組<b>無未測干擾</b>：暴露—結果、暴露—中介、中介—結果，且<span class="warn">中介—結果的干擾不可被暴露影響</span>（否則自然效應不可識別，需改用隨機介入分析法 interventional effects）。還需正性與一致性。</p>
+<h3>4. 識別假設，尤其是致命的第四個</h3>
+<p>自然效應要能被識別，需要<b>四組無未測干擾</b>假設：暴露—結果、暴露—中介、中介—結果，加上最棘手的第四個——<b>中介—結果的干擾不可被暴露影響</b>。如果暴露會改變某個「同時影響中介與結果」的變項，自然直接/間接效應就<b>不可識別</b>，這時要改用「介入性（interventional）中介效應」。這個第四假設是資格考鑑別高手的關鍵點。</p>
 
-<h3>5. 實作與敏感度</h3>
-<p>可用迴歸法、加權法或 g-formula 估計；務必做<b>對未測中介—結果干擾的敏感度分析</b>。中介與交互可整合成四分解（第 26 章）。</p>
+<h3>5. 實作與敏感度分析</h3>
+<p>可以用迴歸法、加權法或 g-formula 來估計。務必做<b>對「未測的中介—結果干擾」的敏感度分析</b>——因為這個假設最難滿足、也最難驗證。中介與交互作用可以整合成「四分解」（連第 26 章）。一個實務提醒：被中介比例出現大於 100% 或負值，通常代表直接與間接效應方向相反（抑制效應），或模型/假設有問題，要謹慎詮釋。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵觀念：四種效應的反事實定義</h4>
+<div class="derive"><p>令 \(Y_{a,m}\)＝設暴露 \(a\)、中介 \(m\) 的潛在結果，\(M_a\)＝暴露 \(a\) 下的中介。<br>
+CDE\((m)=E[Y_{1,m}-Y_{0,m}]\)；<br>
+NDE\(=E[Y_{1,M_0}-Y_{0,M_0}]\)（中介固定在未暴露自然值）；<br>
+NIE\(=E[Y_{1,M_1}-Y_{1,M_0}]\)（暴露固定、僅動中介）。<br>
+總效應 \(=E[Y_{1,M_1}-Y_{0,M_0}]=\)NDE\(+\)NIE。含交互時 NDE、NIE 才能完整拆分（傳統乘積法在有交互時錯）。</p></div>
+<h4>關鍵觀念：致命的第四假設</h4>
+<p>自然效應可識別需四組無未測干擾，最棘手的是<b>「中介—結果的干擾不可被暴露影響」</b>。若暴露會改變某個同時影響中介與結果的變項，NDE/NIE 不可識別，須改用<b>介入性（interventional/randomized）中介效應</b>——這是資格考鑑別高手的點。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：被中介比例 &gt;100% 或負值代表什麼？</div><div class="a">A：常見於直接與間接效應方向相反（抑制/suppression），或模型/假設有問題，需謹慎詮釋。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<div class="exq"><span class="yr">111-1 應用一</span><span class="qtitle">Mediation：三法、因果 NDE/NIE、四假設</span>
+<div class="sol">三法：Difference-based（IE\(=\beta_s^*-\beta_s\)）、Product/Baron–Kenny（IE\(=\alpha_s\beta_m\)）、因果推論（potential outcomes 定義 NDE/NIE）。<b>因果定義</b>：\(NDE=E[Y(s_1,M(s_0))]-E[Y(s_0,M(s_0))]\)，\(NIE=E[Y(s_1,M(s_1))]-E[Y(s_1,M(s_0))]\)，\(TE=NDE+NIE\)。<span class="pitfall">原檔訂正</span>：把 TE 誤寫成只有 NIE 的式子；正確 TE\(=E[Y(s_1,M(s_1))]-E[Y(s_0,M(s_0))]\)。四可辨識假設：S–Y、M–Y、S–M 無未測干擾，且<b>無「由 S 引發又是 M–Y 共因」的變項</b>。例：SNP→抽菸→肺癌。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>效應</th><th>定義</th><th>用途</th></tr></thead>
 <tbody>
@@ -1824,25 +2289,41 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>IV 犧牲一般性換取對未測干擾的穩健</b>；估的常是<span class="term">局部效應（LATE，順從者）</span>。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. IV 的邏輯與假設</h3>
-<p>工具 \(Z\) 像「自然的隨機分派」：影響暴露 \(A\)，但<b>只透過 \(A\)</b> 影響結果 \(Y\)，且與未測干擾獨立。三假設：<span class="term">(1) 相關性</span>（\(Z\)–\(A\) 夠強，弱工具會偏）、<span class="term">(2) 排除限制</span>（\(Z\) 無直接對 \(Y\) 的路徑）、<span class="term">(3) 獨立性/可交換</span>。後兩者<b>不可由資料完全檢驗</b>。</p>
+<h3>1. 當調整無法解決未測干擾</h3>
+<p>前面所有「調整」的方法都有一個共同前提：<b>干擾要被測到</b>。但有時最重要的干擾根本沒被測到（生活型態、疾病嚴重度）。工具變數（IV）與準實驗設計提供另一條路——<b>不靠調整，而是借用一個「外生的變異」</b>來估因果，就像大自然幫你做了隨機分派。</p>
 
-<h3>2. 估計與解讀</h3>
-<p>二階段最小平方（2SLS）或 Wald 估計；在效應異質下，IV 估的是<span class="term">順從者的局部平均處理效應（LATE）</span>，需<b>單調性</b>假設（無 defier）。弱工具→偏誤與變異大（看 F 統計量）。</p>
+<h3>2. 工具變數的三個假設</h3>
+<p>一個好的<span class="term">工具（instrument）</span> \(Z\) 要滿足三個假設：<b>（1）相關性</b>——\(Z\) 與暴露 \(A\) 夠強相關（弱工具會造成偏誤）；<b>（2）排除限制</b>——\(Z\) <b>只透過 \(A\)</b> 影響結果 \(Y\)，沒有其他直接路徑；<b>（3）獨立性</b>——\(Z\) 與未測干擾無關。關鍵警示：後兩個假設<b>無法用資料完全檢驗</b>，只能靠論證。弱工具則可用第一階段的 F 統計量診斷（常要求大於 10）。</p>
 
-<h3>3. 孟德爾隨機化（MR）</h3>
-<p>用<b>基因變異</b>當工具：因隨機分配於受孕、通常不受後天干擾與反向因果影響。挑戰：<span class="term">水平多效性（pleiotropy）</span>破壞排除限制、連鎖不平衡、弱工具。對策：多工具敏感度分析（MR-Egger、加權中位數）。連第 37 章。</p>
+<h3>3. 估計的是誰的效應（LATE）</h3>
+<p>用二階段最小平方或 Wald 估計。但要理解一個重要限制：在效應異質的情況下，IV 估的是<span class="term">順從者的局部平均處理效應（LATE）</span>，而非全體的平均效應，且需要<b>單調性</b>假設（沒有 defier）。所以不同的工具可能給出不同的 LATE，外推受限是 IV 的內在代價。</p>
 
-<h3>4. 準實驗設計</h3>
-<ul>
-<li><span class="term">雙重差分（DiD）</span>：比較介入前後、處理與對照的差之差，假設<b>平行趨勢</b>。</li>
-<li><span class="term">斷點迴歸（RDD）</span>：在分派閾值附近近似隨機，估閾值局部效應。</li>
-<li><span class="term">中斷時間序列（ITS）</span>：介入前後趨勢/水準改變，控制既有趨勢與季節。</li>
-</ul>
+<h3>4. 孟德爾隨機化</h3>
+<p><span class="term">孟德爾隨機化（MR）</span>是 IV 的明星應用：用<b>基因變異</b>當工具。因為基因在受孕時就隨機分配、通常不受後天干擾與反向因果影響，所以近似一個自然的 RCT。它的阿基里斯腱是<span class="term">水平多效性（pleiotropy）</span>——基因經由「非暴露」的路徑影響結果，違反排除限制。對策是多工具敏感度分析（MR-Egger、加權中位數，連第 37 章）。</p>
 
-<h3>5. 使用時機與風險</h3>
-<p>當未測干擾嚴重且有可信外生變異時考慮。風險：假設難驗證、外推有限（局部效應）、弱工具。應與傳統調整互為佐證（三角驗證）。</p>
+<h3>5. 準實驗設計</h3>
+<p>當有可信的外生變異時，還可用準實驗：<span class="term">雙重差分（DiD）</span>——比較介入前後、處理與對照的「差之差」，假設<b>平行趨勢</b>；<span class="term">斷點迴歸（RDD）</span>——在分派閾值附近近似隨機，估閾值局部效應；<span class="term">中斷時間序列（ITS）</span>——看介入前後的趨勢/水準改變，控制既有趨勢與季節。這些方法都在「未測干擾嚴重、但有外生變異」時發揮價值，並應與傳統調整互為佐證（三角驗證）。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵推導：Wald/IV 估計</h4>
+<div class="derive"><p>工具 \(Z\)、暴露 \(A\)、結果 \(Y\)。排除限制使 \(Z\) 只經 \(A\) 影響 \(Y\)：\(\mathrm{Cov}(Z,Y)=\beta\,\mathrm{Cov}(Z,A)\)，故</p>
+<p>\[ \hat\beta_{IV}=\frac{\mathrm{Cov}(Z,Y)}{\mathrm{Cov}(Z,A)}=\frac{\text{Z 對 Y 的效應}}{\text{Z 對 A 的效應}} \]</p>
+<p>直覺：\(Z\) 只推動了 \(A\) 一點點，觀察 \(Y\) 隨之變多少，相除還原 \(A\to Y\)。弱工具（分母→0）使估計爆炸且偏，故看第一階段 \(F\)（常要 &gt;10）。</p></div>
+<h4>關鍵觀念：IV 估的是 LATE</h4>
+<p>效應異質＋單調性（無 defier）下，IV 估<b>順從者（compliers）</b>的局部平均效應，非全體 ATE。故不同工具可給不同 LATE。外推受限是 IV 的內在代價。</p>
+<h4>關鍵觀念：孟德爾隨機化的阿基里斯腱</h4>
+<div class="derive"><p>基因當工具的最大威脅是<b>水平多效性</b>（基因經非暴露路徑影響結果，違反排除限制）。對策：多工具、MR-Egger（截距檢定定向多效性）、加權中位數（半數工具有效仍一致）。連第 37 章。</p></div>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：DiD 的核心假設？違反的典型情況？</div><div class="a">A：平行趨勢（無介入下兩組結果趨勢平行）；若處理組本就有不同時間趨勢或有同時發生的其他衝擊則違反。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<div class="exq"><span class="yr">109-2 I-1</span><span class="qtitle">Instrumental variable 與 Mendelian randomization</span>
+<div class="sol">IV 三假設：①相關性（\(Z\to X\)）②獨立性（與未測干擾無關）③排除限制（\(Z\) 只經 \(X\) 影響 \(Y\)）。在無法控未測干擾時推因果、減反向因果。MR＝IV 特例，用<b>基因變異（SNP）</b>當工具（受孕時隨機分配）。<span class="pitfall">威脅</span>：水平多效性違反排除限制（第 37 章）。</div></div>
+<div class="exq"><span class="yr">113-1 Q10</span><span class="qtitle">Quasi-experiment（準實驗）</span>
+<div class="sol">DiD（平行趨勢）、RDD（閾值連續）、ITS（趨勢可外推）借外生變異估因果。</div></div>
+<div class="exq"><span class="yr">114-2</span><span class="qtitle">適應症混淆的解方：IV／pragmatic RCT</span>
+<div class="sol">未測的嚴重度→用工具變數或務實試驗繞過。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>方法</th><th>借用的外生變異</th><th>關鍵假設</th><th>估計對象</th></tr></thead>
 <tbody>
@@ -1884,21 +2365,39 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>與其口頭說「可能有偏差」，不如量化它</b>；貝氏是自然框架（第 23 章）。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 動機</h3>
-<p>傳統只報 CI，隱含「唯一誤差是隨機的」。實際上系統誤差往往更大。<span class="term">偏差分析（bias / quantitative bias analysis, QBA）</span>用外部知識設定偏差參數，估計「校正後」效應與更誠實的不確定性。</p>
+<h3>1. 為什麼要做偏差分析</h3>
+<p>傳統研究只報告信賴區間，這隱含一個假設：「唯一的誤差是隨機的」。但現實中，<b>系統誤差（偏差）往往比隨機誤差更大</b>。<span class="term">偏差分析（quantitative bias analysis, QBA）</span>的精神就是：與其在討論裡口頭說「本研究可能有未測干擾/錯分」，不如用外部知識<b>把偏差也量化</b>，估出「校正後的估計」與一個更誠實的不確定範圍。</p>
 
 <h3>2. 錯分偏差分析</h3>
-<p>已知（或假設）暴露/結果的 <span class="term">Se、Sp</span>（或 PPV/NPV），用矩陣反推「真實」細格數，得校正估計。差別錯分需分組給參數。連第 13 章。</p>
+<p>已知（或假設）暴露/結果的敏感度、特異度（或 PPV/NPV），就能用矩陣反推「真實」的細格數，得到校正後的估計。例如非差別暴露錯分，可用 \(a=\dfrac{a^*-(1-Sp)N}{Se+Sp-1}\) 回推真陽性數。差別錯分則對不同組別給不同的敏感度/特異度。這把第 13 章的錯分概念變成可操作的校正。</p>
 
 <h3>3. 未測干擾偏差分析</h3>
-<p>指定未測干擾與暴露、與結果的關聯強度及其盛行率，計算它<b>最多</b>能解釋多少關聯。<span class="term">E-value</span>是其簡化摘要：要多強的未測干擾才能把觀察關聯解釋為虛無。</p>
+<p>指定「未測干擾與暴露、與結果的關聯強度」及其盛行率，就能計算它<b>最多</b>能解釋掉多少關聯。<span class="term">E-value</span> 是這類分析的極簡摘要：\(E=RR+\sqrt{RR(RR-1)}\)，回答「要多強的未測干擾（對暴露、對結果的 RR 都至少這麼強）才能把觀察到的關聯解釋為虛無」。E-value 越大，結論對未測干擾越穩健。</p>
 
 <h3>4. 選擇偏差分析</h3>
-<p>指定各暴露×結果層的<span class="term">選擇/參與機率</span>，以其倒數加權或反推來源族群關聯。適用失訪、無應答、對照選擇不當。</p>
+<p>指定各「暴露×結果」層的選擇/參與機率，就能用它的倒數加權、或反推來源族群的關聯。這適用於失訪、無應答、對照選擇不當等情境（第 14 章）。它把「選擇偏差」從一個只能承認的限制，變成一個可以量化其影響的參數。</p>
 
-<h3>5. 從簡單到機率式</h3>
-<p><span class="term">簡單</span>：單組偏差參數，一個校正值。<span class="term">多維</span>：多組合看範圍。<span class="term">機率式（probabilistic）</span>：給偏差參數<b>機率分布</b>，蒙地卡羅抽樣得校正估計的分布與<b>模擬區間</b>，可再疊加隨機誤差。貝氏版把它整合進後驗（第 23 章）。</p>
+<h3>5. 三個層次：簡單、多維、機率式</h3>
+<p>偏差分析有三個深度。<b>簡單</b>：給偏差參數一組設定值，得一個校正估計。<b>多維</b>：試多組設定，看校正值的範圍。<b>機率式</b>：給偏差參數一個<b>機率分布</b>，用蒙地卡羅抽樣得到校正估計的分布與模擬區間，還能再疊加隨機誤差。貝氏（第 23 章）是它的天然框架。核心成果是一句話：<b>總不確定性 = 系統誤差 ⊕ 隨機誤差</b>，得到的區間通常比傳統 CI 更寬——這才誠實反映了觀察研究真正的不確定性。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵推導：錯分的矩陣校正</h4>
+<div class="derive"><p>非差別暴露錯分，已知 \(Se,Sp\)。觀察暴露人數 \(a^*\) 與真實 \(a\) 的關係：\(a^*=Se\cdot a+(1-Sp)(N-a)\)。反解</p>
+<p>\[ a=\frac{a^*-(1-Sp)N}{Se+Sp-1} \]</p>
+<p>對病例、對照各自校正後重算 OR。差別錯分則病例/對照用不同 \(Se,Sp\)。<b>分母 \(Se+Sp-1\)</b> 為工具的「淨有效性」，趨近 0（隨機分類）時校正極不穩。</p></div>
+<h4>關鍵觀念：三層次偏差分析</h4>
+<p>簡單（單一參數→單一校正值）→多維（多組參數→範圍）→機率式（參數給分布→蒙地卡羅得校正估計分布＋模擬區間，可再疊隨機誤差）。目的：把「可能有偏差」變成<b>可量化的區間</b>。貝氏（第 23 章）是其自然框架。</p>
+<h4>關鍵觀念：總不確定 = 系統 ⊕ 隨機</h4>
+<p>傳統 CI 只含隨機；QBA 額外納入偏差參數的不確定，得到通常<b>更寬</b>的區間——這才誠實反映觀察研究的真實不確定性。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：E-value 與偏差分析關係？</div><div class="a">A：E-value 是「未測干擾」偏差分析的極簡摘要（回答需多強干擾才能推翻），完整 QBA 可指定實際參數分布。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<div class="exq"><span class="yr">114-1 Q3</span><span class="qtitle">未測量混淆 bias analysis（E-value × Lee 閾值 × bounding factor）</span>
+<div class="sol">E-value \(=RR+\sqrt{RR(RR-1)}\)（VanderWeele & Ding 2017）＝「要多強的未測干擾（對暴露、對結果 RR 皆達此值）才能解釋掉關聯」；Lee 2011 閾值法；Ding & VanderWeele 2016 bounding factor \(\dfrac{RR_{EU}\,RR_{UY}}{RR_{EU}+RR_{UY}-1}\)。<span class="pitfall">此題原作答方向錯誤已訂正。</span></div></div>
+<div class="exq"><span class="yr">108 Part II(2)</span><span class="qtitle">特異度=0.8 的偏誤分析</span>
+<div class="sol">用 Se/Sp 反推真實細格（矩陣校正），量化錯分對估計的影響。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>層次</th><th>偏差參數</th><th>產出</th></tr></thead>
 <tbody>
@@ -1945,25 +2444,35 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>選對分析單位</b>；當因果作用真在群體層或需多層時，生態/多層分析才恰當。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 何謂生態研究</h3>
-<p>暴露與結果都以<b>群體匯總值</b>（平均、比例、率）測量並相比。類型：多群橫斷、時間趨勢、混合設計。優點：資料現成、成本低、暴露對比大、可研究群體層變項。</p>
+<h3>1. 什麼是生態研究</h3>
+<p><span class="term">生態研究</span>以<b>群體</b>（地區、時間、群組）為分析單位，暴露與結果都用群體的匯總值（平均、比例、率）來測量並相比。它便宜、資料現成、暴露的對比大，還能研究「本質上就是群體層」的變項（法律、政策、氣候）。類型包括多群橫斷、時間趨勢、以及混合設計。</p>
 
 <h3>2. 生態謬誤與其反面</h3>
-<p><span class="term">生態謬誤</span>：由群體關聯推論個體關聯可能錯誤（群體相關被群內結構、干擾扭曲）。反之<span class="term">原子謬誤（atomistic fallacy）</span>：忽略群體脈絡效應。兩者提醒「<b>因果作用的層次</b>」要對。</p>
+<p>生態研究最有名的風險是<span class="term">生態謬誤（ecological fallacy）</span>：<b>由「群體層的關聯」推論「個體層的關聯」可能是錯的</b>。因為群體相關會被群內結構、群內干擾扭曲，極端時甚至方向相反。它的反面是<span class="term">原子謬誤（atomistic fallacy）</span>：只看個體、忽略了群體的脈絡效應。兩者共同提醒一件事——<b>「因果作用發生在哪個層次」，你的分析單位就要對到哪個層次</b>。</p>
 
-<h3>3. 偏差來源</h3>
-<ul>
-<li><span class="term">群內（within-group）干擾</span>：個體層干擾在匯總後無法調整。</li>
-<li><span class="term">跨層混雜/情境效應</span>：群體特徵獨立影響結果。</li>
-<li><span class="term">模型設定</span>：非線性個體關係聚合後扭曲；規格誤設。</li>
-</ul>
+<h3>3. 偏差的來源</h3>
+<p>生態研究的偏差主要來自三處：<b>群內干擾</b>——個體層的干擾在匯總之後就無法調整了；<b>跨層混雜/情境效應</b>——群體的某些特徵獨立地影響結果；<b>模型設定</b>——個體層的非線性關係，聚合之後會被扭曲。這些使得群體迴歸的斜率 \(\beta^{eco}\) 未必等於個體迴歸的斜率 \(\beta^{indiv}\)。</p>
 
-<h3>4. 多層次分析</h3>
-<p><span class="term">多層/階層模型（multilevel）</span>同時納入個體與群體層變項，區分<b>組內與組間效應</b>，是化解生態謬誤的正途（連第 24 章）。可估真正的<span class="term">脈絡效應（contextual effect）</span>。</p>
+<h3>4. 多層次分析：化解之道</h3>
+<p>化解生態謬誤的正途是<span class="term">多層/階層模型</span>：同時納入個體層與群體層的變項，把效應分解成<b>組內效應</b>（個體層）與<b>組間/脈絡效應</b>（地方層）。當兩者不相等，就暗示存在真正的<span class="term">脈絡效應（contextual effect）</span>。這連到第 24 章的群集資料分析，也是社會流行病學（第 39 章）判斷「是居民組成還是地方環境造成健康差異」的關鍵工具。</p>
 
-<h3>5. 何時生態研究恰當</h3>
-<p>當暴露<b>本質上是群體層</b>（法律、空汙政策、稅制）、或作為<b>假說生成</b>與監測、或個體資料不可得時。解讀務必限制在群體層推論，避免跳到個體因果。</p>
+<h3>5. 生態研究何時恰當</h3>
+<p>生態研究不是「次等」設計，它在特定情況下恰當且必要：當暴露<b>本質上就是群體層</b>（法律、空汙政策、稅制）、當作<b>假說生成</b>與監測、或當個體資料根本拿不到時。使用的鐵律是：<b>詮釋必須限制在群體層，不要跳到個體因果</b>。加更多群體共變量並不能根治生態謬誤——群內干擾與跨層非線性仍在，真正的解方是取得個體資料做多層分析。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵推導：生態謬誤的來源</h4>
+<div class="derive"><p>個體模型 \(E[Y\mid X]=\alpha+\beta X\) 聚合成群體 \(\bar Y_g=\alpha+\beta\bar X_g\) 時，若存在<b>群內干擾</b>或個體關係非線性，群體斜率 \(\beta^{eco}\ne\beta^{indiv}\)。極端時甚至反向（Simpson 型）。因此群體關聯不能直接推個體因果。</p></div>
+<h4>關鍵觀念：組內 vs. 組間效應</h4>
+<div class="derive"><p>多層模型 \(Y_{ig}=\beta_0+\beta_W(X_{ig}-\bar X_g)+\beta_B\bar X_g+u_g+\varepsilon\) 明確分離<b>組內效應 \(\beta_W\)</b>（個體層）與<b>組間/脈絡效應 \(\beta_B\)</b>（地方層）。兩者不等即暗示脈絡效應存在。純生態研究只給 \(\beta_B\)，這是它與個體研究可能矛盾的根源。</p></div>
+<h4>關鍵觀念：生態研究何時恰當</h4>
+<p>暴露本質為群體層（法律、空汙政策、稅制）、假說生成、或個體資料不可得時。詮釋須限制在群體層，避免跳到個體因果。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：加更多群體共變量能消除生態謬誤嗎？</div><div class="a">A：不能根治；群內干擾與跨層非線性仍在。正解是取得個體資料做多層分析。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<div class="exq"><span class="yr">113-2 Q6</span><span class="qtitle">PM2.5 與族群死亡率：生態研究與倫理</span>
+<div class="sol">生態研究以群體為單位，便宜、暴露對比大，但有<b>生態謬誤</b>（群體關聯≠個體）、群內干擾難調；PM2.5 為群體層暴露，適合但推論須限群體層。倫理：資料使用與環境正義。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>分析單位</th><th>優點</th><th>主要風險</th></tr></thead>
 <tbody>
@@ -2001,21 +2510,31 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>當「個體互動與回饋」本身是因果核心時，ABM 補足個體層迴歸的不足。</b></p>
 </div></div>
 <div class="ch-body">
-<h3>1. 什麼是 ABM</h3>
-<p><span class="term">代理人基模型</span>定義一群有狀態與行為規則的個體，讓他們在環境/網絡中互動，模擬時間演化。群體現象（疫情曲線、隔離、健康不平等）從個體規則<span class="term">湧現（emergence）</span>，而非事先設定。</p>
+<h3>1. 什麼是代理人基模型</h3>
+<p><span class="term">代理人基模型（ABM）</span>用電腦模擬「許多個體（agents）依照規則彼此互動」，然後觀察<b>由下而上湧現</b>的群體型態。每個代理人有自己的狀態與行為規則，在環境或網絡中互動，模擬時間的演化。它適合處理傳統迴歸難以應付的<b>複雜系統</b>——有非線性回饋、傳播、空間或社會網絡互動的系統。</p>
 
-<h3>2. 為何流行病學需要它</h3>
-<p>當存在<b>互賴（interference，一人暴露影響他人結果，違反 SUTVA）、非線性回饋、閾值、空間/社會網絡傳播</b>時，個體層迴歸的可加、獨立假設失效。ABM 能顯式建模這些機制，模擬介入的<b>動態與間接效應</b>。</p>
+<h3>2. 為什麼流行病學需要它</h3>
+<p>標準因果推論有一個常被違反的假設——<b>SUTVA（無干擾）</b>：一個人的處理不影響別人的結果。但在傳染病、社會網絡、疫苗的間接效應裡，這個假設根本不成立（一人感染會改變他人風險）。此外還有非線性回饋、閾值效應、空間傳播。ABM 能<b>顯式地建模這些機制</b>，模擬介入的<b>動態與間接（外溢）效應</b>，這是個體層迴歸做不到的。</p>
 
-<h3>3. 建模流程</h3>
-<p>界定問題→設定代理人屬性與規則→環境/網絡→參數<span class="term">校準（calibration）</span>使輸出符合觀測→<span class="term">驗證（validation）</span>（對外部資料/機制檢核）→敏感度分析→情境模擬。</p>
+<h3>3. 建模的流程</h3>
+<p>典型流程：界定問題 → 設定代理人的屬性與規則 → 建立環境/網絡 → 參數<span class="term">校準（calibration）</span>使模擬輸出符合觀測 → <span class="term">驗證（validation）</span>（對外部資料或已知機制檢核）→ 敏感度分析 → 情境模擬。要特別分清校準（用已知資料調參，in-sample）與驗證（用獨立資料檢核，out-of-sample）——只校準不驗證，容易「過度擬合假設」。</p>
 
 <h3>4. 與因果推論的關係</h3>
-<p>ABM 可視為<b>可執行的因果模型</b>：在模型內做「反事實實驗」比較不同政策。它與 g-方法（第 25 章）在處理時變、回饋上互補，但結論<b>取決於模型假設</b>，需與實證資料反覆對照。</p>
+<p>可以把 ABM 看成一個<b>可執行的因果模型</b>：在模型內部做「反事實實驗」，比較不同政策情境。它與 g-方法（第 25 章）在處理時變、回饋上互補。但要清醒地認識到：ABM 的結論<b>取決於模型假設</b>，是「條件於假設的情境推演」，必須與實證資料反覆對照，屬於假說探索與政策模擬，而非直接的因果估計。</p>
 
-<h3>5. 優勢與限制</h3>
-<p>優勢：處理複雜性、外溢、非線性、可做無法實驗的政策模擬。限制：資料需求與計算成本、參數不確定、可能過度擬合假設、透明與可重現性挑戰。應報告假設、做結構/參數敏感度分析。</p>
+<h3>5. 優勢、限制與誠實報告</h3>
+<p>優勢：能處理複雜性、外溢效應、非線性，還能模擬「無法用實驗做」的政策。限制：資料需求與計算成本高、參數有不確定性、可能過度擬合假設、透明與可重現性有挑戰。因此使用 ABM 時，務必<b>報告所有假設、做結構與參數的敏感度分析</b>——湧現的群體現象很吸引人，但它的可信度完全建立在假設的合理性上。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵觀念：ABM 處理 SUTVA 違反</h4>
+<div class="derive"><p>標準因果推論假設 <b>SUTVA</b>（無干擾：一人處理不影響他人結果）。傳染、社會網絡、疫苗間接效應皆違反之。ABM 顯式建模個體間互動，直接把「外溢/interference」納入，模擬介入的直接＋間接效應——這是迴歸難以做到的。</p></div>
+<h4>關鍵觀念：校準 vs. 驗證</h4>
+<p>校準＝調參數使模擬輸出符合<b>已知</b>觀測（in-sample）；驗證＝以<b>獨立</b>資料或機制檢核（out-of-sample）。只校準不驗證易「過度擬合假設」。結論對結構假設敏感，須做結構與參數敏感度分析並透明報告。</p>
+<h4>關鍵觀念：湧現與非線性</h4>
+<p>群體型態（疫情曲線、隔離、不平等）由個體規則<b>湧現</b>，非事先設定；閾值、回饋使系統對初始條件與參數敏感（複雜系統）。ABM 是「可執行的因果模型」，與 g-方法互補。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：ABM 的結論算「證據」嗎？</div><div class="a">A：是「條件於模型假設」的情境推演，須與實證資料反覆對照，屬假說探索與政策模擬，非直接因果估計。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th></th><th>傳統迴歸/統計</th><th>代理人基模型</th></tr></thead>
 <tbody>
@@ -2057,21 +2576,39 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>「傳染」把個體流行病學變成群體動力學</b>——第 31 章 ABM 與此密切相關。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 相依事件</h3>
-<p>傳染病中，一人是否感染取決於他人是否已感染（<span class="term">dependent happenings</span>）。因此「暴露」常是「接觸感染者」，風險隨時間與族群免疫狀態動態改變，個體研究的獨立性假設不成立。</p>
+<h3>1. 傳染病為什麼「不一樣」</h3>
+<p>傳染病流行病學與其他領域最根本的差別是：<b>結果本身會傳染</b>。這使得個體的風險彼此<span class="term">相依（dependent happenings）</span>——一個人是否感染，取決於周遭有沒有人已經感染。這直接違反了一般研究的「個體獨立」假設，也是為什麼傳染病需要一套專屬的動力學工具。</p>
 
 <h3>2. 傳播的核心量</h3>
-<p><span class="term">基本再生數 \(R_0\)</span>：全易感族群中一名感染者平均傳染人數；\(R_0>1\) 可流行。<span class="term">有效再生數 \(R_t\)</span>：實際（部分免疫）下的傳播數。<span class="term">群體免疫閾值</span>＝\(1-1/R_0\)，達此免疫比例可阻斷持續傳播。<span class="term">續發率（secondary attack rate）</span>量家戶/接觸者中的傳播。</p>
+<p>幾個必須掌握的量。<span class="term">基本再生數 \(R_0\)</span>：在全易感的族群中，一名感染者平均會傳染幾人；\(R_0>1\) 才可能流行。<span class="term">有效再生數 \(R_t\)</span>：在實際（已有部分免疫）情況下的傳播數，\(R_t=R_0\times s\)（\(s\) 是易感比例）。<span class="term">群體免疫閾值</span> \(=1-1/R_0\)：達到這個免疫比例，就能阻斷持續傳播——\(R_0\) 越大，門檻越高。<span class="term">續發率</span>則衡量家戶或接觸者中的傳播程度。</p>
 
 <h3>3. 傳播動力模型</h3>
-<p><span class="term">區室模型（SIR/SEIR）</span>把人群分為易感 S、（潛伏 E）、感染 I、康復/免疫 R，用微分方程描述流動。可估 \(R_0\)、預測流行曲線、評估介入。網絡模型處理異質接觸。ABM（第 31 章）處理更複雜互動。</p>
+<p><span class="term">區室模型（SIR/SEIR）</span>把人群分成易感 S、（潛伏 E）、感染 I、康復/免疫 R，用微分方程描述人在各室之間的流動。它能估 \(R_0\)、預測流行曲線、評估介入效果。網絡模型處理異質的接觸結構，而更複雜的互動則用代理人基模型（第 31 章）。</p>
 
-<h3>4. 疫苗效力與其效應分解</h3>
-<p>疫苗有<span class="term">直接效應</span>（保護受種者）與<span class="term">間接效應</span>（減少傳播保護他人）、<span class="term">整體/總效應</span>。因 interference，須用特殊設計（群集隨機、階梯式）估各種效應。疫苗效力 \(VE=1-RR\)。</p>
+<h3>4. 疫苗效果的分解</h3>
+<p>疫苗有多層效果：<b>直接效應</b>（保護接種者本人）、<b>間接效應</b>（減少傳播、保護未接種者）、以及整體/總效應。因為有 interference（間接效應），要區分這些效應必須用特殊設計（群集隨機、階梯式）。疫苗效力 \(VE=1-RR\)，但要注意「個體 VE」與「族群層面的衝擊」不是同一件事。</p>
 
 <h3>5. 田野與監測應用</h3>
-<p>疫情調查（流行曲線、潛伏期、共同來源 vs. 傳播鏈）、接觸者追蹤、分子分型（基因序列追蹤傳播，連第 36 章）、即時 \(R_t\) 估計。監測（第 9 章）是傳染病防治的基礎。</p>
+<p>實務上，傳染病流行病學做疫情調查（畫流行曲線、估潛伏期、分辨是「共同來源」還是「人傳人」的傳播鏈）、接觸者追蹤、分子分型（用基因序列追蹤傳播，連第 36 章）、以及即時估計 \(R_t\)。監測（第 9 章）是這一切防治的基礎。核心心法：<b>「傳染」把個體流行病學變成了群體動力學</b>。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵推導：群體免疫閾值</h4>
+<div class="derive"><p>有效再生數 \(R_t=R_0\cdot s\)（\(s\)＝易感比例）。流行受控需 \(R_t<1\Rightarrow s<1/R_0\)。故須免疫比例</p>
+<p>\[ H_c=1-s=1-\frac{1}{R_0} \]</p>
+<p>\(R_0=4\Rightarrow H_c=75\%\)。這直接決定疫苗覆蓋目標；\(R_0\) 越大門檻越高。</p></div>
+<h4>關鍵觀念：相依事件破壞獨立假設</h4>
+<p>一人感染改變他人風險（dependent happenings），使個體「暴露」隨族群免疫動態變化，標準獨立觀察無法直接估。需傳播模型（SIR/SEIR）或考慮 interference 的設計。</p>
+<h4>關鍵觀念：疫苗效應的分解</h4>
+<div class="derive"><p>直接效應（保護受種者）、間接效應（降傳播護他人）、總效應、整體效應。因 interference，群集隨機或階梯設計才能分辨。\(VE=1-RR\)；但因間接效應，個體 VE 與族群衝擊不同。</p></div>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：\(R_0\) 與 \(R_t\) 差在哪？</div><div class="a">A：\(R_0\) 為全易感下的基準；\(R_t\) 為當前（部分免疫/介入）下的實際傳播數，隨時間變。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<div class="exq"><span class="yr">108 Part II / 114-2</span><span class="qtitle">疫苗保護力與交互作用</span>
+<div class="sol">\(VE=1-RR\)；疫苗有直接/間接/總效應（因 interference，需群集設計分辨）。</div></div>
+<div class="exq"><span class="yr">114-1 Q9</span><span class="qtitle">Test-negative design 估疫苗效力</span>
+<div class="sol">就醫檢驗者中比較陽性/陰性的疫苗史，部分校正就醫傾向；近年主力。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>量</th><th>意義</th></tr></thead>
 <tbody>
@@ -2113,21 +2650,35 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>「以活產為條件」常引入碰撞點偏差</b>——因果圖思維在此特別關鍵。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 結局與測量</h3>
-<p>生育力（time-to-pregnancy）、自然流產、死產、早產、低出生體重、先天缺陷、周產期死亡。分母與 time zero 的定義（受孕 vs. 末次月經 vs. 就診）深刻影響估計。</p>
+<h3>1. 生殖流行病學的特殊難題</h3>
+<p>生殖流行病學研究生育力、懷孕與周產期結局。它的難題來自三個特點：<b>時間零點難定</b>（受孕、末次月經、就診，選哪個當 time zero 深刻影響估計）、<b>存活選擇</b>（要活到能被觀察才進得了研究）、以及<b>雙生命體</b>（母親的暴露、胎兒/嬰兒的結果，分析單位要分清）。</p>
 
-<h3>2. 生育力研究</h3>
-<p>以<span class="term">懷孕所需時間（TTP）</span>為結果的世代（含前瞻的 preconception cohort）；<b>存活/長度偏差</b>：只納入已懷孕者會漏掉不孕者（left truncation）。用離散存活/生育率比分析。</p>
+<h3>2. 生育力研究與截斷偏差</h3>
+<p>以<span class="term">懷孕所需時間（TTP）</span>為結果的研究，最大的陷阱是<b>只納入「已經懷孕」的人</b>——這會漏掉不孕者（左截斷/長度偏差）。較妥當的做法是 preconception cohort（從備孕開始追蹤）＋離散存活/生育率比分析。</p>
 
-<h3>3. 出生體重悖論與碰撞偏差</h3>
-<p><span class="warn">經典陷阱</span>：在<b>低出生體重（LBW）分層內</b>，母親吸菸似「保護」嬰兒死亡。原因是<b>出生體重是暴露與其他致病因的共同後果（碰撞點）</b>，分層即製造假關聯（第 3、14 章）。教訓：勿把中介/碰撞的出生體重當調整變項。</p>
+<h3>3. 出生體重悖論：碰撞偏差的經典案例</h3>
+<p>這是全書最有名的陷阱之一，務必理解。觀察上，在<b>低出生體重（LBW）的嬰兒裡</b>，母親吸菸似乎「保護」嬰兒免於死亡。這違反直覺，但原因是：<b>出生體重是「吸菸」與「其他致病因 \(U\)」的共同後果，也就是一個碰撞點</b>。當你在 LBW 這一層裡分析時，那些「低體重但不是吸菸造成」的嬰兒，更可能是被更嚴重的 \(U\) 拉低體重的，於是吸菸在這一層裡就顯得「相對無害」。這是純粹的碰撞偏差（第 3、14 章），不是真效應。教訓：<b>不要把出生體重（中介兼碰撞）當調整變項或分層依據</b>，直接估吸菸對嬰兒死亡的總效應。</p>
 
 <h3>4. 妊娠時間與競爭風險</h3>
-<p>早產與周產期事件涉及<span class="term">競爭風險</span>與<span class="term">胎兒為風險（fetuses-at-risk）</span>觀點：分母應為「當週仍在子宮內的胎兒」而非活產。錯選分母造成偏差。連第 22 章存活分析。</p>
+<p>早產與周產期事件涉及<span class="term">競爭風險</span>與<span class="term">胎兒為風險（fetuses-at-risk）</span>的觀點：正確的分母應該是「當週仍在子宮內的胎兒」，而不是「活產數」。用活產當分母會引入存活選擇偏差。這與第 22 章的存活分析同源。</p>
 
 <h3>5. 分析單位與暴露窗</h3>
-<p>母親—胎兒為雙單位；暴露有<b>敏感窗（如器官形成期）</b>。需注意重複妊娠的相關（同母群集，第 24 章）與跨代效應。</p>
+<p>母親—胎兒是雙單位，要分清你在分析誰。暴露常有<b>敏感窗</b>（例如器官形成期），窗外的暴露可能無關。還要注意重複妊娠的相關性（同一母親的多次懷孕，第 24 章群集資料）以及跨代效應。把「time zero、碰撞點、分母、暴露窗」四件事想清楚，生殖流病的題目就不易出錯。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵推導：出生體重悖論＝碰撞分層</h4>
+<div class="derive"><p>DAG：吸菸 \(A\to\) 出生體重 \(BW\)；其他致命因 \(U\to BW\)、\(U\to\) 嬰兒死亡 \(Y\)；\(A\to Y\)。\(BW\) 是 \(A\) 與 \(U\) 的共同後果（碰撞）。<b>在 LBW 分層內</b>，LBW 的非吸菸嬰兒更可能有 \(U\)（更嚴重病因）→ 吸菸在 LBW 內顯得「保護」。純屬碰撞偏差，非真效應。教訓：勿以出生體重（中介/碰撞）分層或調整。</p></div>
+<h4>關鍵觀念：胎兒為風險</h4>
+<p>早產/周產期事件的正確分母是「當週仍在子宮的胎兒」而非活產；用活產當分母會引入存活選擇偏差。與競爭風險（第 22 章）同源。</p>
+<h4>關鍵觀念：生育力的左截斷</h4>
+<p>以已懷孕者研究 TTP 會漏掉不孕者（left truncation / 長度偏差）；preconception cohort＋離散存活模型較妥。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：如何避免出生體重悖論？</div><div class="a">A：把死亡當結果、直接估吸菸總效應，<b>不</b>調整/分層出生體重（它在因果路徑上且是碰撞）。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<div class="exq"><span class="yr">114-1 Q4</span><span class="qtitle">出生體重悖論：collider bias</span>
+<div class="sol">出生體重是吸菸與其他致病因 \(U\) 的<b>共同後果（碰撞點）</b>；在 LBW 分層內吸菸顯得「保護」，純屬碰撞偏差。<span class="pitfall">處置</span>：直接估吸菸對嬰兒死亡的總效應，<b>不</b>分層/調整出生體重（見第 3、14 章）。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>議題</th><th>陷阱</th><th>對策</th></tr></thead>
 <tbody>
@@ -2167,21 +2718,31 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>把「診斷」視為需驗證的測量</b>，並警惕反向因果與選擇。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 疾病定義與測量</h3>
-<p>精神疾病多為<b>症候群</b>，靠 DSM/ICD 準則與結構化訪談（如 CIDI）操作化。缺乏生物金標準使<span class="term">錯分</span>與<b>診斷漂移</b>成核心議題；量表的信度/效度、文化適切性直接影響盛行率與關聯估計。</p>
+<h3>1. 診斷本身就是一個測量問題</h3>
+<p>精神流行病學研究精神疾病的分布與病因，它最大的方法挑戰在於<b>診斷測量</b>。精神疾病多半是<b>症候群</b>，沒有生物金標準，靠 DSM/ICD 準則與結構化訪談（如 CIDI）來操作化。因此<span class="term">錯分</span>與<b>診斷漂移</b>是核心議題——量表的信度、效度、文化適切性，都直接影響你估出來的盛行率與關聯。把「診斷」當成一個需要驗證的測量，是這一章的起點。</p>
 
 <h3>2. 反向因果與時序</h3>
-<p>許多暴露（失業、物質使用、社會網絡）與精神結果<b>互為因果</b>。橫斷面難定時序；需前瞻世代、發病前暴露、或工具/準實驗（第 28 章）釐清方向。</p>
+<p>許多暴露（失業、物質使用、社會網絡）與精神結果<b>互為因果</b>。橫斷面研究難以確定時序——到底是失業導致憂鬱，還是憂鬱導致失業？釐清方向需要前瞻世代（在發病前測量暴露）、或工具變數/準實驗（第 28 章）。這個「反向因果」問題在精神流病特別嚴重，因為前驅症狀期往往很長，暴露常是早期未診斷疾病的<b>後果</b>而非原因。</p>
 
 <h3>3. 社會因致 vs. 社會選擇</h3>
-<p><span class="term">社會因致（social causation）</span>：不利社經導致疾病；<span class="term">社會選擇/漂移（social selection/drift）</span>：疾病導致社經下滑。兩者對政策意涵相反，需縱貫設計與家族研究區辨。</p>
+<p>一個經典爭論：<span class="term">社會因致（social causation）</span>主張「不利的社經地位導致疾病」；<span class="term">社會選擇/漂移（social selection/drift）</span>主張「疾病導致社經地位下滑」。兩者的政策意涵完全相反，要靠縱貫設計與家族研究來區辨。</p>
 
 <h3>4. 基因與環境</h3>
-<p>雙生子、領養、家族聚集研究估遺傳率；基因×環境交互（如壓力×基因，第 26、37 章）。留意<b>基因—環境相關</b>與多效性。</p>
+<p>雙生子、領養、家族聚集研究用來估遺傳率，並研究基因×環境交互（如壓力×基因型，第 26、37 章）。要注意<b>基因—環境相關（rGE）</b>：基因本身會影響一個人所處的環境暴露，這會混淆解讀。</p>
 
 <h3>5. 共病與病程</h3>
-<p>高共病率使「單一疾病」邊界模糊；長病程與復發使盛行率、發生率解讀複雜（第 4 章）。連續性/維度測量（症狀量表）漸受重視。</p>
+<p>精神疾病的高共病率，使「單一疾病」的邊界變得模糊；長病程與復發也讓盛行率、發生率的解讀變複雜（第 4 章）。近年趨勢是重視<b>維度/連續性測量</b>（用症狀量表而非二分診斷），以更細緻地捕捉精神健康的光譜。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵觀念：診斷即測量</h4>
+<p>精神疾病無生物金標準，診斷是<b>需驗證的測量</b>。量表信度（kappa/ICC）、效度、文化適切性直接影響盛行率與關聯；診斷漂移造成時間趨勢假象。非差別診斷錯分通常衰減關聯（第 13 章條件下）。</p>
+<h4>關鍵觀念：因致 vs. 選擇的識別</h4>
+<div class="derive"><p>社會因致（低 SES→病）與社會選擇/漂移（病→低 SES）方向相反、政策意涵相反。橫斷面無法分辨；需前瞻世代（發病前測 SES）、家族/領養研究，或自然實驗（義務教育年限當工具，第 28 章）釐清方向。</p></div>
+<h4>關鍵觀念：基因×環境</h4>
+<p>基因常為效應修飾（壓力×基因型）。須注意<b>基因—環境相關（rGE）</b>：基因影響環境暴露本身，混淆解讀。大樣本、預設假說、注意尺度（第 26 章）。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：反向因果在精神流病為何特別嚴重？</div><div class="a">A：前驅症狀期長，暴露（失業、物質使用）常是早期疾病的<b>後果</b>而非原因；需發病前暴露與時序設計。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>議題</th><th>問題</th><th>設計對策</th></tr></thead>
 <tbody>
@@ -2222,26 +2783,37 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>臨床決策看「個體層預測與絕對風險」</b>，與族群病因研究的重點不同。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 診斷檢定的評估</h3>
-<p>用 <span class="term">Se、Sp</span>、<span class="term">陽性/陰性預測值（隨盛行率變）</span>、<span class="term">概似比（LR＋、LR−）</span>整合先驗機率→後驗機率（貝氏更新）。<span class="term">ROC 曲線</span>與 AUC 評估切點與整體區辨。連第 13 章。</p>
+<h3>1. 臨床流行病學：方法用於病床邊</h3>
+<p>臨床流行病學把流行病學方法用到<b>臨床問題</b>上：診斷、預後、療效、篩檢。它與族群病因研究最大的視角差異是——<b>臨床決策關心的是「個體層次的預測與絕對風險」</b>（這個病人會怎樣、該不該治），而非「族群的病因強度」。</p>
 
-<h3>2. 預後研究與預測模型</h3>
-<p><span class="term">預後因子</span>不必是因果，只需能<b>預測</b>。建預測模型重<span class="term">校準（calibration）</span>與<span class="term">區辨（discrimination, C-statistic）</span>，並需<b>內外部驗證</b>與避免過度配適（第 21 章）。與病因模型的變項選擇邏輯不同（預測可容許非因果預測項）。</p>
+<h3>2. 診斷檢定的評估</h3>
+<p>用敏感度、特異度、<b>陽性/陰性預測值（會隨盛行率變）</b>、以及<span class="term">概似比（LR＋、LR−）</span>來整合「先驗機率 → 後驗機率」（這其實是貝氏更新：先驗勝算 × LR = 後驗勝算）。ROC 曲線與 AUC 評估切點選擇與整體區辨能力。這一段與第 13 章的測量語言完全相通。</p>
 
-<h3>3. 療效與比較效果</h3>
-<p>RCT 為療效金標準（意向治療 ITT vs. 依方案）；真實世界比較效果用觀察資料＋因果方法（新使用者、傾向分數、目標試驗，第 11、25 章）。注意適應症干擾。</p>
+<h3>3. 預後研究與預測模型</h3>
+<p><span class="term">預後因子</span>不必是因果的，它只需要能<b>預測</b>。建立預測模型時重視兩個軸：<span class="term">校準（calibration）</span>（預測機率與實際比例是否吻合）與<span class="term">區辨（discrimination，C-statistic）</span>（能不能區分高低風險者），並需要內外部驗證、避免過度配適（第 21 章）。這與病因模型的變項選擇邏輯不同——預測模型可以容納非因果的預測項。</p>
 
-<h3>4. 篩檢的特有偏差</h3>
-<ul>
-<li><span class="term">領先時間偏差（lead-time）</span>：提早診斷使「存活」看似延長，實際死亡時間未變。</li>
-<li><span class="term">長度偏差（length）</span>：篩檢較易抓到進展慢、預後好的病例。</li>
-<li><span class="term">過度診斷（overdiagnosis）</span>：偵測到不會致病的病灶，膨脹存活與發生率。</li>
-</ul>
-<p>因此篩檢成效應以<b>族群死亡率下降</b>（RCT）評估，而非存活率。</p>
+<h3>4. 療效與比較效果</h3>
+<p>RCT 是療效的金標準（要分清意向治療 ITT vs. 依方案分析）。真實世界的比較效果研究則用觀察資料＋因果方法（新使用者設計、傾向分數、目標試驗，第 11、25 章），並要特別小心適應症干擾。</p>
 
-<h3>5. 證據應用</h3>
-<p>實證醫學：把研究證據（含 GRADE 品質評估）套到個別病人，權衡效益與風險、可運送性（第 14 章）。</p>
+<h3>5. 篩檢的三大特有偏差</h3>
+<p>篩檢有三個必考的偏差。<span class="term">領先時間偏差</span>：提早診斷讓「從診斷到死亡」的時間看起來變長，但死亡的時間點其實沒變。<span class="term">長度偏差</span>：篩檢比較容易抓到「進展慢、預後好」的病例。<span class="term">過度診斷</span>：偵測到一些「本來不會致病」的病灶，同時膨脹了發生率與存活率。因此，<b>篩檢的成效必須用「族群死亡率下降」（RCT）來評估，而不能用存活率</b>——後者會被這三個偏差誤導。最後，實證醫學就是把這些研究證據（含 GRADE 品質評估）套用到個別病人身上，權衡效益與風險、並考慮可運送性（第 14 章）。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵推導：概似比與貝氏更新</h4>
+<div class="derive"><p>\( LR^+=\dfrac{Se}{1-Sp},\;LR^-=\dfrac{1-Se}{Sp} \)。診斷更新用勝算形式：</p>
+<p>\[ \text{後驗勝算}=\text{先驗勝算}\times LR \]</p>
+<p>先驗勝算＝\(\pi/(1-\pi)\)（盛行率），乘 LR 得後驗勝算，再轉回機率＝後驗（即 PPV/1−NPV）。LR 是「檢定結果改變多少信念」的尺度，且<b>不隨盛行率變</b>（工具屬性），比 PPV 更可攜。</p></div>
+<h4>關鍵觀念：三種篩檢偏差</h4>
+<div class="derive"><p><b>領先時間</b>：提早診斷讓「診斷到死亡」看似變長，死亡時間未變→存活率虛升。<b>長度偏差</b>：篩檢週期較易抓進展慢、預後好者。<b>過度診斷</b>：偵測不會致病的病灶，同時膨脹發生率與存活率。故篩檢成效必須用<b>族群死亡率</b>（RCT）評估，不能用存活率。</p></div>
+<h4>關鍵觀念：預後模型的評估雙軸</h4>
+<p>校準（預測機率 vs. 實際比例，calibration plot）＋區辨（C-statistic/AUC）。因果模型重無偏調整集；預測模型可容非因果預測項，重外部驗證與收縮（第 21 章）。兩者目的不同、變項選擇邏輯不同。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：某篩檢使 5 年存活率大升，代表有效嗎？</div><div class="a">A：未必。可能是領先時間＋過度診斷造成的假象；要看族群死亡率是否下降。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<div class="exq"><span class="yr">109-1 名詞</span><span class="qtitle">Confounding by indication（臨床流病）</span>
+<div class="sol">醫師依病情選治療，適應症又是預後因子→療效被混淆（其講義對應 Modern Epi 臨床流病章）。解方：主動比較者、IV/MR、pragmatic RCT。連第 12、28、43 章。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>臨床問題</th><th>核心測量</th><th>特有偏差</th></tr></thead>
 <tbody>
@@ -2283,21 +2855,31 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>生物標記提升客觀性，但引入實驗室測量誤差與大量多重比較問題。</b></p>
 </div></div>
 <div class="ch-body">
-<h3>1. 生物標記的類型與定位</h3>
-<p><span class="term">暴露標記</span>（如尿中代謝物＝內在劑量，減少回憶偏差）、<span class="term">效應標記</span>（DNA 加合物、甲基化＝暴露到疾病路徑上的中間量→常為<b>中介</b>）、<span class="term">易感性標記</span>（基因型＝效應修飾因子）。在 DAG 上釐清是暴露、中介或修飾，決定分析角色。</p>
+<h3>1. 把生物標記帶進流行病學</h3>
+<p>分子流行病學的核心，是把<b>生物標記（biomarkers）</b>納入研究。生物標記分三類，各有不同的分析角色：<b>暴露標記</b>（如尿中代謝物＝內在劑量，可減少回憶偏差）、<b>效應標記</b>（如 DNA 加合物、甲基化＝暴露到疾病路徑上的中間量，常是<b>中介</b>）、<b>易感性標記</b>（如基因型＝效應修飾因子）。</p>
 
-<h3>2. 檢體與測量</h3>
-<p>採集、處理、儲存、鏈鎖影響標記穩定度（連第 10 章）。實驗室測量誤差、<span class="term">批次效應（batch effect）</span>會造成差別或非差別錯分；需<b>盲化、隨機化上機順序、納入品管樣本、校正批次</b>。</p>
+<h3>2. DAG 定位決定分析方式</h3>
+<p>本章最重要的觀念：<b>同一個標記，在因果鏈上的位置不同，分析方式就完全不同</b>。當作暴露的代理→用來改善暴露測量；當作中介→做中介分析（第 27 章），<b>不可</b>把它當干擾去調整；當作易感性→效應修飾或孟德爾隨機化的工具。所以拿到一個生物標記，先問「它在因果圖的哪裡」。</p>
 
-<h3>3. 半衰期與暴露窗</h3>
-<p>標記反映的<b>時間窗</b>取決於半衰期：短半衰期只反映近期暴露，可能與致病相關窗不符 → 錯分。慢性病研究須考量標記與病程的時序。</p>
+<h3>3. 檢體與測量誤差</h3>
+<p>檢體的採集、處理、儲存、鏈鎖都會影響標記的穩定度（連第 10 章田野方法）。實驗室的測量誤差、特別是<span class="term">批次效應（batch effect）</span>，是分子流病的大敵——如果病例與對照的檢體在不同批次上機，批次誤差就與結果相關，變成<b>差別</b>錯分（方向不定，危險）。對策：隨機化上機順序、病例對照同批、盲化、納入品管樣本、統計校正（如 ComBat）。</p>
 
-<h3>4. 高維資料與多重檢定</h3>
-<p>組學（基因、表觀、代謝、蛋白）產生上萬檢定，需<span class="term">多重比較校正（FDR）</span>、階層/貝氏收縮（第 23 章）、獨立驗證，防偽陽性與過度配適。</p>
+<h3>4. 半衰期與暴露窗</h3>
+<p>一個容易忽略的問題：標記反映的<b>時間窗</b>取決於它的半衰期。短半衰期的標記只反映近期暴露，如果致病相關的暴露窗其實在幾年前，就會造成時窗錯配的錯分。慢性病研究必須考量標記與病程的時序。</p>
 
-<h3>5. 因果推論應用</h3>
-<p>生物標記可作<b>中介</b>（機轉，第 27 章）、作<b>孟德爾隨機化的工具</b>（基因→暴露，第 28、37 章），或改善暴露測量。務必分清「標記＝暴露本身」還是「標記＝下游反應」。</p>
+<h3>5. 高維資料與因果應用</h3>
+<p>組學（基因、表觀、代謝、蛋白）一次產生上萬個檢定，需要<b>多重比較校正（FDR）</b>、階層/貝氏收縮（第 23 章）、以及獨立世代驗證，來防止偽陽性與過度配適。在因果推論上，生物標記可以當<b>中介</b>（研究機轉）、當<b>孟德爾隨機化的工具</b>（基因→暴露，第 28、37 章），或改善暴露測量——但務必分清它是「暴露本身」還是「下游的反應」。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵觀念：生物標記的 DAG 定位決定分析</h4>
+<div class="derive"><p>同一標記角色不同、分析全異：作<b>暴露代理</b>→改善暴露測量（減回憶偏差）；作<b>效應標記/中介</b>→中介分析（第 27 章），<b>不可</b>當干擾調整；作<b>易感性標記</b>→效應修飾或 MR 工具（第 37 章）。先問「它在因果鏈的哪裡」。</p></div>
+<h4>關鍵觀念：批次效應＝潛在差別錯分</h4>
+<p>若病例與對照的檢體在不同批次/時間上機，批次誤差與結果相關→<b>差別</b>錯分（方向不定，危險）。對策：隨機化上機順序、病例對照同批、盲化、納品管樣本、統計校正（如 ComBat）。</p>
+<h4>關鍵觀念：半衰期決定暴露時窗</h4>
+<p>短半衰期標記只反映近期暴露，若致病相關窗在數年前→時窗錯配的錯分。慢性病須考量標記與病程時序，或用長期整合型標記。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：組學上萬檢定如何控制偽陽性？</div><div class="a">A：FDR（BH）、階層/貝氏收縮（第 23 章）、獨立世代驗證；並防過度配適。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>標記類型</th><th>DAG 角色</th><th>用途</th></tr></thead>
 <tbody>
@@ -2337,25 +2919,40 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>基因隨機分配的特性使 MR 能繞過未測干擾，但多效性是致命假設。</b></p>
 </div></div>
 <div class="ch-body">
-<h3>1. 從聚集到定量</h3>
-<p><span class="term">家族聚集</span>顯示遺傳可能；<span class="term">雙生子/領養研究</span>分離基因與共享環境，估<span class="term">遺傳率 \(h^2\)</span>。注意遺傳率是族群、環境相依的量，非固定。</p>
+<h3>1. 從家族聚集到全基因組</h3>
+<p>遺傳流行病學研究基因對疾病的作用，以及基因×環境。它有一個由淺入深的階梯：<b>家族聚集</b>（顯示可能有遺傳）→<b>遺傳率</b>（用雙生子/領養研究分離基因與共享環境）→<b>連鎖</b>→<b>關聯</b>（候選基因、GWAS）→<b>功能</b>。要注意<span class="term">遺傳率 \(h^2\)</span> 是一個<b>族群、環境相依</b>的量，不是「基因決定程度」的固定值——高遺傳率並不排除環境介入有效。</p>
 
 <h3>2. 連鎖 vs. 關聯</h3>
-<p><span class="term">連鎖分析（linkage）</span>在家族中找與疾病共傳的染色體區段（適合罕見高外顯）；<span class="term">關聯分析（association/GWAS）</span>在族群中比較等位基因頻率（適合常見低效應變異）。GWAS 檢定上百萬 SNP，需極嚴閾值（\(5\times10^{-8}\)）。</p>
+<p><span class="term">連鎖分析</span>在家族中尋找「與疾病共同遺傳」的染色體區段，適合罕見、高外顯的變異。<span class="term">關聯分析（GWAS）</span>在族群中比較等位基因頻率，適合常見、低效應的變異。GWAS 一次檢定上百萬個 SNP，所以需要極嚴格的顯著性閾值（\(5\times10^{-8}\)），這其實就是對全基因組獨立檢定數的 Bonferroni 校正。</p>
 
-<h3>3. 特有偏差</h3>
-<ul>
-<li><span class="term">族群分層（population stratification）</span>：祖源同時影響等位基因頻率與疾病→干擾。校正：主成分、混合模型、家族設計（TDT）。</li>
-<li><span class="term">連鎖不平衡（LD）</span>：關聯訊號未必是致病變異本身。</li>
-<li><b>Winner's curse、多重檢定、缺失遺傳率</b>。</li>
-</ul>
+<h3>3. 特有的偏差</h3>
+<p>遺傳研究有幾個專屬偏差。<span class="term">族群分層（population stratification）</span>：祖源同時影響等位基因頻率與疾病基線率，形成干擾——校正方法是主成分（PCA）、混合模型、或家族內設計（TDT）。<span class="term">連鎖不平衡（LD）</span>：偵測到的關聯訊號未必就是致病變異本身。還有 Winner's curse、多重檢定、缺失遺傳率等問題。</p>
 
 <h3>4. 基因×環境交互</h3>
-<p>基因可為<b>效應修飾</b>（第 26 章）：同一環境暴露在不同基因型效應不同。需大樣本、注意尺度與偽陽性。<span class="term">基因—環境相關</span>會混淆解讀。</p>
+<p>基因常扮演<b>效應修飾因子</b>（第 26 章）：同一個環境暴露，在不同基因型的人身上效應不同。研究基因×環境交互需要大樣本、注意尺度、防範偽陽性，還要小心<b>基因—環境相關</b>會混淆解讀。</p>
 
 <h3>5. 孟德爾隨機化</h3>
-<p>以與暴露相關的基因變異當<span class="term">工具</span>估暴露→結果因果。優勢：基因先於疾病、通常不受後天干擾與反向因果。威脅：<span class="term">水平多效性</span>（違反排除限制）、弱工具、LD。用 MR-Egger、加權中位數、多變量 MR 做敏感度分析。連第 28 章。</p>
+<p>遺傳流病最有力的因果工具是<span class="term">孟德爾隨機化（MR）</span>：用與暴露相關的基因變異當<b>工具變數</b>，估暴露對結果的因果效應。優勢在於基因先於疾病、通常不受後天干擾與反向因果影響，近似一個自然的隨機分派。它的主要威脅是<b>水平多效性</b>（基因經非暴露路徑影響結果，違反排除限制）、弱工具與 LD。對策是 MR-Egger、加權中位數、多變量 MR 等敏感度分析（連第 28 章）。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵推導：雙生子遺傳率</h4>
+<div class="derive"><p>MZ 共享 100% 基因、DZ 共享 50%。若相關差異全來自加性遺傳：\(r_{MZ}=h^2+c^2,\;r_{DZ}=\tfrac12h^2+c^2\)（\(c^2\)＝共享環境）。相減得</p>
+<p>\[ h^2\approx 2(r_{MZ}-r_{DZ}) \]</p>
+<p>\(h^2\) 是<b>族群、環境相依</b>的量，非固定「基因決定程度」；高 \(h^2\) 不排除環境介入有效。</p></div>
+<h4>關鍵觀念：族群分層＝祖源干擾</h4>
+<div class="derive"><p>祖源同時影響等位基因頻率與疾病基線率（叉結構），造成 GWAS 假關聯。校正：主成分（PCA）納入祖源軸、混合線性模型、或家族內設計（TDT，用親代未傳等位基因當內部對照，免疫於分層）。</p></div>
+<h4>關鍵觀念：MR＝基因當工具</h4>
+<p>基因於受孕隨機分配、先於疾病、通常不受後天干擾與反向因果→近似自然 RCT。威脅：水平多效性（違反排除限制）、LD、弱工具。用 MR-Egger／加權中位數／多變量 MR 做敏感度（第 28 章）。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：GWAS 為何用 \(5\times10^{-8}\)？</div><div class="a">A：約為對全基因組獨立檢定數（~10⁶）的 Bonferroni 校正，控制全域偽陽性。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<p>遺傳流行病學（GWAS／PRS／MR）是 111-2 的整個第一部分大題。</p>
+<div class="exq"><span class="yr">111-2 第一部分</span><span class="qtitle">GWAS：設計、罕見疾病、多重檢定、PRS、RNA</span>
+<div class="sol">設計：nested case-control 或獨立 case-control，頻率匹配；樣本數依 MAF、OR、power(0.8)、顯著水準 \(5\times10^{-8}\) 估算。QC：call rate、MAF、<b>Hardy–Weinberg 平衡</b>。分析：每 SNP logistic（加性模型）＋<b>主成分 PC 控族群分層</b>；Manhattan／QQ plot。罕見病：多中心、登錄、聚焦 low-frequency/rare 變異。多重檢定：全基因組閾值 \(5\times10^{-8}\)。<b>PRS</b>＝多變異加權風險分數。</div></div>
+<div class="exq"><span class="yr">109-2 I-1</span><span class="qtitle">Mendelian randomization</span>
+<div class="sol">基因當工具估暴露→結果因果；威脅為水平多效性，用 MR-Egger／加權中位數敏感度分析（第 28 章）。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th></th><th>連鎖分析</th><th>關聯/GWAS</th></tr></thead>
 <tbody>
@@ -2401,21 +2998,31 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>傷害可預測、可預防；分析重在找可介入的環節與評估政策。</b></p>
 </div></div>
 <div class="ch-body">
-<h3>1. 觀念轉變</h3>
-<p>傷害非隨機「意外」，而是<b>可預測、可預防</b>的能量傳遞事件（機械、熱、化學、電）。分意圖：<span class="term">非蓄意（unintentional）</span>與<span class="term">蓄意（自傷、他傷/暴力）</span>。</p>
+<h3>1. 傷害不是「意外」</h3>
+<p>傷害流行病學最重要的觀念轉變是：<b>傷害不是隨機的「意外」，而是可預測、可預防的事件</b>。它本質是能量（機械、熱、化學、電）的傳遞。依意圖可分為<span class="term">非蓄意</span>（如車禍）與<span class="term">蓄意</span>（自傷、他傷/暴力）。把「意外」這個詞換成「可介入的事件」，整個防治思維就打開了。</p>
 
-<h3>2. Haddon 矩陣</h3>
-<p><span class="term">Haddon 矩陣</span>以<b>時間（事件前/中/後）× 因素（宿主/媒介或載具/物理環境/社會環境）</b>系統列出介入機會（如安全帶＝事件中、宿主/載具）。是傷害防治的核心規劃工具。</p>
+<h3>2. Haddon 矩陣：系統化的介入地圖</h3>
+<p><span class="term">Haddon 矩陣</span>是傷害防治的核心工具。它用<b>時間（事件前/中/後）× 因素（宿主/媒介或載具/物理環境/社會環境）</b>排出一個表格，每一格都是一個介入機會。例如車禍：「事件前×宿主」是酒駕教育、「事件中×載具」是安全帶與氣囊、「事件後」是緊急醫療與復健。這個矩陣把「傷害無可避免」重構為「有很多點可以介入」。</p>
 
 <h3>3. 資料來源與分類</h3>
-<p>生命統計、急診/住院、警政、驗屍、車禍資料；用 <span class="term">ICD/E-codes</span> 分類機制與意圖。挑戰：意圖誤分（尤其自殺 vs. 意外）、通報不全、分母（暴露人時，如行駛里程）界定。</p>
+<p>資料來自生命統計、急診/住院、警政、驗屍、車禍紀錄，用 ICD/E-codes 分類機制與意圖。挑戰包括：意圖誤分（尤其自殺 vs. 意外難分）、通報不全、以及分母的界定（傷害率的分母應是暴露量，如行駛里程或工時，而非人口）。</p>
 
 <h3>4. 設計與分析</h3>
-<p>短暫暴露對急性事件（如講手機→車禍）適合<span class="term">病例交叉設計</span>（自我配對去除穩定干擾）。政策/法律評估用<span class="term">中斷時間序列、雙重差分</span>（第 28 章）。傷害嚴重度分級（如 AIS/ISS）影響結果定義。</p>
+<p>短暫暴露對急性事件（如講手機導致車禍）最適合用<span class="term">病例交叉設計</span>——用病人自己在危險期 vs. 對照期的暴露比較，自我配對消去所有穩定的干擾。政策/法律的評估（如安全帽法）則用<span class="term">中斷時間序列、雙重差分</span>（第 28 章）。傷害嚴重度可用 AIS/ISS 分級，這會影響結果的定義。</p>
 
 <h3>5. 暴力流行病學</h3>
-<p>把公共衛生框架用於人際/自我暴力：危險與保護因子、社會決定因子、監測（第 9 章）、以實證介入（環境設計、行為、政策）預防。</p>
+<p>把公共衛生框架用到人際/自我暴力上：辨識危險與保護因子、社會決定因子、建立監測（第 9 章），並用實證介入（環境設計、行為介入、政策）來預防。核心精神與傷害一致：<b>暴力也是可預測、可預防的，分析的重點在找可介入的環節並評估政策效果</b>。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵觀念：Haddon 矩陣＝系統化介入地圖</h4>
+<div class="derive"><p>行＝事件前/中/後，列＝宿主/媒介（載具）/物理環境/社會環境。每格是一個介入機會：如車禍「事件中×載具」＝潰縮結構＋安全帶。此矩陣把「傷害不可避免」重構為「多點可介入」，是傷害防治的核心思考工具。</p></div>
+<h4>關鍵觀念：病例交叉用於短暫暴露</h4>
+<p>手機通話→車禍等「短暫暴露、急性事件」用病例交叉：病人自身危險期 vs. 對照期，<b>自我配對消去所有穩定干擾</b>（性格、車況）。假設：暴露短暫、事件不改變後續暴露機率、無時間趨勢（否則用 case-time-control）。</p>
+<h4>關鍵觀念：分母與意圖分類</h4>
+<p>傷害率分母應為暴露量（行駛里程、工時），非人口；意圖誤分（自殺 vs. 意外）是主要偏差來源。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：為何說傷害不是「意外」？</div><div class="a">A：傷害可預測（有危險因子與型態）、可預防（Haddon 各格介入），「意外」暗示不可控，不利防治。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>Haddon 時間</th><th>介入例</th></tr></thead>
 <tbody>
@@ -2459,21 +3066,31 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>社會暴露的因果推論特別依賴設計巧思與明確的反事實（「若改變社會位置會如何」）。</b></p>
 </div></div>
 <div class="ch-body">
-<h3>1. 社會決定因子</h3>
-<p>社經地位（教育、收入、職業）、種族/族群、社會資本、歧視、鄰里與工作環境等，透過物質、行為、心理社會、生物路徑影響健康。強調<b>健康不平等的社會根源</b>。</p>
+<h3>1. 社會結構如何形塑健康</h3>
+<p>社會流行病學研究<b>社會結構與位置</b>（社經地位、種族、社會網絡、鄰里）如何形塑健康與不平等。它關注的是健康差異的<b>社會根源</b>——社經地位、歧視、社會資本等，透過物質、行為、心理社會、生物等多條路徑影響健康。</p>
 
 <h3>2. 生命歷程觀點</h3>
-<p><span class="term">生命歷程流行病學</span>：早年暴露（含胎兒期，第 33 章）之<b>關鍵期、累積、路徑</b>模型影響成年疾病。需長期世代與世代（cohort）設計。</p>
+<p><span class="term">生命歷程流行病學</span>強調早年（甚至胎兒期，第 33 章）的暴露如何影響成年疾病，並區分三種模型：<b>關鍵期</b>（特定時間窗的暴露決定終身風險）、<b>累積</b>（暴露劑量隨時間堆疊）、<b>路徑</b>（早年暴露經一連串中介影響後果）。研究這些需要長期世代與世代設計。</p>
 
-<h3>3. 脈絡 vs. 組成、多層</h3>
-<p>地區健康差異可能來自<span class="term">組成（composition，居民個體特徵）</span>或<span class="term">脈絡（context，地方本身效應）</span>。用<b>多層模型</b>區分（第 24、30 章），避免生態謬誤與原子謬誤。</p>
+<h3>3. 脈絡 vs. 組成</h3>
+<p>地區的健康差異，可能來自<span class="term">組成（composition）</span>——居民的個體特徵，也可能來自<span class="term">脈絡（context）</span>——地方本身的效應。用<b>多層模型</b>（第 24、30 章）分離組內與組間效應來辨別，避免生態謬誤與原子謬誤。只有脈絡效應才支持「改變地方環境」的政策。</p>
 
-<h3>4. 因果推論難題</h3>
-<p>社會暴露難隨機化，易有<b>反向因果、社會選擇、未測干擾</b>。策略：明確定義可介入的反事實（「良好定義的暴露」，consistency）、自然實驗/準實驗（政策變動、樂透、義務教育年限當 IV，第 28 章）、中介分析拆路徑（第 27 章）、敏感度/偏差分析（第 29 章）。</p>
+<h3>4. 社會暴露的因果推論難題</h3>
+<p>社會暴露難以隨機化，容易有反向因果、社會選擇、未測干擾。策略包括：明確定義一個<b>可介入的反事實</b>（滿足一致性假設——「若這人是另一種族會如何」難以定義清楚的介入，故常轉為「歧視經驗」「收入移轉」等可介入的機制）；用自然實驗/準實驗（政策變動、樂透、義務教育年限當工具，第 28 章）；用中介分析拆解路徑（第 27 章）；以及敏感度/偏差分析（第 29 章）。</p>
 
-<h3>5. 測量與不平等量化</h3>
-<p>社經地位測量多元（絕對 vs. 相對）；不平等以<span class="term">斜率/相對不平等指數（SII/RII）、集中指數</span>量化。種族常是社會建構的代理，需謹慎詮釋。</p>
+<h3>5. 測量與不平等的量化</h3>
+<p>社經地位的測量是多元的（絕對 vs. 相對）；不平等可用<span class="term">斜率/相對不平等指數（SII/RII）</span>、集中指數來量化。要謹慎處理「種族」——它往往是社會建構的代理變項，不是生物本質，詮釋時要格外小心。核心心法：<b>社會暴露的因果推論，特別依賴設計的巧思與「良好定義的可介入反事實」</b>。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵觀念：良好定義暴露（consistency）是社會流病的門檻</h4>
+<div class="derive"><p>反事實框架要求暴露對應<b>可設想的介入</b>。「若這人是另一種族/性別會如何」難以定義清楚的介入→一致性假設模糊，因果解讀受限。故社會流病常轉為「可介入的機制」（如歧視經驗、收入移轉）以滿足 consistency（第 3 章）。</p></div>
+<h4>關鍵觀念：組成 vs. 脈絡</h4>
+<p>地區健康差異來自居民個體特徵（組成）或地方本身（脈絡）？多層模型分離組內/組間效應（第 30 章）辨別，避免生態與原子謬誤。脈絡效應才支持「改變地方環境」的政策。</p>
+<h4>關鍵觀念：生命歷程三模型</h4>
+<p>關鍵期（特定窗口暴露決定終身風險）、累積（暴露劑量隨時間堆疊）、路徑（早年暴露經一連串中介影響後果）。需長期世代與重複測量；中介分析（第 27 章）拆路徑。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：社會暴露難隨機化，如何強化因果？</div><div class="a">A：自然實驗/準實驗（政策變動、樂透、義務教育；第 28 章）、明確可介入的反事實、偏差分析。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>概念</th><th>意義</th><th>方法對應</th></tr></thead>
 <tbody>
@@ -2514,21 +3131,31 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>暴露評估品質決定研究品質</b>；環境暴露多為群體層，重視測量誤差校正。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 暴露評估</h3>
-<p>核心且困難：監測站、模型（土地利用迴歸、擴散模型）、生物標記（內在劑量，第 36 章）、個人採樣。以區域平均指派個人常造成<span class="term">Berkson 誤差</span>（偏誤小、變異增）與非差別錯分（第 13 章）。<span class="term">暴露組（exposome）</span>強調終生多重環境暴露。</p>
+<h3>1. 暴露評估是環境流病的命門</h3>
+<p>環境流行病學研究外在環境暴露（空汙、水、化學物、噪音、氣候）對健康的影響。它最大的挑戰、也是決定研究品質的關鍵，是<b>暴露評估</b>。方法包括監測站、模型（土地利用迴歸、擴散模型）、生物標記（內在劑量，第 36 章）、個人採樣。用「區域平均」指派給個人時，會造成<span class="term">Berkson 誤差</span>（點估計偏誤小、但變異增）與非差別錯分。近年的<span class="term">暴露組（exposome）</span>概念強調要看終生的多重環境暴露。</p>
 
 <h3>2. 時間序列與短期效應</h3>
-<p>空汙—每日死亡/入院用<span class="term">時間序列（Poisson，控制季節、氣溫、趨勢）</span>與<span class="term">病例交叉</span>估短期效應；分佈滯後模型處理延遲。長期效應用世代（如空汙世代）。</p>
+<p>空汙與每日死亡/入院的關係，常用<span class="term">時間序列（Poisson，控制季節、氣溫、長期趨勢）</span>與<span class="term">病例交叉</span>來估短期效應，並用分佈滯後模型處理延遲。長期效應則用世代研究（如空汙世代）。一個實務要點：時間序列研究<b>不需要控制個體層的干擾</b>（因為是同一人群跨時間比較，穩定特徵自動抵消），主要控制的是季節、氣溫、星期等時間混雜。</p>
 
 <h3>3. 劑量反應與低劑量</h3>
-<p>常需在<b>低劑量、無明顯閾值</b>下估計，樣條/非線性建模（第 20 章）。低相對風險但高暴露盛行→大 PAF（第 5 章），公共衛生意義大。</p>
+<p>環境暴露常需要在<b>低劑量、沒有明顯閾值</b>的情況下估計效應，用樣條等非線性建模（第 20 章）。這裡有一個重要的公衛觀念：<b>低相對風險但高暴露盛行→大 PAF</b>——空汙的 RR 可能只有 1.05，但因為幾乎全民暴露，可歸因的病例數與 PAF 都很大（第 5 章）。所以「小效應」在環境流病仍有重大意義。</p>
 
 <h3>4. 干擾與混合暴露</h3>
-<p>氣溫、季節、社經、共存汙染物互為干擾/交互。多汙染物<span class="term">混合暴露</span>用加權指數、貝氏核機器、混合模型處理，並防過度配適。</p>
+<p>氣溫、季節、社經地位、共存的汙染物之間互為干擾或交互。多汙染物的<span class="term">混合暴露</span>可用加權指數、貝氏核機器、混合模型等處理，並要防過度配適。</p>
 
-<h3>5. 因果與政策</h3>
-<p>自然實驗（法規、廠關閉）、準實驗（第 28 章）強化因果。環境正義關注暴露的社會分布（連第 39 章）。結果用於標準制定與風險評估。</p>
+<h3>5. 因果強化與政策</h3>
+<p>自然實驗（如法規變動、工廠關閉）與準實驗（第 28 章）能強化因果推論。環境正義關注暴露在不同社會族群間的分布（連第 39 章）。研究結果最終用於標準制定與風險評估。核心心法：<b>暴露評估的品質，決定了整個環境流病研究的品質</b>。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵觀念：暴露評估是環境流病的命門</h4>
+<div class="derive"><p>以區域監測站平均指派個人＝<b>Berkson 型誤差</b>（\(X=W+U\)）：對點估計偏誤小但增變異；若指派系統性偏離則另有差別成分。改善：土地利用迴歸、擴散模型、個人採樣、生物標記（第 36 章）。</p></div>
+<h4>關鍵推導：時間序列的 Poisson 設定</h4>
+<div class="derive"><p>\( \ln E[Y_t]=\alpha+\beta X_t+s(\text{time})+s(\text{temp})+\text{dow} \)。以平滑樣條吸收季節與長期趨勢、氣溫混雜，\(\beta\) 捕捉短期空汙效應；分佈滯後模型處理延遲。病例交叉是其等價的分層形式。</p></div>
+<h4>關鍵觀念：低 RR、高 PAF</h4>
+<p>空汙相對風險常很小（如 1.05），但因<b>全民暴露</b>（\(P_e\to1\)），PAF 與可歸因病例數巨大（第 5 章）。故「小效應」在環境流病仍具重大公衛意義。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：時間序列研究控制個體干擾嗎？</div><div class="a">A：不需個體干擾（同一人群跨時間比較，穩定特徵自消）；主要控季節、氣溫、趨勢、星期等時間混雜。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>設計</th><th>暴露時間尺度</th><th>重點</th></tr></thead>
 <tbody>
@@ -2568,21 +3195,31 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>用內部對照與時間相依分析化解健康工人效應。</b></p>
 </div></div>
 <div class="ch-body">
-<h3>1. 健康工人效應</h3>
-<p><span class="term">健康工人效應（HWE）</span>兩成分：<b>僱用選擇</b>（能就業者較健康）與<b>健康工人存活效應</b>（不健康者較早離職，仍留者較健康，且與累積暴露相關→時間相依干擾，第 25 章）。使一般人口為外部對照時<b>低估</b>危害。對策：<b>內部對照（暴露梯度）</b>、時間相依分析、g-方法。</p>
+<h3>1. 職業流病與健康工人效應</h3>
+<p>職業流行病學研究工作場所的暴露與健康，方法上以世代研究（SMR）與巢式病例對照為主。它有一個專屬的、極重要的偏差——<span class="term">健康工人效應（HWE）</span>，理解它是這一章的關鍵。</p>
 
-<h3>2. 暴露評估</h3>
-<p>由工作史結合<span class="term">工作—暴露矩陣（JEM）</span>、專家評估、環境監測、生物標記重建<b>累積暴露</b>。錯分多為非差別（衰減），但劑量重建誤差複雜。</p>
+<h3>2. 健康工人效應的兩層結構</h3>
+<p>HWE 有兩個成分。第一是<b>僱用選擇</b>：能夠就業的人本來就比一般人健康（基線偏移）。第二是<b>健康工人存活效應</b>：不健康的人較早離職，還留在職的人相對更健康，而且留得越久暴露累積越多——這使「就業狀態」變成一個<b>時變干擾、又受先前暴露影響</b>的變項，正是第 25 章 g-方法的教科書案例。當用一般人口當外部對照時，HWE 會使危害被<b>低估</b>。</p>
 
-<h3>3. 設計與測量</h3>
-<p><span class="term">職業世代</span>常回溯建構，結果用死亡/癌症登記；效應用 <span class="term">SMR</span>（外部）或內部率比。罕見結果用<span class="term">巢式病例對照</span>省暴露重建成本（第 8、11 章）。</p>
+<h3>3. SMR 與對照的選擇</h3>
+<p>職業世代常用<span class="term">SMR</span>（觀察/期望死亡數，外部對照）。但因為健康工人效應，用一般人口當對照會系統性低估危害（SMR 常小於 1）。更好的做法是用<b>內部對照</b>（世代內的暴露梯度）＋內部率比，既能減輕 HWE，又能看劑量反應。也要記得：<b>不同的 SMR 不能直接互相比較</b>（各用自己的人時結構加權）。</p>
 
-<h3>4. 時間相關概念</h3>
-<p><b>累積暴露、暴露率、時間自暴露起（time since exposure）、誘導/潛伏期、暴露時窗</b>都需在分析中建模（滯後、加權）。錯設時間結構會偏誤劑量反應。</p>
+<h3>4. 暴露重建</h3>
+<p>職業暴露常需要用工作史結合<span class="term">工作—暴露矩陣（JEM）</span>、專家評估、環境監測、生物標記來重建<b>累積暴露</b>。這裡的錯分多為非差別（造成衰減），但劑量重建的誤差結構可能複雜。</p>
 
-<h3>5. 應用</h3>
-<p>職業致癌物辨識、暴露限值制定、傷害（第 38 章）、防護介入評估。結果常有法規與補償意涵，要求嚴謹與透明。</p>
+<h3>5. 時間相關的概念</h3>
+<p>職業研究特別重視時間結構：<b>累積暴露、暴露率、time since exposure（自暴露起算的時間，用於誘導/潛伏期建模）、暴露時窗、滯後</b>。錯誤設定時間結構會扭曲劑量反應。應用上，職業流病用於辨識職業致癌物、制定暴露限值、評估防護介入——因為結果常有法規與補償的意涵，要求分析格外嚴謹與透明。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵觀念：健康工人存活效應＝時變干擾</h4>
+<div class="derive"><p>就業狀態 \(L_t\)（在職/離職）受先前暴露影響（不健康者離職→暴露累積停止），又預測結果與後續暴露→<b>treatment-confounder feedback</b>。標準調整 \(L_t\) 會偏（第 25 章），須用 g-方法或內部對照＋時間相依模型。這是 HWE 難纏的根本原因。</p></div>
+<h4>關鍵觀念：SMR 與外部對照的低估</h4>
+<p>用一般人口當外部對照＋SMR 時，僱用選擇使職業世代基線較健康→SMR 系統性 &lt;1（低估危害）。內部對照（暴露梯度）＋內部率比可繞過。</p>
+<h4>關鍵觀念：暴露重建的時間結構</h4>
+<p>累積暴露、暴露率、time since exposure、暴露時窗、滯後——錯設時間結構會扭曲劑量反應。JEM 結合工作史重建，錯分多為非差別（衰減）。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：兩個工廠的 SMR 一個 0.9 一個 1.1，能說後者較危險嗎？</div><div class="a">A：不能直接比（各用自身人時結構加權）；且皆受健康工人效應影響，須內部對照或共同標準。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>對照策略</th><th>優點</th><th>風險</th></tr></thead>
 <tbody>
@@ -2626,21 +3263,31 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>飲食是「混合暴露＋大量誤差」的極端案例</b>，能量調整與誤差校正是核心技術。</p>
 </div></div>
 <div class="ch-body">
-<h3>1. 飲食評估工具</h3>
-<p><span class="term">食物頻率問卷（FFQ）</span>（便宜、可測長期習慣，但誤差大）、<span class="term">24 小時回憶／飲食紀錄</span>（較準但只反映短期、負擔大）、<span class="term">生物標記</span>（客觀，如尿氮估蛋白）。各具不同誤差結構，常為<b>非差別但相關的誤差</b>（未必偏向虛無，第 13 章）。</p>
+<h3>1. 飲食是「混合暴露＋大量誤差」的極端案例</h3>
+<p>營養流行病學研究飲食與健康。它的難題很特殊：飲食的測量誤差<b>特別大</b>、各種營養素<b>高度相關</b>、而且<b>總能量攝取</b>扮演一個微妙的角色。可以把飲食看成「混合暴露＋大量測量誤差」的極端案例，能量調整與誤差校正是這一章的兩大核心技術。</p>
 
-<h3>2. 測量誤差校正</h3>
-<p>用<span class="term">驗證/校準子研究</span>（以較準工具或標記）估誤差，做<span class="term">迴歸校準</span>還原衰減的劑量反應。忽略誤差通常<b>低估</b>關聯並扭曲劑量反應形狀。</p>
+<h3>2. 飲食評估工具</h3>
+<p>常見工具各有誤差特性：<span class="term">食物頻率問卷（FFQ）</span>便宜、能測長期習慣，但誤差大；<span class="term">24 小時回憶/飲食紀錄</span>較準，但只反映短期、負擔大；<span class="term">生物標記</span>客觀（如尿氮估蛋白攝取），但有成本與時間窗限制。這些誤差常是<b>非差別但彼此相關</b>的——這一點很重要，因為它意味「非差別就偏向虛無」的簡單規則<b>不適用</b>（第 13 章的例外情形）。</p>
 
-<h3>3. 總能量調整</h3>
-<p>營養素攝取與<b>總能量</b>高度相關；能量本身可能是干擾或中介。方法：<span class="term">殘差法（回歸營養素於能量取殘差）</span>、<span class="term">營養密度（每千卡）</span>、能量分割模型。目的：分離「飲食組成」與「總量」的效應，並降低相關測量誤差。</p>
+<h3>3. 測量誤差校正</h3>
+<p>對付大量誤差，用<span class="term">驗證/校準子研究</span>（以較準的工具或生物標記）估出誤差參數，再做<span class="term">迴歸校準</span>還原被衰減的劑量反應。忽略測量誤差通常會<b>低估</b>關聯並扭曲劑量反應的形狀。</p>
 
-<h3>4. 相關暴露與飲食型態</h3>
-<p>單一營養素難獨立（食物一起吃）。<span class="term">飲食型態分析（因素/群集分析、指數如地中海飲食）</span>捕捉整體飲食，較貼近現實且減共線性，但詮釋較粗。</p>
+<h3>4. 總能量調整</h3>
+<p>營養素攝取與<b>總能量</b>高度相關，而能量本身可能是干擾或中介。處理方法有<span class="term">殘差法</span>（把營養素對能量迴歸、取殘差）與<span class="term">營養密度法</span>（每千卡的攝取量）。目的有二：分離「飲食組成」與「總攝取量」的效應，並降低兩者共有的測量誤差（食量大的人所有營養素都被高估）。這是營養流病幾乎必考的技術。</p>
 
-<h3>5. 因果強化</h3>
-<p>RCT（如補充劑試驗）、<span class="term">孟德爾隨機化</span>（用影響營養代謝的基因，第 37 章）補強觀察證據；注意 MR 多效性。長潛伏與變動飲食需長期世代與重複測量。</p>
+<h3>5. 飲食型態與因果強化</h3>
+<p>因為單一營養素很難獨立（食物是一起吃的），<span class="term">飲食型態分析</span>（因素/群集分析、或如地中海飲食評分的指數）較貼近現實、又能減少共線性，但詮釋較粗。因果的強化則靠 RCT（如補充劑試驗）與<span class="term">孟德爾隨機化</span>（用影響營養代謝的基因當工具，第 37 章，注意多效性）。長潛伏與變動的飲食需要長期世代與重複測量。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵推導：能量調整的殘差法</h4>
+<div class="derive"><p>營養素 \(N\) 對總能量 \(E\) 迴歸：\(N=a+bE+r\)。殘差 \(r\) 即「與能量無關的營養素變異」。調整後營養素 \(=r+\bar N\)（加回均值便於解讀）。目的：分離「飲食組成」與「總攝取量」的效應，並降低兩者共有的測量誤差（食量大者所有營養素都被高估）。</p></div>
+<h4>關鍵觀念：飲食測量誤差多為相關且非差別</h4>
+<p>FFQ 各項誤差相關，<b>不保證偏向虛無</b>（第 13 章例外情形），且常與真值相關（非古典）。故單純「非差別→衰減」不成立，需驗證子研究＋迴歸校準還原劑量反應。</p>
+<h4>關鍵觀念：飲食型態 vs. 單一營養素</h4>
+<p>食物一起吃→營養素高度共線。飲食型態（因素/群集分析、地中海飲食指數）較貼近現實、減共線，但詮釋較粗、依賴主觀建構。互補使用。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：為何營養研究常用 MR？</div><div class="a">A：飲食觀察研究有大量測量誤差與殘餘干擾；MR 用代謝相關基因當工具繞過（注意多效性；第 37 章）。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>工具</th><th>優點</th><th>缺點</th></tr></thead>
 <tbody>
@@ -2685,26 +3332,42 @@ tbody tr:nth-child(even){background:#fafcfe}
 <p>主線：<b>把前面所有因果與偏差工具，用來讓「觀察性藥物研究」逼近隨機試驗。</b></p>
 </div></div>
 <div class="ch-body">
-<h3>1. 領域與問題</h3>
-<p>上市後（第四期）安全性與比較效果、罕見不良反應、長期效應、特殊族群。多用<span class="term">次級資料（claims、EHR、登記，第 11 章）</span>，因隨機試驗不足以偵測罕見/長期風險。</p>
+<h3>1. 藥物流病：因果與偏差工具的總驗收</h3>
+<p>藥物流行病學研究真實世界中藥物的效益與風險，尤其是上市後的安全性。它可以說是前面所有因果推論與偏差工具的<b>總驗收</b>——目標是讓「觀察性的藥物研究」盡可能逼近隨機試驗。它多用次級資料（申報、EHR、登記，第 11 章），因為隨機試驗不足以偵測罕見或長期的風險。</p>
 
 <h3>2. 核心偏差</h3>
-<ul>
-<li><span class="term">適應症干擾</span>：開藥與疾病嚴重度相關。</li>
-<li><span class="term">健康使用者/依從者效應</span>：用藥/持續用藥者本身較健康。</li>
-<li><span class="term">不朽時間偏差、盛行使用者偏差</span>（第 11 章）。</li>
-<li><span class="term">反向因果/前驅症狀（protopathic）</span>：早期未診斷症狀促使用藥。</li>
-</ul>
+<p>藥物流病有一組專屬的核心偏差，務必能列舉並解釋：<span class="term">適應症干擾</span>（醫師依病情開藥，而病情又是預後因子）；<span class="term">健康使用者/依從者效應</span>（用藥、持續用藥的人本身較健康）；<span class="term">不朽時間偏差、盛行使用者偏差</span>（第 11 章）；<span class="term">反向因果/前驅症狀（protopathic）</span>（早期未診斷的症狀促使用藥）。</p>
 
-<h3>3. 設計對策</h3>
-<p><span class="term">新使用者設計</span>＋<span class="term">主動比較者（另一種治療同適應症的藥）</span>對齊嚴重度與 time zero，是現代主力。<span class="term">目標試驗模擬</span>系統化排除時間偏差。<span class="term">傾向分數／高維傾向分數（hdPS）</span>調整大量代理干擾；<span class="term">IV（如醫師偏好）</span>處理未測干擾（第 28 章）。</p>
+<h3>3. 設計對策：新使用者＋主動比較者</h3>
+<p>對付這些偏差，現代主力是<b>新使用者設計</b>＋<b>主動比較者（同適應症的另一種藥）</b>：前者排除盛行使用者的存活選擇、正確設 time zero，後者使兩組疾病嚴重度相近、壓低適應症干擾。再套上<b>目標試驗模擬</b>系統化排除時間偏差。多干擾則用<span class="term">傾向分數/高維傾向分數（hdPS）</span>調整；未測干擾用工具變數（如醫師偏好，第 28 章）。</p>
 
 <h3>4. 自我對照設計</h3>
-<p><span class="term">自我對照病例序列（SCCS）</span>與<span class="term">病例交叉</span>用病人自身作對照，<b>去除所有不隨時間變的干擾</b>（基因、體質），適合急性事件與短暫用藥；需事件不影響後續暴露等假設。</p>
+<p><span class="term">自我對照病例序列（SCCS）</span>與<span class="term">病例交叉</span>用病人自身當對照，比較<b>風險期 vs. 非風險期</b>的事件率，<b>去除所有不隨時間變的干擾</b>（基因、體質、慢性病），特別適合急性事件與短暫用藥。但要注意它<b>不能</b>控制隨時間變的干擾（如年齡、疾病進展）。</p>
 
 <h3>5. 訊號偵測與監測</h3>
-<p>自發通報系統（去趨勢、不對稱比）、<span class="term">序列/前瞻監測（如 Sentinel）</span>在多資料庫網絡即時偵測安全訊號，再以正式研究確認。偏差分析（第 29 章）量化殘餘偏差。</p>
+<p>安全訊號的偵測有多層：自發通報系統（用不對稱比等方法）、以及在多資料庫網絡上做<span class="term">序列/前瞻監測（如 Sentinel）</span>即時偵測，再以正式研究確認。最後用偏差分析（第 29 章）量化殘餘偏差。核心心法：<b>把前面所有的因果與偏差工具，用來讓觀察性藥物研究逼近隨機試驗的證據等級</b>——這也為整本書的方法學畫下一個總整理的句點。</p>
 </div>
+<div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
+<h4>關鍵觀念：藥物流病＝因果與偏差工具的總驗收</h4>
+<div class="derive"><p>把觀察性藥物研究對齊<b>目標試驗</b>：合格條件、暴露（新使用者）、比較者（主動比較者）、time zero、追蹤、結果。多數藥物流病偏差（適應症干擾、不朽時間、盛行使用者、健康依從者）都是某一步沒對齊的表現。</p></div>
+<h4>關鍵觀念：新使用者＋主動比較者的雙重防護</h4>
+<p>新使用者→排除盛行使用者的存活選擇與早期事件遺漏、正確設 time zero；主動比較者（同適應症另一藥）→兩組疾病嚴重度相近，壓低適應症干擾。這是現代藥物流病的預設設計。</p>
+<h4>關鍵觀念：自我對照（SCCS/病例交叉）消去固定干擾</h4>
+<div class="derive"><p>比較同一人的<b>風險期 vs. 非風險期</b>事件率，所有<b>不隨時間變</b>的干擾（基因、體質、慢性病）自動消去。假設：事件不影響後續暴露、事件罕見或用適當方法、暴露期明確。適合疫苗/藥物→急性事件。</p></div>
+<h4>關鍵觀念：高維傾向分數（hdPS）</h4>
+<p>從上萬個代理變項（診斷、處方、就醫）經驗式挑選最能平衡的干擾代理，估處理機率再調整，補救未直接測量但有代理的干擾（仍無法解決真正未測者）。</p>
+<h4>口試常見追問</h4>
+<div class="qa"><div class="q">Q：為何主動比較者優於「不用藥」對照？</div><div class="a">A：「不用藥」者與用藥者在適應症/嚴重度/健康行為上差異大（適應症干擾、健康使用者）；同適應症的另一藥使兩組更可比。</div></div>
+<div class="qa"><div class="q">Q：SCCS 不能控制什麼？</div><div class="a">A：不能控制<b>隨時間變</b>的干擾（如年齡、疾病進展）；這些仍須建模。</div></div>
+</div></div>
+<div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
+<div class="exq"><span class="yr">113-2 Q5</span><span class="qtitle">健保資料庫 prevalent vs incident user</span>
+<div class="sol">盛行使用者偏差→改新使用者設計；配主動比較者對齊嚴重度與 time zero。</div></div>
+<div class="exq"><span class="yr">114-1 Q2</span><span class="qtitle">傾向分數四方法（健康大數據混雜校正）</span>
+<div class="sol">Matching／Stratification／IPTW／Covariate adjustment（見第 20 章詳解）；hdPS 用大量代理變項。<span class="pitfall">皆無法解決未測干擾。</span></div></div>
+<div class="exq"><span class="yr">109-1 / 114-2</span><span class="qtitle">適應症混淆與其解方</span>
+<div class="sol">主動比較者、新使用者、IV/MR、pragmatic RCT。</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>偏差</th><th>對策</th></tr></thead>
 <tbody>
@@ -2739,17 +3402,4 @@ tbody tr:nth-child(even){background:#fafcfe}
 </footer>
 </main>
 </div>
-<script>
-const links=[...document.querySelectorAll('.toc-link')];
-const secs=links.map(l=>document.querySelector(l.getAttribute('href')));
-const obs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){
-  const id=e.target.id; links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+id));}});},
-  {rootMargin:'-10% 0px -80% 0px',threshold:0});
-secs.forEach(s=>s&&obs.observe(s));
-function filterToc(q){q=q.trim().toLowerCase();
-  links.forEach(l=>{const t=(l.dataset.txt||'').toLowerCase(); l.style.display=(!q||t.includes(q))?'flex':'none';});
-  document.querySelectorAll('.toc-part').forEach(p=>p.style.display=q?'none':'block');}
-links.forEach(l=>l.addEventListener('click',()=>document.getElementById('toc').classList.remove('open')));
-</script>
-</body>
-</html>
+<sc
