@@ -120,6 +120,27 @@ tbody tr:nth-child(even){background:#fafcfe}
     color:#fff;border:none;border-radius:10px;padding:9px 13px;font-size:14px;font-weight:700;box-shadow:0 3px 10px rgba(0,0,0,.2)}
   main{padding:56px 16px 100px}
 }
+
+/* ==== 劃記與筆記 ==== */
+mark.hl-y{background:#fff29a;color:inherit;border-radius:2px;padding:0 1px;cursor:pointer}
+mark.hl-r{background:#ffc4c4;color:inherit;border-radius:2px;padding:0 1px;cursor:pointer}
+mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;cursor:pointer}
+.anno-toolbar{position:fixed;z-index:300;display:none;gap:4px;background:#222d3a;border-radius:10px;padding:6px;box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.anno-toolbar button{border:none;border-radius:7px;padding:6px 10px;font-size:13px;cursor:pointer;font-weight:700}
+.anno-toolbar .b-y{background:#fff29a}.anno-toolbar .b-r{background:#ffc4c4}.anno-toolbar .b-g{background:#bfe9c6}.anno-toolbar .b-n{background:#dfe3f7}
+.note-badge{cursor:pointer;font-size:12px;margin-left:4px;vertical-align:super;text-decoration:none;user-select:none}
+.anno-fab{position:fixed;right:18px;bottom:18px;z-index:290;background:var(--brand);color:#fff;border:none;border-radius:50px;padding:12px 16px;font-size:14px;font-weight:800;box-shadow:0 4px 14px rgba(0,0,0,.25);cursor:pointer}
+.anno-panel{position:fixed;right:0;top:0;height:100vh;width:340px;max-width:88vw;background:#fff;border-left:1px solid var(--line);box-shadow:-6px 0 24px rgba(0,0,0,.12);z-index:295;transform:translateX(100%);transition:.25s;overflow:auto;padding:18px}
+.anno-panel.open{transform:none}
+.anno-panel h3{margin:4px 0 10px;color:var(--brand);font-size:17px}
+.anno-panel .pitem{border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin:8px 0;font-size:13px;cursor:pointer;line-height:1.55}
+.anno-panel .pitem:hover{background:#f3f7fc}
+.anno-panel .tag{font-size:11px;font-weight:800;padding:1px 7px;border-radius:20px;margin-right:6px;color:#333}
+.anno-panel .bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.anno-panel .bar button{font-size:12px;border:1px solid var(--line);background:#f6f8fb;border-radius:7px;padding:6px 9px;cursor:pointer}
+.flash{animation:annofl 1.3s}
+@keyframes annofl{0%{background:#fff2b0}100%{background:transparent}}
+@media print{.anno-fab,.anno-toolbar,.anno-panel,.toc-toggle,.note-badge{display:none!important}}
 </style>
 </head>
 <body>
@@ -195,6 +216,7 @@ tbody tr:nth-child(even){background:#fafcfe}
 </div>
 <div class="how">
   <h3>如何使用這份手冊</h3>
+  <p style="background:#eef6ff;border:1px solid #cfe0f2;border-radius:8px;padding:9px 13px;font-size:13px;margin:0 0 10px"><b>🖍 劃記與筆記：</b>用滑鼠<b>選取任一段文字</b>，會跳出工具列，可標「重要／不懂／已懂」或加「📝筆記」。點已劃記處可移除；右下角「📒 我的筆記」可檢視、一鍵跳轉、<b>匯出／匯入</b>。標記存在你的瀏覽器本機（換裝置請用匯出）。</p>
   <p>左側目錄依原書分部排列，可點選跳章、可輸入關鍵字過濾。每一章用顏色區分不同區塊：</p>
   <div class="legend">
     <span class="chip c-map">🧭 核心邏輯與方法地圖</span>
@@ -3930,6 +3952,93 @@ function filterToc(q){q=q.trim().toLowerCase();
   links.forEach(l=>{const t=(l.dataset.txt||'').toLowerCase(); l.style.display=(!q||t.includes(q))?'flex':'none';});
   document.querySelectorAll('.toc-part').forEach(p=>p.style.display=q?'none':'block');}
 links.forEach(l=>l.addEventListener('click',()=>document.getElementById('toc').classList.remove('open')));
+</script>
+<script>
+(function(){
+  const KEY='epi_handbook_anno_v1';
+  const main=document.querySelector('main'); if(!main) return;
+  let state={hl:[],notes:[]};
+  try{ const s=localStorage.getItem(KEY); if(s) state=JSON.parse(s);}catch(e){}
+  function save(){ try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){} }
+  const uid=()=>'a'+Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-3);
+  const clsMap={y:'hl-y',r:'hl-r',g:'hl-g'};
+  const blocks=main.querySelectorAll('h2,h3,h4,p,li,td,th,.formula-item');
+  blocks.forEach((b,i)=>{ if(!b.dataset.hid) b.dataset.hid='b'+i; });
+  function skip(node){ let p=node.parentElement;
+    while(p&&p!==main){ const t=p.tagName; if(t==='SCRIPT'||t==='STYLE'||t==='SVG'||t==='MJX-CONTAINER'||(p.classList&&p.classList.contains('MathJax'))) return true; p=p.parentElement; } return false; }
+  function textNodes(root){ const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){ return (n.nodeValue&&!skip(n))?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT; }}); const a=[]; let n; while(n=w.nextNode()) a.push(n); return a; }
+  function blockText(b){ return textNodes(b).map(n=>n.nodeValue).join(''); }
+  function wrapRange(b,gS,gE,cls,aid){ const nodes=textNodes(b); let pos=0; const segs=[];
+    for(const n of nodes){ const L=n.nodeValue.length; const s=Math.max(gS,pos), e=Math.min(gE,pos+L); if(e>s) segs.push([n,s-pos,e-pos]); pos+=L; }
+    for(const seg of segs){ try{ const r=document.createRange(); r.setStart(seg[0],seg[1]); r.setEnd(seg[0],seg[2]); const m=document.createElement('mark'); m.className=cls; m.dataset.aid=aid; r.surroundContents(m);}catch(err){} } }
+  function selStart(b,node,off){ const nodes=textNodes(b); let pos=0; for(const n of nodes){ if(n===node) return pos+off; pos+=n.nodeValue.length; } return -1; }
+  function esc(s){ return (s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+
+  const tb=document.createElement('div'); tb.className='anno-toolbar';
+  tb.innerHTML='<button class="b-y" data-c="y">重要</button><button class="b-r" data-c="r">不懂</button><button class="b-g" data-c="g">已懂</button><button class="b-n" data-c="note">📝筆記</button>';
+  document.body.appendChild(tb);
+  let pend=null;
+  document.addEventListener('mouseup',function(e){
+    if(tb.contains(e.target)) return;
+    const sel=window.getSelection();
+    if(!sel||sel.isCollapsed||!sel.toString().trim()){ tb.style.display='none'; return; }
+    const r=sel.getRangeAt(0); const sc=r.startContainer;
+    if(sc.nodeType!==3||!sc.parentElement){ tb.style.display='none'; return; }
+    const b=sc.parentElement.closest('[data-hid]'); if(!b){ tb.style.display='none'; return; }
+    const gS=selStart(b,sc,r.startOffset); if(gS<0){ tb.style.display='none'; return; }
+    pend={b:b,gS:gS,q:sel.toString()};
+    const rect=r.getBoundingClientRect();
+    let top=rect.top-48; if(top<6) top=rect.bottom+8;
+    tb.style.display='flex'; tb.style.top=top+'px';
+    tb.style.left=Math.min(Math.max(rect.left,8),window.innerWidth-230)+'px';
+  });
+  tb.addEventListener('mousedown',e=>e.preventDefault());
+  tb.addEventListener('click',function(e){
+    const btn=e.target.closest('button'); if(!btn||!pend) return; const c=btn.dataset.c;
+    const b=pend.b, gS=pend.gS, q=pend.q, bt=blockText(b);
+    let n=0, idx=bt.indexOf(q); while(idx>=0&&idx<gS){ n++; idx=bt.indexOf(q,idx+1); }
+    if(c==='note'){ const txt=prompt('輸入筆記（會標在這段文字旁）：',''); if(txt&&txt.trim()){ const nt={id:uid(),hid:b.dataset.hid,q:q.slice(0,60),text:txt.trim()}; state.notes.push(nt); addNoteBadge(nt); save(); } }
+    else { const id=uid(); wrapRange(b,gS,gS+q.length,clsMap[c],id); state.hl.push({id:id,hid:b.dataset.hid,q:q,c:c,n:n}); save(); }
+    window.getSelection().removeAllRanges(); tb.style.display='none'; pend=null;
+  });
+
+  main.addEventListener('click',function(e){
+    const m=e.target.closest('mark[data-aid]'); if(!m) return;
+    if(!confirm('移除這個劃記？')) return; const aid=m.dataset.aid;
+    document.querySelectorAll('mark[data-aid="'+aid+'"]').forEach(x=>{ const p=x.parentNode; while(x.firstChild) p.insertBefore(x.firstChild,x); p.removeChild(x); if(p.normalize) p.normalize(); });
+    state.hl=state.hl.filter(h=>h.id!==aid); save(); if(panel.classList.contains('open')) renderPanel();
+  });
+
+  function addNoteBadge(nt){ const b=main.querySelector('[data-hid="'+nt.hid+'"]'); if(!b) return;
+    const s=document.createElement('span'); s.className='note-badge'; s.textContent='📝'; s.title=nt.text; s.dataset.aid=nt.id;
+    s.onclick=function(ev){ ev.stopPropagation(); const v=prompt('編輯筆記（清空並確定＝刪除）：',nt.text); if(v===null) return; if(!v.trim()){ state.notes=state.notes.filter(x=>x.id!==nt.id); s.remove(); } else { nt.text=v.trim(); s.title=nt.text; } save(); if(panel.classList.contains('open')) renderPanel(); };
+    b.appendChild(s); }
+
+  const fab=document.createElement('button'); fab.className='anno-fab'; fab.textContent='📒 我的筆記'; document.body.appendChild(fab);
+  const panel=document.createElement('div'); panel.className='anno-panel'; document.body.appendChild(panel);
+  fab.onclick=function(){ panel.classList.toggle('open'); renderPanel(); };
+  function renderPanel(){
+    const tags={y:['重要','#fff29a'],r:['不懂','#ffc4c4'],g:['已懂','#bfe9c6']};
+    let h='<h3>📒 我的筆記與劃記</h3><div class="bar"><button id="an-exp">⬇ 匯出</button><button id="an-imp">⬆ 匯入</button><button id="an-clr">🗑 清除全部</button><button id="an-cls">關閉</button></div>';
+    h+='<div style="font-size:12px;color:#5b6673;margin-bottom:6px">劃記 '+state.hl.length+' · 筆記 '+state.notes.length+'（點項目跳到位置）</div>';
+    state.notes.forEach(function(nt){ h+='<div class="pitem" data-hid="'+nt.hid+'"><span class="tag" style="background:#dfe3f7">📝 筆記</span>'+esc(nt.text)+'<br><span style="color:#8a94a3">「'+esc(nt.q)+'…」</span></div>'; });
+    state.hl.forEach(function(x){ const t=tags[x.c]||tags.y; h+='<div class="pitem" data-hid="'+x.hid+'"><span class="tag" style="background:'+t[1]+'">'+t[0]+'</span>'+esc(x.q.slice(0,90))+'</div>'; });
+    if(!state.notes.length&&!state.hl.length) h+='<div style="color:#8a94a3;font-size:13px;margin-top:10px">還沒有標記。選取內文文字即可開始劃記。</div>';
+    panel.innerHTML=h;
+    panel.querySelector('#an-cls').onclick=()=>panel.classList.remove('open');
+    panel.querySelector('#an-clr').onclick=function(){ if(confirm('確定清除所有劃記與筆記？此動作無法復原。')){ state={hl:[],notes:[]}; save(); location.reload(); } };
+    panel.querySelector('#an-exp').onclick=function(){ const blob=new Blob([JSON.stringify(state)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='我的流病筆記.json'; a.click(); };
+    panel.querySelector('#an-imp').onclick=function(){ const inp=document.createElement('input'); inp.type='file'; inp.accept='.json'; inp.onchange=function(){ const f=inp.files[0]; if(!f) return; const rd=new FileReader(); rd.onload=function(){ try{ const d=JSON.parse(rd.result); if(d&&d.hl&&d.notes){ state=d; save(); location.reload(); } else alert('檔案內容不符'); }catch(e){ alert('檔案格式錯誤'); } }; rd.readAsText(f); }; inp.click(); };
+    panel.querySelectorAll('.pitem').forEach(function(it){ it.onclick=function(){ const b=main.querySelector('[data-hid="'+it.dataset.hid+'"]'); if(b){ b.scrollIntoView({behavior:'smooth',block:'center'}); b.classList.remove('flash'); void b.offsetWidth; b.classList.add('flash'); panel.classList.remove('open'); } }; });
+  }
+
+  function reapply(){
+    state.hl.forEach(function(hh){ const b=main.querySelector('[data-hid="'+hh.hid+'"]'); if(!b) return; const bt=blockText(b); let idx=-1; for(let k=0;k<=hh.n;k++){ idx=bt.indexOf(hh.q,idx+1); if(idx<0) break; } if(idx<0) return; wrapRange(b,idx,idx+hh.q.length,clsMap[hh.c]||'hl-y',hh.id); });
+    state.notes.forEach(addNoteBadge);
+  }
+  if(window.MathJax&&MathJax.startup&&MathJax.startup.promise){ MathJax.startup.promise.then(reapply).catch(reapply); }
+  else { setTimeout(reapply,600); }
+})();
 </script>
 </body>
 </html>
