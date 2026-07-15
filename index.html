@@ -19,6 +19,7 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
   --bridge:#f3eefb; --bridge-b:#7d4fc0;
   --deep:#e9f6f4; --deep-b:#12897e;
   --qual:#fff8e8; --qual-b:#b8860b;
+  --calc:#eef0fb; --calc-b:#4759c4;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -36,13 +37,13 @@ body{margin:0;background:var(--bg);color:var(--ink);
   padding:6px 8px;border-radius:8px;font-size:13.5px}
 .toc-link:hover{background:#eef4fb}
 .toc-link.active{background:#e2effb;color:var(--brand);font-weight:700}
-.tl-num{flex:0 0 26px;text-align:center;font-weight:800;color:var(--brand2);
+.tl-num{flex:0 0 30px;text-align:center;font-weight:800;color:var(--brand2);
   background:#eaf3fb;border-radius:6px;font-size:12px;padding:1px 0}
 .tl-zh{flex:1}
 main{flex:1;min-width:0;padding:30px 42px 120px;max-width:1000px;margin:0 auto}
 .masthead{background:linear-gradient(135deg,#1f5c8c,#2b7bbd);color:#fff;border-radius:16px;
   padding:30px 34px;margin-bottom:26px;box-shadow:0 8px 24px rgba(31,92,140,.18)}
-.masthead h1{margin:0 0 6px;font-size:27px}
+.masthead h1{margin:0 0 6px;font-size:26px}
 .masthead p{margin:4px 0;opacity:.94;font-size:14.5px}
 .masthead .note{margin-top:14px;font-size:12.5px;opacity:.82;border-top:1px solid rgba(255,255,255,.25);padding-top:10px}
 .how{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:30px}
@@ -56,6 +57,7 @@ main{flex:1;min-width:0;padding:30px 42px 120px;max-width:1000px;margin:0 auto}
 .c-bridge{background:var(--bridge);border-color:var(--bridge-b)}
 .c-deep{background:var(--deep);border-color:var(--deep-b)}
 .c-qual{background:var(--qual);border-color:var(--qual-b)}
+.c-calc{background:var(--calc);border-color:var(--calc-b)}
 .chapter{background:var(--panel);border:1px solid var(--line);border-radius:16px;
   padding:26px 30px;margin-bottom:34px;scroll-margin-top:14px;box-shadow:0 2px 10px rgba(20,40,60,.04)}
 .ch-head{border-bottom:2px solid var(--brand);padding-bottom:12px;margin-bottom:18px}
@@ -95,7 +97,13 @@ main{flex:1;min-width:0;padding:30px 42px 120px;max-width:1000px;margin:0 auto}
 .box-qual .exq .sol{margin-top:5px}
 .box-qual .pitfall{color:#a5281b;font-weight:700}
 .box-qual h4{color:#8a6400;font-size:15px;margin:14px 0 4px}
-.box-exam ol{margin:6px 0 6px 2px;padding-left:20px} .box-exam li{margin:6px 0}
+.box-calc{background:var(--calc)} .box-calc .box-title{background:#dfe3f7;color:#2f3d95;border-bottom:2px solid var(--calc-b)}
+.box-calc .box-body{padding:10px 20px 18px}
+.box-calc h4{color:#2f3d95;font-size:15px;margin:14px 0 5px;border-left:4px solid var(--calc-b);padding-left:9px}
+.box-calc .ex{background:#fff;border:1px solid #ccd3f0;border-radius:8px;padding:9px 14px;margin:11px 0}
+.box-calc .given{background:#f5f7fe;border-radius:6px;padding:5px 10px;margin:5px 0;font-size:13.5px}
+.box-calc .step{margin:5px 0 5px 4px}
+.box-calc .ans{font-weight:700;color:#2f3d95;background:#e6eaf9;border-radius:6px;padding:4px 10px;margin-top:6px;display:inline-block}
 table{border-collapse:collapse;width:100%;margin:10px 0;font-size:13.6px;background:#fff}
 th,td{border:1px solid #d5dde5;padding:7px 10px;text-align:left;vertical-align:top}
 thead th{background:#eef3f8;color:#26526f;font-weight:700}
@@ -170,24 +178,29 @@ tbody tr:nth-child(even){background:#fafcfe}
 <a class="toc-link" href="#ch41" data-txt="41 職業流行病學 Occupational Epidemiology"><span class="tl-num">41</span><span class="tl-zh">職業流行病學</span></a>
 <a class="toc-link" href="#ch42" data-txt="42 營養流行病學 Nutritional Epidemiology"><span class="tl-num">42</span><span class="tl-zh">營養流行病學</span></a>
 <a class="toc-link" href="#ch43" data-txt="43 藥物流行病學 Pharmacoepidemiology"><span class="tl-num">43</span><span class="tl-zh">藥物流行病學</span></a>
+<div class="toc-part">第八部：專題補充（考前加強）</div>
+<a class="toc-link" href="#ch44" data-txt="S1 專題：AI 能否取代傳統流行病學 Can AI Replace Traditional Epidemiology?"><span class="tl-num">S1</span><span class="tl-zh">專題：AI 能否取代傳統流行病學</span></a>
+<a class="toc-link" href="#ch45" data-txt="S2 專題：標的試驗仿真（TTE）能否達 RCT 等級證據 Can Target Trial Emulation Achieve RCT-level Evidence?"><span class="tl-num">S2</span><span class="tl-zh">專題：標的試驗仿真（TTE）能否達 RCT 等級證據</span></a>
+<a class="toc-link" href="#ch46" data-txt="S3 專題：競爭風險 — 1−KM vs CIF Competing Risks: 1-KM vs CIF"><span class="tl-num">S3</span><span class="tl-zh">專題：競爭風險 — 1−KM vs CIF</span></a>
 </nav>
 <main>
 <div class="masthead">
   <h1>現代流行病學 · 精讀複習手冊（資格考詳細版）</h1>
-  <p><b>Modern Epidemiology</b>（第 5 版）· 全 43 章 · 正體中文</p>
-  <p>每章：核心邏輯與方法地圖 → 重點解說 → <b>深入解析與推導（資格考深化：進階觀念、關鍵推導、口試常見追問）</b> → 方法比較總表／重要公式總整理／考試重點／接回其他單元。</p>
-  <div class="note">說明：本手冊為原著概念之中文重點整理與解說（精讀複習版），屬讀書筆記性質，非原文逐句翻譯；名詞與公式以教學方式重新表述，供學習與複習使用。</div>
+  <p><b>Modern Epidemiology</b>（第 5 版）· 全 43 章 ＋ 3 專題 · 正體中文</p>
+  <p>每章：核心邏輯與方法地圖 → 本文逐段詳解 → 深入解析與推導 → 資格考真題與詳解 → 計算型例題 → 方法比較總表／重要公式／考試重點／接回其他單元。</p>
+  <div class="note">說明：本手冊為原著概念之中文重點整理與解說（精讀複習版），屬讀書筆記性質，非原文逐句翻譯；資格考真題與專題內容整理自使用者提供之複習資料，名詞與公式以教學方式重新表述，供學習與複習使用。</div>
 </div>
 <div class="how">
   <h3>如何使用這份手冊</h3>
-  <p>左側目錄依原書分部排列，可點選跳章、可輸入關鍵字過濾。每一章固定包含六個區塊，用顏色區分：</p>
+  <p>左側目錄依原書分部排列，可點選跳章、可輸入關鍵字過濾。每一章用顏色區分不同區塊：</p>
   <div class="legend">
     <span class="chip c-map">🧭 核心邏輯與方法地圖</span>
-    <span class="chip">本文重點解說</span>
-    <span class="chip c-compare">📊 方法比較總表</span>
-    <span class="chip c-formula">🧮 重要公式總整理</span>
+    <span class="chip">本文逐段詳解</span>
     <span class="chip c-deep">🔬 深入解析與推導</span>
     <span class="chip c-qual">🎓 資格考真題與詳解</span>
+    <span class="chip c-calc">🧮 計算型例題</span>
+    <span class="chip c-compare">📊 方法比較總表</span>
+    <span class="chip c-formula">🧮 重要公式總整理</span>
     <span class="chip c-exam">🎯 考試重點</span>
     <span class="chip c-bridge">🔗 接回其他單元</span>
   </div>
@@ -486,6 +499,22 @@ tbody tr:nth-child(even){background:#fafcfe}
 <div class="exq"><span class="yr">109-2 / 110-1</span><span class="qtitle">名詞：Cumulative incidence（累積發生率）</span>
 <div class="sol">一段固定期間內原本無病者發病的比例（機率，需註明時間長度）；與 IR 的橋樑為 \(CI=1-e^{-IR\cdot t}\approx IR\cdot t\)（罕見）。</div></div>
 </div></div>
+<div class="box box-calc"><div class="box-title">🧮 計算型例題（帶數字演練）</div><div class="box-body">
+<h4>例 1｜由人時算發生率</h4>
+<div class="ex"><div class="given">一世代追蹤 5 人：A 追 2 年後發病；B 追 5 年未發病；C 追 1 年後發病；D 追 4 年失訪；E 追 5 年未發病。求發生率。</div>
+<div class="step">總人時 \(=2+5+1+4+5=17\) 人年；事件數 \(=2\)（A、C）。</div>
+<div class="step">發生率 \(IR=\dfrac{2}{17}=0.118\) 每人年。</div>
+<div class="ans">IR ≈ 0.12 /人年（11.8 例／100 人年）</div></div>
+<h4>例 2｜由率估累積發生率（風險）</h4>
+<div class="ex"><div class="given">某病發生率固定 \(\lambda=0.05\)／人年，問 3 年累積發生率。</div>
+<div class="step">\(CI=1-e^{-\lambda t}=1-e^{-0.05\times3}=1-e^{-0.15}=1-0.861\)。</div>
+<div class="step">近似法（罕見）：\(CI\approx\lambda t=0.15\)（略高估）。</div>
+<div class="ans">CI = 0.139（精確）≈ 0.15（近似）</div></div>
+<h4>例 3｜盛行率 = 發生率 × 病程</h4>
+<div class="ex"><div class="given">發生率 \(IR=10\)／1000 人年，平均病程 \(\bar D=4\) 年。估穩態盛行率。</div>
+<div class="step">\(\dfrac{P}{1-P}\approx IR\times\bar D=0.010\times4=0.04\Rightarrow P=\dfrac{0.04}{1.04}\)。</div>
+<div class="ans">P ≈ 0.038（3.8%）</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>量</th><th>分母</th><th>範圍/單位</th><th>需指定時間？</th><th>主要用途</th></tr></thead>
 <tbody>
@@ -566,6 +595,23 @@ tbody tr:nth-child(even){background:#fafcfe}
 <div class="sol">\( VE=1-RR=\dfrac{I_{unvacc}-I_{vacc}}{I_{unvacc}} \)。例：\(I_{vacc}=0.40,I_{unvacc}=0.36\Rightarrow RR=1.11,VE=-11\%\)（負值＝未降風險）。<span class="pitfall">注意</span>：算出負 VE 要能解讀，別誤把分子分母顛倒。</div></div>
 <div class="exq"><span class="yr">114-2 第二部份</span><span class="qtitle">疫苗效果與交互作用（3 題）</span>
 <div class="sol">結合 VE 與交互作用尺度（相加 vs 相乘），連第 26、32 章。</div></div>
+</div></div>
+<div class="box box-calc"><div class="box-title">🧮 計算型例題（帶數字演練）</div><div class="box-body">
+<h4>例 1｜由 2×2 表算 RD、RR、OR</h4>
+<div class="ex"><div class="given">暴露組 1000 人 90 發病；未暴露 1000 人 30 發病。</div>
+<div class="step">\(R_1=90/1000=0.09,\ R_0=30/1000=0.03\)。</div>
+<div class="step">RD \(=0.09-0.03=0.06\)；RR \(=0.09/0.03=3.0\)。</div>
+<div class="step">OR \(=\dfrac{90/910}{30/970}=\dfrac{90\times970}{910\times30}=\dfrac{87300}{27300}=3.20\)。</div>
+<div class="ans">RD=0.06、RR=3.0、OR=3.20（病不算罕見，OR>RR）</div></div>
+<h4>例 2｜歸因分數 AFe 與 PAF</h4>
+<div class="ex"><div class="given">承上 RR=3；暴露盛行率 \(P_e=0.30\)。</div>
+<div class="step">暴露者歸因分數 \(AF_e=\dfrac{RR-1}{RR}=\dfrac{2}{3}=0.67\)。</div>
+<div class="step">族群歸因分數 \(PAF=\dfrac{P_e(RR-1)}{1+P_e(RR-1)}=\dfrac{0.3\times2}{1+0.3\times2}=\dfrac{0.6}{1.6}\)。</div>
+<div class="ans">AFe = 67%、PAF = 37.5%</div></div>
+<h4>例 3｜弱因子但普遍 → 大 PAF</h4>
+<div class="ex"><div class="given">因子甲 RR=5、\(P_e=0.02\)；因子乙 RR=1.3、\(P_e=0.80\)。比較 PAF。</div>
+<div class="step">甲：\(\dfrac{0.02\times4}{1+0.08}=0.074\)；乙：\(\dfrac{0.8\times0.3}{1+0.24}=\dfrac{0.24}{1.24}=0.194\)。</div>
+<div class="ans">乙(19.4%) > 甲(7.4%)：弱但普遍的因子公衛衝擊更大</div></div>
 </div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>測量</th><th>公式</th><th>尺度</th><th>無效應值</th><th>主要用途/備註</th></tr></thead>
@@ -806,6 +852,18 @@ tbody tr:nth-child(even){background:#fafcfe}
 <div class="sol">就醫且檢驗者中比較陽性/陰性者的疫苗暴露，<b>自動部分校正就醫傾向</b>；近年疫苗效力主力設計。</div></div>
 <div class="exq"><span class="yr">102-2/104/105 題4</span><span class="qtitle">Density vs Cumulative 病例對照</span>
 <div class="sol">密度（風險集）抽樣→OR＝IRR（免罕見假設）；累積（存活者）抽樣→須罕見病才 OR≈RR（見本章推導）。</div></div>
+</div></div>
+<div class="box box-calc"><div class="box-title">🧮 計算型例題（帶數字演練）</div><div class="box-body">
+<h4>例 1｜配對病例對照的 OR 與 CI（只用不一致對）</h4>
+<div class="ex"><div class="given">1:1 配對，40 對「病例暴露、對照未暴露」(b=40)；10 對「病例未暴露、對照暴露」(c=10)；其餘為一致對。</div>
+<div class="step">\(\widehat{OR}=b/c=40/10=4.0\)（一致對不進入）。</div>
+<div class="step">\(SE(\ln OR)=\sqrt{1/b+1/c}=\sqrt{1/40+1/10}=\sqrt{0.125}=0.354\)。</div>
+<div class="step">95% CI \(=4.0\times e^{\pm1.96\times0.354}=4.0\times e^{\pm0.693}=(2.00,\ 8.0)\)。</div>
+<div class="ans">OR=4.0，95% CI 2.0–8.0</div></div>
+<h4>例 2｜密度抽樣 OR 直接是率比</h4>
+<div class="ex"><div class="given">風險集（密度）抽樣：病例暴露 a=60、未暴露 c=40；對照暴露 b=30、未暴露 d=90。</div>
+<div class="step">\(OR=\dfrac{ad}{bc}=\dfrac{60\times90}{30\times40}=\dfrac{5400}{1200}=4.5\)。</div>
+<div class="ans">OR=4.5，因密度抽樣直接估率比 IRR（免罕見假設）</div></div>
 </div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>對照抽樣</th><th>從何抽對照</th><th>OR 估計的量</th><th>需罕見病假設？</th></tr></thead>
@@ -1106,6 +1164,18 @@ tbody tr:nth-child(even){background:#fafcfe}
 <div class="exq"><span class="yr">114-1 Q3</span><span class="qtitle">未測量混淆 bias analysis（Lee 閾值 × E-value）</span>
 <div class="sol">E-value \(=RR+\sqrt{RR(RR-1)}\)（VanderWeele & Ding 2017）＋Lee 2011 閾值法、Ding & VanderWeele 2016 bounding factor。<span class="pitfall">此題原作答有訂正</span>：要正確說明「需多強的未測干擾才能解釋掉關聯」。詳見第 29 章。</div></div>
 </div></div>
+<div class="box box-calc"><div class="box-title">🧮 計算型例題（帶數字演練）</div><div class="box-body">
+<h4>例 1｜Mantel–Haenszel 合併 OR（兩層）</h4>
+<div class="ex"><div class="given">層1(n=200)：a=30,b=20,c=20,d=130；層2(n=200)：a=50,b=30,c=20,d=100。</div>
+<div class="step">分子 \(\sum a_id_i/n_i=\dfrac{30\times130}{200}+\dfrac{50\times100}{200}=19.5+25=44.5\)。</div>
+<div class="step">分母 \(\sum b_ic_i/n_i=\dfrac{20\times20}{200}+\dfrac{30\times20}{200}=2.0+3.0=5.0\)。</div>
+<div class="step">\(OR_{MH}=44.5/5.0=8.9\)。</div>
+<div class="ans">OR(M–H) = 8.9</div></div>
+<h4>例 2｜E-value（量化未測干擾）</h4>
+<div class="ex"><div class="given">觀察 \(RR=3.0\)，問要多強的未測干擾才能解釋掉。</div>
+<div class="step">\(E=RR+\sqrt{RR(RR-1)}=3+\sqrt{3\times2}=3+2.449\)。</div>
+<div class="ans">E-value = 5.45：未測干擾對暴露、對結果的 RR 都須 ≥5.45 才能解釋掉關聯</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>控制方法</th><th>階段</th><th>優點</th><th>缺點</th></tr></thead>
 <tbody>
@@ -1191,6 +1261,18 @@ tbody tr:nth-child(even){background:#fafcfe}
 <div class="sol">結果偽陽性↑屬非差別錯分；用 Se/Sp 做矩陣校正回推真實細格（第 29 章）。</div></div>
 <div class="exq"><span class="yr">102-2 題5</span><span class="qtitle">Matching 與 Nondifferential misclassification</span>
 <div class="sol">配對的效率/偏差取捨＋非差別錯分方向。</div></div>
+</div></div>
+<div class="box box-calc"><div class="box-title">🧮 計算型例題（帶數字演練）</div><div class="box-body">
+<h4>例 1｜Se、Sp、PPV（PPV 隨盛行率變）</h4>
+<div class="ex"><div class="given">檢驗 Se=0.90、Sp=0.95。情境A盛行率 \(\pi=0.10\)；情境B \(\pi=0.01\)。</div>
+<div class="step">A：\(PPV=\dfrac{0.9\times0.1}{0.9\times0.1+0.05\times0.9}=\dfrac{0.09}{0.09+0.045}=0.667\)。</div>
+<div class="step">B：\(PPV=\dfrac{0.9\times0.01}{0.009+0.05\times0.99}=\dfrac{0.009}{0.009+0.0495}=0.154\)。</div>
+<div class="ans">PPV：盛行 10%→67%、盛行 1%→15%（罕見病多假陽）</div></div>
+<h4>例 2｜非差別錯分的衰減</h4>
+<div class="ex"><div class="given">真實暴露：病例 60%、對照 30%。暴露測量 Se=0.8、Sp=0.9（非差別）。</div>
+<div class="step">觀察暴露率 \(p^*=Se\cdot p+(1-Sp)(1-p)\)。病例：\(0.8(0.6)+0.1(0.4)=0.52\)；對照：\(0.8(0.3)+0.1(0.7)=0.31\)。</div>
+<div class="step">真 OR \(=\dfrac{.6/.4}{.3/.7}=3.5\)；觀察 OR \(=\dfrac{.52/.48}{.31/.69}=\dfrac{1.083}{0.449}=2.41\)。</div>
+<div class="ans">OR 由 3.5 衰減到 2.41（非差別二分→偏向虛無）</div></div>
 </div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>錯分類型</th><th>誤差是否與另一變項相關</th><th>對效應的方向</th><th>典型例</th></tr></thead>
@@ -1348,6 +1430,17 @@ tbody tr:nth-child(even){background:#fafcfe}
 <div class="exq"><span class="yr">114-1 Q6</span><span class="qtitle">三大偏差對 validity 與 precision 的影響</span>
 <div class="sol">系統誤差（干擾/選擇/資訊）影響<b>效度</b>，加大樣本不能修；隨機誤差影響<b>精確度</b>，靠樣本數/事件數改善。MSE＝Bias²＋Variance。</div></div>
 </div></div>
+<div class="box box-calc"><div class="box-title">🧮 計算型例題（帶數字演練）</div><div class="box-body">
+<h4>例 1｜RR 的 95% 信賴區間（對數尺度）</h4>
+<div class="ex"><div class="given">暴露組 a=90/n₁=1000；未暴露 c=30/n₀=1000，RR=3.0。</div>
+<div class="step">\(SE(\ln RR)=\sqrt{\tfrac1a-\tfrac1{n_1}+\tfrac1c-\tfrac1{n_0}}=\sqrt{\tfrac1{90}-\tfrac1{1000}+\tfrac1{30}-\tfrac1{1000}}=\sqrt{0.0411}=0.203\)。</div>
+<div class="step">95% CI \(=3.0\times e^{\pm1.96\times0.203}=3.0\times e^{\pm0.398}=(2.01,\ 4.47)\)。</div>
+<div class="ans">RR=3.0，95% CI 2.0–4.5</div></div>
+<h4>例 2｜兩比例的樣本數</h4>
+<div class="ex"><div class="given">欲偵測 \(p_1=0.15\) vs \(p_0=0.10\)，\(\alpha=0.05\)（雙尾 z=1.96）、power=0.8（z=0.84）。</div>
+<div class="step">\(n=\dfrac{(1.96+0.84)^2[0.15(0.85)+0.10(0.90)]}{(0.05)^2}=\dfrac{7.84\times(0.1275+0.09)}{0.0025}=\dfrac{7.84\times0.2175}{0.0025}\)。</div>
+<div class="ans">每組 n ≈ 682（共約 1364）</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>概念</th><th>正確理解</th><th>常見誤解</th></tr></thead>
 <tbody>
@@ -1502,6 +1595,19 @@ tbody tr:nth-child(even){background:#fafcfe}
 <div class="exq"><span class="yr">109-2 II-6</span><span class="qtitle">肝癌的 Poisson 迴歸與假說檢定</span>
 <div class="sol">同上框架，人年 offset＋率比解讀。</div></div>
 </div></div>
+<div class="box box-calc"><div class="box-title">🧮 計算型例題（帶數字演練）</div><div class="box-body">
+<h4>例 1｜OR 的 95% CI（Woolf）</h4>
+<div class="ex"><div class="given">2×2：a=50,b=50,c=20,d=80。</div>
+<div class="step">\(OR=\dfrac{50\times80}{50\times20}=\dfrac{4000}{1000}=4.0\)。</div>
+<div class="step">\(SE(\ln OR)=\sqrt{\tfrac1{50}+\tfrac1{50}+\tfrac1{20}+\tfrac1{80}}=\sqrt{0.0825}=0.287\)。</div>
+<div class="step">95% CI \(=4.0\times e^{\pm1.96\times0.287}=(2.28,\ 7.02)\)。</div>
+<div class="ans">OR=4.0，95% CI 2.28–7.02</div></div>
+<h4>例 2｜卡方檢定</h4>
+<div class="ex"><div class="given">同上表，總 n=200。檢定關聯。</div>
+<div class="step">期望值：如 E(a)=行和×列和/n \(=100\times70/200=35\)。</div>
+<div class="step">\(\chi^2=\sum\dfrac{(O-E)^2}{E}\)（四格）\(\approx 20.6\)，df=1，臨界 3.84。</div>
+<div class="ans">χ²≈20.6 > 3.84，p<0.001，關聯顯著</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>檢定</th><th>適用</th><th>備註</th></tr></thead>
 <tbody>
@@ -1575,6 +1681,16 @@ tbody tr:nth-child(even){background:#fafcfe}
 <div class="sol">直接：用<b>標準人口結構 \(W_i\)</b> 套研究族群年齡別率 \(I_i\)：\( I_{direct}=\dfrac{\sum W_i I_i}{\sum W_i} \)。間接：用標準族群年齡別率套研究族群人口得期望數 \(E\)：\( SMR=O/E \)。時間標準化例：台灣 2000 vs 2020 心臟病死亡率（排除人口老化）；空間例：花蓮 vs 台北。Poisson 標準化：\(\log\mu=\log t+\beta_1 X_{地區}+\beta_2 X_{age}\)，年齡當共變數控制干擾。</div></div>
 <div class="exq"><span class="yr">113-2 Q3</span><span class="qtitle">直接 vs 間接標準化</span>
 <div class="sol">選權重＝選目標人群；<span class="pitfall">SMR 因各用自身人時結構加權，不同 SMR 不可直接互比</span>。</div></div>
+</div></div>
+<div class="box box-calc"><div class="box-title">🧮 計算型例題（帶數字演練）</div><div class="box-body">
+<h4>例 1｜直接標準化</h4>
+<div class="ex"><div class="given">兩年齡層。研究族群層別率：青年 5/1000、老年 40/1000。標準人口：青年 8000 人、老年 2000 人。</div>
+<div class="step">標準化率 \(=\dfrac{\sum W_iI_i}{\sum W_i}=\dfrac{8000\times0.005+2000\times0.040}{10000}=\dfrac{40+80}{10000}\)。</div>
+<div class="ans">直接標準化率 = 12／1000</div></div>
+<h4>例 2｜間接標準化與 SMR</h4>
+<div class="ex"><div class="given">研究世代觀察死亡 90 例。標準人口層別率套到本世代人時，期望死亡：青年 30＋老年 45＝75。</div>
+<div class="step">\(SMR=\dfrac{O}{E}=\dfrac{90}{75}=1.20\)。</div>
+<div class="ans">SMR=1.20（比一般人口高 20%；不同 SMR 不可互比）</div></div>
 </div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th></th><th>Mantel–Haenszel</th><th>直接標準化</th><th>間接標準化(SMR)</th></tr></thead>
@@ -1881,6 +1997,18 @@ tbody tr:nth-child(even){background:#fafcfe}
 <div class="exq"><span class="yr">競爭風險專題</span><span class="qtitle">Cause-specific vs Subdistribution hazard、KM vs CIF</span>
 <div class="sol">原因別危害回答「病因」，次分佈危害（Fine–Gray）回答「絕對風險/預測」；1−KM 高估、CIF 正確。</div></div>
 </div></div>
+<div class="box box-calc"><div class="box-title">🧮 計算型例題（帶數字演練）</div><div class="box-body">
+<h4>例 1｜Kaplan–Meier 估計</h4>
+<div class="ex"><div class="given">10 人。第 2 年 1 死（其餘 9 在風險）；第 5 年 1 人在風險 8 時死（中間第 4 年有 1 人設限）。</div>
+<div class="step">\(t=2\)：\(S=1\times(1-\tfrac19)=0.889\)。</div>
+<div class="step">\(t=5\)：風險數 \(n=8\)（扣掉死者與設限者），\(S=0.889\times(1-\tfrac18)=0.889\times0.875\)。</div>
+<div class="ans">S(2)=0.889、S(5)=0.778</div></div>
+<h4>例 2｜為何 1−KM 高估（競爭風險）</h4>
+<div class="ex"><div class="given">100 人追蹤：目標事件 20、競爭死亡 30、其餘存活。若把競爭死亡當設限。</div>
+<div class="step">1−KM 假設 30 名競爭死亡者「仍可能發生目標事件」，把不可能的風險灌入 → 高估。</div>
+<div class="step">CIF 用 all-cause 存活加權，正確扣除被競爭事件搶走的人。</div>
+<div class="ans">正解用 CIF（見專題 S3）；1−KM＞CIF</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>方法</th><th>類型</th><th>產出</th><th>關鍵假設</th></tr></thead>
 <tbody>
@@ -2173,6 +2301,17 @@ tbody tr:nth-child(even){background:#fafcfe}
 <div class="exq"><span class="yr">114-1 Q5 / 114-2</span><span class="qtitle">Poisson 交互、疫苗交互作用</span>
 <div class="sol">指明尺度；公衛決策看相加交互（RERI/AP/S）。</div></div>
 </div></div>
+<div class="box box-calc"><div class="box-title">🧮 計算型例題（帶數字演練）</div><div class="box-body">
+<h4>例 1｜相加交互 RERI</h4>
+<div class="ex"><div class="given">菸×石綿：\(RR_{10}=10\)（僅菸）、\(RR_{01}=5\)（僅石綿）、\(RR_{11}=50\)（皆有）。</div>
+<div class="step">乘法檢查：\(RR_{10}\times RR_{01}=10\times5=50=RR_{11}\Rightarrow\) 乘法無交互。</div>
+<div class="step">相加檢查：\(RERI=RR_{11}-RR_{10}-RR_{01}+1=50-10-5+1=36>0\)。</div>
+<div class="ans">乘法無交互，但相加有強正交互（RERI=36）→ 尺度相依</div></div>
+<h4>例 2｜歸因於交互的比例 AP</h4>
+<div class="ex"><div class="given">承上，AP＝RERI/RR₁₁。</div>
+<div class="step">\(AP=36/50=0.72\)。</div>
+<div class="ans">雙暴露者中 72% 的超額風險可歸因於交互作用</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>概念</th><th>尺度/框架</th><th>回答的問題</th></tr></thead>
 <tbody>
@@ -2244,6 +2383,14 @@ NIE\(=E[Y_{1,M_1}-Y_{1,M_0}]\)（暴露固定、僅動中介）。<br>
 <div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
 <div class="exq"><span class="yr">111-1 應用一</span><span class="qtitle">Mediation：三法、因果 NDE/NIE、四假設</span>
 <div class="sol">三法：Difference-based（IE\(=\beta_s^*-\beta_s\)）、Product/Baron–Kenny（IE\(=\alpha_s\beta_m\)）、因果推論（potential outcomes 定義 NDE/NIE）。<b>因果定義</b>：\(NDE=E[Y(s_1,M(s_0))]-E[Y(s_0,M(s_0))]\)，\(NIE=E[Y(s_1,M(s_1))]-E[Y(s_1,M(s_0))]\)，\(TE=NDE+NIE\)。<span class="pitfall">原檔訂正</span>：把 TE 誤寫成只有 NIE 的式子；正確 TE\(=E[Y(s_1,M(s_1))]-E[Y(s_0,M(s_0))]\)。四可辨識假設：S–Y、M–Y、S–M 無未測干擾，且<b>無「由 S 引發又是 M–Y 共因」的變項</b>。例：SNP→抽菸→肺癌。</div></div>
+</div></div>
+<div class="box box-calc"><div class="box-title">🧮 計算型例題（帶數字演練）</div><div class="box-body">
+<h4>例｜線性中介的效應分解（乘積法）</h4>
+<div class="ex"><div class="given">中介模型 \(M=\alpha_0+\alpha_s S\)，\(\alpha_s=2\)；結果模型 \(Y=\beta_0+\beta_s S+\beta_m M\)，\(\beta_s=1.5\)、\(\beta_m=0.4\)。</div>
+<div class="step">直接效應 DE \(=\beta_s=1.5\)。</div>
+<div class="step">間接效應 IE \(=\alpha_s\beta_m=2\times0.4=0.8\)。</div>
+<div class="step">總效應 TE \(=DE+IE=1.5+0.8=2.3\)；被中介比例 \(=0.8/2.3\)。</div>
+<div class="ans">DE=1.5、IE=0.8、TE=2.3、被中介比例=35%（無交互、線性下乘積法=差異法）</div></div>
 </div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>效應</th><th>定義</th><th>用途</th></tr></thead>
@@ -2324,6 +2471,13 @@ NIE\(=E[Y_{1,M_1}-Y_{1,M_0}]\)（暴露固定、僅動中介）。<br>
 <div class="exq"><span class="yr">114-2</span><span class="qtitle">適應症混淆的解方：IV／pragmatic RCT</span>
 <div class="sol">未測的嚴重度→用工具變數或務實試驗繞過。</div></div>
 </div></div>
+<div class="box box-calc"><div class="box-title">🧮 計算型例題（帶數字演練）</div><div class="box-body">
+<h4>例｜Wald 工具變數估計</h4>
+<div class="ex"><div class="given">工具 Z（0/1）。Z=1 組結果均值 8.0、暴露率 0.6；Z=0 組結果均值 5.0、暴露率 0.2。</div>
+<div class="step">Z 對 Y 效應 \(=8.0-5.0=3.0\)；Z 對 A 效應 \(=0.6-0.2=0.4\)。</div>
+<div class="step">\(\hat\beta_{IV}=\dfrac{\text{Z→Y}}{\text{Z→A}}=\dfrac{3.0}{0.4}=7.5\)。</div>
+<div class="ans">IV 估計 = 7.5（暴露對結果的因果效應，順從者 LATE）</div></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>方法</th><th>借用的外生變異</th><th>關鍵假設</th><th>估計對象</th></tr></thead>
 <tbody>
@@ -2397,6 +2551,17 @@ NIE\(=E[Y_{1,M_1}-Y_{1,M_0}]\)（暴露固定、僅動中介）。<br>
 <div class="sol">E-value \(=RR+\sqrt{RR(RR-1)}\)（VanderWeele & Ding 2017）＝「要多強的未測干擾（對暴露、對結果 RR 皆達此值）才能解釋掉關聯」；Lee 2011 閾值法；Ding & VanderWeele 2016 bounding factor \(\dfrac{RR_{EU}\,RR_{UY}}{RR_{EU}+RR_{UY}-1}\)。<span class="pitfall">此題原作答方向錯誤已訂正。</span></div></div>
 <div class="exq"><span class="yr">108 Part II(2)</span><span class="qtitle">特異度=0.8 的偏誤分析</span>
 <div class="sol">用 Se/Sp 反推真實細格（矩陣校正），量化錯分對估計的影響。</div></div>
+</div></div>
+<div class="box box-calc"><div class="box-title">🧮 計算型例題（帶數字演練）</div><div class="box-body">
+<h4>例 1｜錯分的矩陣校正（非差別）</h4>
+<div class="ex"><div class="given">觀察到某組暴露陽性 \(a^*=300\)（總 N=1000）。已知 Se=0.90、Sp=0.80。</div>
+<div class="step">真陽 \(a=\dfrac{a^*-(1-Sp)N}{Se+Sp-1}=\dfrac{300-0.2\times1000}{0.9+0.8-1}=\dfrac{300-200}{0.7}\)。</div>
+<div class="ans">真實暴露數 ≈ 143（觀察值 300 大幅高估）</div></div>
+<h4>例 2｜E-value 對 CI 下界</h4>
+<div class="ex"><div class="given">\(RR=2.5\)，95% CI 下界 1.5。</div>
+<div class="step">點估計 E \(=2.5+\sqrt{2.5\times1.5}=2.5+1.94=4.44\)。</div>
+<div class="step">下界 E \(=1.5+\sqrt{1.5\times0.5}=1.5+0.87=2.37\)。</div>
+<div class="ans">E-value：點估計 4.44、下界 2.37（下界較小＝較易被推翻）</div></div>
 </div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>層次</th><th>偏差參數</th><th>產出</th></tr></thead>
@@ -2608,6 +2773,20 @@ NIE\(=E[Y_{1,M_1}-Y_{1,M_0}]\)（暴露固定、僅動中介）。<br>
 <div class="sol">\(VE=1-RR\)；疫苗有直接/間接/總效應（因 interference，需群集設計分辨）。</div></div>
 <div class="exq"><span class="yr">114-1 Q9</span><span class="qtitle">Test-negative design 估疫苗效力</span>
 <div class="sol">就醫檢驗者中比較陽性/陰性的疫苗史，部分校正就醫傾向；近年主力。</div></div>
+</div></div>
+<div class="box box-calc"><div class="box-title">🧮 計算型例題（帶數字演練）</div><div class="box-body">
+<h4>例 1｜群體免疫閾值</h4>
+<div class="ex"><div class="given">某傳染病 \(R_0=4\)。</div>
+<div class="step">\(H_c=1-\dfrac{1}{R_0}=1-\dfrac14=0.75\)。</div>
+<div class="ans">需 75% 免疫才能阻斷持續傳播</div></div>
+<h4>例 2｜疫苗效力 VE</h4>
+<div class="ex"><div class="given">接種組發生率 0.02、未接種 0.10。</div>
+<div class="step">\(RR=0.02/0.10=0.2\)；\(VE=1-RR=1-0.2\)。</div>
+<div class="ans">VE = 80%</div></div>
+<h4>例 3｜有效再生數</h4>
+<div class="ex"><div class="given">\(R_0=4\)，易感比例已降到 \(s=0.4\)。</div>
+<div class="step">\(R_t=R_0\times s=4\times0.4=1.6\)。</div>
+<div class="ans">R_t=1.6（>1，仍會流行）</div></div>
 </div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>量</th><th>意義</th></tr></thead>
@@ -2952,6 +3131,13 @@ NIE\(=E[Y_{1,M_1}-Y_{1,M_0}]\)（暴露固定、僅動中介）。<br>
 <div class="sol">設計：nested case-control 或獨立 case-control，頻率匹配；樣本數依 MAF、OR、power(0.8)、顯著水準 \(5\times10^{-8}\) 估算。QC：call rate、MAF、<b>Hardy–Weinberg 平衡</b>。分析：每 SNP logistic（加性模型）＋<b>主成分 PC 控族群分層</b>；Manhattan／QQ plot。罕見病：多中心、登錄、聚焦 low-frequency/rare 變異。多重檢定：全基因組閾值 \(5\times10^{-8}\)。<b>PRS</b>＝多變異加權風險分數。</div></div>
 <div class="exq"><span class="yr">109-2 I-1</span><span class="qtitle">Mendelian randomization</span>
 <div class="sol">基因當工具估暴露→結果因果；威脅為水平多效性，用 MR-Egger／加權中位數敏感度分析（第 28 章）。</div></div>
+</div></div>
+<div class="box box-calc"><div class="box-title">🧮 計算型例題（帶數字演練）</div><div class="box-body">
+<h4>例｜雙生子遺傳率</h4>
+<div class="ex"><div class="given">某性狀 MZ（同卵）相關 \(r_{MZ}=0.70\)、DZ（異卵）相關 \(r_{DZ}=0.45\)。</div>
+<div class="step">\(h^2\approx 2(r_{MZ}-r_{DZ})=2(0.70-0.45)=2\times0.25\)。</div>
+<div class="step">共享環境 \(c^2=2r_{DZ}-r_{MZ}=0.90-0.70=0.20\)。</div>
+<div class="ans">遺傳率 h²≈0.50、共享環境 c²≈0.20（h² 為族群相依，非固定）</div></div>
 </div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th></th><th>連鎖分析</th><th>關聯/GWAS</th></tr></thead>
@@ -3397,9 +3583,200 @@ NIE\(=E[Y_{1,M_1}-Y_{1,M_0}]\)（暴露固定、僅動中介）。<br>
 <p><b>往後接：</b>臨床療效比較（35）、疫苗安全（32）、方法整合的真實世界證據總複習。</p>
 </div></div>
 <a class="back-top" href="#top">↑ 回頂端</a></section>
+<section class="chapter" id="ch44">
+<div class="ch-head"><span class="ch-num">專題 S1</span><h2>專題：AI 能否取代傳統流行病學</h2><div class="ch-en">Can AI Replace Traditional Epidemiology?</div></div>
+<div class="box box-map"><div class="box-title">🧭 核心邏輯與方法地圖</div><div class="box-body">
+<p>這份專題辯的是一個<b>方法學核心問題</b>：<b>資料驅動（data-driven）的 AI，能不能取代假說驅動（hypothesis-driven）的流行病學？</b></p>
+<ul>
+<li><b>正方</b>談 AI 的「預測力」（時效、準確、多維整合、精準公衛、自動監測）。</li>
+<li><b>反方</b>用三個經典失敗案例證明「<b>預測強 ≠ 能做因果與決策</b>」。</li>
+<li><b>結論</b>收斂到<b>互補而非取代（augment, not replace）</b>。</li>
+</ul>
+<p>主線＝資格考反覆考的價值觀：<b>關聯 ≠ 因果、預測 ≠ 解釋</b>。</p>
+</div></div>
+<div class="ch-body">
+<h3>1. AI 工具的五種類型：分清「預測」與「因果」兩條線</h3>
+<p>報告依 Matthay 等人（2025）把 AI 工具分五類，記憶關鍵是<b>前兩類找型態、後三類才碰因果</b>：<b>預測模型</b>（用預測變數預測結果，屬關聯/預測）、<b>非監督學習</b>（分群、分型，探索性）、<b>因果結構學習</b>（演算法推斷 DAG）、<b>因果估計</b>（預測反事實、估 ATE）、<b>生成模型</b>（建聯合機率、生成資料，如 GAN/VAE）。看到 AI 應用先問：它落在「找型態」還是「做因果」？</p>
+
+<h3>2. AI 模型 vs 傳統流病模型（高頻對照）</h3>
+<p>四組對照軸（Sung & Hopper 2023）：<b>基礎</b>——AI 靠資料萃取的特徵，傳統靠明確假設與機制；<b>因果</b>——AI 提升準確度但不管因果貢獻，傳統結果可直接詮釋、可做因果；<b>效率/弱點</b>——AI 高效但易過度配適，傳統較耗時但穩健透明；<b>典範</b>——AI 是 data-driven／association／prediction，傳統是 hypothesis-driven／causation／prevention。這四列是整份報告的中心軸線。</p>
+
+<h3>3. 反方三案例＝資格考三大方法學破口</h3>
+<p>三個失敗案例剛好對應三個核心破口，看懂等於複習一輪方法學。</p>
+<p><b>案例 1｜Google Flu Trends（純相關的陷阱）。</b>2009 年用 5000 萬個搜尋詞「自動選出」與流感相關的詞，號稱不需先驗知識；2014 年 Lazer 等人點名四大病灶：<b>大數據傲慢、過度配適、演算法/概念漂移（concept drift）、黑盒不透明</b>。2021 改版做對了什麼恰好呼應偏差校正——改用<b>病例對照設計＋問卷驗證症狀、人工編碼控雜訊、用 MRP（多層迴歸＋事後分層）加權回母群、開放透明</b>。教訓：<b>純相關會隨時間漂移而崩壞</b>。</p>
+<p><b>案例 2｜Watson for Oncology（外推性崩盤）。</b>訓練資料不代表目標人群 → 一般化/外推失敗（連第 14 章外部效度、可運送性）。</p>
+<p><b>案例 3｜健保資源分配演算法的種族偏差（Obermeyer 2019）。</b>用「醫療花費」當「醫療需求」的代理結果變數，但弱勢族群就醫花費本就較低 → <b>結果變數設定錯誤造成系統性偏差</b>（連第 13 章錯分、第 9 章 outcome 定義）。</p>
+
+<h3>4. Q&A 攻防的方法學高密度區</h3>
+<p>考前必看的攻防點：<b>系統誤差 vs. 隨機誤差</b>（AI 大數據縮小隨機誤差，但縮不掉系統偏差）；<b>confounder vs. collider</b>（AI 特徵選擇可能不慎納入碰撞點）；<b>類別不平衡</b>（罕見結果時 accuracy 失真，要看召回/精確率/PR-AUC/校準，連第 21 章 114-1 Q10）。</p>
+
+<h3>5. 結論：互補，而非取代</h3>
+<p>AI 提供<b>速度與規模</b>，傳統流病提供<b>因果、倫理與可重現性</b>。兩者是 Human–AI 協作、互補共生，而非替代。這正是資格考希望你內化的態度——工具再強，也回到「關聯 ≠ 因果、預測 ≠ 解釋」的第一性原理。</p>
+</div>
+<div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
+<table><thead><tr><th>案例</th><th>方法學破口</th><th>對應章節</th></tr></thead>
+<tbody>
+<tr><td>Google Flu Trends</td><td>過度配適＋概念漂移＋純相關</td><td>Ch.15、21</td></tr>
+<tr><td>Watson for Oncology</td><td>外推性/一般化失敗</td><td>Ch.14</td></tr>
+<tr><td>健保演算法種族偏差</td><td>結果變數設定錯誤→系統偏差</td><td>Ch.9、13</td></tr>
+</tbody></table>
+<table><thead><tr><th>軸</th><th>AI/機器學習</th><th>傳統流病</th></tr></thead>
+<tbody>
+<tr><td>典範</td><td>data-driven / association / prediction</td><td>hypothesis-driven / causation / prevention</td></tr>
+<tr><td>弱點</td><td>過度配適、黑盒</td><td>耗時，但穩健透明</td></tr>
+</tbody></table>
+</div></div>
+<div class="box box-formula"><div class="box-title">🧮 重要公式總整理</div><div class="box-body">
+<div class="formula-item"><b>核心不等式（觀念）：</b> 預測準確度高 ⇏ 能估因果效應／能做決策。</div>
+<div class="formula-item"><b>MRP：</b> 多層迴歸估各層 → 事後分層（post-stratification）加權回母群，修正非代表性樣本。</div>
+<div class="formula-item"><b>不平衡評估：</b> 用召回、精確率、F1、PR-AUC、校準，而非 accuracy。</div>
+</div></div>
+<div class="box box-exam"><div class="box-title">🎯 考試重點</div><div class="box-body">
+<ol>
+<li>能說出 AI 工具五類型，並分辨哪些「找型態」、哪些「做因果」。</li>
+<li>背 AI vs 傳統流病的四組對照軸（association/causation…）。</li>
+<li>三個失敗案例 → 三個方法學破口（必考）。</li>
+<li>解釋 GFT 為何崩壞（過度配適＋概念漂移＋純相關）與 2021 如何用偏差校正修正。</li>
+<li>「預測 ≠ 因果」「系統誤差不因大數據消失」。</li>
+</ol>
+</div></div>
+<div class="box box-bridge"><div class="box-title">🔗 如何把本章接回其他單元</div><div class="box-body">
+<p><b>接回：</b>關聯 vs 因果（第 2、3、5 章）；外推性（第 14 章）；結果錯分（第 9、13 章）；過度配適與預測評估（第 21 章）；不平衡分類（第 21 章 114-1 Q10）；生成/模擬與 ABM（第 31 章）。</p>
+</div></div>
+<a class="back-top" href="#top">↑ 回頂端</a></section>
+<section class="chapter" id="ch45">
+<div class="ch-head"><span class="ch-num">專題 S2</span><h2>專題：標的試驗仿真（TTE）能否達 RCT 等級證據</h2><div class="ch-en">Can Target Trial Emulation Achieve RCT-level Evidence?</div></div>
+<div class="box box-map"><div class="box-title">🧭 核心邏輯與方法地圖</div><div class="box-body">
+<p>TTE（Target Trial Emulation，標的試驗仿真）是近年因果推論最重要的框架之一，直接對應資格考核心：<b>因果推論、設計偏差、時間零點、ITT vs per-protocol、時變干擾與 g-methods</b>。</p>
+<ul>
+<li><b>一句話</b>：把觀察性資料的分析，<b>明確按照一個假想隨機試驗（target trial）的協議</b>去做。</li>
+<li><b>價值</b>：先寫清因果問題與協議（<b>7 大要素</b>），再用真實世界資料仿真，一次擋掉 immortal time bias、prevalent user bias、time-zero misalignment。</li>
+<li><b>辯論</b>：這樣做出的證據能否「等同」RCT？正方說可逼近、反方說品質參差。</li>
+</ul>
+</div></div>
+<div class="ch-body">
+<h3>1. 從觀察性研究的危機談起</h3>
+<p>經典案例：<b>停經後荷爾蒙治療（MHT）能否預防心血管疾病？</b>觀察性研究合併估計 MI 約 0.79（95% CI 0.75–0.84，看似保護），但 RCT 約 1.04（95% CI 0.94–1.14，無保護甚至有害）。觀察性訊號有生物機制（estrogen 活化 eNOS）又統計顯著可重現，結論卻與 RCT 相反。<b>關鍵洞見：觀察性訊號要能與 RCT 有意義比較，必須套上「試驗式的因果框架」</b>——這就是 TTE 的動機。（提醒：報告把 pooled estimate 誤標成 "SE"；SE 在統計幾乎一律指標準誤，勿混淆。）</p>
+
+<h3>2. RCT 為何是金標準（必背三要件）</h3>
+<p>①<b>可交換性</b>：隨機分派讓兩組期望上可比 \(Y^a\perp A\)；②<b>明確協議</b>：清楚定義 time zero 與治療分派；③被視為評估療效的黃金標準。TTE 的目標，就是用觀察資料去逼近這三件事。</p>
+
+<h3>3. TTE 定義與兩步驟（Hernán & Robins 2016）</h3>
+<p>TTE ＝模仿一個假想的<b>實用性隨機試驗（pragmatic target trial）</b>的觀察性分析。兩步驟：<b>Specify</b>（寫出假想試驗的協議）→ <b>Emulate</b>（用觀察資料仿真每個要素）。精神是「<b>在分析資料前，先明確定義因果問題</b>」。</p>
+
+<h3>4. 目標試驗協議的 7 大要素（高頻必背）</h3>
+<p>（1）<b>Eligibility 納入條件</b>：只用 baseline 可得資訊，<b>不可用 postbaseline 資訊決定納入</b>（否則不朽時間偏差）。（2）<b>Treatment strategies 治療策略</b>：用<b>新使用者設計</b>、定義劑量/途徑/起停規則。（3）<b>Assignment 分派程序</b>：非盲；用 PS matching／IPW／g-estimation／doubly robust 調整干擾以逼近可交換性。（4）<b>Follow-up 追蹤期</b>：定 time zero 與結果終點。（5）<b>Outcome 結果</b>：系統、盲性判定。（6）<b>Causal contrasts 因果對比</b>：<b>ITT vs per-protocol</b>；相對/絕對效應。（7）<b>Analysis plan</b>：per-protocol 需調整干擾、敏感度分析。（提醒：分派程序是「要素」，PS matching 只是「其中一種方法」，別把方法當定義。）另引 TARGET checklist（Cashin 2025，21 項報告規範）。</p>
+
+<h3>5. 正反方與結論</h3>
+<p><b>正方</b>：TTE 問「可行動的因果問題」、對齊要素擋掉可避免偏差、釐清該調的干擾、提升透明度；RCT-DUPLICATE 顯示良好仿真可達與 RCT 高度一致；並反過來檢視 RCT 本身的內外部效度侷限。<b>反方</b>：報告缺乏標準化、time-zero 等設計偏差仍可能發生、TTE 與 RCT 的整體一致率其實不穩定。<b>結論</b>：TTE 強化觀察性因果推論、擴展到真實世界，但品質參差，RCT 仍較穩定——<b>互補</b>。</p>
+</div>
+<div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
+<table><thead><tr><th>7 要素</th><th>仿真重點</th><th>擋掉的偏差</th></tr></thead>
+<tbody>
+<tr><td>Eligibility</td><td>只用 baseline 資訊</td><td>immortal time</td></tr>
+<tr><td>Treatment</td><td>new-user 設計</td><td>prevalent user</td></tr>
+<tr><td>Assignment</td><td>PS/IPW/g-方法調干擾</td><td>confounding</td></tr>
+<tr><td>Follow-up</td><td>對齊 time zero</td><td>time-zero misalignment</td></tr>
+<tr><td>Contrasts</td><td>ITT vs per-protocol</td><td>依從性偏差</td></tr>
+</tbody></table>
+</div></div>
+<div class="box box-formula"><div class="box-title">🧮 重要公式總整理</div><div class="box-body">
+<div class="formula-item"><b>可交換性（RCT 目標）：</b> \( Y^a \perp A \)</div>
+<div class="formula-item"><b>ITT</b>＝依「分派」分析（保留隨機化、估實用效果）；<b>per-protocol</b>＝依「實際遵從」分析，需調整時變干擾（g-方法，第 25 章）。</div>
+<div class="formula-item"><b>TTE 兩步：</b> Specify（寫協議）→ Emulate（仿真每要素）。</div>
+</div></div>
+<div class="box box-exam"><div class="box-title">🎯 考試重點</div><div class="box-body">
+<ol>
+<li>背 <b>7 大要素</b>及各自「仿真重點」與「擋掉哪個偏差」（必考）。</li>
+<li>用 MHT 案例說明觀察性與 RCT 為何「打架」，TTE 如何調和。</li>
+<li>RCT 三要件（可交換、明確協議、金標準）。</li>
+<li>ITT vs per-protocol 在 TTE 中如何定義；per-protocol 為何需 g-方法。</li>
+<li>能指出「不朽時間/盛行使用者/time-zero」對應哪個要素沒對齊。</li>
+</ol>
+</div></div>
+<div class="box box-bridge"><div class="box-title">🔗 如何把本章接回其他單元</div><div class="box-body">
+<p><b>接回：</b>目標試驗思維（第 6、11 章）；不朽時間/盛行使用者偏差（第 11、43 章）；時變干擾與 g-方法、ITT/per-protocol（第 25 章）；傾向分數/IPW（第 12、20 章）；可交換性（第 3 章）；113-2 Q5、114-2 考題。</p>
+</div></div>
+<a class="back-top" href="#top">↑ 回頂端</a></section>
+<section class="chapter" id="ch46">
+<div class="ch-head"><span class="ch-num">專題 S3</span><h2>專題：競爭風險 — 1−KM vs CIF</h2><div class="ch-en">Competing Risks: 1-KM vs CIF</div></div>
+<div class="box box-map"><div class="box-title">🧭 核心邏輯與方法地圖</div><div class="box-body">
+<p>當同一個體可能發生<b>多種互斥結局</b>，且某些結局一旦發生就<b>使目標事件永遠不可能再發生</b>時，就有競爭風險。那些「阻止」目標事件的事件＝<span class="term">競爭事件</span>。</p>
+<ul>
+<li><b>核心考點</b>：直接用 <b>1−Kaplan–Meier 會系統性高估</b>單一死因的累積發生率。</li>
+<li><b>兩個關鍵量</b>：<b>Cause-specific hazard</b>（別因風險→機轉）vs <b>Subdistribution hazard / CIF</b>（Fine–Gray→預後/絕對風險）。</li>
+<li><b>最愛考陷阱</b>：兩者可以<b>方向相反</b>。</li>
+</ul>
+</div></div>
+<div class="ch-body">
+<h3>1. 為什麼需要它：KM 的高估問題</h3>
+<p>研究「死於 MRSA 菌血症」的累積風險時，「死於其他原因」就是競爭事件——病人一旦死於其他原因，<b>再也不可能</b>死於 MRSA。若用一般 Kaplan–Meier，會把競爭事件當成<b>設限（censoring）</b>處理，但這違反 KM 的基本假設<span class="term">非資訊性設限</span>（設限與預後無關）。競爭事件（死亡）顯然與預後高度相關。結果：\(1-S(t)\) 把「已死於別因」的人<b>假裝成「仍存活、之後仍可能死於 MRSA」</b>，把不可能發生的風險灌進去，<b>系統性向上偏誤（高估）</b>。正解是改用<span class="term">累積發生函數（CIF）</span>。</p>
+
+<h3>2. 兩個關鍵量：務必分清</h3>
+<p><b>Cause-specific hazard（別因風險）</b>：在「<b>仍存活者</b>」中，單位時間發生目標事件的瞬時速率；用 cause-specific Cox（競爭事件當 censor）估；回答<b>病因機轉</b>。<b>CIF / Subdistribution hazard（Fine–Gray）</b>：到時間 \(t\) 為止，<b>實際</b>因目標事件發生的累積機率（已扣掉被競爭事件搶走的人）；用 Aalen–Johansen 估 CIF、Fine–Gray 建模；回答<b>預後負擔</b>。<b>記憶法</b>：想解釋「機轉」→ cause-specific；想預測「實際風險/負擔」→ Fine–Gray（CIF）。</p>
+
+<h3>3. CIF 公式與可加性</h3>
+<p>CIF 的無母數估計 \( \widehat{CIF}_1(t)=\sum_{t_i\le t} S(t_{i-1})\times\dfrac{d_{1i}}{n_i} \)，權重用<b>前一時點的 all-cause 存活 \(S\)</b>——這正是把競爭事件影響「內建」進去的地方。可加性：所有死因的 CIF 相加＝總累積死亡 \( CIF_{\text{目標}}(t)+CIF_{\text{其他}}(t)=1-S_{\text{all-cause}}(t) \)。因此每條 CIF 都<b>小於</b> \(1-S(t)\)，兩條疊起來才等於 \(1-S(t)\)。</p>
+
+<h3>4. 最關鍵陷阱：兩個尺度可以方向相反</h3>
+<p>兩者的差別只在一件事：<b>發生競爭事件的人，要不要留在後續的 risk set 裡</b>。cause-specific 把競爭事件者<b>移出</b> risk set；subdistribution 把他們<b>永久保留</b>在 risk set（永遠不進分子），好讓單一 hazard 直接對應 CIF。因此<b>不能假設兩個 HR 一致，甚至不能假設同號</b>：若某因子<b>大幅降低競爭事件</b>（例如減少其他原因死亡），會讓更多人「活得夠久去發生目標事件」，於是即使它對目標事件的 cause-specific hazard 毫無影響，目標事件的 CIF 仍會上升。競爭事件與目標事件會「搶人」，故兩尺度可講出相反的故事。</p>
+
+<h3>5. 怎麼選、怎麼畫</h3>
+<p>一句話原則：想知道「<b>為什麼發病/治療是否改變機轉</b>」→ cause-specific；想知道「<b>實際多少比例會發生/病人絕對風險</b>」→ Fine–Gray（CIF）。臨床上常<b>兩個都報告</b>：cause-specific 說機轉、Fine–Gray 說負擔，互補而非互斥。畫圖時把 1−KM（高估紅線）、CIF 目標（藍）、CIF 其他（綠）、1−S all-cause（灰虛線）疊在一起，紅藍之間的垂直缺口就是高估量，缺口隨競爭事件數與追蹤時間增大。</p>
+</div>
+<div class="box box-calc"><div class="box-title">🧮 計算型例題（帶數字演練）</div><div class="box-body">
+<h4>例｜CIF 與 1−KM 的差距</h4>
+<div class="ex"><div class="given">追蹤到某時點：整體存活 \(S(t_{i-1})=0.80\)；該時點目標事件 \(d_1=8\)、仍在風險 \(n=100\)。</div>
+<div class="step">該時點 CIF 增量 \(=S(t_{i-1})\times\dfrac{d_1}{n}=0.80\times\dfrac{8}{100}=0.064\)。</div>
+<div class="step">若誤把競爭事件當設限用 KM，增量 \(=\dfrac{8}{n_{\text{KM}}}\) 會用較小的分母（competing 者已被移除），使 \(1-S\) 增量偏大 → 高估。</div>
+<div class="step">可加性檢核：\(CIF_{\text{目標}}+CIF_{\text{競爭}}=1-S_{\text{all-cause}}\)。</div>
+<div class="ans">CIF 用 all-cause 存活加權；1−KM 系統性 ＞ CIF</div></div>
+</div></div>
+<div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
+<table><thead><tr><th>面向</th><th>Cause-specific hazard</th><th>Subdistribution (Fine–Gray)</th></tr></thead>
+<tbody>
+<tr><td>競爭事件後的人</td><td>移出 risk set（censor）</td><td>永久保留在 risk set</td></tr>
+<tr><td>連到 CIF</td><td>需所有死因 hazard 一起</td><td>單一 hazard 直接對應 CIF</td></tr>
+<tr><td>回歸模型</td><td>Cause-specific Cox</td><td>Fine–Gray</td></tr>
+<tr><td>回答</td><td>病因/機轉</td><td>預後/絕對風險</td></tr>
+<tr><td>生物可解釋性</td><td>高</td><td>低（risk set 含已死者）</td></tr>
+</tbody></table>
+</div></div>
+<div class="box box-formula"><div class="box-title">🧮 重要公式總整理</div><div class="box-body">
+<div class="formula-item"><b>高估關係：</b> \( 1-\mathrm{KM}(\text{目標}) \;>\; \mathrm{CIF}(\text{目標}) \)（有競爭事件時）。</div>
+<div class="formula-item"><b>CIF 估計：</b> \( \widehat{CIF}_1(t)=\sum_{t_i\le t} S(t_{i-1})\,\dfrac{d_{1i}}{n_i} \)</div>
+<div class="formula-item"><b>可加性：</b> \( CIF_1(t)+CIF_2(t)=1-S_{\text{all-cause}}(t) \)</div>
+<div class="formula-item"><b>Cause-specific 連 CIF：</b> \( CIF_1(t)=\int_0^t S(u)\,\lambda_1^{cs}(u)\,du \)；<b>Fine–Gray：</b> \( CIF_1(t)=1-e^{-\int_0^t \lambda_1^{sd}(u)du} \)</div>
+</div></div>
+<div class="box box-exam"><div class="box-title">🎯 考試重點</div><div class="box-body">
+<ol>
+<li>解釋 <b>1−KM 為何高估</b>（把競爭事件當非資訊性設限，違反假設）。</li>
+<li>Cause-specific vs Subdistribution：<b>risk set 差別</b>、對應模型、回答的問題（必考）。</li>
+<li><b>兩尺度可方向相反</b>的機制（降低競爭事件→CIF 上升）。</li>
+<li>CIF 的估計式與<b>可加性</b>。</li>
+<li>選擇原則：機轉→cause-specific；負擔/預後→Fine–Gray；常兩者都報。</li>
+</ol>
+</div></div>
+<div class="box box-bridge"><div class="box-title">🔗 如何把本章接回其他單元</div><div class="box-body">
+<p><b>接回：</b>存活分析與 KM/Cox（第 22 章）；率與累積發生（第 4 章）；競爭風險是 114-2、106、109-2 考題核心；預後模型（第 35 章）。</p>
+</div></div>
+<a class="back-top" href="#top">↑ 回頂端</a></section>
 <footer style="text-align:center;color:var(--muted);font-size:12.5px;margin-top:40px">
-  現代流行病學 精讀複習手冊 · 共 43 章 · 供複習使用
+  現代流行病學 精讀複習手冊 · 共 46 個單元（43 章 ＋ 3 專題）· 供複習使用
 </footer>
 </main>
 </div>
-<sc
+<script>
+const links=[...document.querySelectorAll('.toc-link')];
+const secs=links.map(l=>document.querySelector(l.getAttribute('href')));
+const obs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){
+  const id=e.target.id; links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+id));}});},
+  {rootMargin:'-10% 0px -80% 0px',threshold:0});
+secs.forEach(s=>s&&obs.observe(s));
+function filterToc(q){q=q.trim().toLowerCase();
+  links.forEach(l=>{const t=(l.dataset.txt||'').toLowerCase(); l.style.display=(!q||t.includes(q))?'flex':'none';});
+  document.querySelectorAll('.toc-part').forEach(p=>p.style.display=q?'none':'block');}
+links.forEach(l=>l.addEventListener('click',()=>document.getElementById('toc').classList.remove('open')));
+</script>
+</body>
+</html>
