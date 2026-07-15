@@ -550,8 +550,8 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 </tbody></table>
 </div></div>
 <div class="box box-formula"><div class="box-title">🧮 重要公式總整理</div><div class="box-body">
-<div class="formula-item"><b>累積發生率：</b> \( CI = \dfrac{\text{新病例數}}{\text{期初風險人數}} \)</div>
-<div class="formula-item"><b>發生率：</b> \( IR = \dfrac{\text{新病例數}}{\sum \text{人時}} \)</div>
+<div class="formula-item"><b>累積發生率：</b> \( CI = \dfrac{\text{cases}}{\text{N at risk}} \)</div>
+<div class="formula-item"><b>發生率：</b> \( IR = \dfrac{\text{cases}}{\sum \text{PT}} \)</div>
 <div class="formula-item"><b>率轉風險（定率、無競爭風險）：</b> \( CI = 1-e^{-IR\cdot t}\;\approx\; IR\cdot t \)（罕見時）</div>
 <div class="formula-item"><b>發生勝算：</b> \( \text{odds}=\dfrac{CI}{1-CI} \)</div>
 <div class="formula-item"><b>穩態盛行關係：</b> \( \dfrac{P}{1-P} \approx IR \times \bar{D} \)</div>
@@ -605,10 +605,10 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <div class="derive"><p>\(OR=\dfrac{R_1/(1-R_1)}{R_0/(1-R_0)}=RR\cdot\dfrac{1-R_0}{1-R_1}\)。當 \(R_1,R_0\to0\)，修正因子 \(\dfrac{1-R_0}{1-R_1}\to1\)，故 \(OR\to RR\)。病不罕見時 \(R_1>R_0\Rightarrow\) 修正因子 &gt;1 \(\Rightarrow OR\) 比 \(RR\) 更偏離 1（誇大）。密度抽樣的病例對照則 \(OR=IRR\) 不需此近似（第 8 章）。</p></div>
 <h4>關鍵推導：PAF 的兩種等價式</h4>
 <div class="derive"><p>由 \(RR\) 與暴露盛行 \(P_e\)：族群平均風險 \(=P_e R_1+(1-P_e)R_0\)。</p>
-<p>\[ PAF=\frac{\text{族群風險}-R_0}{\text{族群風險}}=\frac{P_e(RR-1)}{1+P_e(RR-1)} \]</p>
+<p>\[ PAF=\frac{\text{pop risk}-R_0}{\text{pop risk}}=\frac{P_e(RR-1)}{1+P_e(RR-1)} \]</p>
 <p>另一等價式用病例中暴露比例 \(p_c\)：\(PAF=p_c\cdot\dfrac{RR-1}{RR}\)（便於病例對照估計，因 \(p_c\) 可從病例組得到）。可見 PAF 同時受 <b>效應強度</b> 與 <b>暴露盛行</b> 決定——弱因子若很普遍，PAF 可能大於強而罕見的因子。</p></div>
 <h4>進階觀念：效應 vs. 關聯的鴻溝</h4>
-<p>\(RR^{obs}=RR^{causal}\times(\text{干擾偏差因子})\times(\text{選擇偏差因子})\times(\text{錯分因子})\)。整本書的效度章節就是在估計並消除右邊那些乘數。口試很愛問「你報的是效應還是關聯？差在哪？」</p>
+<p>\(RR^{obs}=RR^{causal}\times(\text{confounding})\times(\text{selection})\times(\text{misclass})\)。整本書的效度章節就是在估計並消除右邊那些乘數。口試很愛問「你報的是效應還是關聯？差在哪？」</p>
 <h4>口試常見追問</h4>
 <div class="qa"><div class="q">Q：為何公共衛生決策看 RD/PAF 而非 RR？</div><div class="a">A：RR 不含基線風險；RD、PAF 反映「絕對能防幾例」，才是資源配置依據。</div></div>
 <div class="qa"><div class="q">Q：OR 一定高估 RR 嗎？</div><div class="a">A：偏離虛無的方向被放大：RR&gt;1 時 OR&gt;RR，RR&lt;1 時 OR&lt;RR。罕見病時可忽略。</div></div>
@@ -704,7 +704,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <h4>關鍵觀念：隨機化到底處理了什麼</h4>
 <div class="derive"><p>隨機分派使 \(A\perp\{Y(1),Y(0)\}\)（<b>邊際</b>可交換），因此不需測量任何干擾即可識別效應——這是觀察研究做不到的。但隨機化<b>不</b>保證：無選擇偏差（失訪後）、無測量偏差、外部效度。故 RCT 仍需 ITT 與追蹤完整性。</p></div>
 <h4>關鍵觀念：效度 vs. 效率的數學分離</h4>
-<div class="derive"><p>均方誤差 \( \mathrm{MSE}=\underbrace{\text{Bias}^2}_{\text{效度}}+\underbrace{\text{Variance}}_{\text{效率}} \)。加大樣本只降低第二項；偏差是 \(n\to\infty\) 仍不消失的系統項。故「效度優先」有嚴格意義：無法用資料量買回無偏。</p></div>
+<div class="derive"><p>均方誤差 \( \mathrm{MSE}=\underbrace{\text{Bias}^2}_{\text{validity}}+\underbrace{\text{Variance}}_{\text{efficiency}} \)。加大樣本只降低第二項；偏差是 \(n\to\infty\) 仍不消失的系統項。故「效度優先」有嚴格意義：無法用資料量買回無偏。</p></div>
 <h4>口試常見追問</h4>
 <div class="qa"><div class="q">Q：橫斷面研究能否談因果？</div><div class="a">A：時序不明是硬傷；除非暴露為不可變（如基因、血型）或有明確時間結構，否則僅供假說。</div></div>
 <div class="qa"><div class="q">Q：給一個罕見病＋長潛伏，選什麼設計？</div><div class="a">A：病例對照（或世代內巢式病例對照）；世代對罕見病無效率。</div></div>
@@ -805,7 +805,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <div class="box box-formula"><div class="box-title">🧮 重要公式總整理</div><div class="box-body">
 <div class="formula-item"><b>率比：</b> \( IRR = \dfrac{a/PT_1}{c/PT_0} \)（\(PT\)＝人時）</div>
 <div class="formula-item"><b>風險比：</b> \( RR = \dfrac{a/N_1}{c/N_0} \)</div>
-<div class="formula-item"><b>標準化死亡比：</b> \( SMR = \dfrac{\text{觀察死亡數}}{\text{期望死亡數}} \)（外部對照）</div>
+<div class="formula-item"><b>標準化死亡比：</b> \( SMR = \dfrac{\text{Obs}}{\text{Exp}} \)（外部對照）</div>
 </div></div>
 <div class="box box-exam"><div class="box-title">🎯 考試重點</div><div class="box-body">
 <ol>
@@ -969,8 +969,8 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 </tbody></table>
 </div></div>
 <div class="box box-formula"><div class="box-title">🧮 重要公式總整理</div><div class="box-body">
-<div class="formula-item"><b>系統敏感度：</b> \( \text{Se}=\dfrac{\text{系統偵測到的病例}}{\text{真實病例總數}} \)</div>
-<div class="formula-item"><b>陽性預測值：</b> \( \text{PPV}=\dfrac{\text{真病例}}{\text{通報病例}} \)（決定調查資源是否被虛報耗費）</div>
+<div class="formula-item"><b>系統敏感度：</b> \( \text{Se}=\dfrac{\text{detected}}{\text{true total}} \)</div>
+<div class="formula-item"><b>陽性預測值：</b> \( \text{PPV}=\dfrac{\text{true cases}}{\text{reported}} \)（決定調查資源是否被虛報耗費）</div>
 <div class="formula-item"><b>異常偵測：</b> 觀察數 vs. 期望數之偏離（閾值、CUSUM、時空掃描）。</div>
 </div></div>
 <div class="box box-exam"><div class="box-title">🎯 考試重點</div><div class="box-body">
@@ -1042,7 +1042,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 </tbody></table>
 </div></div>
 <div class="box box-formula"><div class="box-title">🧮 重要公式總整理</div><div class="box-body">
-<div class="formula-item"><b>應答率：</b> \( \text{RR}=\dfrac{\text{完成人數}}{\text{合格且被邀請人數}} \)</div>
+<div class="formula-item"><b>應答率：</b> \( \text{RR}=\dfrac{\text{completed}}{\text{eligible}} \)</div>
 <div class="formula-item"><b>參與偏差條件：</b> 當參與機率同時與<b>暴露</b>與<b>結果</b>相關時，才產生選擇偏差。</div>
 <div class="formula-item"><b>信度（重測）：</b> 以 kappa／組內相關 ICC 量化測量一致性。</div>
 </div></div>
@@ -1093,7 +1093,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <h4>關鍵觀念：新使用者＋主動比較者為何有效</h4>
 <p>新使用者排除盛行使用者的存活選擇與早期事件遺漏；主動比較者（同適應症的另一藥）使兩組疾病嚴重度相近，壓低適應症干擾，並自然對齊 time zero。這是次級資料因果分析的黃金組合（第 43 章）。</p>
 <h4>關鍵觀念：碼定義的錯分校正</h4>
-<div class="derive"><p>驗證研究給演算法的 \(Se,Sp\)。若結果錯分為非差別，觀察 RR 衰減；可用矩陣法回推真實細格：真陽 \(=\dfrac{\text{觀察陽}-(1-Sp)N}{Se+Sp-1}\)（第 13、29 章）。</p></div>
+<div class="derive"><p>驗證研究給演算法的 \(Se,Sp\)。若結果錯分為非差別，觀察 RR 衰減；可用矩陣法回推真實細格：真陽 \(=\dfrac{\text{obs+}-(1-Sp)N}{Se+Sp-1}\)（第 13、29 章）。</p></div>
 <h4>口試常見追問</h4>
 <div class="qa"><div class="q">Q：claims 資料最大的三個威脅？</div><div class="a">A：碼錯分、未測干擾（嚴重度/生活型態）、時間對齊偏差（不朽時間/盛行使用者）。</div></div>
 <div class="qa"><div class="q">Q：適應症干擾為何難調整？</div><div class="a">A：開藥決策所依據的嚴重度常未被完整記錄→殘餘/未測干擾，需主動比較者、IV 或偏差分析。</div></div>
@@ -1216,7 +1216,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <div class="box box-formula"><div class="box-title">🧮 重要公式總整理</div><div class="box-body">
 <div class="formula-item"><b>干擾三條件：</b> 與結果相關 ∧ 與暴露相關 ∧ 非中介/非暴露後果。</div>
 <div class="formula-item"><b>M–H 合併 OR：</b> \( OR_{MH}=\dfrac{\sum a_i d_i/n_i}{\sum b_i c_i/n_i} \)</div>
-<div class="formula-item"><b>標準化率：</b> \( \text{直接標準化}=\dfrac{\sum w_i \, r_i}{\sum w_i} \)（\(w\)＝標準人口權重）</div>
+<div class="formula-item"><b>標準化率：</b> \( \text{direct-std}=\dfrac{\sum w_i \, r_i}{\sum w_i} \)（\(w\)＝標準人口權重）</div>
 <div class="formula-item"><b>E-value：</b> \( E = RR + \sqrt{RR(RR-1)} \)，量化「要多強的未測干擾才能解釋掉關聯」。</div>
 </div></div>
 <div class="box box-exam"><div class="box-title">🎯 考試重點</div><div class="box-body">
@@ -1316,7 +1316,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <div class="formula-item"><b>敏感度/特異度：</b> \( Se=\dfrac{TP}{TP+FN},\; Sp=\dfrac{TN}{TN+FP} \)</div>
 <div class="formula-item"><b>陽性預測值（隨盛行率變）：</b> \( PPV=\dfrac{Se\cdot p}{Se\cdot p+(1-Sp)(1-p)} \)</div>
 <div class="formula-item"><b>迴歸稀釋：</b> 觀察斜率 \(=\) 真斜率 \(\times\) 可靠度 \( \rho \)（\(0<\rho<1\)）。</div>
-<div class="formula-item"><b>信度：</b> ICC \(=\dfrac{\sigma^2_{\text{真}}}{\sigma^2_{\text{真}}+\sigma^2_{\text{誤}}} \)</div>
+<div class="formula-item"><b>信度：</b> ICC \(=\dfrac{\sigma^2_{\text{true}}}{\sigma^2_{\text{true}}+\sigma^2_{\text{err}}} \)</div>
 </div></div>
 <div class="box box-exam"><div class="box-title">🎯 考試重點</div><div class="box-body">
 <ol>
@@ -1442,7 +1442,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <p>\[ \mathrm{Var}(\ln OR)\approx\frac1a+\frac1b+\frac1c+\frac1d \]</p>
 <p>零細格使變異爆炸，故加 0.5 校正或改用精確/貝氏法。95% CI：\(\exp(\ln OR\pm1.96\sqrt{\cdot})\)。<b>比值型一律在對數尺度</b>因其抽樣分布偏態，對數後才近似常態。</p></div>
 <h4>關鍵觀念：p 值不是什麼</h4>
-<p>\(p=P(\text{資料同樣或更極端}\mid H_0)\)。它<b>不是</b> \(P(H_0\mid\text{資料})\)、不是效應大小、不是可重複性。「不顯著」常只是 CI 寬（不精確），非「證明無效應」。資格考極愛此區辨。</p>
+<p>\(p=P(\text{data as/more extreme}\mid H_0)\)。它<b>不是</b> \(P(H_0\mid\text{data})\)、不是效應大小、不是可重複性。「不顯著」常只是 CI 寬（不精確），非「證明無效應」。資格考極愛此區辨。</p>
 <h4>關鍵推導：兩比例樣本數</h4>
 <div class="derive"><p>檢定 \(H_0:p_1=p_0\)，欲以檢定力 \(1-\beta\)、水準 \(\alpha\) 偵測差 \(p_1-p_0\)：</p>
 <p>\[ n=\frac{\big(z_{1-\alpha/2}+z_{1-\beta}\big)^2\,[p_1(1-p_1)+p_0(1-p_0)]}{(p_1-p_0)^2} \]</p>
@@ -1703,7 +1703,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
 <p>年齡標準化是方老師測量單元的常考大題（110-1、113-2、106）。</p>
 <div class="exq"><span class="yr">110-1 I-1</span><span class="qtitle">年齡標準化：作用、直接/間接、時間/空間、Poisson 標準化</span>
-<div class="sol">直接：用<b>標準人口結構 \(W_i\)</b> 套研究族群年齡別率 \(I_i\)：\( I_{direct}=\dfrac{\sum W_i I_i}{\sum W_i} \)。間接：用標準族群年齡別率套研究族群人口得期望數 \(E\)：\( SMR=O/E \)。時間標準化例：台灣 2000 vs 2020 心臟病死亡率（排除人口老化）；空間例：花蓮 vs 台北。Poisson 標準化：\(\log\mu=\log t+\beta_1 X_{地區}+\beta_2 X_{age}\)，年齡當共變數控制干擾。</div></div>
+<div class="sol">直接：用<b>標準人口結構 \(W_i\)</b> 套研究族群年齡別率 \(I_i\)：\( I_{direct}=\dfrac{\sum W_i I_i}{\sum W_i} \)。間接：用標準族群年齡別率套研究族群人口得期望數 \(E\)：\( SMR=O/E \)。時間標準化例：台灣 2000 vs 2020 心臟病死亡率（排除人口老化）；空間例：花蓮 vs 台北。Poisson 標準化：\(\log\mu=\log t+\beta_1 X_{\text{area}}+\beta_2 X_{age}\)，年齡當共變數控制干擾。</div></div>
 <div class="exq"><span class="yr">113-2 Q3</span><span class="qtitle">直接 vs 間接標準化</span>
 <div class="sol">選權重＝選目標人群；<span class="pitfall">SMR 因各用自身人時結構加權，不同 SMR 不可直接互比</span>。</div></div>
 </div></div>
@@ -1831,7 +1831,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <p>迴歸是「同時控制多個干擾、估計效應」的主力工具。本章聚焦<b>模型設定（specification）</b>——選對連結函數、決定放哪些項。最核心的一句話：<b>模型的形式由「你要估什麼效應」與「因果結構」決定，不是由 p 值挑變項</b>。</p>
 
 <h3>2. 選連結函數＝選效應尺度</h3>
-<p>這是迴歸最關鍵的觀念。結果型態與你想要的效應尺度，決定用哪個模型：二元結果想要 RR 用 <span class="term">log-binomial</span>（或 Poisson＋穩健變異）；想要 OR 用 <span class="term">logistic</span>；計數/率資料用 <span class="term">Poisson/負二項</span>（以 \(\ln(\text{人時})\) 當 <span class="term">offset</span>）；連續結果或風險差用<span class="term">線性/恆等連結</span>。<b>係數的意義完全由連結函數決定</b>：logistic 的 \(e^\beta\) 是 OR，Poisson 的 \(e^\beta\) 是率比。把 OR 當 RR 解讀，在不罕見時會嚴重高估。</p>
+<p>這是迴歸最關鍵的觀念。結果型態與你想要的效應尺度，決定用哪個模型：二元結果想要 RR 用 <span class="term">log-binomial</span>（或 Poisson＋穩健變異）；想要 OR 用 <span class="term">logistic</span>；計數/率資料用 <span class="term">Poisson/負二項</span>（以 \(\ln(\text{PT})\) 當 <span class="term">offset</span>）；連續結果或風險差用<span class="term">線性/恆等連結</span>。<b>係數的意義完全由連結函數決定</b>：logistic 的 \(e^\beta\) 是 OR，Poisson 的 \(e^\beta\) 是率比。把 OR 當 RR 解讀，在不罕見時會嚴重高估。</p>
 
 <h3>3. 暴露的函數形式</h3>
 <p>連續暴露不必假設是直線關係。可以用<b>類別、多項式、限制性立方樣條</b>捕捉非線性的劑量反應。過度細分會增加變異，過度平滑會掩蓋型態，需要權衡。硬把明明有閾值的關係塞進一個線性項，是常見的設定錯誤。</p>
@@ -1952,7 +1952,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 </tbody></table>
 </div></div>
 <div class="box box-formula"><div class="box-title">🧮 重要公式總整理</div><div class="box-body">
-<div class="formula-item"><b>概似比檢定：</b> \( \mathrm{LRT}=-2(\ell_{\text{簡}}-\ell_{\text{繁}})\sim\chi^2_{df} \)</div>
+<div class="formula-item"><b>概似比檢定：</b> \( \mathrm{LRT}=-2(\ell_{\text{reduced}}-\ell_{\text{full}})\sim\chi^2_{df} \)</div>
 <div class="formula-item"><b>AIC：</b> \( \mathrm{AIC}=-2\ell+2k \)（\(k\)＝參數數）</div>
 <div class="formula-item"><b>穩健變異：</b> 夾心估計 \( \hat{V}=A^{-1}BA^{-1} \)</div>
 <div class="formula-item"><b>EPV 經驗法則：</b> 每個預測項需 ~10 個事件以避免過度配適。</div>
@@ -2097,7 +2097,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <p>\[ E[\theta\mid y]=\frac{\tau^{-2}\mu_0+(n/\sigma^2)\bar y}{\tau^{-2}+n/\sigma^2} \]</p>
 <p>即先驗與資料<b>依各自精確度加權</b>。資料多（\(n\) 大）→後驗趨近 MLE；資料少→先驗主導（穩定稀疏估計）。這就是「收縮」的來源。</p></div>
 <h4>關鍵觀念：可信區間 vs. 信賴區間</h4>
-<p>95% 可信區間：\(P(\theta\in\text{區間}\mid\text{資料})=0.95\)（對參數的機率陳述，直觀）。95% 信賴區間：重複抽樣下 95% 的區間涵蓋真值（對程序的陳述）。前者才是多數人「以為」的意思。弱先驗、大樣本下數值常相近。</p>
+<p>95% 可信區間：\(P(\theta\in\text{interval}\mid\text{data})=0.95\)（對參數的機率陳述，直觀）。95% 信賴區間：重複抽樣下 95% 的區間涵蓋真值（對程序的陳述）。前者才是多數人「以為」的意思。弱先驗、大樣本下數值常相近。</p>
 <h4>關鍵觀念：階層模型的收縮</h4>
 <div class="derive"><p>多組估計向整體均值收縮，收縮量∝各組不確定性。小樣本組被拉得多、大樣本組拉得少。自動處理多重比較（部分匯集 partial pooling），優於逐一分析或完全合併。</p></div>
 <h4>口試常見追問</h4>
@@ -2188,7 +2188,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 </tbody></table>
 </div></div>
 <div class="box box-formula"><div class="box-title">🧮 重要公式總整理</div><div class="box-body">
-<div class="formula-item"><b>組內相關：</b> \( \mathrm{ICC}=\dfrac{\sigma^2_{\text{組間}}}{\sigma^2_{\text{組間}}+\sigma^2_{\text{組內}}} \)</div>
+<div class="formula-item"><b>組內相關：</b> \( \mathrm{ICC}=\dfrac{\sigma^2_{\text{between}}}{\sigma^2_{\text{between}}+\sigma^2_{\text{within}}} \)</div>
 <div class="formula-item"><b>設計效應：</b> \( \mathrm{DEFF}=1+(m-1)\,\mathrm{ICC} \)（\(m\)＝群集大小）→ 有效樣本 = 名目/DEFF。</div>
 <div class="formula-item"><b>混合模型：</b> \( g(E[Y_{ij}\mid u_i])=\beta X_{ij}+u_i,\; u_i\sim N(0,\sigma^2) \)</div>
 </div></div>
@@ -2479,7 +2479,7 @@ NIE\(=E[Y_{1,M_1}-Y_{1,M_0}]\)（暴露固定、僅動中介）。<br>
 <div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
 <h4>關鍵推導：Wald/IV 估計</h4>
 <div class="derive"><p>工具 \(Z\)、暴露 \(A\)、結果 \(Y\)。排除限制使 \(Z\) 只經 \(A\) 影響 \(Y\)：\(\mathrm{Cov}(Z,Y)=\beta\,\mathrm{Cov}(Z,A)\)，故</p>
-<p>\[ \hat\beta_{IV}=\frac{\mathrm{Cov}(Z,Y)}{\mathrm{Cov}(Z,A)}=\frac{\text{Z 對 Y 的效應}}{\text{Z 對 A 的效應}} \]</p>
+<p>\[ \hat\beta_{IV}=\frac{\mathrm{Cov}(Z,Y)}{\mathrm{Cov}(Z,A)}=\frac{\text{Z on Y}}{\text{Z on A}} \]</p>
 <p>直覺：\(Z\) 只推動了 \(A\) 一點點，觀察 \(Y\) 隨之變多少，相除還原 \(A\to Y\)。弱工具（分母→0）使估計爆炸且偏，故看第一階段 \(F\)（常要 &gt;10）。</p></div>
 <h4>關鍵觀念：IV 估的是 LATE</h4>
 <p>效應異質＋單調性（無 defier）下，IV 估<b>順從者（compliers）</b>的局部平均效應，非全體 ATE。故不同工具可給不同 LATE。外推受限是 IV 的內在代價。</p>
@@ -2603,7 +2603,7 @@ NIE\(=E[Y_{1,M_1}-Y_{1,M_0}]\)（暴露固定、僅動中介）。<br>
 </tbody></table>
 </div></div>
 <div class="box box-formula"><div class="box-title">🧮 重要公式總整理</div><div class="box-body">
-<div class="formula-item"><b>錯分校正（暴露）：</b> 真陽 \(=\dfrac{\text{觀察陽}-(1-Sp)\,N}{Se+Sp-1}\)。</div>
+<div class="formula-item"><b>錯分校正（暴露）：</b> 真陽 \(=\dfrac{\text{obs+}-(1-Sp)\,N}{Se+Sp-1}\)。</div>
 <div class="formula-item"><b>E-value：</b> \( E=RR+\sqrt{RR(RR-1)} \)（點估計）。</div>
 <div class="formula-item"><b>選擇偏差因子：</b> 以各層選擇機率比重加權還原來源族群 OR。</div>
 <div class="formula-item"><b>總不確定：</b> 系統誤差（偏差分布）⊕ 隨機誤差（抽樣）。</div>
@@ -2826,7 +2826,7 @@ NIE\(=E[Y_{1,M_1}-Y_{1,M_0}]\)（暴露固定、僅動中介）。<br>
 <div class="box box-formula"><div class="box-title">🧮 重要公式總整理</div><div class="box-body">
 <div class="formula-item"><b>群體免疫閾值：</b> \( H_c = 1-\dfrac{1}{R_0} \)</div>
 <div class="formula-item"><b>有效再生數：</b> \( R_t = R_0 \times s_t \)（\(s_t\)＝易感比例）</div>
-<div class="formula-item"><b>疫苗效力：</b> \( VE = 1-RR = 1-\dfrac{\text{接種發生率}}{\text{未接種發生率}} \)</div>
+<div class="formula-item"><b>疫苗效力：</b> \( VE = 1-RR = 1-\dfrac{\text{vacc}}{\text{unvacc}} \)</div>
 </div></div>
 <div class="box box-exam"><div class="box-title">🎯 考試重點</div><div class="box-body">
 <ol>
@@ -3005,7 +3005,7 @@ NIE\(=E[Y_{1,M_1}-Y_{1,M_0}]\)（暴露固定、僅動中介）。<br>
 <div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
 <h4>關鍵推導：概似比與貝氏更新</h4>
 <div class="derive"><p>\( LR^+=\dfrac{Se}{1-Sp},\;LR^-=\dfrac{1-Se}{Sp} \)。診斷更新用勝算形式：</p>
-<p>\[ \text{後驗勝算}=\text{先驗勝算}\times LR \]</p>
+<p>\[ \text{posterior odds}=\text{prior odds}\times LR \]</p>
 <p>先驗勝算＝\(\pi/(1-\pi)\)（盛行率），乘 LR 得後驗勝算，再轉回機率＝後驗（即 PPV/1−NPV）。LR 是「檢定結果改變多少信念」的尺度，且<b>不隨盛行率變</b>（工具屬性），比 PPV 更可攜。</p></div>
 <h4>關鍵觀念：三種篩檢偏差</h4>
 <div class="derive"><p><b>領先時間</b>：提早診斷讓「診斷到死亡」看似變長，死亡時間未變→存活率虛升。<b>長度偏差</b>：篩檢週期較易抓進展慢、預後好者。<b>過度診斷</b>：偵測不會致病的病灶，同時膨脹發生率與存活率。故篩檢成效必須用<b>族群死亡率</b>（RCT）評估，不能用存活率。</p></div>
@@ -3445,8 +3445,8 @@ NIE\(=E[Y_{1,M_1}-Y_{1,M_0}]\)（暴露固定、僅動中介）。<br>
 </tbody></table>
 </div></div>
 <div class="box box-formula"><div class="box-title">🧮 重要公式總整理</div><div class="box-body">
-<div class="formula-item"><b>SMR：</b> \( \dfrac{\text{觀察}}{\text{期望}} \)（外部率套人時）。</div>
-<div class="formula-item"><b>累積暴露：</b> \( \sum_t (\text{強度}_t \times \text{時間}_t) \)，可加滯後。</div>
+<div class="formula-item"><b>SMR：</b> \( \dfrac{\text{Obs}}{\text{Exp}} \)（外部率套人時）。</div>
+<div class="formula-item"><b>累積暴露：</b> \( \sum_t (\text{intensity}_t \times \text{time}_t) \)，可加滯後。</div>
 <div class="formula-item"><b>HWE 對策：</b> 內部對照 + 時間相依/g-方法（第 25 章）。</div>
 </div></div>
 <div class="box box-exam"><div class="box-title">🎯 考試重點</div><div class="box-body">
@@ -3741,7 +3741,7 @@ NIE\(=E[Y_{1,M_1}-Y_{1,M_0}]\)（暴露固定、僅動中介）。<br>
 <p><b>Cause-specific hazard（別因風險）</b>：在「<b>仍存活者</b>」中，單位時間發生目標事件的瞬時速率；用 cause-specific Cox（競爭事件當 censor）估；回答<b>病因機轉</b>。<b>CIF / Subdistribution hazard（Fine–Gray）</b>：到時間 \(t\) 為止，<b>實際</b>因目標事件發生的累積機率（已扣掉被競爭事件搶走的人）；用 Aalen–Johansen 估 CIF、Fine–Gray 建模；回答<b>預後負擔</b>。<b>記憶法</b>：想解釋「機轉」→ cause-specific；想預測「實際風險/負擔」→ Fine–Gray（CIF）。</p>
 
 <h3>3. CIF 公式與可加性</h3>
-<p>CIF 的無母數估計 \( \widehat{CIF}_1(t)=\sum_{t_i\le t} S(t_{i-1})\times\dfrac{d_{1i}}{n_i} \)，權重用<b>前一時點的 all-cause 存活 \(S\)</b>——這正是把競爭事件影響「內建」進去的地方。可加性：所有死因的 CIF 相加＝總累積死亡 \( CIF_{\text{目標}}(t)+CIF_{\text{其他}}(t)=1-S_{\text{all-cause}}(t) \)。因此每條 CIF 都<b>小於</b> \(1-S(t)\)，兩條疊起來才等於 \(1-S(t)\)。</p>
+<p>CIF 的無母數估計 \( \widehat{CIF}_1(t)=\sum_{t_i\le t} S(t_{i-1})\times\dfrac{d_{1i}}{n_i} \)，權重用<b>前一時點的 all-cause 存活 \(S\)</b>——這正是把競爭事件影響「內建」進去的地方。可加性：所有死因的 CIF 相加＝總累積死亡 \( CIF_{\text{target}}(t)+CIF_{\text{other}}(t)=1-S_{\text{all-cause}}(t) \)。因此每條 CIF 都<b>小於</b> \(1-S(t)\)，兩條疊起來才等於 \(1-S(t)\)。</p>
 
 <h3>4. 最關鍵陷阱：兩個尺度可以方向相反</h3>
 <p>兩者的差別只在一件事：<b>發生競爭事件的人，要不要留在後續的 risk set 裡</b>。cause-specific 把競爭事件者<b>移出</b> risk set；subdistribution 把他們<b>永久保留</b>在 risk set（永遠不進分子），好讓單一 hazard 直接對應 CIF。因此<b>不能假設兩個 HR 一致，甚至不能假設同號</b>：若某因子<b>大幅降低競爭事件</b>（例如減少其他原因死亡），會讓更多人「活得夠久去發生目標事件」，於是即使它對目標事件的 cause-specific hazard 毫無影響，目標事件的 CIF 仍會上升。競爭事件與目標事件會「搶人」，故兩尺度可講出相反的故事。</p>
@@ -3754,7 +3754,7 @@ NIE\(=E[Y_{1,M_1}-Y_{1,M_0}]\)（暴露固定、僅動中介）。<br>
 <div class="ex"><div class="given">追蹤到某時點：整體存活 \(S(t_{i-1})=0.80\)；該時點目標事件 \(d_1=8\)、仍在風險 \(n=100\)。</div>
 <div class="step">該時點 CIF 增量 \(=S(t_{i-1})\times\dfrac{d_1}{n}=0.80\times\dfrac{8}{100}=0.064\)。</div>
 <div class="step">若誤把競爭事件當設限用 KM，增量 \(=\dfrac{8}{n_{\text{KM}}}\) 會用較小的分母（competing 者已被移除），使 \(1-S\) 增量偏大 → 高估。</div>
-<div class="step">可加性檢核：\(CIF_{\text{目標}}+CIF_{\text{競爭}}=1-S_{\text{all-cause}}\)。</div>
+<div class="step">可加性檢核：\(CIF_{\text{target}}+CIF_{\text{competing}}=1-S_{\text{all-cause}}\)。</div>
 <div class="ans">CIF 用 all-cause 存活加權；1−KM 系統性 ＞ CIF</div></div>
 </div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
@@ -3768,7 +3768,7 @@ NIE\(=E[Y_{1,M_1}-Y_{1,M_0}]\)（暴露固定、僅動中介）。<br>
 </tbody></table>
 </div></div>
 <div class="box box-formula"><div class="box-title">🧮 重要公式總整理</div><div class="box-body">
-<div class="formula-item"><b>高估關係：</b> \( 1-\mathrm{KM}(\text{目標}) \;>\; \mathrm{CIF}(\text{目標}) \)（有競爭事件時）。</div>
+<div class="formula-item"><b>高估關係：</b> \( 1-\mathrm{KM}(\text{target}) \;>\; \mathrm{CIF}(\text{target}) \)（有競爭事件時）。</div>
 <div class="formula-item"><b>CIF 估計：</b> \( \widehat{CIF}_1(t)=\sum_{t_i\le t} S(t_{i-1})\,\dfrac{d_{1i}}{n_i} \)</div>
 <div class="formula-item"><b>可加性：</b> \( CIF_1(t)+CIF_2(t)=1-S_{\text{all-cause}}(t) \)</div>
 <div class="formula-item"><b>Cause-specific 連 CIF：</b> \( CIF_1(t)=\int_0^t S(u)\,\lambda_1^{cs}(u)\,du \)；<b>Fine–Gray：</b> \( CIF_1(t)=1-e^{-\int_0^t \lambda_1^{sd}(u)du} \)</div>
