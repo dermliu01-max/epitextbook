@@ -104,6 +104,12 @@ main{flex:1;min-width:0;padding:30px 42px 120px;max-width:1000px;margin:0 auto}
 .box-calc .given{background:#f5f7fe;border-radius:6px;padding:5px 10px;margin:5px 0;font-size:13.5px}
 .box-calc .step{margin:5px 0 5px 4px}
 .box-calc .ans{font-weight:700;color:#2f3d95;background:#e6eaf9;border-radius:6px;padding:4px 10px;margin-top:6px;display:inline-block}
+.box-gap{background:#fff0f6} .box-gap .box-title{background:#fadcea;color:#9c2b63;border-bottom:2px solid #c2185b}
+.box-gap .box-body{padding:10px 20px 18px}
+.box-gap h4{color:#9c2b63;font-size:15px;margin:14px 0 5px;border-left:4px solid #c2185b;padding-left:9px}
+.box-gap .k{background:#fff;border:1px solid #f2c9dd;border-radius:8px;padding:9px 14px;margin:10px 0}
+.box-gap .must{color:#a5281b;font-weight:700}
+.c-gap{background:#fff0f6;border-color:#c2185b}
 table{border-collapse:collapse;width:100%;margin:10px 0;font-size:13.6px;background:#fff}
 th,td{border:1px solid #d5dde5;padding:7px 10px;text-align:left;vertical-align:top}
 thead th{background:#eef3f8;color:#26526f;font-weight:700}
@@ -206,6 +212,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <div class="toc-part">第九部：考前衝刺</div>
 <a class="toc-link" href="#ch47" data-txt="S4 考前衝刺：跨年度考點熱區索引 Cross-Year Exam Topic Hotspot Index"><span class="tl-num">S4</span><span class="tl-zh">考前衝刺：跨年度考點熱區索引</span></a>
 <a class="toc-link" href="#ch48" data-txt="S5 考前衝刺：模擬資格考卷＋詳解 Mock Qualifying Exam with Full Solutions"><span class="tl-num">S5</span><span class="tl-zh">考前衝刺：模擬資格考卷＋詳解</span></a>
+<a class="toc-link" href="#ch49" data-txt="S6 考前衝刺：七日衝刺計畫（一週應考） 7-Day Final Sprint Plan"><span class="tl-num">S6</span><span class="tl-zh">考前衝刺：七日衝刺計畫（一週應考）</span></a>
 </nav>
 <main>
 <div class="masthead">
@@ -224,6 +231,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
     <span class="chip c-deep">🔬 深入解析與推導</span>
     <span class="chip c-qual">🎓 資格考真題與詳解</span>
     <span class="chip c-calc">🧮 計算型例題</span>
+    <span class="chip c-gap">⭐ 講義補強考點</span>
     <span class="chip c-compare">📊 方法比較總表</span>
     <span class="chip c-formula">🧮 重要公式總整理</span>
     <span class="chip c-exam">🎯 考試重點</span>
@@ -440,6 +448,22 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <div class="exq"><span class="yr">113-2 / 111-1</span><span class="qtitle">名詞：counterfactual（反事實）</span>
 <div class="sol">因果＝兩個平行宇宙結果的比較 \(Y(1)\) vs \(Y(0)\)；個體只能觀察其一（因果推論的根本問題），故估平均因果效應，並需可交換、正性、一致性三假設（本章推導）。</div></div>
 </div></div>
+<div class="box box-gap"><div class="box-title">⭐ 講義補強考點（易漏必看）</div><div class="box-body">
+<h4>M-bias：為什麼「統計準則挑 confounder」不夠</h4>
+<div class="k"><p>結構：\(U_1\to L\leftarrow U_2\)，且 \(U_1\to A\)、\(U_2\to Y\)。此時 <b>L 看起來與暴露 A、結果 Y 都相關</b>，用傳統統計準則會被判定成 confounder；但 L 其實是 \(U_1,U_2\) 的<b>共同結果（collider）</b>。<span class="must">調整 L 反而打開 \(U_1\to L\leftarrow U_2\) 路徑、引入偏差。</span></p>
+<p><b>拿分句：</b>「與暴露和結果都相關」<b>不等於</b>就該調整。必須<b>先有因果知識（DAG）</b>，才能分辨 confounder（要調）、collider（不要調）、mediator（不要調）。</p>
+<p><b>出處：</b>113-1 Q2（education/occupation 為 confounder、insulin resistance 為 mediator）；114-1 Q6（三大偏差比較）。</p></div>
+
+<h4>Simpson's paradox：同樣的數字，結論相反</h4>
+<div class="k"><p>課堂用<b>兩組數字完全相同</b>的資料，逼你體會「該不該調整不能只看統計」：</p>
+<p><b>版本一</b>：\(D\leftarrow \text{Model}\to C\)——Model 是 <b>confounder</b>，<b>應</b>分層/調整（調整後才正確）。<br>
+<b>版本二</b>：\(D\to W\leftarrow C\)（W＝體重下降）——W 是 <b>collider</b>，限制在「同體重」會<b>製造</b>假關聯，<b>不該</b>調整。</p>
+<p><span class="must">關鍵</span>：crude 與 adjusted 哪個對<b>並不顯然</b>，有時<b>調整後反而錯</b>。要靠 DAG＋領域知識判斷，不能機械式「能調就調」。</p>
+<p><b>出處：</b>Hernán, Clayton & Keiding (2011)；114-1 Q4（吸菸→低體重←出生缺陷的「保護假象」）；111-1（抽菸–DM–住院 collider）；113-1 Q1（censoring collider）。</p></div>
+
+<h4>Confounder 的兩種定義（深淺分水嶺）</h4>
+<div class="k"><p><b>傳統統計定義</b>（與暴露相關、與結果相關、非中介）容易誤判 M-bias 中的 L；<b>因果結構定義</b>（DAG 上的共同原因、需阻斷後門路徑）才正確。考試若問「如何判斷 confounder」，<b>兩種都寫、並說明後者較嚴謹</b>可拿高分。</p></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>結構</th><th>圖形</th><th>中間變項角色</th><th>要不要調整</th></tr></thead>
 <tbody>
@@ -637,6 +661,20 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <div class="ex"><div class="given">因子甲 RR=5、\(P_e=0.02\)；因子乙 RR=1.3、\(P_e=0.80\)。比較 PAF。</div>
 <div class="step">甲：\(\dfrac{0.02\times4}{1+0.08}=0.074\)；乙：\(\dfrac{0.8\times0.3}{1+0.24}=\dfrac{0.24}{1.24}=0.194\)。</div>
 <div class="ans">乙(19.4%) > 甲(7.4%)：弱但普遍的因子公衛衝擊更大</div></div>
+</div></div>
+<div class="box box-gap"><div class="box-title">⭐ 講義補強考點（易漏必看）</div><div class="box-body">
+<h4>Greenland–Robins 四種因果型（Table 4-1，必背）</h4>
+<div class="k"><p>依個體的兩個潛在結果 \((Y^1,Y^0)\) 把人分四型：<b>Doomed</b>（\(1,1\)：暴露與否都發病）、<b>Causal/因果型</b>（\(1,0\)：只有暴露才發病）、<b>Preventive/預防型</b>（\(0,1\)：只有未暴露才發病）、<b>Immune</b>（\(0,0\)：都不發病）。</p>
+<p><b>意涵</b>：族群的因果效應是這四型比例的合成；<b>個體效應無法觀察</b>（只看得到其中一個潛在結果），故只能估平均效應。也解釋了為何「平均無效果」不等於「對每個人都無效果」。</p></div>
+
+<h4>Sharp causal null hypothesis（尖銳因果虛無假設）</h4>
+<div class="k"><p>主張暴露對<b>每一個個體</b>都無效果：對所有 \(i\)，\(Y_i^1=Y_i^0\)。這比「平均無效果」<b>更強</b>——只要有任何一人有效果即被推翻。它是<b>隨機化推論（randomization test）</b>的基礎。考題若問「平均無效 vs 尖銳虛無」，要能點出強弱之別。</p></div>
+
+<h4>Halloran 疫苗四效應（必背）</h4>
+<div class="k"><p><b>直接效果</b>：接種者本人相對未接種者的風險下降。<b>間接效果</b>：因群體接種率提高、傳播下降，使「未接種者」也受益。<b>總效果</b>：接種者相對於「無接種計畫時之未接種者」的下降（含直接＋間接）。<b>整體效果</b>：整個計畫（不分接種與否）相對於完全無計畫的族群疾病負擔下降。<br>\(VE=1-RR\)。因有間接效果（interference），<b>個體 VE 與族群衝擊不同</b>，需群集隨機等設計才能分辨。</p></div>
+
+<h4>可估計性：哪些設計能估哪些量</h4>
+<div class="k"><p>RR、絕對風險（\(I_1\) 或 \(I_0\)）、可歸因風險（\(I_1-I_0\)）、NNT\(=1/|AR|\) <b>皆可由 cohort／RCT 估計</b>；<span class="must">case-control 無法直接估絕對風險，只能估 OR</span>。114-1 Q7 就是要你依「定義＋可估計之設計＋舉例＋NNT」四段作答。</p></div>
 </div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>測量</th><th>公式</th><th>尺度</th><th>無效應值</th><th>主要用途/備註</th></tr></thead>
@@ -1201,6 +1239,11 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <div class="step">\(E=RR+\sqrt{RR(RR-1)}=3+\sqrt{3\times2}=3+2.449\)。</div>
 <div class="ans">E-value = 5.45：未測干擾對暴露、對結果的 RR 都須 ≥5.45 才能解釋掉關聯</div></div>
 </div></div>
+<div class="box box-gap"><div class="box-title">⭐ 講義補強考點（易漏必看）</div><div class="box-body">
+<h4>未測量混淆的三條補救路線（速答框架）</h4>
+<div class="k"><p>存在未測量混淆 → 無 conditional exchangeability → 因果效應<b>不可識別（non-identifiability）</b>。三條路線：①<b>Bias analysis</b>（量化未測混淆需多強才能解釋掉關聯）②<b>工具變數</b>（找只透過 A 影響 Y 的變數）③<b>傾向分數</b>（matching／stratification／weighting／共變量調整）。</p>
+<p><b>E-value</b>（最常考的 bias analysis 公式）：\( \text{E-value}=RR+\sqrt{RR(RR-1)} \)（VanderWeele & Ding 2017）。解讀：要把觀察到的 RR 完全解釋掉，未測混淆必須<b>同時</b>與暴露和結果都至少有 E-value 這麼強的關聯。罕見結果時 RR≈OR。</p></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>控制方法</th><th>階段</th><th>優點</th><th>缺點</th></tr></thead>
 <tbody>
@@ -1466,6 +1509,22 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <div class="step">\(n=\dfrac{(1.96+0.84)^2[0.15(0.85)+0.10(0.90)]}{(0.05)^2}=\dfrac{7.84\times(0.1275+0.09)}{0.0025}=\dfrac{7.84\times0.2175}{0.0025}\)。</div>
 <div class="ans">每組 n ≈ 682（共約 1364）</div></div>
 </div></div>
+<div class="box box-gap"><div class="box-title">⭐ 講義補強考點（易漏必看）</div><div class="box-body">
+<h4>型一錯誤、型二錯誤與檢定力（必背決策矩陣）</h4>
+<div class="k"><p>先把這組等號記死：<b>偽陽性＝型一錯誤（\(\alpha\)）</b>；<b>偽陰性＝型二錯誤（\(\beta\)）</b>。</p>
+<table><thead><tr><th>統計決策＼真實</th><th>真實無差異（\(H_0\) 真）</th><th>真實有差異（\(H_0\) 假）</th></tr></thead>
+<tbody>
+<tr><td>判定有顯著（拒絕 \(H_0\)）</td><td><b>型一錯誤 \(\alpha\)</b>（偽陽性）</td><td>正確：<b>檢定力 \(=1-\beta\)</b></td></tr>
+<tr><td>判定無顯著（不拒絕）</td><td>正確（\(1-\alpha\)）</td><td><b>型二錯誤 \(\beta\)</b>（偽陰性）</td></tr>
+</tbody></table>
+<p><b>申論技巧：把這張 2×2 表畫出來，邏輯一目了然，是有效的得分手段。</b></p></div>
+
+<div class="k"><p><b>型一（\(\alpha\)）</b>＝「沒效卻說有效／沒病卻判有病」。臨床上最忌諱——會核准無效療法、讓病人承擔副作用與花費，故嚴格控制 \(\alpha=0.05\)。<span class="must">\(\alpha\) 是研究者事先設定的容忍上限，不是資料算出來的；p 值才是資料算出來的</span>，兩者不可混。</p>
+<p><b>型二（\(\beta\)）</b>＝「有效卻測不出／有病卻漏診」，常因樣本數不足或方法太保守（如傳統 Fisher exact）。臨床試驗通常容許 \(\beta=0.20\)。<b>注意不對稱</b>：\(\alpha=0.05\) 但 \(\beta=0.20\)——科學界對「誤說有效」的容忍度遠低於「錯失發現」，這是<b>價值判斷而非數學必然</b>（加分點）。</p></div>
+
+<div class="k"><p><b>提高 Power \(=1-\beta\) 的五個做法與代價</b>（考點）：①<b>增加樣本數</b>（最直接；代價成本/時間/倫理）②<b>放寬 \(\alpha\)</b>（增加偽陽性，此消彼長）③<b>增大效應值</b>（多由生物本質決定，非研究者可控）④<b>降低變異</b>（改善測量精確度、限制族群同質性）⑤<b>改用較不保守的檢定</b>（如 mid-p 取代 Fisher exact；代價是不再保證涵蓋率 ≥95%）。</p>
+<p><span class="must">L4 加分點</span>：Power 是<b>設計階段</b>的概念，用來決定要收多少人。研究做完再回頭算 <b>post-hoc power 沒有意義</b>——它只是 p 值的單調函數，不提供新資訊。結果不顯著時應報<b>信賴區間</b>，說明「是真的沒效，還是只是估不準」。</p></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>概念</th><th>正確理解</th><th>常見誤解</th></tr></thead>
 <tbody>
@@ -1716,6 +1775,12 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <div class="ex"><div class="given">研究世代觀察死亡 90 例。標準人口層別率套到本世代人時，期望死亡：青年 30＋老年 45＝75。</div>
 <div class="step">\(SMR=\dfrac{O}{E}=\dfrac{90}{75}=1.20\)。</div>
 <div class="ans">SMR=1.20（比一般人口高 20%；不同 SMR 不可互比）</div></div>
+</div></div>
+<div class="box box-gap"><div class="box-title">⭐ 講義補強考點（易漏必看）</div><div class="box-body">
+<h4>直接 vs 間接標準化：差別在「資料需求」</h4>
+<div class="k"><p><b>直接法</b>：已知<b>研究族群各層率</b> → 套<b>標準人口結構</b>加權 → 得 age-adjusted rate。<br>
+<b>間接法</b>：研究族群各層率<b>不穩或未知</b> → 套<b>標準人口各層率</b>到研究族群結構算期望數 → <b>SMR＝觀察/期望</b>；再 <b>AMR＝SMR × 參考人口粗死亡率</b>。</p>
+<p><span class="must">113-1 Q3 明確要求：各舉一例並比較「資料需求」的差異</span>——這是最容易被漏答的一段。</p></div>
 </div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th></th><th>Mantel–Haenszel</th><th>直接標準化</th><th>間接標準化(SMR)</th></tr></thead>
@@ -2034,6 +2099,11 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <div class="step">CIF 用 all-cause 存活加權，正確扣除被競爭事件搶走的人。</div>
 <div class="ans">正解用 CIF（見專題 S3）；1−KM＞CIF</div></div>
 </div></div>
+<div class="box box-gap"><div class="box-title">⭐ 講義補強考點（易漏必看）</div><div class="box-body">
+<h4>存活分析與頻率測量的接點（方2 常考）</h4>
+<div class="k"><p>三大發生測量要分清：<b>發生時間（incidence time）</b>、<b>發生率（incidence rate，瞬時、有時間單位）</b>、<b>發生比例（incidence proportion＝risk，無單位、0–1）</b>。</p>
+<p>存活函數與危害的微分關係：\( h(t)=-\dfrac{d}{dt}\ln S(t) \)，即 \( S(t)=e^{-\int_0^t h(u)du} \)。Kaplan–Meier 為其無母數估計。<b>開放 vs 封閉族群</b>決定你該用率還是風險。</p></div>
+</div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>方法</th><th>類型</th><th>產出</th><th>關鍵假設</th></tr></thead>
 <tbody>
@@ -2336,6 +2406,15 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <div class="ex"><div class="given">承上，AP＝RERI/RR₁₁。</div>
 <div class="step">\(AP=36/50=0.72\)。</div>
 <div class="ans">雙暴露者中 72% 的超額風險可歸因於交互作用</div></div>
+</div></div>
+<div class="box box-gap"><div class="box-title">⭐ 講義補強考點（易漏必看）</div><div class="box-body">
+<h4>統計交互作用會「騙人」：同一筆資料，加成與相乘可給相反答案</h4>
+<div class="k"><p>加成性看 <b>RD</b>、相乘性看 <b>RR</b>。同一筆資料可以「相乘無交互、加成有交互」，故<span class="must">報告交互作用必須註明尺度</span>。這是李補1（因果圓派）與 SCC 系列的核心考點。</p></div>
+
+<h4>Peril 與 PRISM（進階、可作加分論述）</h4>
+<div class="k"><p><b>成圓率與「病因無累贅假設」（no-redundancy）</b>：因果圓派模型下，把「率相加」轉換成 <b>peril 相乘</b>的新風險測度，即 <b>Peril</b>。以 peril ratio 建構的 <b>PRISM</b>（Peril Ratio Index of Synergy based on Multiplicativity）可在同一筆資料上，與加成性、相乘性給出三種結論——用以說明「統計交互的尺度困境」。</p>
+<p><span class="must">最重要的統一洞見</span>：<b>疾病極罕見時 → 趨近加成性；疾病極常見（趨近 100%）時 → 趨近相乘性</b>；<b>罕見疾病的病例對照研究 → 用 RERI</b>。這句話能直接回答「為什麼公衛看加成、病因學常用相乘」。</p>
+<p>延伸：設限資料下的交互作用（IC 與 MIT）、以 peril ratio 同質性為基礎的分層分析、<b>互補對數迴歸（complementary log regression）</b>、以及疾病歸因的 <b>Causal-Pie Weight（CPW）與 PAF</b>。</p></div>
 </div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
 <table><thead><tr><th>概念</th><th>尺度/框架</th><th>回答的問題</th></tr></thead>
@@ -3936,8 +4015,102 @@ NIE\(=E[Y_{1,M_1}-Y_{1,M_0}]\)（暴露固定、僅動中介）。<br>
 <p><b>接回：</b>各題對應章已標於題末；訂正後回該章的🎓考題詳解與🧮計算型例題再練一輪；用 S4 熱區索引確認涵蓋高頻主題。</p>
 </div></div>
 <a class="back-top" href="#top">↑ 回頂端</a></section>
+<section class="chapter" id="ch49">
+<div class="ch-head"><span class="ch-num">衝刺 S6</span><h2>考前衝刺：七日衝刺計畫（一週應考）</h2><div class="ch-en">7-Day Final Sprint Plan</div></div>
+<div class="box box-map"><div class="box-title">🧭 核心邏輯與方法地圖</div><div class="box-body">
+<p>你剩<b>一週</b>。這頁不是再讀新東西，而是把手冊變成<b>拿分工具</b>。原則三條：</p>
+<ul>
+<li><b>只做能拿分的事</b>：默寫公式、練計算、寫答題骨架——不要再從頭精讀。</li>
+<li><b>先顧🔥🔥🔥基本盤</b>（見 S4 熱區），基本盤穩＝及格線穩。</li>
+<li><b>每天輸出</b>：手寫一次比讀三次有效。看完就闔上默寫。</li>
+</ul>
+</div></div>
+<div class="ch-body">
+<h3>Day 1（因果基礎＋效應測量）</h3>
+<p><b>讀</b>：Ch.2、3、5＋⭐補強（M-bias、Simpson、Greenland–Robins 四型、Halloran 四效應）。<br>
+<b>練</b>：Ch.5 計算例題全做；手畫 DAG 三結構（鏈/叉/碰撞）各一例並寫「調不調」。<br>
+<b>默寫</b>：RD/RR/OR/AFe/PAF、可交換性三假設、後門準則。<br>
+<b>檢核</b>：能否 60 秒說出「效應 vs 關聯」的差別與需要什麼假設？</p>
+
+<h3>Day 2（偏差三本柱）</h3>
+<p><b>讀</b>：Ch.12、13、14＋⭐（未測混淆三路線、E-value）。<br>
+<b>練</b>：Ch.12、13 計算例題（M–H、E-value、Se/Sp/PPV、非差別錯分衰減）。<br>
+<b>默寫</b>：干擾四要件、三大偏差對照表、E-value 公式。<br>
+<b>檢核</b>：拿到任一題能否分辨「這是 confounding、selection 還是 information bias？」</p>
+
+<h3>Day 3（測量、設計與病例對照）</h3>
+<p><b>讀</b>：Ch.4、6、7、8。<br>
+<b>練</b>：Ch.4、8 計算例題（人時、率轉風險、配對 OR＋CI、密度抽樣）。<br>
+<b>默寫</b>：三種對照抽樣→OR 各估什麼、是否需罕見假設；四設計對照表。<br>
+<b>檢核</b>：能否解釋「對照代表誰」？</p>
+
+<h3>Day 4（統計推論：最高頻拿分區）</h3>
+<p><b>讀</b>：Ch.15、16、17、18＋⭐（型一/型二/Power 決策矩陣、直接 vs 間接標準化的資料需求）。<br>
+<b>練</b>：Ch.15、17、18 計算例題全做（RR 的對數 CI、Woolf、卡方、標準化、SMR）。<br>
+<b>默寫</b>：Exact CI 的概念、Poisson 模型含 offset、\(SE(\ln OR)\)、\(SE(\ln RR)\)、直接/間接標準化。<br>
+<b>檢核</b>：Exact CI、Poisson、標準化三題能否<b>不看書寫出完整列式</b>？（這三個幾乎年年考）</p>
+
+<h3>Day 5（迴歸、存活與競爭風險）</h3>
+<p><b>讀</b>：Ch.20、21、22＋專題 S3（1−KM vs CIF）。<br>
+<b>練</b>：Ch.22 例題；寫出 Cox PH 假設如何檢查與補救。<br>
+<b>默寫</b>：連結函數↔效應尺度對應表；線性迴歸四假設＋檢定＋違反處理；cause-specific vs Fine–Gray 差異。<br>
+<b>檢核</b>：能否說出「兩個 hazard 尺度為何可方向相反」？</p>
+
+<h3>Day 6（進階因果與新趨勢）</h3>
+<p><b>讀</b>：Ch.25、26、27、28＋專題 S1（AI）、S2（TTE）。<br>
+<b>練</b>：RERI 計算、中介三法與 NDE/NIE 定義、Wald IV 估計。<br>
+<b>默寫</b>：目標試驗 <b>7 大要素</b>及各擋哪個偏差；IV 三假設；中介四假設。<br>
+<b>檢核</b>：「觀察 vs RCT 打架」的題目能否用 TTE 七要素逐一檢查作答？</p>
+
+<h3>Day 7（模擬考＋補洞）</h3>
+<p><b>上午</b>：限時 90 分鐘寫 <b>S5 模擬卷</b>（遮住詳解）。<br>
+<b>下午</b>：對詳解訂正，把錯的回到該章的🎓考題詳解與🧮例題再練一次。<br>
+<b>晚上</b>：只看三樣——<b>S4 熱區索引🔥🔥🔥、各章🧮重要公式總整理、你劃紅色「不懂」的段落</b>。<br>
+<b>睡前</b>：把最常錯的 5 條公式手寫一遍。不要熬夜。</p>
+
+<h3>考場作答策略（進考場前看這段）</h3>
+<p><b>名詞題</b>用三段式：<b>定義 → 統計原理/公式 → 流病意義與應用（舉例）</b>，容易拿滿分。<br>
+<b>計算題</b>：<b>務必列式</b>，比值型記得在對數尺度算 CI；標準化先寫清「用誰的權重」。就算算錯，列式與邏輯有分。<br>
+<b>DAG/申論題</b>：<b>先畫圖</b>，再逐點寫「這個變項是什麼角色→調或不調→理由」。<br>
+<b>看到情境題先問三句</b>：①這是風險還是率？②哪個尺度（加成/相乘）？③這是 confounding、selection 還是 information bias？<br>
+<b>不會的題不要空白</b>：寫出你知道的定義、相關公式與判斷方向，部分分數很關鍵。</p>
+</div>
+<div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
+<table><thead><tr><th>Day</th><th>主題</th><th>必默寫</th><th>對應章</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>因果基礎＋效應測量</td><td>RD/RR/OR/PAF、三假設、後門準則</td><td>2、3、5</td></tr>
+<tr><td>2</td><td>三大偏差</td><td>干擾四要件、E-value</td><td>12、13、14</td></tr>
+<tr><td>3</td><td>測量與設計</td><td>三種抽樣→OR、四設計對照</td><td>4、6、7、8</td></tr>
+<tr><td>4</td><td><b>統計推論（最高頻）</b></td><td>Exact CI、Poisson offset、標準化/SMR</td><td>15–18</td></tr>
+<tr><td>5</td><td>迴歸與存活</td><td>連結函數↔尺度、PH 檢查、CIF</td><td>20–22、S3</td></tr>
+<tr><td>6</td><td>進階因果與趨勢</td><td>TTE 七要素、IV 三假設、中介四假設</td><td>25–28、S1、S2</td></tr>
+<tr><td>7</td><td>模擬考＋補洞</td><td>錯題重練、公式再默一次</td><td>S5、S4</td></tr>
+</tbody></table>
+</div></div>
+<div class="box box-formula"><div class="box-title">🧮 重要公式總整理</div><div class="box-body">
+<p><b>考前最後一頁：只默這些（默不出來就翻該章）</b></p>
+<div class="formula-item">\(CI=1-e^{-\lambda t}\)；\(P/(1-P)\approx IR\times\bar D\)；\(OR=ad/bc\)；\(PAF=\dfrac{P_e(RR-1)}{1+P_e(RR-1)}\)</div>
+<div class="formula-item">\(SE(\ln OR)=\sqrt{\tfrac1a+\tfrac1b+\tfrac1c+\tfrac1d}\)；\(SE(\ln RR)=\sqrt{\tfrac1a-\tfrac1{n_1}+\tfrac1c-\tfrac1{n_0}}\)；CI 在對數尺度算再取 exp</div>
+<div class="formula-item">\(OR_{MH}=\dfrac{\sum a_id_i/n_i}{\sum b_ic_i/n_i}\)；直接標準化 \(\dfrac{\sum W_iI_i}{\sum W_i}\)；\(SMR=O/E\)</div>
+<div class="formula-item">Poisson：\(\log\mu_i=\log T_i+\beta_0+\beta_1X_i\)，\(e^{\beta}=IRR\)</div>
+<div class="formula-item">配對 \(OR=b/c\)，\(SE=\sqrt{1/b+1/c}\)；\(RERI=RR_{11}-RR_{10}-RR_{01}+1\)；\(VE=1-RR\)</div>
+<div class="formula-item">E-value \(=RR+\sqrt{RR(RR-1)}\)；Power \(=1-\beta\)；\(h(t)=-\dfrac{d}{dt}\ln S(t)\)</div>
+</div></div>
+<div class="box box-exam"><div class="box-title">🎯 考試重點</div><div class="box-body">
+<ol>
+<li><b>每天結束前默寫當日公式一次</b>（手寫，不要只用看的）。</li>
+<li>Day 4 的三大高頻（Exact CI、Poisson、標準化）務必練到不看書能列式。</li>
+<li>Day 7 一定要<b>限時模擬</b>——訓練時間分配比多讀一章重要。</li>
+<li>作答三段式（定義→原理→應用）與「先畫 DAG」是最穩的得分習慣。</li>
+<li><b>不會也要寫</b>：寫定義、寫相關公式、寫判斷方向，爭取部分分數。</li>
+</ol>
+</div></div>
+<div class="box box-bridge"><div class="box-title">🔗 如何把本章接回其他單元</div><div class="box-body">
+<p><b>搭配使用：</b>S4 熱區索引（決定讀什麼）→ 各章🧮計算例題與🎓考題詳解（練手）→ S5 模擬卷（檢核）→ 用右下角「📒 我的筆記」把紅色「不懂」處集中複習。</p>
+</div></div>
+<a class="back-top" href="#top">↑ 回頂端</a></section>
 <footer style="text-align:center;color:var(--muted);font-size:12.5px;margin-top:40px">
-  現代流行病學 精讀複習手冊 · 共 48 個單元（43 章 ＋ 3 專題）· 供複習使用
+  現代流行病學 精讀複習手冊 · 共 49 個單元（43 章 ＋ 3 專題）· 供複習使用
 </footer>
 </main>
 </div>
