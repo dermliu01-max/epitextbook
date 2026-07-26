@@ -147,6 +147,26 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 .flash{animation:annofl 1.3s}
 @keyframes annofl{0%{background:#fff2b0}100%{background:transparent}}
 @media print{.anno-fab,.anno-toolbar,.anno-panel,.toc-toggle,.note-badge{display:none!important}}
+
+/* ==== 章節狀態圓點 ==== */
+.toc-link{position:relative}
+.st-dot{flex:0 0 15px;width:15px;height:15px;border-radius:50%;border:2px solid #c7d0da;background:#fff;
+  cursor:pointer;margin-right:1px;transition:.15s;align-self:center}
+.st-dot:hover{transform:scale(1.25);box-shadow:0 0 0 3px rgba(43,123,189,.18)}
+.st-dot[data-st="read"]{background:#4caf50;border-color:#3d8b40}
+.st-dot[data-st="imp"]{background:#ffc107;border-color:#d6a100}
+.st-dot[data-st="nogo"]{background:#e53935;border-color:#b52d2a}
+.toc-link[data-st="read"] .tl-zh{color:#6b7280;text-decoration:line-through;text-decoration-color:#b7c0cb}
+.toc-link[data-st="imp"] .tl-zh{font-weight:700}
+.toc-link[data-st="nogo"] .tl-zh{color:#b52d2a;font-weight:700}
+.st-bar{display:flex;flex-wrap:wrap;gap:5px;margin:2px 2px 10px;font-size:11.5px}
+.st-bar button{border:1px solid var(--line);background:#f6f8fb;border-radius:7px;padding:4px 7px;cursor:pointer;font-size:11.5px}
+.st-bar button.on{background:#e2effb;border-color:var(--brand2);color:var(--brand);font-weight:700}
+.st-legend{font-size:11px;color:var(--muted);margin:0 3px 8px;line-height:1.7}
+.st-legend b{color:var(--ink)}
+.st-prog{height:6px;border-radius:6px;background:#e9eef4;overflow:hidden;margin:0 3px 10px}
+.st-prog i{display:block;height:100%;background:linear-gradient(90deg,#4caf50,#7fd183);width:0}
+@media print{.st-dot,.st-bar,.st-prog{display:none!important}}
 </style>
 </head>
 <body>
@@ -4211,6 +4231,98 @@ links.forEach(l=>l.addEventListener('click',()=>document.getElementById('toc').c
   }
   if(window.MathJax&&MathJax.startup&&MathJax.startup.promise){ MathJax.startup.promise.then(reapply).catch(reapply); }
   else { setTimeout(reapply,600); }
+})();
+</script>
+<script>
+(function(){
+  var KEY='epi_chapter_status_v1';
+  var toc=document.getElementById('toc'); if(!toc) return;
+  var st={}; try{var s=localStorage.getItem(KEY); if(s) st=JSON.parse(s)||{};}catch(e){}
+  function save(){ try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){} }
+  var ORDER=['none','read','imp','nogo'];
+  var LABEL={none:'未標記',read:'已讀',imp:'重要',nogo:'不懂'};
+  var links=[].slice.call(toc.querySelectorAll('.toc-link'));
+
+  links.forEach(function(l){
+    var id=l.getAttribute('href');
+    var d=document.createElement('span');
+    d.className='st-dot';
+    d.title='點一下切換：未標記 → 已讀 → 重要 → 不懂';
+    l.insertBefore(d,l.firstChild);
+    d.addEventListener('click',function(ev){
+      ev.preventDefault(); ev.stopPropagation();
+      var cur=st[id]||'none';
+      var nx=ORDER[(ORDER.indexOf(cur)+1)%ORDER.length];
+      if(nx==='none'){ delete st[id]; } else { st[id]=nx; }
+      save(); paint(); 
+    });
+  });
+
+  function paint(){
+    links.forEach(function(l){
+      var id=l.getAttribute('href'); var v=st[id];
+      var d=l.querySelector('.st-dot');
+      if(v){ d.setAttribute('data-st',v); l.setAttribute('data-st',v); d.title='目前：'+LABEL[v]+'（點一下切換）'; }
+      else { d.removeAttribute('data-st'); l.removeAttribute('data-st'); d.title='點一下切換：未標記 → 已讀 → 重要 → 不懂'; }
+    });
+    var n=links.length, r=0,i=0,g=0;
+    links.forEach(function(l){var v=st[l.getAttribute('href')]; if(v==='read')r++; else if(v==='imp')i++; else if(v==='nogo')g++;});
+    var el=document.getElementById('stCount');
+    if(el) el.innerHTML='<b>'+r+'</b>/'+n+' 已讀 · <b>'+i+'</b> 重要 · <b>'+g+'</b> 不懂';
+    var bar=document.getElementById('stProg'); if(bar) bar.style.width=(n?Math.round(r/n*100):0)+'%';
+    applyFilter();
+  }
+
+  var filter='all';
+  function applyFilter(){
+    links.forEach(function(l){
+      var v=st[l.getAttribute('href')]||'none';
+      var show = (filter==='all') || (filter==='left' ? (v!=='read') : (v===filter));
+      l.dataset.stHide = show?'':'1';
+      if(!l.dataset.qHide) l.style.display = show?'flex':'none';
+    });
+    document.querySelectorAll('.toc-part').forEach(function(p){ p.style.display=(filter==='all')?'block':'none'; });
+  }
+
+  // control bar
+  var title=toc.querySelector('.toc-title');
+  var wrap=document.createElement('div');
+  wrap.innerHTML='<div class="st-legend">🖱 點<b>章號左邊的圓點</b>切換：⚪未標記 → <b style="color:#3d8b40">🟢已讀</b> → <b style="color:#d6a100">🟡重要</b> → <b style="color:#b52d2a">🔴不懂</b></div>'+
+    '<div class="st-prog"><i id="stProg"></i></div>'+
+    '<div class="st-legend" id="stCount"></div>'+
+    '<div class="st-bar">'+
+      '<button data-f="all" class="on">全部</button>'+
+      '<button data-f="left">未讀</button>'+
+      '<button data-f="imp">🟡重要</button>'+
+      '<button data-f="nogo">🔴不懂</button>'+
+      '<button data-f="read">🟢已讀</button>'+
+      '<button id="stClr">清除</button>'+
+    '</div>';
+  title.parentNode.insertBefore(wrap,title.nextSibling);
+
+  wrap.querySelectorAll('.st-bar button[data-f]').forEach(function(b){
+    b.addEventListener('click',function(){
+      wrap.querySelectorAll('.st-bar button[data-f]').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on'); filter=b.dataset.f; applyFilter();
+    });
+  });
+  wrap.querySelector('#stClr').addEventListener('click',function(){
+    if(confirm('清除所有章節標記？')){ st={}; save(); paint(); }
+  });
+
+  // keep search compatible
+  var si=document.getElementById('tocSearch');
+  if(si){ si.addEventListener('input',function(){
+    var q=si.value.trim().toLowerCase();
+    links.forEach(function(l){
+      var txt=(l.dataset.txt||'').toLowerCase();
+      l.dataset.qHide = (!q||txt.indexOf(q)>=0)?'':'1';
+      if(l.dataset.qHide){ l.style.display='none'; }
+      else { l.style.display = l.dataset.stHide?'none':'flex'; }
+    });
+  }); }
+
+  paint();
 })();
 </script>
 </body>
