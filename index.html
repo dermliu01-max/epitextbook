@@ -1260,8 +1260,9 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <div class="ans">E-value = 5.45：未測干擾對暴露、對結果的 RR 都須 ≥5.45 才能解釋掉關聯</div></div>
 </div></div>
 <div class="box box-gap"><div class="box-title">⭐ 講義補強考點（易漏必看）</div><div class="box-body">
-<h4>未測量混淆的三條補救路線（速答框架）</h4>
-<div class="k"><p>存在未測量混淆 → 無 conditional exchangeability → 因果效應<b>不可識別（non-identifiability）</b>。三條路線：①<b>Bias analysis</b>（量化未測混淆需多強才能解釋掉關聯）②<b>工具變數</b>（找只透過 A 影響 Y 的變數）③<b>傾向分數</b>（matching／stratification／weighting／共變量調整）。</p>
+<h4>未測量混淆的補救路線（速答框架）</h4>
+<div class="k"><p>存在未測量混淆 → 無 conditional exchangeability → 因果效應<b>不可識別（non-identifiability）</b>。兩條路線：①<b>Bias analysis</b>（量化未測混淆需多強才能解釋掉關聯）②<b>工具變數</b>（找只透過 A 影響 Y 的變數）。</p>
+<p><span class="must">注意</span>：<b>傾向分數（matching／stratification／weighting／共變量調整）只能平衡「已測」干擾，無法解決未測混淆</b>——它處理的是已測干擾的多變項調整問題，不屬於此處的補救路線。</p>
 <p><b>E-value</b>（最常考的 bias analysis 公式）：\( \text{E-value}=RR+\sqrt{RR(RR-1)} \)（VanderWeele & Ding 2017）。解讀：要把觀察到的 RR 完全解釋掉，未測混淆必須<b>同時</b>與暴露和結果都至少有 E-value 這麼強的關聯。罕見結果時 RR≈OR。</p></div>
 </div></div>
 <div class="box box-compare"><div class="box-title">📊 方法比較總表</div><div class="box-body">
