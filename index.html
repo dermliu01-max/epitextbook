@@ -167,6 +167,21 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 .st-prog{height:6px;border-radius:6px;background:#e9eef4;overflow:hidden;margin:0 3px 10px}
 .st-prog i{display:block;height:100%;background:linear-gradient(90deg,#4caf50,#7fd183);width:0}
 @media print{.st-dot,.st-bar,.st-prog{display:none!important}}
+
+/* ==== 可拖曳側邊欄 ==== */
+#toc{width:var(--tocw,310px);min-width:var(--tocw,310px)}
+#tocResizer{position:sticky;top:0;height:100vh;width:8px;min-width:8px;cursor:col-resize;
+  background:transparent;z-index:40;flex:0 0 8px}
+#tocResizer:hover,#tocResizer.dragging{background:linear-gradient(90deg,transparent,rgba(43,123,189,.28),transparent)}
+#tocResizer::after{content:"";position:absolute;left:3px;top:50%;transform:translateY(-50%);
+  width:2px;height:46px;background:#cfd8e3;border-radius:2px}
+#tocResizer:hover::after,#tocResizer.dragging::after{background:var(--brand2)}
+body.resizing{user-select:none;cursor:col-resize}
+/* 公式不再溢位：可水平捲動 */
+mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden;max-width:100%;padding-bottom:2px}
+.box-body,.ch-body{overflow-wrap:break-word}
+td mjx-container,th mjx-container{max-width:100%}
+@media print{#tocResizer{display:none!important}}
 </style>
 </head>
 <body>
@@ -234,6 +249,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <a class="toc-link" href="#ch48" data-txt="S5 考前衝刺：模擬資格考卷＋詳解 Mock Qualifying Exam with Full Solutions"><span class="tl-num">S5</span><span class="tl-zh">考前衝刺：模擬資格考卷＋詳解</span></a>
 <a class="toc-link" href="#ch49" data-txt="S6 考前衝刺：七日衝刺計畫（一週應考） 7-Day Final Sprint Plan"><span class="tl-num">S6</span><span class="tl-zh">考前衝刺：七日衝刺計畫（一週應考）</span></a>
 </nav>
+<div id="tocResizer" title="拖曳可調整目錄寬度（雙擊還原）"></div>
 <main>
 <div class="masthead">
   <h1>現代流行病學 · 精讀複習手冊（資格考詳細版）</h1>
@@ -375,7 +391,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <div class="exq"><span class="yr">102-2/104/105</span><span class="qtitle">題1：解釋 Sufficient Component Cause model</span>
 <div class="sol">答題骨架：一個「圓（pie）」＝一個充分原因，切片＝組成原因，切片<b>湊齊</b>才發病；一病可有多個充分原因（多條病因途徑）；出現在<b>所有</b>充分原因中的組成原因＝必要原因（如結核菌）。四點意涵：解釋族群間效果差異（其他組成原因盛行率不同）、界定交互作用的<b>生物機制</b>、預防理論基礎（阻斷任一切片即阻斷該圓）、支持多重病因論。侷限：充分原因幾乎無法完整觀測，屬理論框架。</div></div>
 <div class="exq"><span class="yr">102-2/104/105</span><span class="qtitle">題2：用 R11/R10/R01/R00 說明生物交互作用（interaction contrast 推導）</span>
-<div class="sol">2×2 風險表（菸×石綿）：R11 皆有、R10 僅菸、R01 僅石綿、R00 皆無。<b>相加交互（interaction contrast）</b>：\( IC=R_{11}-(R_{10}+R_{01}-R_{00}) \)。\(IC>0\)＝<b>超相加/協同（synergism）</b>：\((R_{11}-R_{00})>(R_{10}-R_{00})+(R_{01}-R_{00})\)。這是「兩組成原因落在同一塊餅」的頻率學對應（詳見第 26 章 RERI）。</div></div>
+<div class="sol">2×2 風險表（菸×石綿）：R11 皆有、R10 僅菸、R01 僅石綿、R00 皆無。<b>相加交互（interaction contrast）</b>：\( IC=R_{11}-(R_{10}+R_{01}-R_{00}) \)。\(IC\gt 0\)＝<b>超相加/協同（synergism）</b>：\((R_{11}-R_{00})\gt (R_{10}-R_{00})+(R_{01}-R_{00})\)。這是「兩組成原因落在同一塊餅」的頻率學對應（詳見第 26 章 RERI）。</div></div>
 <div class="exq"><span class="yr">102-2/104/105</span><span class="qtitle">題3：HBeAg 是保護因子？反向因果與理想設計</span>
 <div class="sol"><span class="pitfall">陷阱＝反向因果</span>：橫斷面看似保護，實為疾病狀態影響標記；理想設計為前瞻世代、暴露先於結果。連第 34 章反向因果、第 6 章時序。</div></div>
 <div class="exq"><span class="yr">114-2</span><span class="qtitle">名詞1：SCC model（統計原理、流病意義與應用）</span>
@@ -452,7 +468,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <p>\[ E[Y(a)]=\sum_z E[Y(a)\mid Z=z]P(z)=\sum_z E[Y(a)\mid A=a,Z=z]P(z) \]</p>
 <p>第一步用全期望，第二步用條件可交換把 \(Y(a)\) 換成觀察量，第三步用一致性 \(Y(a)=Y\)（當 \(A=a\)）：</p>
 <p>\[ E[Y(a)]=\sum_z E[Y\mid A=a,Z=z]P(z) \]</p>
-<p>這就是「標準化/g-formula」的一步版（第 18、25 章）。三個可識別假設在此各出一次力：可交換、一致性、正性（保證每個 \(z\) 下 \(P(A=a\mid z)>0\)）。</p></div>
+<p>這就是「標準化/g-formula」的一步版（第 18、25 章）。三個可識別假設在此各出一次力：可交換、一致性、正性（保證每個 \(z\) 下 \(P(A=a\mid z)\gt 0\)）。</p></div>
 <h4>關鍵觀念：碰撞點為何「調整才壞」</h4>
 <div class="derive"><p>\(A\to K\leftarrow Y\)：\(A\)、\(Y\) 邊際獨立。但已知 \(K=1\) 時，若非 \(A\) 造成則更可能是 \(Y\) 造成 → 在 \(K\) 的層內 \(A\) 與 \(Y\) 出現負相關（explaining away）。這就是選擇偏差的引擎（第 14 章）。</p></div>
 <h4>口試常見追問</h4>
@@ -646,7 +662,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 </div>
 <div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
 <h4>關鍵推導：罕見病時 OR ≈ RR ≈ IRR</h4>
-<div class="derive"><p>\(OR=\dfrac{R_1/(1-R_1)}{R_0/(1-R_0)}=RR\cdot\dfrac{1-R_0}{1-R_1}\)。當 \(R_1,R_0\to0\)，修正因子 \(\dfrac{1-R_0}{1-R_1}\to1\)，故 \(OR\to RR\)。病不罕見時 \(R_1>R_0\Rightarrow\) 修正因子 &gt;1 \(\Rightarrow OR\) 比 \(RR\) 更偏離 1（誇大）。密度抽樣的病例對照則 \(OR=IRR\) 不需此近似（第 8 章）。</p></div>
+<div class="derive"><p>\(OR=\dfrac{R_1/(1-R_1)}{R_0/(1-R_0)}=RR\cdot\dfrac{1-R_0}{1-R_1}\)。當 \(R_1,R_0\to0\)，修正因子 \(\dfrac{1-R_0}{1-R_1}\to1\)，故 \(OR\to RR\)。病不罕見時 \(R_1\gt R_0\Rightarrow\) 修正因子 &gt;1 \(\Rightarrow OR\) 比 \(RR\) 更偏離 1（誇大）。密度抽樣的病例對照則 \(OR=IRR\) 不需此近似（第 8 章）。</p></div>
 <h4>關鍵推導：PAF 的兩種等價式</h4>
 <div class="derive"><p>由 \(RR\) 與暴露盛行 \(P_e\)：族群平均風險 \(=P_e R_1+(1-P_e)R_0\)。</p>
 <p>\[ PAF=\frac{\text{pop risk}-R_0}{\text{pop risk}}=\frac{P_e(RR-1)}{1+P_e(RR-1)} \]</p>
@@ -1225,7 +1241,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 </div>
 <div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
 <h4>關鍵推導：干擾造成的偏差方向</h4>
-<div class="derive"><p>單一二元干擾 \(C\)，粗 RR 與分層 RR 的關係可寫成暴露組與未暴露組 \(C\) 盛行差異的函數。若 \(C\) 使風險上升（\(RR_{CY}>1\)）且在暴露組較盛行（\(P(C\mid A{=}1)>P(C\mid A{=}0)\)），則粗估<b>高估</b>正效應；若方向相反則低估。<b>偏差方向＝(干擾對結果方向) × (干擾在兩暴露組的分布差方向)</b>。這條口訣可快速判斷「調整後會往哪移」。</p></div>
+<div class="derive"><p>單一二元干擾 \(C\)，粗 RR 與分層 RR 的關係可寫成暴露組與未暴露組 \(C\) 盛行差異的函數。若 \(C\) 使風險上升（\(RR_{CY}\gt 1\)）且在暴露組較盛行（\(P(C\mid A{=}1)\gt P(C\mid A{=}0)\)），則粗估<b>高估</b>正效應；若方向相反則低估。<b>偏差方向＝(干擾對結果方向) × (干擾在兩暴露組的分布差方向)</b>。這條口訣可快速判斷「調整後會往哪移」。</p></div>
 <h4>關鍵觀念：為何不能只看「估計改變10%」</h4>
 <div class="derive"><p>加入變項 \(Z\) 後估計改變，可能因 \(Z\) 是真干擾（該調），也可能因 \(Z\) 是中介（不該調，改變是擋掉間接效應）或碰撞（不該調，改變是新造偏差），甚至因 <b>OR 不可壓縮</b>（即使無干擾，條件 OR≠邊際 OR）。故變項選擇必須由 DAG 的角色決定，非由數值變化決定。</p></div>
 <h4>關鍵推導：E-value</h4>
@@ -1379,7 +1395,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <div class="box box-formula"><div class="box-title">🧮 重要公式總整理</div><div class="box-body">
 <div class="formula-item"><b>敏感度/特異度：</b> \( Se=\dfrac{TP}{TP+FN},\; Sp=\dfrac{TN}{TN+FP} \)</div>
 <div class="formula-item"><b>陽性預測值（隨盛行率變）：</b> \( PPV=\dfrac{Se\cdot p}{Se\cdot p+(1-Sp)(1-p)} \)</div>
-<div class="formula-item"><b>迴歸稀釋：</b> 觀察斜率 \(=\) 真斜率 \(\times\) 可靠度 \( \rho \)（\(0<\rho<1\)）。</div>
+<div class="formula-item"><b>迴歸稀釋：</b> 觀察斜率 \(=\) 真斜率 \(\times\) 可靠度 \( \rho \)（\(0\lt \rho\lt 1\)）。</div>
 <div class="formula-item"><b>信度：</b> ICC \(=\dfrac{\sigma^2_{\text{true}}}{\sigma^2_{\text{true}}+\sigma^2_{\text{err}}} \)</div>
 </div></div>
 <div class="box box-exam"><div class="box-title">🎯 考試重點</div><div class="box-body">
@@ -1694,7 +1710,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
 <p>Poisson 迴歸（人年 offset）是率資料的招牌題，106、113-1、110-1、109-2 反覆出現。</p>
 <div class="exq"><span class="yr">113-1 Q3</span><span class="qtitle">128 城市肺癌 × 空污/抽菸、各城人年不同：寫模型、檢定量分布、拒絕區</span>
-<div class="sol">\( \log\mu_i=\log T_i+\beta_0+\beta_1\text{Pollution}_i+\beta_2\text{Smoking}_i \)，\(T_i\)＝人年 offset，\(\exp(\beta)=IRR\)。檢定：\(H_0:\beta_1=\beta_2=0\)；Wald \(=\hat\beta/SE\sim N(0,1)\)（或 Score/LRT）；\(|Z|>1.96\) 落拒絕區。</div></div>
+<div class="sol">\( \log\mu_i=\log T_i+\beta_0+\beta_1\text{Pollution}_i+\beta_2\text{Smoking}_i \)，\(T_i\)＝人年 offset，\(\exp(\beta)=IRR\)。檢定：\(H_0:\beta_1=\beta_2=0\)；Wald \(=\hat\beta/SE\sim N(0,1)\)（或 Score/LRT）；\(|Z|\gt 1.96\) 落拒絕區。</div></div>
 <div class="exq"><span class="yr">106 名詞</span><span class="qtitle">Wald 檢定與 Poisson 假設（等分散）</span>
 <div class="sol">Poisson 假設 \(E(Y)=\mathrm{Var}(Y)\)；過度分散→負二項/GAM。</div></div>
 <div class="exq"><span class="yr">109-2 II-6</span><span class="qtitle">肝癌的 Poisson 迴歸與假說檢定</span>
@@ -1884,7 +1900,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 </div></div>
 <div class="box box-formula"><div class="box-title">🧮 重要公式總整理</div><div class="box-body">
 <div class="formula-item"><b>多項式邏輯：</b> \( \ln\dfrac{P(Y=k)}{P(Y=0)}=\alpha_k+\beta_k X \)</div>
-<div class="formula-item"><b>比例勝算：</b> \( \ln\dfrac{P(Y\le j)}{P(Y>j)}=\alpha_j-\beta X \)（各 \(j\) 共用 \(\beta\)）</div>
+<div class="formula-item"><b>比例勝算：</b> \( \ln\dfrac{P(Y\le j)}{P(Y\gt j)}=\alpha_j-\beta X \)（各 \(j\) 共用 \(\beta\)）</div>
 <div class="formula-item"><b>線性趨勢：</b> 對有序類指定分數 \(s_k\)，檢定 \(\beta\) 於 \(\sum s_k\)。</div>
 </div></div>
 <div class="box box-exam"><div class="box-title">🎯 考試重點</div><div class="box-body">
@@ -2077,7 +2093,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <p>存活分析依賴一個重要假設：<span class="term">非資訊性設限（non-informative censoring）</span>——設限與事件風險獨立。如果「快要發病的人特別容易失訪」，設限就與風險相關，這其實就是選擇偏差，會使估計偏誤。<span class="term">左截斷</span>則處理「延遲進入」（例如用年齡當時間尺度時，受試者是在某個年齡才進入觀察）。</p>
 
 <h3>3. 存活函數與危害函數</h3>
-<p>兩個核心量：<span class="term">存活函數</span> \(S(t)=P(T>t)\)（活過 \(t\) 的機率）與<span class="term">危害函數</span> \(h(t)\)（在 \(t\) 仍存活的條件下，瞬間發生事件的率）。兩者互通：\(S(t)=\exp(-\int_0^t h(u)du)\)。危害其實就是第 4 章「率」的連續版——把存活分析看成「率的精緻化」，觀念就順了。</p>
+<p>兩個核心量：<span class="term">存活函數</span> \(S(t)=P(T\gt t)\)（活過 \(t\) 的機率）與<span class="term">危害函數</span> \(h(t)\)（在 \(t\) 仍存活的條件下，瞬間發生事件的率）。兩者互通：\(S(t)=\exp(-\int_0^t h(u)du)\)。危害其實就是第 4 章「率」的連續版——把存活分析看成「率的精緻化」，觀念就順了。</p>
 
 <h3>4. 非參數與半參數方法</h3>
 <p><span class="term">Kaplan–Meier</span>用階梯曲線估 \(S(t)\)，組間比較用<span class="term">log-rank 檢定</span>。<span class="term">Cox 比例危害模型</span> \(h(t\mid X)=h_0(t)e^{\beta X}\) 是主力——它不需要設定基線危害的形狀，\(e^\beta\) 就是<span class="term">危害比 HR</span>。它的核心假設是<b>比例危害</b>：兩人的危害比不隨時間改變。檢查方法：Schoenfeld 殘差對時間有無趨勢、log(−log S) 曲線是否平行、或加「時間×變數」交互項。違反時：改用分層 Cox、時間相依係數，或換一個時間尺度。</p>
@@ -2087,7 +2103,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 </div>
 <div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
 <h4>關鍵推導：存活與危害的關係</h4>
-<div class="derive"><p>危害 \(h(t)=\lim_{\Delta\to0}\dfrac{P(t\le T<t+\Delta\mid T\ge t)}{\Delta}=-\dfrac{d}{dt}\ln S(t)\)。積分得 \( S(t)=\exp\!\big(-\int_0^t h(u)du\big)=e^{-H(t)} \)，\(H\)＝累積危害。定危害即回到第 4 章 \(1-e^{-\lambda t}\)。</p></div>
+<div class="derive"><p>危害 \(h(t)=\lim_{\Delta\to0}\dfrac{P(t\le T\lt t+\Delta\mid T\ge t)}{\Delta}=-\dfrac{d}{dt}\ln S(t)\)。積分得 \( S(t)=\exp\!\big(-\int_0^t h(u)du\big)=e^{-H(t)} \)，\(H\)＝累積危害。定危害即回到第 4 章 \(1-e^{-\lambda t}\)。</p></div>
 <h4>關鍵推導：Kaplan–Meier 為何是乘積</h4>
 <div class="derive"><p>存活到 \(t\)＝逐個事件時點「條件存活」相乘：\( \hat S(t)=\prod_{t_i\le t}\big(1-\tfrac{d_i}{n_i}\big) \)。設限者在其離開後不再計入 \(n_i\)，故其部分資訊（活到離開）被善用——這是存活分析勝過「只看是否發病」的核心。</p></div>
 <h4>關鍵觀念：Cox 的比例危害與偏概似</h4>
@@ -2399,7 +2415,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 </div>
 <div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
 <h4>關鍵推導：交互的尺度相依</h4>
-<div class="derive"><p>設 \(RR_{10}=2,\;RR_{01}=3\)。若<b>可乘無交互</b>則 \(RR_{11}=2\times3=6\)。檢查可加：RERI \(=RR_{11}-RR_{10}-RR_{01}+1=6-2-3+1=2>0\)→<b>可加有正交互</b>。反之若可加無交互（\(RR_{11}=RR_{10}+RR_{01}-1=4\)），則可乘 \(4\ne6\) 有負交互。<b>故「有無交互」必須指定尺度。</b></p></div>
+<div class="derive"><p>設 \(RR_{10}=2,\;RR_{01}=3\)。若<b>可乘無交互</b>則 \(RR_{11}=2\times3=6\)。檢查可加：RERI \(=RR_{11}-RR_{10}-RR_{01}+1=6-2-3+1=2\gt 0\)→<b>可加有正交互</b>。反之若可加無交互（\(RR_{11}=RR_{10}+RR_{01}-1=4\)），則可乘 \(4\ne6\) 有負交互。<b>故「有無交互」必須指定尺度。</b></p></div>
 <h4>關鍵推導：由 logistic 係數得 RERI</h4>
 <div class="derive"><p>模型 \(\operatorname{logit}P=\beta_0+\beta_1 A+\beta_2 W+\beta_3 AW\)。以 OR 近似 RR（罕見）：\(RR_{10}=e^{\beta_1},RR_{01}=e^{\beta_2},RR_{11}=e^{\beta_1+\beta_2+\beta_3}\)。</p>
 <p>\[ \mathrm{RERI}=e^{\beta_1+\beta_2+\beta_3}-e^{\beta_1}-e^{\beta_2}+1 \]</p>
@@ -2411,7 +2427,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 </div></div>
 <div class="box box-qual"><div class="box-title">🎓 資格考真題與詳解（歷年考古）</div><div class="box-body">
 <div class="exq"><span class="yr">102-2/104/105 題2</span><span class="qtitle">以 R11/R10/R01/R00 說明生物交互（interaction contrast）</span>
-<div class="sol">相加交互 \(IC=R_{11}-(R_{10}+R_{01}-R_{00})\)；\(IC>0\)＝協同（synergism），對應 SCC「同一塊餅」。乘法無交互＝\(RR_{11}=RR_{10}\times RR_{01}\)。</div></div>
+<div class="sol">相加交互 \(IC=R_{11}-(R_{10}+R_{01}-R_{00})\)；\(IC\gt 0\)＝協同（synergism），對應 SCC「同一塊餅」。乘法無交互＝\(RR_{11}=RR_{10}\times RR_{01}\)。</div></div>
 <div class="exq"><span class="yr">109-1 名詞</span><span class="qtitle">Mediation vs Effect modification</span>
 <div class="sol">中介在因果路徑上（S→M→Y，拆效應）；效應修飾是效應隨第三變項而異（不在路徑上）。兩者概念與處置完全不同。</div></div>
 <div class="exq"><span class="yr">114-1 Q5 / 114-2</span><span class="qtitle">Poisson 交互、疫苗交互作用</span>
@@ -2421,7 +2437,7 @@ mark.hl-g{background:#bfe9c6;color:inherit;border-radius:2px;padding:0 1px;curso
 <h4>例 1｜相加交互 RERI</h4>
 <div class="ex"><div class="given">菸×石綿：\(RR_{10}=10\)（僅菸）、\(RR_{01}=5\)（僅石綿）、\(RR_{11}=50\)（皆有）。</div>
 <div class="step">乘法檢查：\(RR_{10}\times RR_{01}=10\times5=50=RR_{11}\Rightarrow\) 乘法無交互。</div>
-<div class="step">相加檢查：\(RERI=RR_{11}-RR_{10}-RR_{01}+1=50-10-5+1=36>0\)。</div>
+<div class="step">相加檢查：\(RERI=RR_{11}-RR_{10}-RR_{01}+1=50-10-5+1=36\gt 0\)。</div>
 <div class="ans">乘法無交互，但相加有強正交互（RERI=36）→ 尺度相依</div></div>
 <h4>例 2｜歸因於交互的比例 AP</h4>
 <div class="ex"><div class="given">承上，AP＝RERI/RR₁₁。</div>
@@ -2870,7 +2886,7 @@ NIE\(=E[Y_{1,M_1}-Y_{1,M_0}]\)（暴露固定、僅動中介）。<br>
 <p>傳染病流行病學與其他領域最根本的差別是：<b>結果本身會傳染</b>。這使得個體的風險彼此<span class="term">相依（dependent happenings）</span>——一個人是否感染，取決於周遭有沒有人已經感染。這直接違反了一般研究的「個體獨立」假設，也是為什麼傳染病需要一套專屬的動力學工具。</p>
 
 <h3>2. 傳播的核心量</h3>
-<p>幾個必須掌握的量。<span class="term">基本再生數 \(R_0\)</span>：在全易感的族群中，一名感染者平均會傳染幾人；\(R_0>1\) 才可能流行。<span class="term">有效再生數 \(R_t\)</span>：在實際（已有部分免疫）情況下的傳播數，\(R_t=R_0\times s\)（\(s\) 是易感比例）。<span class="term">群體免疫閾值</span> \(=1-1/R_0\)：達到這個免疫比例，就能阻斷持續傳播——\(R_0\) 越大，門檻越高。<span class="term">續發率</span>則衡量家戶或接觸者中的傳播程度。</p>
+<p>幾個必須掌握的量。<span class="term">基本再生數 \(R_0\)</span>：在全易感的族群中，一名感染者平均會傳染幾人；\(R_0\gt 1\) 才可能流行。<span class="term">有效再生數 \(R_t\)</span>：在實際（已有部分免疫）情況下的傳播數，\(R_t=R_0\times s\)（\(s\) 是易感比例）。<span class="term">群體免疫閾值</span> \(=1-1/R_0\)：達到這個免疫比例，就能阻斷持續傳播——\(R_0\) 越大，門檻越高。<span class="term">續發率</span>則衡量家戶或接觸者中的傳播程度。</p>
 
 <h3>3. 傳播動力模型</h3>
 <p><span class="term">區室模型（SIR/SEIR）</span>把人群分成易感 S、（潛伏 E）、感染 I、康復/免疫 R，用微分方程描述人在各室之間的流動。它能估 \(R_0\)、預測流行曲線、評估介入效果。網絡模型處理異質的接觸結構，而更複雜的互動則用代理人基模型（第 31 章）。</p>
@@ -2883,7 +2899,7 @@ NIE\(=E[Y_{1,M_1}-Y_{1,M_0}]\)（暴露固定、僅動中介）。<br>
 </div>
 <div class="box box-deep"><div class="box-title">🔬 深入解析與推導（資格考深化）</div><div class="box-body">
 <h4>關鍵推導：群體免疫閾值</h4>
-<div class="derive"><p>有效再生數 \(R_t=R_0\cdot s\)（\(s\)＝易感比例）。流行受控需 \(R_t<1\Rightarrow s<1/R_0\)。故須免疫比例</p>
+<div class="derive"><p>有效再生數 \(R_t=R_0\cdot s\)（\(s\)＝易感比例）。流行受控需 \(R_t\lt 1\Rightarrow s\lt 1/R_0\)。故須免疫比例</p>
 <p>\[ H_c=1-s=1-\frac{1}{R_0} \]</p>
 <p>\(R_0=4\Rightarrow H_c=75\%\)。這直接決定疫苗覆蓋目標；\(R_0\) 越大門檻越高。</p></div>
 <h4>關鍵觀念：相依事件破壞獨立假設</h4>
@@ -3280,7 +3296,7 @@ NIE\(=E[Y_{1,M_1}-Y_{1,M_0}]\)（暴露固定、僅動中介）。<br>
 </div></div>
 <div class="box box-formula"><div class="box-title">🧮 重要公式總整理</div><div class="box-body">
 <div class="formula-item"><b>遺傳率（雙生子）：</b> \( h^2 \approx 2(r_{MZ}-r_{DZ}) \)</div>
-<div class="formula-item"><b>GWAS 全基因組顯著：</b> \( p < 5\times10^{-8} \)</div>
+<div class="formula-item"><b>GWAS 全基因組顯著：</b> \( p \lt  5\times10^{-8} \)</div>
 <div class="formula-item"><b>MR 估計：</b> \( \hat\beta_{MR}=\dfrac{\beta_{Z\to Y}}{\beta_{Z\to A}} \)（比值法）</div>
 </div></div>
 <div class="box box-exam"><div class="box-title">🎯 考試重點</div><div class="box-body">
@@ -3868,7 +3884,7 @@ NIE\(=E[Y_{1,M_1}-Y_{1,M_0}]\)（暴露固定、僅動中介）。<br>
 </tbody></table>
 </div></div>
 <div class="box box-formula"><div class="box-title">🧮 重要公式總整理</div><div class="box-body">
-<div class="formula-item"><b>高估關係：</b> \( 1-\mathrm{KM}(\text{target}) \;>\; \mathrm{CIF}(\text{target}) \)（有競爭事件時）。</div>
+<div class="formula-item"><b>高估關係：</b> \( 1-\mathrm{KM}(\text{target}) \;\gt \; \mathrm{CIF}(\text{target}) \)（有競爭事件時）。</div>
 <div class="formula-item"><b>CIF 估計：</b> \( \widehat{CIF}_1(t)=\sum_{t_i\le t} S(t_{i-1})\,\dfrac{d_{1i}}{n_i} \)</div>
 <div class="formula-item"><b>可加性：</b> \( CIF_1(t)+CIF_2(t)=1-S_{\text{all-cause}}(t) \)</div>
 <div class="formula-item"><b>Cause-specific 連 CIF：</b> \( CIF_1(t)=\int_0^t S(u)\,\lambda_1^{cs}(u)\,du \)；<b>Fine–Gray：</b> \( CIF_1(t)=1-e^{-\int_0^t \lambda_1^{sd}(u)du} \)</div>
@@ -4324,6 +4340,45 @@ links.forEach(l=>l.addEventListener('click',()=>document.getElementById('toc').c
   }); }
 
   paint();
+})();
+</script>
+<script>
+(function(){
+  var KEY='epi_toc_width_v1';
+  var toc=document.getElementById('toc'), rz=document.getElementById('tocResizer');
+  if(!toc||!rz) return;
+  var MIN=180, MAX=680, DEF=310;
+  function setW(w){ w=Math.max(MIN,Math.min(MAX,Math.round(w)));
+    document.documentElement.style.setProperty('--tocw', w+'px'); return w; }
+  var saved=parseInt(localStorage.getItem(KEY)||'',10);
+  if(saved) setW(saved);
+
+  var dragging=false;
+  rz.addEventListener('mousedown',function(e){
+    dragging=true; rz.classList.add('dragging'); document.body.classList.add('resizing'); e.preventDefault();
+  });
+  document.addEventListener('mousemove',function(e){
+    if(!dragging) return;
+    var w=setW(e.clientX - toc.getBoundingClientRect().left);
+    rz.dataset.w=w;
+  });
+  document.addEventListener('mouseup',function(){
+    if(!dragging) return;
+    dragging=false; rz.classList.remove('dragging'); document.body.classList.remove('resizing');
+    try{ localStorage.setItem(KEY, rz.dataset.w||DEF); }catch(err){}
+  });
+  rz.addEventListener('dblclick',function(){ setW(DEF); try{localStorage.setItem(KEY,DEF);}catch(err){} });
+
+  // touch support
+  rz.addEventListener('touchstart',function(e){ dragging=true; rz.classList.add('dragging'); },{passive:true});
+  document.addEventListener('touchmove',function(e){
+    if(!dragging||!e.touches[0]) return;
+    var w=setW(e.touches[0].clientX - toc.getBoundingClientRect().left); rz.dataset.w=w;
+  },{passive:true});
+  document.addEventListener('touchend',function(){
+    if(!dragging) return; dragging=false; rz.classList.remove('dragging');
+    try{ localStorage.setItem(KEY, rz.dataset.w||DEF); }catch(err){}
+  });
 })();
 </script>
 </body>
